@@ -1,14 +1,6 @@
 import { sql } from 'drizzle-orm'
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core'
-
-const writingTypes = [
-  'daily_summary',
-  'gratitude',
-  'notable_moment',
-  'writing_prompt',
-  'custom'
-] as const
-const widgetTypes = ['habit_tracker', 'todo_list', 'mood_tracker', 'word_of_day', 'photo'] as const
+import { widgetTypes, writingTypes } from './dbConstants'
 
 // app user settings
 export const settings = sqliteTable('settings', {
@@ -19,7 +11,7 @@ export const settings = sqliteTable('settings', {
   streakTolerance: integer('streak_tolerance').notNull().default(0),
   ollamaModel: text('ollama_model'),
   createdAt: text('created_at').notNull(),
-  updatedAt: text('updated_at').notNull()
+  updatedAt: text('updated_at')
 })
 
 // journal entries
