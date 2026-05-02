@@ -22,7 +22,7 @@ const DEFAULT_WIDGET_SECTIONS: {
   { type: 'todo_list', position: 2 }
 ]
 
-export function seedDatabase(db: DrizzleDB, passwordHash: string): void {
+export function seedDatabase(db: DrizzleDB): void {
   const settingsIsEmpty = db.select().from(settings).limit(1).all().length === 0
 
   if (!settingsIsEmpty) return
@@ -31,7 +31,6 @@ export function seedDatabase(db: DrizzleDB, passwordHash: string): void {
   db.insert(settings)
     .values({
       name: 'User',
-      passwordHash,
       createdAt: sql`(CURRENT_TIMESTAMP)`
     })
     .run()

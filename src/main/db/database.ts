@@ -1,4 +1,4 @@
-import Database from 'better-sqlite3-multiple-ciphers'
+import Database from 'better-sqlite3'
 import { drizzle } from 'drizzle-orm/better-sqlite3'
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator'
 import { app } from 'electron'
@@ -29,8 +29,8 @@ export function openDatabase(password: string): DrizzleDB {
 
   try {
     const db = new Database(databasePath)
-    db.pragma('journal_mode = WAL') // good for performance (https://www.npmjs.com/package/better-sqlite3-multiple-ciphers)
     db.pragma(`key="x'${deriveKey(password, salt)}'"`)
+    db.pragma('journal_mode = WAL') // good for performance (https://www.npmjs.com/package/better-sqlite3-multiple-ciphers)
     const drizzleDB: DrizzleDB = drizzle(db)
     migrate(drizzleDB, { migrationsFolder })
     log.info('DB opened')
@@ -41,7 +41,7 @@ export function openDatabase(password: string): DrizzleDB {
   }
 }
 
-export function closeDatabase(db: Database.Database): void {
-  db.close()
-  log.info('DB Closed')
+export function closeDatabase(db: DrizzleDB): void {
+  db.$client.close()
+  log.info('DB closed')
 }
