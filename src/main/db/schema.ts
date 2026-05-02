@@ -7,7 +7,6 @@ export const settings = sqliteTable('settings', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   name: text('name').notNull(),
   theme: text('theme').notNull().default('light'),
-  passwordHash: text('password_hash').notNull(),
   streakTolerance: integer('streak_tolerance').notNull().default(0),
   ollamaModel: text('ollama_model'),
   createdAt: text('created_at').notNull(),

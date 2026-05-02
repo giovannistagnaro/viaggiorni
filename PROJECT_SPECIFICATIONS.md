@@ -90,7 +90,7 @@ Cozy, trustworthy, genuinely helpful. Warm minimal aesthetic — not cold, not c
 ## Data model (14 tables)
 
 ### settings
-id, name, theme, password_hash, streak_tolerance, ollama_model, created_at, updated_at
+id, name, theme, streak_tolerance, ollama_model, created_at, updated_at
 
 ### entries
 id, title, date (YYYY-MM-DD), is_bookmarked, created_at, updated_at
