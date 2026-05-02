@@ -8,16 +8,11 @@
   ],
   "compilerOptions": {
     "composite": true,
-    "ignoreDeprecations": "6.0",
     "jsx": "react-jsx",
-    "baseUrl": ".",
     "paths": {
-      "@renderer/*": [
-        "src/renderer/src/*"
-      ],
-      "@/*": [
-        "src/renderer/src/*"
-      ]
+    "@renderer/*": ["./src/renderer/src/*"],
+    "@/*": ["./src/renderer/src/*"]
     }
   }
+
 }
