@@ -1,4 +1,4 @@
-import Database from 'better-sqlite3-multiple-ciphers'
+import Database from 'better-sqlite3'
 import { drizzle } from 'drizzle-orm/better-sqlite3'
 import { migrate } from 'drizzle-orm/better-sqlite3/migrator'
 import { app } from 'electron'
@@ -41,7 +41,7 @@ export function openDatabase(password: string): DrizzleDB {
   }
 }
 
-export function closeDatabase(db: Database.Database): void {
-  db.close()
+export function closeDatabase(db: DrizzleDB): void {
+  db.$client.close()
   log.info('DB Closed')
 }
