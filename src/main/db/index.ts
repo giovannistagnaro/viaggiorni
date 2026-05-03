@@ -1,6 +1,10 @@
+import { existsSync } from 'fs'
 import { closeDatabase, DrizzleDB, openDatabase } from './database'
 import { seedDatabase } from './seed'
 import log from 'electron-log'
+import { SALT_FILE_NAME } from './dbConstants'
+import { join } from 'path'
+import { app } from 'electron'
 
 let db: DrizzleDB | null = null
 
@@ -35,4 +39,8 @@ export function getDB(): DrizzleDB {
 
 export function isUnlocked(): boolean {
   return db !== null
+}
+
+export function isFirstLaunch(): boolean {
+  return !existsSync(join(app.getPath('userData'), SALT_FILE_NAME))
 }

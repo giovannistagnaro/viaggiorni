@@ -7,13 +7,13 @@ import { deriveKey } from './crypto'
 import log from 'electron-log'
 import { existsSync, readFileSync, writeFileSync } from 'fs'
 import { randomBytes } from 'crypto'
-import { SALT_BYTES } from './dbConstants'
+import { DB_FILE_NAME, SALT_BYTES, SALT_FILE_NAME } from './dbConstants'
 
 export type DrizzleDB = ReturnType<typeof drizzle>
 
 export function openDatabase(password: string): DrizzleDB {
-  const databasePath = join(app.getPath('userData'), 'viaggiorni.db')
-  const saltPath = join(app.getPath('userData'), 'salt.bin')
+  const databasePath = join(app.getPath('userData'), DB_FILE_NAME)
+  const saltPath = join(app.getPath('userData'), SALT_FILE_NAME)
   const migrationsFolder = app.isPackaged
     ? join(process.resourcesPath, 'drizzle')
     : join(app.getAppPath(), 'drizzle')

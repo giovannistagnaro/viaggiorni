@@ -6,7 +6,12 @@ const api = {
   db: {
     open: (password: string) => ipcRenderer.invoke('db:open', password),
     close: () => ipcRenderer.invoke('db:close'),
-    isUnlocked: () => ipcRenderer.invoke('db:isUnlocked')
+    isUnlocked: () => ipcRenderer.invoke('db:isUnlocked'),
+    isFirstLaunch: () => ipcRenderer.invoke('db:isFirstLaunch')
+  },
+  user: {
+    getUsername: () => ipcRenderer.invoke('user:getUsername'),
+    setUsername: (name: string) => ipcRenderer.invoke('user:setUsername', name)
   }
 }
 
