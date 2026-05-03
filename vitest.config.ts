@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
+import { resolve } from 'path'
 
 export default defineConfig({
   test: {
@@ -9,6 +10,11 @@ export default defineConfig({
           name: 'main',
           environment: 'node',
           include: ['src/main/**/*.test.ts', 'src/preload/**/*.test.ts']
+        },
+        resolve: {
+          alias: {
+            '@shared': resolve(__dirname, 'src/shared')
+          }
         }
       },
       {
@@ -19,6 +25,13 @@ export default defineConfig({
           include: ['src/renderer/**/*.test.{ts,tsx}'],
           setupFiles: ['./vitest.setup.ts'],
           globals: true
+        },
+        resolve: {
+          alias: {
+            '@renderer': resolve(__dirname, 'src/renderer/src'),
+            '@': resolve(__dirname, 'src/renderer/src'),
+            '@shared': resolve(__dirname, 'src/shared')
+          }
         }
       }
     ]

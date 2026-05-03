@@ -1,45 +1,68 @@
+import SectionEditor from '@renderer/components/SectionEditor'
+import { Entry, EntrySection } from '@shared/types'
 import { useEffect, useState } from 'react'
 
 interface Props {
   onLock: () => void
 }
 
-type Entry = {
-  id: number
-  title: string
-  date: string
-  isBookmarked: boolean
-  createdAt: string
-  updatedAt: string | null
-}
-
 function Main({ onLock }: Props): React.JSX.Element {
   const [entry, setEntry] = useState<Entry | null>(null)
   const [loading, setLoading] = useState(true)
+  const [sections, setSections] = useState<EntrySection[]>([])
 
   useEffect(() => {
     async function dateSetup(): Promise<void> {
-      const isoDate = formatDateISO(new Date())
-      let todayEntry = await window.api.entries.getByDate(isoDate)
-      if (!todayEntry)
-        todayEntry = await window.api.entries.create(isoDate, formatTitleForDate(isoDate))
-      setEntry(todayEntry)
-      setLoading(false)
+      try {
+        const isoDate = formatDateISO(new Date())
+        let todayEntry = await window.api.entries.getByDate(isoDate)
+        if (!todayEntry)
+          todayEntry = await window.api.entries.create(isoDate, formatTitleForDate(isoDate))
+        setEntry(todayEntry)
+      } catch (err) {
+        // TODO: surface to user via error UI
+        console.error("Failed to load or create today's entry", err)
+      } finally {
+        setLoading(false)
+      }
     }
     dateSetup()
   }, [])
 
+  useEffect(() => {
+    async function entrySectionSetup(): Promise<void> {
+      if (!entry) return
+      try {
+        const entrySections = await window.api.entrySections.getSectionsForEntry(entry.id)
+        setSections(entrySections)
+      } catch (err) {
+        // TODO: surface to user via error UI
+        console.error('Failed to load entry sections', err)
+      }
+    }
+    entrySectionSetup()
+  }, [entry])
+
   async function handleTitleBlur(newTitle: string): Promise<void> {
     if (!entry || entry.title === newTitle) return
-    await window.api.entries.updateTitle(entry.id, newTitle)
-    setEntry({ ...entry, title: newTitle })
+    try {
+      await window.api.entries.updateTitle(entry.id, newTitle)
+      setEntry({ ...entry, title: newTitle })
+    } catch (err) {
+      // TODO: surface to user via error UI
+      console.error('Failed to update entry title', err)
+    }
   }
 
   async function handleLock(): Promise<void> {
     ;(document.activeElement as HTMLElement | null)?.blur()
     // give pending IPC a tick to complete
     await new Promise((r) => setTimeout(r, 0))
-    await window.api.db.close()
+    try {
+      await window.api.db.close()
+    } catch (err) {
+      console.error('Failed to close DB', err)
+    }
     onLock()
   }
 
@@ -64,7 +87,20 @@ function Main({ onLock }: Props): React.JSX.Element {
 
       <div className="grid grid-cols-2 grid-rows-1 gap-4">
         <p>Widgets (coming soon)</p>
-        <p>Sections (coming soon)</p>
+        {sections.map((section) => (
+          <SectionEditor
+            key={section.id}
+            section={section}
+            onSave={async (newContent) => {
+              try {
+                await window.api.entrySections.updateSectionContent(section.id, newContent)
+              } catch (err) {
+                // TODO: surface to user via error UI
+                console.error('Failed to save section content', err)
+              }
+            }}
+          />
+        ))}
       </div>
     </>
   )

@@ -56,12 +56,18 @@ function Onboarding({ onComplete }: Props): React.JSX.Element {
     } else if (password !== confirmPassword) {
       setError(ERROR_MESSAGE_PASSWORD_MISMATCH)
     } else {
-      const openDbResult = await window.api.db.open(password)
-      if (openDbResult.success) {
-        await window.api.user.setUsername(name)
-        onComplete()
-      } else {
-        setError(openDbResult.error)
+      try {
+        const openDbResult = await window.api.db.open(password)
+        if (openDbResult.success) {
+          await window.api.user.setUsername(name)
+          onComplete()
+        } else {
+          setError(openDbResult.error)
+        }
+      } catch (err) {
+        // TODO: surface to user via error UI
+        console.error('Failed to complete onboarding', err)
+        setError('Something went wrong. Please try again.')
       }
     }
     setSubmitting(false)
