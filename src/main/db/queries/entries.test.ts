@@ -105,10 +105,6 @@ describe('createEntry', () => {
 
 describe('updateEntryTitle', () => {
   it('updates the title of an existing entry', () => {
-    // - create an entry with title 'Original'
-    // - call updateEntryTitle with new title 'Updated'
-    // - re-fetch the entry
-    // - assert title is 'Updated'
     const newEntry = createEntry(db, '2026-05-02', 'Original')
     updateEntryTitle(db, newEntry.id, 'Updated')
 
@@ -122,10 +118,6 @@ describe('updateEntryTitle', () => {
   })
 
   it('updates the updatedAt timestamp', () => {
-    // - create an entry
-    // - assert initial updatedAt is null/undefined (no default set)
-    // - call updateEntryTitle
-    // - re-fetch and assert updatedAt is now defined
     const newEntry = createEntry(db, '2026-05-02', 'Original')
     updateEntryTitle(db, newEntry.id, 'Updated')
 
@@ -136,9 +128,6 @@ describe('updateEntryTitle', () => {
 
 describe('toggleBookmark', () => {
   it('sets isBookmarked from false to true', () => {
-    // - create an entry (default isBookmarked = false)
-    // - call toggleBookmark
-    // - re-fetch and assert isBookmarked is true
     const newEntry = createEntry(db, '2026-05-02', 'Original')
     toggleBookmark(db, newEntry.id)
 

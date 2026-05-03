@@ -1,14 +1,9 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
+import type { entries, entrySections } from '../main/db/schema'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
-type Entry = {
-  id: number
-  title: string
-  date: string
-  isBookmarked: boolean
-  createdAt: string
-  updatedAt: string | null
-}
+type Entry = typeof entries.$inferSelect
+type EntrySection = typeof entrySections.$inferSelect
 
 interface DbApi {
   open: (password: string) => Promise<DbOpenResult>
@@ -30,10 +25,16 @@ interface EntriesApi {
   getAllBookmarked: () => Promise<Entry[]>
 }
 
+interface EntrySectionsApi {
+  getSectionsForEntry: (entryId: number) => Promise<EntrySection[]>
+  updateSectionContent: (sectionId: number, newContent: string) => Promise<void>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
   entries: EntriesApi
+  entrySections: EntrySectionsApi
 }
 
 declare global {

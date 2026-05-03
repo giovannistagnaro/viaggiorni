@@ -5,6 +5,7 @@ import icon from '../../resources/icon.png?asset'
 import { registerDbIpc } from './ipc/db'
 import { registerUserIpc } from './ipc/user'
 import { registerEntriesIpc } from './ipc/entries'
+import { registerEntrySectionsIpc } from './ipc/entrySections'
 
 function createWindow(): void {
   // Create the browser window.
@@ -48,6 +49,7 @@ app.whenReady().then(() => {
   registerDbIpc()
   registerUserIpc()
   registerEntriesIpc()
+  registerEntrySectionsIpc()
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.

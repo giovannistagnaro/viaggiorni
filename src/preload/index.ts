@@ -20,6 +20,12 @@ const api = {
       ipcRenderer.invoke('entries:updateTitle', id, title),
     toggleBookmark: (id: number) => ipcRenderer.invoke('entries:toggleBookmark', id),
     getAllBookmarked: () => ipcRenderer.invoke('entries:getAllBookmarked')
+  },
+  entrySections: {
+    getSectionsForEntry: (entryId: number) =>
+      ipcRenderer.invoke('entrySections:getSectionsForEntry', entryId),
+    updateSectionContent: (sectionId: number, newContent: string) =>
+      ipcRenderer.invoke('entrySections:updateSectionContent', sectionId, newContent)
   }
 }
 
