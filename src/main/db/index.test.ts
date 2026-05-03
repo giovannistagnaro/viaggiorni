@@ -1,4 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
+import { existsSync } from 'fs'
+import { isFirstLaunch } from './index'
 
 vi.mock('./database', () => ({
   openDatabase: vi.fn(),
@@ -6,6 +8,15 @@ vi.mock('./database', () => ({
 }))
 vi.mock('./seed', () => ({
   seedDatabase: vi.fn()
+}))
+vi.mock('electron', () => ({
+  app: {
+    getPath: vi.fn(() => '/fake/userData')
+  }
+}))
+
+vi.mock('fs', () => ({
+  existsSync: vi.fn()
 }))
 
 import { openDatabase, closeDatabase } from './database'
@@ -126,5 +137,23 @@ describe('isUnlocked', () => {
     openDBWrapper('pwd')
 
     expect(isUnlocked()).toBe(true)
+  })
+})
+
+describe('isFirstLaunch', () => {
+  beforeEach(() => {
+    vi.resetAllMocks()
+  })
+
+  it('returns true when salt file does not exist', () => {
+    vi.mocked(existsSync).mockReturnValue(false)
+
+    expect(isFirstLaunch()).toBe(true)
+  })
+
+  it('returns false when salt file exists', () => {
+    vi.mocked(existsSync).mockReturnValue(true)
+
+    expect(isFirstLaunch()).toBe(false)
   })
 })

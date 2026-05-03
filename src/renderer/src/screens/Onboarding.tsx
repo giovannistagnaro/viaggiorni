@@ -1,9 +1,22 @@
 import { useState } from 'react'
 import {
+  ERROR_MESSAGE_PASSWORD_MISMATCH,
+  ERROR_MESSAGE_PASSWORD_TOO_LONG,
+  ERROR_MESSAGE_PASSWORD_TOO_SHORT,
+  ERROR_MESSAGE_USERNAME_TOO_LONG,
+  ERROR_MESSAGE_USERNAME_TOO_SHORT,
   MAX_PASSWORD_LENGTH,
   MAX_USERNAME_LENGTH,
   MIN_PASSWORD_LENGTH,
-  MIN_USERNAME_LENGTH
+  MIN_USERNAME_LENGTH,
+  PASSWORD_RECOVERY_WARNING_TEXT,
+  PASSWORD_SCREEN_CONFIRMATION_PLACEHOLDER_TEXT,
+  PASSWORD_SCREEN_HEADER_TEXT,
+  ENTER_YOUR_PASSWORD_PLACEHOLDER_TEXT,
+  PASSWORD_SUBMIT_BUTTON_TEXT,
+  USERNAME_SUBMIT_BUTTON_TEXT,
+  WELCOME_SCREEN_HEADER_TEXT,
+  WELCOME_SCREEN_PLACEHOLDER_TEXT
 } from './screenConstants'
 
 interface Props {
@@ -24,9 +37,9 @@ function Onboarding({ onComplete }: Props): React.JSX.Element {
     event.preventDefault()
 
     if (name.length < MIN_USERNAME_LENGTH) {
-      setError(`Username needs to be at least ${MIN_USERNAME_LENGTH} characters.`)
+      setError(ERROR_MESSAGE_USERNAME_TOO_SHORT)
     } else if (name.length > MAX_USERNAME_LENGTH) {
-      setError(`Username needs to be at most ${MAX_USERNAME_LENGTH} characters.`)
+      setError(ERROR_MESSAGE_USERNAME_TOO_LONG)
     } else {
       setStep('password')
     }
@@ -37,11 +50,11 @@ function Onboarding({ onComplete }: Props): React.JSX.Element {
     setSubmitting(true)
 
     if (password.length < MIN_PASSWORD_LENGTH) {
-      setError(`Password needs to be at least ${MIN_PASSWORD_LENGTH} characters.`)
+      setError(ERROR_MESSAGE_PASSWORD_TOO_SHORT)
     } else if (password.length > MAX_PASSWORD_LENGTH) {
-      setError(`Password needs to be at most ${MAX_PASSWORD_LENGTH} characters.`)
+      setError(ERROR_MESSAGE_PASSWORD_TOO_LONG)
     } else if (password !== confirmPassword) {
-      setError('Passwords do not match.')
+      setError(ERROR_MESSAGE_PASSWORD_MISMATCH)
     } else {
       const openDbResult = await window.api.db.open(password)
       if (openDbResult.success) {
@@ -57,7 +70,7 @@ function Onboarding({ onComplete }: Props): React.JSX.Element {
   if (step === 'welcome') {
     return (
       <form onSubmit={handleNameSubmit}>
-        <h1>Welcome to Viaggiorni!</h1>
+        <h1>{WELCOME_SCREEN_HEADER_TEXT}</h1>
         <input
           type="text"
           value={name}
@@ -65,12 +78,12 @@ function Onboarding({ onComplete }: Props): React.JSX.Element {
             setError(null)
             setName(e.target.value)
           }}
-          placeholder="Enter your username."
+          placeholder={WELCOME_SCREEN_PLACEHOLDER_TEXT}
           autoFocus
           disabled={submitting}
         />
         <button type="submit" disabled={submitting || !name}>
-          {submitting ? 'Checking username...' : 'Continue'}
+          {USERNAME_SUBMIT_BUTTON_TEXT(submitting)}
         </button>
         {error && <p>{error}</p>}
       </form>
@@ -80,7 +93,7 @@ function Onboarding({ onComplete }: Props): React.JSX.Element {
   if (step === 'password') {
     return (
       <form onSubmit={handlePasswordSubmit}>
-        <h1>Set your password.</h1>
+        <h1>{PASSWORD_SCREEN_HEADER_TEXT}</h1>
         <input
           type="password"
           value={password}
@@ -88,7 +101,7 @@ function Onboarding({ onComplete }: Props): React.JSX.Element {
             setError(null)
             setPassword(e.target.value)
           }}
-          placeholder="Enter your password."
+          placeholder={ENTER_YOUR_PASSWORD_PLACEHOLDER_TEXT}
           autoFocus
           disabled={submitting}
         />
@@ -99,14 +112,14 @@ function Onboarding({ onComplete }: Props): React.JSX.Element {
             setError(null)
             setConfirmPassword(e.target.value)
           }}
-          placeholder="Confirm your password."
+          placeholder={PASSWORD_SCREEN_CONFIRMATION_PLACEHOLDER_TEXT}
           disabled={submitting}
         />
         <p>
-          <b>Your password cannot be recovered. If you forget it, your journal is lost forever.</b>
+          <b>{PASSWORD_RECOVERY_WARNING_TEXT}</b>
         </p>
         <button type="submit" disabled={submitting || !password || !confirmPassword}>
-          {submitting ? 'Checking password...' : 'Submit'}
+          {PASSWORD_SUBMIT_BUTTON_TEXT(submitting)}
         </button>
         {error && <p>{error}</p>}
       </form>

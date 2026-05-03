@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ENTER_YOUR_PASSWORD_PLACEHOLDER_TEXT } from './screenConstants'
 
 interface Props {
   onSuccess: () => void
@@ -11,7 +12,11 @@ function Login({ onSuccess }: Props): React.JSX.Element {
   const [username, setUsername] = useState<string>('')
 
   useEffect(() => {
-    window.api.user.getUsername().then(setUsername)
+    async function getUsernameWrapper(): Promise<void> {
+      const fetchedUsername = await window.api.user.getUsername()
+      setUsername(fetchedUsername ?? '')
+    }
+    getUsernameWrapper()
   }, [])
 
   function getGreeting(name: string): string {
@@ -52,7 +57,7 @@ function Login({ onSuccess }: Props): React.JSX.Element {
         type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        placeholder="Enter your password."
+        placeholder={ENTER_YOUR_PASSWORD_PLACEHOLDER_TEXT}
         autoFocus
         disabled={submitting}
       />
