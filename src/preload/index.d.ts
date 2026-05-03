@@ -1,9 +1,7 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import type { entries, entrySections } from '../main/db/schema'
+import { Entry, EntrySection } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
-type Entry = typeof entries.$inferSelect
-type EntrySection = typeof entrySections.$inferSelect
 
 interface DbApi {
   open: (password: string) => Promise<DbOpenResult>

@@ -13,8 +13,13 @@ function Login({ onSuccess }: Props): React.JSX.Element {
 
   useEffect(() => {
     async function getUsernameWrapper(): Promise<void> {
-      const fetchedUsername = await window.api.user.getUsername()
-      setUsername(fetchedUsername ?? '')
+      try {
+        const fetchedUsername = await window.api.user.getUsername()
+        setUsername(fetchedUsername ?? '')
+      } catch (err) {
+        // TODO: surface to user via error UI
+        console.error('Failed to fetch username', err)
+      }
     }
     getUsernameWrapper()
   }, [])

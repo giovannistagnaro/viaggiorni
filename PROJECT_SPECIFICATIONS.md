@@ -242,6 +242,7 @@ Follow these consistently — decide once, apply everywhere:
 - **Missing photo file** — DB row exists but file not found on disk — show neutral placeholder, do not crash
 - **App crash** — electron-log captures error to local log file before exit
 - **React render error** — error boundary catches it, shows friendly "something went wrong" with option to reload
+- **IPC operation failures** (entries, sections, widgets, todos, habits, etc.) — non-blocking toast or inline message, never silent. If failure indicates DB is locked, route the user back to the login screen.
 
 ---
 
