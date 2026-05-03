@@ -3,6 +3,7 @@ import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { registerDbIpc } from './ipc/db'
+import { registerUserIpc } from './ipc/user'
 
 function createWindow(): void {
   // Create the browser window.
@@ -44,6 +45,7 @@ app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
 
   registerDbIpc()
+  registerUserIpc()
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.

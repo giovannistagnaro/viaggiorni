@@ -6,10 +6,16 @@ interface DbApi {
   open: (password: string) => Promise<DbOpenResult>
   close: () => Promise<void>
   isUnlocked: () => Promise<boolean>
+  isFirstLaunch: () => Promise<boolean>
+}
+
+interface userApi {
+  getUsername: () => Promise<string>
 }
 
 interface Api {
   db: DbApi
+  user: userApi
 }
 
 declare global {

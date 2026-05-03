@@ -1,5 +1,5 @@
 import { ipcMain } from 'electron'
-import { closeDBWrapper, isUnlocked, openDBWrapper } from '../db'
+import { closeDBWrapper, isFirstLaunch, isUnlocked, openDBWrapper } from '../db'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
 const DB_OPEN_FAILURE_MESSAGE = 'Invalid password'
@@ -18,5 +18,8 @@ export function registerDbIpc(): void {
   })
   ipcMain.handle('db:isUnlocked', (): boolean => {
     return isUnlocked()
+  })
+  ipcMain.handle('db:isFirstLaunch', (): boolean => {
+    return isFirstLaunch()
   })
 }
