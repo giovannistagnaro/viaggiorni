@@ -4,6 +4,7 @@ import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 import { registerDbIpc } from './ipc/db'
 import { registerUserIpc } from './ipc/user'
+import { registerEntriesIpc } from './ipc/entries'
 
 function createWindow(): void {
   // Create the browser window.
@@ -46,6 +47,7 @@ app.whenReady().then(() => {
 
   registerDbIpc()
   registerUserIpc()
+  registerEntriesIpc()
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
