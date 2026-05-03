@@ -10,7 +10,8 @@ const api = {
     isFirstLaunch: () => ipcRenderer.invoke('db:isFirstLaunch')
   },
   user: {
-    getUsername: () => ipcRenderer.invoke('user:getUsername')
+    getUsername: () => ipcRenderer.invoke('user:getUsername'),
+    setUsername: (name: string) => ipcRenderer.invoke('user:setUsername', name)
   }
 }
 

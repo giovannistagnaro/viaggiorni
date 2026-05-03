@@ -11,6 +11,7 @@ interface DbApi {
 
 interface userApi {
   getUsername: () => Promise<string>
+  setUsername: (name: string) => Promise<void>
 }
 
 interface Api {
