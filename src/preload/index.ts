@@ -12,6 +12,14 @@ const api = {
   user: {
     getUsername: () => ipcRenderer.invoke('user:getUsername'),
     setUsername: (name: string) => ipcRenderer.invoke('user:setUsername', name)
+  },
+  entries: {
+    getByDate: (date: string) => ipcRenderer.invoke('entries:getByDate', date),
+    create: (date: string, title: string) => ipcRenderer.invoke('entries:create', date, title),
+    updateTitle: (id: number, title: string) =>
+      ipcRenderer.invoke('entries:updateTitle', id, title),
+    toggleBookmark: (id: number) => ipcRenderer.invoke('entries:toggleBookmark', id),
+    getAllBookmarked: () => ipcRenderer.invoke('entries:getAllBookmarked')
   }
 }
 
