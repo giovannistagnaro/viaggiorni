@@ -1,0 +1,1 @@
+ALTER TABLE `entry_sections` ADD `is_visible` integer DEFAULT true NOT NULL;

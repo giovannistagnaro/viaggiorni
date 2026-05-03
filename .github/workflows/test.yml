@@ -19,6 +19,8 @@ jobs:
 
       - run: npm ci
 
+      - run: npm rebuild better-sqlite3
+
       - run: npm run typecheck
 
       - run: npm run lint

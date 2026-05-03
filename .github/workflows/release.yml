@@ -21,6 +21,14 @@ jobs:
 
       - run: npm ci
 
+      - run: npm rebuild better-sqlite3
+
+      - run: npm run typecheck
+
+      - run: npm run lint
+      
+      - run: npm test
+
       - name: Build (Linux)
         if: matrix.os == 'ubuntu-latest'
         run: npm run build:linux
