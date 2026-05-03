@@ -39,6 +39,7 @@ export const entrySections = sqliteTable('entry_sections', {
   label: text('label'),
   content: text('content'),
   position: integer('position').notNull(),
+  isVisible: integer('is_visible', { mode: 'boolean' }).notNull().default(true),
   createdAt: text('created_at')
     .notNull()
     .default(sql`(CURRENT_TIMESTAMP)`),
