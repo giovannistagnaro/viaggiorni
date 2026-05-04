@@ -2,7 +2,7 @@
 
 ---
 
-## What we're building
+## What is Viaggiorni?
 A local-first, encrypted desktop journal app. The app should feel cozy, trustworthy, and genuinely useful — not corporate or generic. Users journal daily, track habits, manage todos, log mood, and optionally use AI via Ollama.
 
 ---
