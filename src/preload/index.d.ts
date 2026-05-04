@@ -1,5 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import { Entry, EntryWriting, EntryWidget, Todo } from '@shared/types'
+import { Entry, EntryWriting, EntryWidget, Todo, MoodTag } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
 
@@ -41,6 +41,15 @@ interface TodosApi {
   changeTodoPosition: (todoId: number, newPosition: number) => Promise<void>
 }
 
+interface MoodTagsApi {
+  getAllMoodTags: () => Promise<MoodTag[]>
+  getMoodTagsForEntry: (entryId: number) => Promise<MoodTag[]>
+  addMoodTagToEntry: (entryId: number, tagId: number) => Promise<void>
+  removeMoodTagFromEntry: (entryId: number, tagId: number) => Promise<void>
+  removeMoodTag: (tagId: number) => Promise<void>
+  createMoodTag: (label: string) => Promise<void>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
@@ -48,6 +57,7 @@ interface Api {
   entryWritings: EntryWritingsApi
   entryWidgets: EntryWidgetsApi
   todos: TodosApi
+  moodTags: MoodTagsApi
 }
 
 declare global {

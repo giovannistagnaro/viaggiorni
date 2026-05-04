@@ -42,6 +42,17 @@ const api = {
       ipcRenderer.invoke('todos:updateTodoLabel', todoId, newLabel),
     changeTodoPosition: (todoId: number, newPosition: number) =>
       ipcRenderer.invoke('todos:changeTodoPosition', todoId, newPosition)
+  },
+  moodTags: {
+    getAllMoodTags: () => ipcRenderer.invoke('moodTags:getAllMoodTags'),
+    getMoodTagsForEntry: (entryId: number) =>
+      ipcRenderer.invoke('moodTags:getMoodTagsForEntry', entryId),
+    addMoodTagToEntry: (entryId: number, tagId: number) =>
+      ipcRenderer.invoke('moodTags:addMoodTagToEntry', entryId, tagId),
+    removeMoodTagFromEntry: (entryId: number, tagId: number) =>
+      ipcRenderer.invoke('moodTags:removeMoodTagFromEntry', entryId, tagId),
+    removeMoodTag: (tagId: number) => ipcRenderer.invoke('moodTags:removeMoodTag', tagId),
+    createMoodTag: (label: string) => ipcRenderer.invoke('moodTags:createMoodTag', label)
   }
 }
 

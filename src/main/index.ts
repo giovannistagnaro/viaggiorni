@@ -8,6 +8,7 @@ import { registerEntriesIpc } from './ipc/entries'
 import { registerEntryWritingsIpc } from './ipc/entryWritings'
 import { registerEntryWidgetsIpc } from './ipc/entryWidgets'
 import { registerTodosIpc } from './ipc/todos'
+import { registerMoodTagsIpc } from './ipc/moodTags'
 
 function ipcRegistration(): void {
   registerDbIpc()
@@ -16,6 +17,7 @@ function ipcRegistration(): void {
   registerEntryWritingsIpc()
   registerEntryWidgetsIpc()
   registerTodosIpc()
+  registerMoodTagsIpc()
 }
 
 function createWindow(): void {
