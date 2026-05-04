@@ -65,8 +65,8 @@ describe('TodoListWidget', () => {
 
       render(<TodoListWidget entryDate={ENTRY_DATE} />)
 
-      expect(await screen.findByText('Buy milk')).toBeInTheDocument()
-      expect(await screen.findByText('Walk dog')).toBeInTheDocument()
+      expect(await screen.findByDisplayValue('Buy milk')).toBeInTheDocument()
+      expect(await screen.findByDisplayValue('Walk dog')).toBeInTheDocument()
     })
 
     it('renders nothing in the list when there are no todos', async () => {
@@ -182,10 +182,56 @@ describe('TodoListWidget', () => {
 
       render(<TodoListWidget entryDate={ENTRY_DATE} />)
 
-      await screen.findByText('Buy milk')
+      await screen.findByDisplayValue('Buy milk')
       await userEvent.click(screen.getByRole('button', { name: 'Delete todo' }))
 
       expect(window.api.todos.deleteTodo).toHaveBeenCalledWith(42)
+    })
+  })
+
+  describe('edit label', () => {
+    it('calls updateTodoLabel with the trimmed value on blur when changed', async () => {
+      vi.mocked(window.api.todos.getTodosForDate).mockResolvedValue([
+        baseTodo({ id: 42, label: 'Buy milk' })
+      ])
+
+      render(<TodoListWidget entryDate={ENTRY_DATE} />)
+
+      const input = await screen.findByDisplayValue('Buy milk')
+      await userEvent.tripleClick(input)
+      await userEvent.keyboard('  Buy oat milk  ')
+      await userEvent.tab()
+
+      expect(window.api.todos.updateTodoLabel).toHaveBeenCalledWith(42, 'Buy oat milk')
+    })
+
+    it('does not call updateTodoLabel when the label is unchanged', async () => {
+      vi.mocked(window.api.todos.getTodosForDate).mockResolvedValue([
+        baseTodo({ id: 42, label: 'Buy milk' })
+      ])
+
+      render(<TodoListWidget entryDate={ENTRY_DATE} />)
+
+      const input = await screen.findByDisplayValue('Buy milk')
+      await userEvent.click(input)
+      await userEvent.tab()
+
+      expect(window.api.todos.updateTodoLabel).not.toHaveBeenCalled()
+    })
+
+    it('does not call updateTodoLabel when the new value is empty or whitespace', async () => {
+      vi.mocked(window.api.todos.getTodosForDate).mockResolvedValue([
+        baseTodo({ id: 42, label: 'Buy milk' })
+      ])
+
+      render(<TodoListWidget entryDate={ENTRY_DATE} />)
+
+      const input = await screen.findByDisplayValue('Buy milk')
+      await userEvent.tripleClick(input)
+      await userEvent.keyboard('   ')
+      await userEvent.tab()
+
+      expect(window.api.todos.updateTodoLabel).not.toHaveBeenCalled()
     })
   })
 })

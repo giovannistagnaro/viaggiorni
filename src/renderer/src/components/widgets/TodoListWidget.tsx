@@ -73,6 +73,19 @@ function TodoListWidget({ entryDate }: Props): React.JSX.Element {
     }
   }
 
+  async function handleLabelBlur(todo: Todo, newValue: string): Promise<void> {
+    const trimmed = newValue.trim()
+    if (!trimmed || trimmed === todo.label) return
+
+    try {
+      await window.api.todos.updateTodoLabel(todo.id, trimmed)
+      await getActiveDateTodos()
+    } catch (err) {
+      // TODO: surface to user via error UI
+      console.error('Failed to update todo label', err)
+    }
+  }
+
   return (
     <>
       <label className="px-4">
@@ -105,12 +118,14 @@ function TodoListWidget({ entryDate }: Props): React.JSX.Element {
             checked={todo.isCompleted}
             onChange={() => handleToggle(todo.id)}
           />
-          <span> {todo.label}</span>
-          <button
-            onClick={() => handleDelete(todo.id)}
-            className="pl-4"
-            aria-label="Delete todo"
-          >
+          <input
+            type="text"
+            defaultValue={todo.label}
+            onBlur={(e) => handleLabelBlur(todo, e.target.value)}
+            aria-label="Todo label"
+            className="pl-2"
+          />
+          <button onClick={() => handleDelete(todo.id)} className="pl-4" aria-label="Delete todo">
             -
           </button>
         </div>
