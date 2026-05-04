@@ -1,7 +1,7 @@
 import { MoodTag } from '@shared/types'
 import { DrizzleDB } from '../database'
 import { entryMoodTags, moodTags } from '../schema'
-import { and, eq, getTableColumns } from 'drizzle-orm'
+import { and, eq, getTableColumns, sql } from 'drizzle-orm'
 
 export function getAllMoodTags(db: DrizzleDB): MoodTag[] {
   return db.select().from(moodTags).orderBy(moodTags.label).all()
@@ -17,7 +17,15 @@ export function getMoodTagsForEntry(db: DrizzleDB, entryId: number): MoodTag[] {
 }
 
 export function addMoodTagToEntry(db: DrizzleDB, entryId: number, tagId: number): void {
-  db.insert(entryMoodTags).values({ entryId, tagId }).run()
+  db.transaction((tx) => {
+    const row = tx
+      .select()
+      .from(entryMoodTags)
+      .where(and(eq(entryMoodTags.entryId, entryId), eq(entryMoodTags.tagId, tagId)))
+      .get()
+
+    if (!row) tx.insert(entryMoodTags).values({ entryId, tagId }).run()
+  })
 }
 
 export function removeMoodTagFromEntry(db: DrizzleDB, entryId: number, tagId: number): void {
@@ -27,9 +35,20 @@ export function removeMoodTagFromEntry(db: DrizzleDB, entryId: number, tagId: nu
 }
 
 export function removeMoodTag(db: DrizzleDB, tagId: number): void {
-  db.delete(moodTags).where(eq(moodTags.id, tagId)).run()
+  db.transaction((tx) => {
+    tx.delete(entryMoodTags).where(eq(entryMoodTags.tagId, tagId)).run()
+    tx.delete(moodTags).where(eq(moodTags.id, tagId)).run()
+  })
 }
 
 export function createMoodTag(db: DrizzleDB, label: string): void {
-  db.insert(moodTags).values({ label }).run()
+  db.transaction((tx) => {
+    const row = tx
+      .select()
+      .from(moodTags)
+      .where(sql`LOWER(${moodTags.label}) = LOWER(${label})`)
+      .get()
+
+    if (!row) tx.insert(moodTags).values({ label }).run()
+  })
 }
