@@ -8,7 +8,7 @@ export function registerEntrySectionsIpc(): void {
     try {
       return getSectionsForEntry(getDB(), entryId)
     } catch (err) {
-      log.error('Failed to find matching entry', { entryId, error: err })
+      log.error('Failed to find matching entry for sections', { entryId, error: err })
       throw err
     }
   })

@@ -1,5 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import { Entry, EntrySection } from '@shared/types'
+import { Entry, EntrySection, EntryWidget, Todo } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
 
@@ -28,11 +28,26 @@ interface EntrySectionsApi {
   updateSectionContent: (sectionId: number, newContent: string) => Promise<void>
 }
 
+interface EntryWidgetsApi {
+  getWidgetsForEntry: (entryId: number) => Promise<EntryWidget[]>
+}
+
+interface TodosApi {
+  createTodo: (entryDate: string, label: string) => Promise<Todo>
+  getTodosForDate: (entryDate: string) => Promise<Todo[]>
+  toggleTodoCompleted: (todoId: number) => Promise<void>
+  deleteTodo: (todoId: number) => Promise<void>
+  updateTodoLabel: (todoId: number, newLabel: string) => Promise<void>
+  changeTodoPosition: (todoId: number, newPosition: number) => Promise<void>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
   entries: EntriesApi
   entrySections: EntrySectionsApi
+  entryWidgets: EntryWidgetsApi
+  todos: TodosApi
 }
 
 declare global {

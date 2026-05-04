@@ -1,11 +1,9 @@
+import { EntrySection } from '@shared/types'
 import { DrizzleDB } from '../database'
 import { entrySections } from '../schema'
 import { eq, asc, sql } from 'drizzle-orm'
 
-export function getSectionsForEntry(
-  db: DrizzleDB,
-  entryId: number
-): (typeof entrySections.$inferSelect)[] {
+export function getSectionsForEntry(db: DrizzleDB, entryId: number): EntrySection[] {
   return db
     .select()
     .from(entrySections)

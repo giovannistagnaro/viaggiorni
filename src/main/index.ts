@@ -6,6 +6,17 @@ import { registerDbIpc } from './ipc/db'
 import { registerUserIpc } from './ipc/user'
 import { registerEntriesIpc } from './ipc/entries'
 import { registerEntrySectionsIpc } from './ipc/entrySections'
+import { registerEntryWidgetsIpc } from './ipc/entryWidgets'
+import { registerTodosIpc } from './ipc/todos'
+
+function ipcRegistration(): void {
+  registerDbIpc()
+  registerUserIpc()
+  registerEntriesIpc()
+  registerEntrySectionsIpc()
+  registerEntryWidgetsIpc()
+  registerTodosIpc()
+}
 
 function createWindow(): void {
   // Create the browser window.
@@ -46,10 +57,7 @@ app.whenReady().then(() => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
-  registerDbIpc()
-  registerUserIpc()
-  registerEntriesIpc()
-  registerEntrySectionsIpc()
+  ipcRegistration()
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
