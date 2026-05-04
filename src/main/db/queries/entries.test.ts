@@ -7,7 +7,7 @@ import {
   toggleBookmark,
   getAllBookmarkedEntries
 } from './entries'
-import { entries, entrySections, entryWidgets, templateSections, templateWidgets } from '../schema'
+import { entries, entryWritings, entryWidgets, templateWritings, templateWidgets } from '../schema'
 import type { DrizzleDB } from '../database'
 import { eq } from 'drizzle-orm'
 
@@ -47,20 +47,20 @@ describe('createEntry', () => {
     expect(newEntry.date).toEqual('2026-05-02')
   })
 
-  it('snapshots template_sections into entry_sections', () => {
+  it('snapshots template_writings into entry_writings', () => {
     const newEntry = createEntry(db, '2026-05-02', 'Test entry')
 
-    const sections = db
+    const writings = db
       .select()
-      .from(entrySections)
-      .where(eq(entrySections.entryId, newEntry.id))
+      .from(entryWritings)
+      .where(eq(entryWritings.entryId, newEntry.id))
       .all()
 
-    const templateSectionRows = db.select().from(templateSections).all()
+    const templateWritingRows = db.select().from(templateWritings).all()
 
-    expect(sections).toHaveLength(templateSectionRows.length)
-    expect(sections.map((s) => s.type).sort()).toEqual(
-      templateSectionRows.map((s) => s.type).sort()
+    expect(writings).toHaveLength(templateWritingRows.length)
+    expect(writings.map((w) => w.type).sort()).toEqual(
+      templateWritingRows.map((w) => w.type).sort()
     )
   })
 
@@ -82,23 +82,23 @@ describe('createEntry', () => {
   it('subsequent template changes do not affect existing entries', () => {
     const newEntry = createEntry(db, '2026-05-02', 'Test entry')
 
-    const sections = db
+    const writings = db
       .select()
-      .from(entrySections)
-      .where(eq(entrySections.entryId, newEntry.id))
+      .from(entryWritings)
+      .where(eq(entryWritings.entryId, newEntry.id))
       .all()
 
-    db.delete(templateSections).run()
+    db.delete(templateWritings).run()
 
-    const sectionsAfterDeletion = db
+    const writingsAfterDeletion = db
       .select()
-      .from(entrySections)
-      .where(eq(entrySections.entryId, newEntry.id))
+      .from(entryWritings)
+      .where(eq(entryWritings.entryId, newEntry.id))
       .all()
 
-    expect(sectionsAfterDeletion).toHaveLength(sections.length)
-    expect(sectionsAfterDeletion.map((s) => s.type).sort()).toEqual(
-      sections.map((s) => s.type).sort()
+    expect(writingsAfterDeletion).toHaveLength(writings.length)
+    expect(writingsAfterDeletion.map((w) => w.type).sort()).toEqual(
+      writings.map((w) => w.type).sort()
     )
   })
 })

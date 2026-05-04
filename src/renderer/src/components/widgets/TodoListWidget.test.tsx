@@ -29,9 +29,9 @@ beforeEach(() => {
       toggleBookmark: vi.fn(),
       getAllBookmarked: vi.fn()
     },
-    entrySections: {
-      getSectionsForEntry: vi.fn(),
-      updateSectionContent: vi.fn()
+    entryWritings: {
+      getWritingsForEntry: vi.fn(),
+      updateWritingContent: vi.fn()
     },
     entryWidgets: {
       getWidgetsForEntry: vi.fn()

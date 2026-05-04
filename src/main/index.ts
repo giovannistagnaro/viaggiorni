@@ -5,7 +5,7 @@ import icon from '../../resources/icon.png?asset'
 import { registerDbIpc } from './ipc/db'
 import { registerUserIpc } from './ipc/user'
 import { registerEntriesIpc } from './ipc/entries'
-import { registerEntrySectionsIpc } from './ipc/entrySections'
+import { registerEntryWritingsIpc } from './ipc/entryWritings'
 import { registerEntryWidgetsIpc } from './ipc/entryWidgets'
 import { registerTodosIpc } from './ipc/todos'
 
@@ -13,7 +13,7 @@ function ipcRegistration(): void {
   registerDbIpc()
   registerUserIpc()
   registerEntriesIpc()
-  registerEntrySectionsIpc()
+  registerEntryWritingsIpc()
   registerEntryWidgetsIpc()
   registerTodosIpc()
 }

@@ -1,7 +1,7 @@
-import SectionEditor from '@renderer/components/SectionEditor'
+import WritingEditor from '@renderer/components/WritingEditor'
 import WidgetRenderer from '@renderer/components/WidgetRenderer'
 import { formatDateISO, formatTitleForDate } from '@renderer/utils/dateFormatters'
-import { Entry, EntrySection, EntryWidget } from '@shared/types'
+import { Entry, EntryWriting, EntryWidget } from '@shared/types'
 import { useEffect, useState } from 'react'
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 function Main({ onLock }: Props): React.JSX.Element {
   const [entry, setEntry] = useState<Entry | null>(null)
   const [loading, setLoading] = useState(true)
-  const [sections, setSections] = useState<EntrySection[]>([])
+  const [writings, setWritings] = useState<EntryWriting[]>([])
   const [widgets, setWidgets] = useState<EntryWidget[]>([])
 
   useEffect(() => {
@@ -33,17 +33,17 @@ function Main({ onLock }: Props): React.JSX.Element {
   }, [])
 
   useEffect(() => {
-    async function entrySectionSetup(): Promise<void> {
+    async function entryWritingSetup(): Promise<void> {
       if (!entry) return
       try {
-        const entrySections = await window.api.entrySections.getSectionsForEntry(entry.id)
-        setSections(entrySections)
+        const entryWritings = await window.api.entryWritings.getWritingsForEntry(entry.id)
+        setWritings(entryWritings)
       } catch (err) {
         // TODO: surface to user via error UI
-        console.error('Failed to load entry sections', err)
+        console.error('Failed to load entry writings', err)
       }
     }
-    entrySectionSetup()
+    entryWritingSetup()
   }, [entry])
 
   useEffect(() => {
@@ -109,16 +109,16 @@ function Main({ onLock }: Props): React.JSX.Element {
           ))}
         </div>
         <div>
-          {sections.map((section) => (
-            <SectionEditor
-              key={section.id}
-              section={section}
+          {writings.map((writing) => (
+            <WritingEditor
+              key={writing.id}
+              writing={writing}
               onSave={async (newContent) => {
                 try {
-                  await window.api.entrySections.updateSectionContent(section.id, newContent)
+                  await window.api.entryWritings.updateWritingContent(writing.id, newContent)
                 } catch (err) {
                   // TODO: surface to user via error UI
-                  console.error('Failed to save section content', err)
+                  console.error('Failed to save writing content', err)
                 }
               }}
             />

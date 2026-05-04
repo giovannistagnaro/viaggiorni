@@ -1,6 +1,6 @@
 import type {
   entries,
-  entrySections,
+  entryWritings,
   entryWidgets,
   habits,
   habitLogs,
@@ -10,13 +10,13 @@ import type {
   entryPhotos,
   wordOfDay,
   template,
-  templateSections,
+  templateWritings,
   templateWidgets,
   settings
 } from '../main/db/schema'
 
 export type Entry = typeof entries.$inferSelect
-export type EntrySection = typeof entrySections.$inferSelect
+export type EntryWriting = typeof entryWritings.$inferSelect
 export type EntryWidget = typeof entryWidgets.$inferSelect
 export type Habit = typeof habits.$inferSelect
 export type HabitLog = typeof habitLogs.$inferSelect
@@ -26,6 +26,6 @@ export type Todo = typeof todos.$inferSelect
 export type EntryPhoto = typeof entryPhotos.$inferSelect
 export type WordOfDay = typeof wordOfDay.$inferSelect
 export type Template = typeof template.$inferSelect
-export type TemplateSection = typeof templateSections.$inferSelect
+export type TemplateWriting = typeof templateWritings.$inferSelect
 export type TemplateWidget = typeof templateWidgets.$inferSelect
 export type Settings = typeof settings.$inferSelect

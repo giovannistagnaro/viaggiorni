@@ -21,11 +21,11 @@ const api = {
     toggleBookmark: (id: number) => ipcRenderer.invoke('entries:toggleBookmark', id),
     getAllBookmarked: () => ipcRenderer.invoke('entries:getAllBookmarked')
   },
-  entrySections: {
-    getSectionsForEntry: (entryId: number) =>
-      ipcRenderer.invoke('entrySections:getSectionsForEntry', entryId),
-    updateSectionContent: (sectionId: number, newContent: string) =>
-      ipcRenderer.invoke('entrySections:updateSectionContent', sectionId, newContent)
+  entryWritings: {
+    getWritingsForEntry: (entryId: number) =>
+      ipcRenderer.invoke('entryWritings:getWritingsForEntry', entryId),
+    updateWritingContent: (writingId: number, newContent: string) =>
+      ipcRenderer.invoke('entryWritings:updateWritingContent', writingId, newContent)
   },
   entryWidgets: {
     getWidgetsForEntry: (entryId: number) =>
