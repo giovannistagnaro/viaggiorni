@@ -1,5 +1,7 @@
 import SectionEditor from '@renderer/components/SectionEditor'
-import { Entry, EntrySection } from '@shared/types'
+import WidgetRenderer from '@renderer/components/WidgetRenderer'
+import { formatDateISO, formatTitleForDate } from '@renderer/utils/dateFormatters'
+import { Entry, EntrySection, EntryWidget } from '@shared/types'
 import { useEffect, useState } from 'react'
 
 interface Props {
@@ -10,6 +12,7 @@ function Main({ onLock }: Props): React.JSX.Element {
   const [entry, setEntry] = useState<Entry | null>(null)
   const [loading, setLoading] = useState(true)
   const [sections, setSections] = useState<EntrySection[]>([])
+  const [widgets, setWidgets] = useState<EntryWidget[]>([])
 
   useEffect(() => {
     async function dateSetup(): Promise<void> {
@@ -43,6 +46,19 @@ function Main({ onLock }: Props): React.JSX.Element {
     entrySectionSetup()
   }, [entry])
 
+  useEffect(() => {
+    async function entryWidgetSetup(): Promise<void> {
+      if (!entry) return
+      try {
+        const entryWidgets = await window.api.entryWidgets.getWidgetsForEntry(entry.id)
+        setWidgets(entryWidgets)
+      } catch (err) {
+        console.error('Failed to load widgets', err)
+      }
+    }
+    entryWidgetSetup()
+  }, [entry])
+
   async function handleTitleBlur(newTitle: string): Promise<void> {
     if (!entry || entry.title === newTitle) return
     try {
@@ -74,6 +90,7 @@ function Main({ onLock }: Props): React.JSX.Element {
       <button
         className="fixed top-4 right-4 rounded-lg bg-gray-600 text-white px-4 py-2"
         onClick={handleLock}
+        type="button"
       >
         Lock
       </button>
@@ -86,36 +103,30 @@ function Main({ onLock }: Props): React.JSX.Element {
       <p>{entry.date}</p>
 
       <div className="grid grid-cols-2 grid-rows-1 gap-4">
-        <p>Widgets (coming soon)</p>
-        {sections.map((section) => (
-          <SectionEditor
-            key={section.id}
-            section={section}
-            onSave={async (newContent) => {
-              try {
-                await window.api.entrySections.updateSectionContent(section.id, newContent)
-              } catch (err) {
-                // TODO: surface to user via error UI
-                console.error('Failed to save section content', err)
-              }
-            }}
-          />
-        ))}
+        <div>
+          {widgets.map((widget) => (
+            <WidgetRenderer key={widget.id} widget={widget} entryDate={entry.date} />
+          ))}
+        </div>
+        <div>
+          {sections.map((section) => (
+            <SectionEditor
+              key={section.id}
+              section={section}
+              onSave={async (newContent) => {
+                try {
+                  await window.api.entrySections.updateSectionContent(section.id, newContent)
+                } catch (err) {
+                  // TODO: surface to user via error UI
+                  console.error('Failed to save section content', err)
+                }
+              }}
+            />
+          ))}
+        </div>
       </div>
     </>
   )
-}
-
-function formatDateISO(date: Date): string {
-  return date.toLocaleDateString('en-CA')
-}
-
-function formatTitleForDate(isoDate: string): string {
-  return new Date(isoDate + 'T00:00:00').toLocaleDateString('en-US', {
-    weekday: 'long',
-    month: 'long',
-    day: 'numeric'
-  })
 }
 
 export default Main
