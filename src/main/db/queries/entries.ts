@@ -2,10 +2,10 @@ import { eq, desc, sql } from 'drizzle-orm'
 import type { DrizzleDB } from '../database'
 import {
   entries,
-  entrySections,
+  entryWritings,
   entryWidgets,
   template,
-  templateSections,
+  templateWritings,
   templateWidgets
 } from '../schema'
 
@@ -28,10 +28,10 @@ export function createEntry(
       throw new Error('No template found')
     }
 
-    const activeSections = tx
+    const activeWritings = tx
       .select()
-      .from(templateSections)
-      .where(eq(templateSections.templateId, activeTemplate.id))
+      .from(templateWritings)
+      .where(eq(templateWritings.templateId, activeTemplate.id))
       .all()
     const activeWidgets = tx
       .select()
@@ -39,15 +39,15 @@ export function createEntry(
       .where(eq(templateWidgets.templateId, activeTemplate.id))
       .all()
 
-    if (activeSections.length > 0) {
-      tx.insert(entrySections)
+    if (activeWritings.length > 0) {
+      tx.insert(entryWritings)
         .values(
-          activeSections.map((section) => ({
+          activeWritings.map((writing) => ({
             entryId: newEntry.id,
-            type: section.type,
-            label: section.label,
-            position: section.position,
-            isVisible: section.isVisible
+            type: writing.type,
+            label: writing.label,
+            position: writing.position,
+            isVisible: writing.isVisible
           }))
         )
         .run()

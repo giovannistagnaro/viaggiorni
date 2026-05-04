@@ -1,5 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import { Entry, EntrySection, EntryWidget, Todo } from '@shared/types'
+import { Entry, EntryWriting, EntryWidget, Todo } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
 
@@ -23,9 +23,9 @@ interface EntriesApi {
   getAllBookmarked: () => Promise<Entry[]>
 }
 
-interface EntrySectionsApi {
-  getSectionsForEntry: (entryId: number) => Promise<EntrySection[]>
-  updateSectionContent: (sectionId: number, newContent: string) => Promise<void>
+interface EntryWritingsApi {
+  getWritingsForEntry: (entryId: number) => Promise<EntryWriting[]>
+  updateWritingContent: (writingId: number, newContent: string) => Promise<void>
 }
 
 interface EntryWidgetsApi {
@@ -45,7 +45,7 @@ interface Api {
   db: DbApi
   user: UserApi
   entries: EntriesApi
-  entrySections: EntrySectionsApi
+  entryWritings: EntryWritingsApi
   entryWidgets: EntryWidgetsApi
   todos: TodosApi
 }

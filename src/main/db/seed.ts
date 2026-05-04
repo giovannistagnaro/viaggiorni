@@ -1,9 +1,9 @@
 import { sql } from 'drizzle-orm'
 import { DrizzleDB } from './database'
-import { settings, moodTags, template, templateSections, templateWidgets } from './schema'
+import { settings, moodTags, template, templateWritings, templateWidgets } from './schema'
 import { DEFAULT_MOOD_TAGS, widgetTypes, writingTypes } from './dbConstants'
 
-const DEFAULT_WRITING_SECTIONS: {
+const DEFAULT_TEMPLATE_WRITINGS: {
   type: (typeof writingTypes)[number]
   label: string
   position: number
@@ -13,7 +13,7 @@ const DEFAULT_WRITING_SECTIONS: {
   { type: 'writing_prompt', label: 'Writing Prompt', position: 2 }
 ]
 
-const DEFAULT_WIDGET_SECTIONS: {
+const DEFAULT_TEMPLATE_WIDGETS: {
   type: (typeof widgetTypes)[number]
   position: number
 }[] = [
@@ -53,27 +53,27 @@ export function seedDatabase(db: DrizzleDB): void {
     .returning({ id: template.id })
     .get()
 
-  // default writing sections
-  db.insert(templateSections)
+  // default template writings
+  db.insert(templateWritings)
     .values(
-      DEFAULT_WRITING_SECTIONS.map((section) => ({
+      DEFAULT_TEMPLATE_WRITINGS.map((writing) => ({
         templateId: insertedTemplate.id,
-        type: section.type,
-        label: section.label,
-        position: section.position,
+        type: writing.type,
+        label: writing.label,
+        position: writing.position,
         isVisible: true,
         createdAt: sql`(CURRENT_TIMESTAMP)`
       }))
     )
     .run()
 
-  // default widget sections
+  // default template widgets
   db.insert(templateWidgets)
     .values(
-      DEFAULT_WIDGET_SECTIONS.map((section) => ({
+      DEFAULT_TEMPLATE_WIDGETS.map((widget) => ({
         templateId: insertedTemplate.id,
-        type: section.type,
-        position: section.position,
+        type: widget.type,
+        position: widget.position,
         isVisible: true,
         createdAt: sql`(CURRENT_TIMESTAMP)`
       }))

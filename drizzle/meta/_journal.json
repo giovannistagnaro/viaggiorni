@@ -29,6 +29,13 @@
       "when": 1777780851037,
       "tag": "0003_normal_payback",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1777868042205,
+      "tag": "0004_colorful_fixer",
+      "breakpoints": true
     }
   ]
 }

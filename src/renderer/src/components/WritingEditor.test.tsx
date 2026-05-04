@@ -1,14 +1,14 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import SectionEditor from './SectionEditor'
+import WritingEditor from './WritingEditor'
 
-const baseSection = {
+const baseWriting = {
   id: 1,
   label: 'Daily Summary',
   content: null
 }
 
-describe('SectionEditor', () => {
+describe('WritingEditor', () => {
   beforeEach(() => {
     vi.useFakeTimers()
   })
@@ -17,26 +17,26 @@ describe('SectionEditor', () => {
     vi.useRealTimers()
   })
 
-  it('renders the section label when present', () => {
-    render(<SectionEditor section={baseSection} onSave={vi.fn()} />)
+  it('renders the writing label when present', () => {
+    render(<WritingEditor writing={baseWriting} onSave={vi.fn()} />)
 
     expect(screen.getByRole('heading', { level: 2, name: 'Daily Summary' })).toBeInTheDocument()
   })
 
   it('does not render a heading when label is null', () => {
-    const nullLabelSection = { ...baseSection, label: null }
-    render(<SectionEditor section={nullLabelSection} onSave={vi.fn()} />)
+    const nullLabelWriting = { ...baseWriting, label: null }
+    render(<WritingEditor writing={nullLabelWriting} onSave={vi.fn()} />)
 
     expect(screen.queryByRole('heading', { level: 2 })).not.toBeInTheDocument()
   })
 
   it('renders the editor', () => {
-    const { container } = render(<SectionEditor section={baseSection} onSave={vi.fn()} />)
+    const { container } = render(<WritingEditor writing={baseWriting} onSave={vi.fn()} />)
 
     expect(container.querySelector('.ProseMirror')).toBeInTheDocument()
   })
 
-  it('initializes the editor with parsed content from section.content', () => {
+  it('initializes the editor with parsed content from writing.content', () => {
     const content = JSON.stringify({
       type: 'doc',
       content: [
@@ -46,15 +46,15 @@ describe('SectionEditor', () => {
         }
       ]
     })
-    const sectionWithContent = { ...baseSection, content }
+    const writingWithContent = { ...baseWriting, content }
 
-    const { container } = render(<SectionEditor section={sectionWithContent} onSave={vi.fn()} />)
+    const { container } = render(<WritingEditor writing={writingWithContent} onSave={vi.fn()} />)
 
     expect(container.querySelector('.ProseMirror')).toHaveTextContent('hello world')
   })
 
-  it('renders an empty editor when section.content is null', () => {
-    render(<SectionEditor section={baseSection} onSave={vi.fn()} />)
+  it('renders an empty editor when writing.content is null', () => {
+    render(<WritingEditor writing={baseWriting} onSave={vi.fn()} />)
 
     const editor = document.querySelector('.ProseMirror')
     expect(editor?.textContent).toBe('')

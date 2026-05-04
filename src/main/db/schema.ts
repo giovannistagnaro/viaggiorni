@@ -27,8 +27,8 @@ export const entries = sqliteTable('entries', {
   updatedAt: text('updated_at')
 })
 
-// sections of the writing portion of the page
-export const entrySections = sqliteTable('entry_sections', {
+// writings of the right side of the page
+export const entryWritings = sqliteTable('entry_writings', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   entryId: integer('entry_id')
     .notNull()
@@ -74,7 +74,7 @@ export const template = sqliteTable('template', {
 })
 
 // templates for right side of entry
-export const templateSections = sqliteTable('template_sections', {
+export const templateWritings = sqliteTable('template_writings', {
   id: integer('id').primaryKey({ autoIncrement: true }),
   templateId: integer('template_id')
     .notNull()
