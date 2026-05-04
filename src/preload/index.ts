@@ -26,6 +26,22 @@ const api = {
       ipcRenderer.invoke('entrySections:getSectionsForEntry', entryId),
     updateSectionContent: (sectionId: number, newContent: string) =>
       ipcRenderer.invoke('entrySections:updateSectionContent', sectionId, newContent)
+  },
+  entryWidgets: {
+    getWidgetsForEntry: (entryId: number) =>
+      ipcRenderer.invoke('entryWidgets:getWidgetsForEntry', entryId)
+  },
+  todos: {
+    createTodo: (entryDate: string, label: string) =>
+      ipcRenderer.invoke('todos:createTodo', entryDate, label),
+    getTodosForDate: (entryDate: string) => ipcRenderer.invoke('todos:getTodosForDate', entryDate),
+    toggleTodoCompleted: (todoId: number) =>
+      ipcRenderer.invoke('todos:toggleTodoCompleted', todoId),
+    deleteTodo: (todoId: number) => ipcRenderer.invoke('todos:deleteTodo', todoId),
+    updateTodoLabel: (todoId: number, newLabel: string) =>
+      ipcRenderer.invoke('todos:updateTodoLabel', todoId, newLabel),
+    changeTodoPosition: (todoId: number, newPosition: number) =>
+      ipcRenderer.invoke('todos:changeTodoPosition', todoId, newPosition)
   }
 }
 
