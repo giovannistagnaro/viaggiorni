@@ -29,3 +29,5 @@ export type Template = typeof template.$inferSelect
 export type TemplateWriting = typeof templateWritings.$inferSelect
 export type TemplateWidget = typeof templateWidgets.$inferSelect
 export type Settings = typeof settings.$inferSelect
+
+export type WordOfDayItem = { word: string; definition: string; example: string }

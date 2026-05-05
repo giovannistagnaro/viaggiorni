@@ -13,7 +13,7 @@ import {
   entryWidgets,
   templateWritings,
   templateWidgets
-} from '../../schemas/schema'
+} from '../schemas/schema'
 import type { DrizzleDB } from '../database'
 import { eq } from 'drizzle-orm'
 

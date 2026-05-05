@@ -1,6 +1,6 @@
 import { eq, gte } from 'drizzle-orm'
 import { DrizzleDB } from '../database'
-import { wordOfDay } from '../schema'
+import { wordOfDay } from '../schemas/schema'
 import { WordOfDay } from '@shared/types'
 import { addDays } from './helpers'
 
