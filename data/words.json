@@ -1,0 +1,5002 @@
+[
+  {
+    "word": "ephemeral",
+    "definition": "Lasting for a very short time.",
+    "example": "The ephemeral beauty of cherry blossoms draws crowds every spring."
+  },
+  {
+    "word": "serendipity",
+    "definition": "The pleasant occurrence of finding something good without looking for it.",
+    "example": "Meeting my best friend on a delayed train was pure serendipity."
+  },
+  {
+    "word": "petrichor",
+    "definition": "The earthy smell produced when rain falls on dry soil.",
+    "example": "She opened the window to breathe in the petrichor after the storm."
+  },
+  {
+    "word": "mellifluous",
+    "definition": "Sweet and smooth, usually describing a sound or voice.",
+    "example": "His mellifluous voice made even the dullest stories captivating."
+  },
+  {
+    "word": "luminous",
+    "definition": "Glowing softly with light.",
+    "example": "The luminous moon cast silver patterns across the still lake."
+  },
+  {
+    "word": "quaint",
+    "definition": "Charmingly old-fashioned or unusual.",
+    "example": "We stayed at a quaint inn tucked between two crooked oak trees."
+  },
+  {
+    "word": "wistful",
+    "definition": "Showing a quiet, gentle longing or sadness.",
+    "example": "She gave a wistful smile while looking at her childhood photographs."
+  },
+  {
+    "word": "halcyon",
+    "definition": "Peaceful, happy, and prosperous, often referring to a past time.",
+    "example": "He often spoke of the halcyon days of his college summers."
+  },
+  {
+    "word": "ineffable",
+    "definition": "Too great or beautiful to be expressed in words.",
+    "example": "Watching the aurora unfold gave her an ineffable sense of awe."
+  },
+  {
+    "word": "limerence",
+    "definition": "An intense, often involuntary romantic infatuation.",
+    "example": "His limerence for her colored every ordinary moment with meaning."
+  },
+  {
+    "word": "sonder",
+    "definition": "The realization that every passerby is living a life as vivid as your own.",
+    "example": "Sitting in the cafe, a quiet sonder washed over him."
+  },
+  {
+    "word": "saudade",
+    "definition": "A deep emotional longing for something or someone absent.",
+    "example": "Listening to that song stirred a familiar saudade for her grandmother."
+  },
+  {
+    "word": "hiraeth",
+    "definition": "A homesickness for a home you cannot return to or that never was.",
+    "example": "Walking the misty hills, he felt a strange hiraeth tug at him."
+  },
+  {
+    "word": "wabi-sabi",
+    "definition": "Finding beauty in imperfection and the natural cycle of decay.",
+    "example": "Her ceramics embraced wabi-sabi with their uneven glazes and cracks."
+  },
+  {
+    "word": "komorebi",
+    "definition": "Sunlight filtering through the leaves of trees.",
+    "example": "She paused under the komorebi dappling the forest path."
+  },
+  {
+    "word": "tsundoku",
+    "definition": "The habit of acquiring books and letting them pile up unread.",
+    "example": "His apartment was a monument to cheerful tsundoku."
+  },
+  {
+    "word": "schadenfreude",
+    "definition": "Pleasure derived from another person's misfortune.",
+    "example": "She felt a flicker of schadenfreude when her rival's project flopped."
+  },
+  {
+    "word": "fernweh",
+    "definition": "A longing to travel to far-off places you have never been.",
+    "example": "Watching travel documentaries triggered a familiar fernweh in him."
+  },
+  {
+    "word": "gemütlichkeit",
+    "definition": "A feeling of warmth, friendliness, and cozy belonging.",
+    "example": "The little tavern radiated gemütlichkeit on snowy nights."
+  },
+  {
+    "word": "ikigai",
+    "definition": "A sense of purpose that gives meaning to daily life.",
+    "example": "Teaching gardening to children became her quiet ikigai."
+  },
+  {
+    "word": "meraki",
+    "definition": "Doing something with soul, creativity, and love.",
+    "example": "He kneaded the dough with meraki, just as his mother had."
+  },
+  {
+    "word": "yugen",
+    "definition": "A profound awareness of the universe that triggers gentle sadness.",
+    "example": "The empty shoreline stirred a quiet yugen in her chest."
+  },
+  {
+    "word": "sobremesa",
+    "definition": "The relaxed conversation lingering at the table after a meal.",
+    "example": "Their sobremesa stretched into a long, candlelit evening."
+  },
+  {
+    "word": "duende",
+    "definition": "A mysterious creative power that stirs deep emotion.",
+    "example": "Her flamenco performance was charged with raw duende."
+  },
+  {
+    "word": "mamihlapinatapai",
+    "definition": "A wordless, meaningful look shared by two who both wish something.",
+    "example": "They exchanged a mamihlapinatapai, neither willing to break the silence."
+  },
+  {
+    "word": "resilience",
+    "definition": "The ability to recover quickly from difficulties.",
+    "example": "Her resilience after the setback inspired everyone around her."
+  },
+  {
+    "word": "tranquil",
+    "definition": "Calm, quiet, and untroubled.",
+    "example": "We rented a tranquil cabin overlooking a glassy bay."
+  },
+  {
+    "word": "verdant",
+    "definition": "Lush and green with vegetation.",
+    "example": "The verdant valley stretched on as far as we could see."
+  },
+  {
+    "word": "azure",
+    "definition": "Bright sky-blue in color.",
+    "example": "The azure sea seemed almost too vivid to be real."
+  },
+  {
+    "word": "amber",
+    "definition": "A warm orange-yellow color.",
+    "example": "Amber light spilled through the curtains at dusk."
+  },
+  {
+    "word": "crimson",
+    "definition": "A deep, rich red color.",
+    "example": "Crimson leaves drifted down onto the wet sidewalk."
+  },
+  {
+    "word": "umber",
+    "definition": "A natural earthy brown pigment or color.",
+    "example": "She painted the barn in shades of umber and ochre."
+  },
+  {
+    "word": "ochre",
+    "definition": "An earthy yellow-brown color.",
+    "example": "The desert cliffs glowed ochre in the late afternoon sun."
+  },
+  {
+    "word": "indigo",
+    "definition": "A deep blue-purple color.",
+    "example": "Indigo clouds gathered along the horizon before the storm."
+  },
+  {
+    "word": "vermilion",
+    "definition": "A vivid red-orange color.",
+    "example": "Her vermilion scarf stood out against the gray buildings."
+  },
+  {
+    "word": "cerulean",
+    "definition": "A deep, slightly greenish sky-blue.",
+    "example": "Cerulean waves lapped against the white sand."
+  },
+  {
+    "word": "russet",
+    "definition": "A reddish-brown color often seen in autumn.",
+    "example": "Russet leaves crunched underfoot on the morning walk."
+  },
+  {
+    "word": "alabaster",
+    "definition": "Smooth, pale, and white like polished stone.",
+    "example": "Moonlight made her face seem almost alabaster."
+  },
+  {
+    "word": "ebony",
+    "definition": "Very dark black, often glossy.",
+    "example": "The pianist's ebony hair fell over the keys as she played."
+  },
+  {
+    "word": "ivory",
+    "definition": "A creamy off-white color.",
+    "example": "She wore an ivory dress trimmed with lace."
+  },
+  {
+    "word": "auburn",
+    "definition": "A reddish-brown color, often used for hair.",
+    "example": "Her auburn curls caught fire in the autumn sun."
+  },
+  {
+    "word": "scarlet",
+    "definition": "A bright, slightly orange-leaning red.",
+    "example": "Scarlet poppies dotted the field near the old chapel."
+  },
+  {
+    "word": "magenta",
+    "definition": "A vibrant purplish-pink color.",
+    "example": "The sky turned magenta at the edges of sunset."
+  },
+  {
+    "word": "saffron",
+    "definition": "A bright golden-yellow color.",
+    "example": "Saffron robes flickered through the temple courtyard."
+  },
+  {
+    "word": "chartreuse",
+    "definition": "A yellow-green color resembling young leaves.",
+    "example": "She painted the bedroom door a bold chartreuse."
+  },
+  {
+    "word": "tangerine",
+    "definition": "A bright orange color.",
+    "example": "Tangerine streaks lit up the early morning sky."
+  },
+  {
+    "word": "lavender",
+    "definition": "A pale purple color, like the flower.",
+    "example": "Lavender twilight settled gently over the garden."
+  },
+  {
+    "word": "periwinkle",
+    "definition": "A pale, slightly bluish purple color.",
+    "example": "Her periwinkle sweater matched the spring crocuses."
+  },
+  {
+    "word": "burgundy",
+    "definition": "A dark red color resembling the wine.",
+    "example": "He arrived in a burgundy coat that suited the season."
+  },
+  {
+    "word": "emerald",
+    "definition": "A rich, vivid green color.",
+    "example": "The emerald hills shimmered after the morning rain."
+  },
+  {
+    "word": "sapphire",
+    "definition": "A deep, vivid blue color.",
+    "example": "Sapphire lakes were scattered across the high plateau."
+  },
+  {
+    "word": "obsidian",
+    "definition": "A deep, glassy black color.",
+    "example": "Obsidian skies promised a thunderstorm by morning."
+  },
+  {
+    "word": "pearl",
+    "definition": "A soft, lustrous white tone.",
+    "example": "Pearl clouds drifted over the harbor at dawn."
+  },
+  {
+    "word": "topaz",
+    "definition": "A warm yellow-gold color.",
+    "example": "The cat's topaz eyes glowed in the dim hallway."
+  },
+  {
+    "word": "fuchsia",
+    "definition": "A bright, vivid pinkish-purple color.",
+    "example": "Fuchsia blossoms spilled over the garden wall."
+  },
+  {
+    "word": "garnet",
+    "definition": "A deep red color, like the gemstone.",
+    "example": "She wore a garnet pendant inherited from her grandmother."
+  },
+  {
+    "word": "ardent",
+    "definition": "Showing intense feeling or enthusiasm.",
+    "example": "He was an ardent supporter of the local theater."
+  },
+  {
+    "word": "fervor",
+    "definition": "Intense and passionate feeling.",
+    "example": "She spoke with such fervor that the room fell silent."
+  },
+  {
+    "word": "zeal",
+    "definition": "Energetic enthusiasm in pursuit of something.",
+    "example": "He approached gardening with the zeal of a new convert."
+  },
+  {
+    "word": "verve",
+    "definition": "Energy and lively spirit, especially in expression.",
+    "example": "Her writing had a verve that pulled readers right in."
+  },
+  {
+    "word": "panache",
+    "definition": "Stylish, confident flair.",
+    "example": "He delivered the speech with surprising panache."
+  },
+  {
+    "word": "poise",
+    "definition": "Graceful, composed self-assurance.",
+    "example": "She handled the unexpected questions with calm poise."
+  },
+  {
+    "word": "grace",
+    "definition": "Effortless beauty or politeness in movement or manner.",
+    "example": "He stepped onto the stage with quiet grace."
+  },
+  {
+    "word": "candor",
+    "definition": "Open, honest expression.",
+    "example": "Her candor in the meeting cleared up months of confusion."
+  },
+  {
+    "word": "humility",
+    "definition": "A modest view of one's own importance.",
+    "example": "Despite his success, he carried himself with real humility."
+  },
+  {
+    "word": "fortitude",
+    "definition": "Strength of mind in facing hardship.",
+    "example": "She showed remarkable fortitude during the long recovery."
+  },
+  {
+    "word": "tenacity",
+    "definition": "The quality of holding on firmly and persistently.",
+    "example": "His tenacity finally paid off after years of practice."
+  },
+  {
+    "word": "diligence",
+    "definition": "Careful and persistent effort.",
+    "example": "Her diligence made even tedious tasks look graceful."
+  },
+  {
+    "word": "prudence",
+    "definition": "Careful good judgment.",
+    "example": "Prudence kept him from investing everything at once."
+  },
+  {
+    "word": "temperance",
+    "definition": "Moderation in action, thought, or feeling.",
+    "example": "She practiced temperance even at the most lavish dinners."
+  },
+  {
+    "word": "magnanimous",
+    "definition": "Generous and forgiving, especially toward rivals.",
+    "example": "He was magnanimous in defeat, congratulating the winner warmly."
+  },
+  {
+    "word": "altruistic",
+    "definition": "Showing unselfish concern for others.",
+    "example": "Her altruistic work at the shelter touched the whole community."
+  },
+  {
+    "word": "benevolent",
+    "definition": "Kind and well-meaning.",
+    "example": "A benevolent neighbor watered the plants while we were away."
+  },
+  {
+    "word": "gregarious",
+    "definition": "Fond of company; sociable.",
+    "example": "His gregarious nature made him the heart of every gathering."
+  },
+  {
+    "word": "convivial",
+    "definition": "Friendly, lively, and enjoyable.",
+    "example": "The dinner had a convivial atmosphere from start to finish."
+  },
+  {
+    "word": "jovial",
+    "definition": "Cheerful and friendly.",
+    "example": "Her jovial laugh filled the small kitchen."
+  },
+  {
+    "word": "affable",
+    "definition": "Easy to talk to; warm in manner.",
+    "example": "The affable host made every guest feel welcome."
+  },
+  {
+    "word": "amiable",
+    "definition": "Pleasant and friendly.",
+    "example": "He has an amiable way of disarming arguments."
+  },
+  {
+    "word": "genial",
+    "definition": "Friendly and cheerful.",
+    "example": "Her genial smile put the nervous interviewees at ease."
+  },
+  {
+    "word": "sanguine",
+    "definition": "Optimistic, especially in difficult situations.",
+    "example": "He remained sanguine despite the project's many setbacks."
+  },
+  {
+    "word": "stoic",
+    "definition": "Enduring difficulty without showing feelings.",
+    "example": "She faced the bad news with stoic calm."
+  },
+  {
+    "word": "pensive",
+    "definition": "Engaged in deep, often serious thought.",
+    "example": "He grew pensive whenever the topic of his old hometown came up."
+  },
+  {
+    "word": "contemplative",
+    "definition": "Thoughtful and reflective.",
+    "example": "The garden was a contemplative space at dawn."
+  },
+  {
+    "word": "introspective",
+    "definition": "Examining one's own thoughts and feelings.",
+    "example": "Long walks made her unusually introspective."
+  },
+  {
+    "word": "reverie",
+    "definition": "A state of pleasant, dreamy thought.",
+    "example": "She drifted into reverie as the train passed open fields."
+  },
+  {
+    "word": "musing",
+    "definition": "A period of thoughtful or dreamy reflection.",
+    "example": "His evening musing often turned into pages of writing."
+  },
+  {
+    "word": "solitude",
+    "definition": "The state of being alone, often by choice.",
+    "example": "He found solitude in early morning runs along the river."
+  },
+  {
+    "word": "seclusion",
+    "definition": "Quiet privacy away from others.",
+    "example": "The cabin offered the seclusion she had been craving."
+  },
+  {
+    "word": "respite",
+    "definition": "A short break from something difficult.",
+    "example": "The afternoon nap was a welcome respite from the heat."
+  },
+  {
+    "word": "reprieve",
+    "definition": "A temporary relief from trouble.",
+    "example": "The cool breeze offered a brief reprieve from the long hike."
+  },
+  {
+    "word": "solace",
+    "definition": "Comfort in a time of distress.",
+    "example": "She found solace in long letters from her sister."
+  },
+  {
+    "word": "succor",
+    "definition": "Assistance and support in difficulty.",
+    "example": "The villagers brought succor to travelers stranded in the storm."
+  },
+  {
+    "word": "haven",
+    "definition": "A safe, peaceful place.",
+    "example": "Her grandmother's kitchen was her childhood haven."
+  },
+  {
+    "word": "refuge",
+    "definition": "A place that provides shelter or safety.",
+    "example": "The library became their refuge during long winters."
+  },
+  {
+    "word": "sanctuary",
+    "definition": "A safe and sacred space.",
+    "example": "The garden felt like a sanctuary in the middle of the city."
+  },
+  {
+    "word": "nestle",
+    "definition": "Settle comfortably into a soft place.",
+    "example": "The puppy nestled into the blanket and sighed."
+  },
+  {
+    "word": "snuggle",
+    "definition": "Move into a cozy, close position.",
+    "example": "They snuggled under the quilt to watch the storm pass."
+  },
+  {
+    "word": "linger",
+    "definition": "Stay somewhere a little longer than necessary.",
+    "example": "The smell of cinnamon lingered after the bread came out."
+  },
+  {
+    "word": "saunter",
+    "definition": "Walk in a slow, relaxed manner.",
+    "example": "We sauntered down the boardwalk eating slow ice cream."
+  },
+  {
+    "word": "amble",
+    "definition": "Walk at a leisurely pace.",
+    "example": "The old dog ambled across the grass without a worry."
+  },
+  {
+    "word": "meander",
+    "definition": "Wander without a fixed course.",
+    "example": "We meandered through the alleyways for hours."
+  },
+  {
+    "word": "ramble",
+    "definition": "Walk for pleasure with no particular destination.",
+    "example": "On Sundays they rambled through the wooded hills."
+  },
+  {
+    "word": "wander",
+    "definition": "Move about with no clear direction.",
+    "example": "She liked to wander the markets without a shopping list."
+  },
+  {
+    "word": "roam",
+    "definition": "Travel without a fixed purpose.",
+    "example": "The cat would roam the garden every twilight."
+  },
+  {
+    "word": "stroll",
+    "definition": "Walk casually for enjoyment.",
+    "example": "They took an evening stroll along the harbor."
+  },
+  {
+    "word": "perch",
+    "definition": "Sit or rest on something narrow or high.",
+    "example": "A blue jay perched on the windowsill and stared inside."
+  },
+  {
+    "word": "alight",
+    "definition": "Land softly after movement.",
+    "example": "A butterfly alighted on the steaming teacup."
+  },
+  {
+    "word": "flutter",
+    "definition": "Move with quick, light, irregular motions.",
+    "example": "Her notes fluttered to the floor when the door opened."
+  },
+  {
+    "word": "flicker",
+    "definition": "Burn or shine with an unsteady light.",
+    "example": "Candles flickered in the drafty hallway."
+  },
+  {
+    "word": "shimmer",
+    "definition": "Shine with a soft, wavering light.",
+    "example": "The lake shimmered gold under the late afternoon sun."
+  },
+  {
+    "word": "glisten",
+    "definition": "Shine with a wet or oily reflection.",
+    "example": "Dew glistened on the spider's web at dawn."
+  },
+  {
+    "word": "glow",
+    "definition": "Give off a steady, soft light.",
+    "example": "The fireplace glowed long after the last guest had left."
+  },
+  {
+    "word": "radiance",
+    "definition": "Bright, warm light or quality.",
+    "example": "There was a radiance about her that morning that no one missed."
+  },
+  {
+    "word": "twinkle",
+    "definition": "A small, bright light that flashes intermittently.",
+    "example": "The first twinkle of stars appeared above the harbor."
+  },
+  {
+    "word": "sparkle",
+    "definition": "Shine brightly with flashes of light.",
+    "example": "Frost made every branch sparkle in the sunrise."
+  },
+  {
+    "word": "glimmer",
+    "definition": "A faint or wavering light.",
+    "example": "A glimmer of hope returned with the morning news."
+  },
+  {
+    "word": "gleam",
+    "definition": "A brief, soft shine of light.",
+    "example": "A gleam of mischief lit up his eyes."
+  },
+  {
+    "word": "dapple",
+    "definition": "Mark with small, irregular spots of light or color.",
+    "example": "Sunlight dappled the floor of the quiet study."
+  },
+  {
+    "word": "mottled",
+    "definition": "Marked with patches of different colors.",
+    "example": "The mottled bark of the sycamore looked like a painted wall."
+  },
+  {
+    "word": "iridescent",
+    "definition": "Showing shifting, rainbow-like colors.",
+    "example": "Iridescent feathers caught the light as the bird turned."
+  },
+  {
+    "word": "opalescent",
+    "definition": "Showing soft, milky, shifting colors.",
+    "example": "The opalescent sky after rain calmed her nerves."
+  },
+  {
+    "word": "translucent",
+    "definition": "Letting light pass through without being clear.",
+    "example": "The translucent paper softened the lamp's glow."
+  },
+  {
+    "word": "diaphanous",
+    "definition": "Light, delicate, and almost transparent.",
+    "example": "Diaphanous curtains drifted in the spring breeze."
+  },
+  {
+    "word": "gossamer",
+    "definition": "Light, thin, and delicate, like spider silk.",
+    "example": "Gossamer threads stretched across the porch railing."
+  },
+  {
+    "word": "ethereal",
+    "definition": "Delicate and otherworldly.",
+    "example": "The choir's harmonies created an ethereal atmosphere."
+  },
+  {
+    "word": "celestial",
+    "definition": "Relating to the sky or heavens.",
+    "example": "We watched a celestial display of meteors after midnight."
+  },
+  {
+    "word": "stellar",
+    "definition": "Relating to stars; or excellent in quality.",
+    "example": "Her stellar performance earned a standing ovation."
+  },
+  {
+    "word": "lunar",
+    "definition": "Relating to the moon.",
+    "example": "The lunar light made the meadow look like silver."
+  },
+  {
+    "word": "solar",
+    "definition": "Relating to the sun.",
+    "example": "We installed a solar lamp by the back gate."
+  },
+  {
+    "word": "auroral",
+    "definition": "Relating to the dawn or northern lights.",
+    "example": "An auroral hush settled over the snowy field."
+  },
+  {
+    "word": "crepuscular",
+    "definition": "Relating to twilight; active at dusk.",
+    "example": "Foxes are crepuscular and often appear at dusk."
+  },
+  {
+    "word": "vespertine",
+    "definition": "Relating to or active in the evening.",
+    "example": "The garden had a vespertine charm after sunset."
+  },
+  {
+    "word": "nocturnal",
+    "definition": "Active at night.",
+    "example": "Owls are nocturnal hunters with remarkable hearing."
+  },
+  {
+    "word": "matutinal",
+    "definition": "Relating to or happening in the morning.",
+    "example": "She had a matutinal habit of writing before dawn."
+  },
+  {
+    "word": "aubade",
+    "definition": "A poem or song greeting the dawn.",
+    "example": "The flutist played a soft aubade as the sky paled."
+  },
+  {
+    "word": "nocturne",
+    "definition": "A musical composition evoking the night.",
+    "example": "He played a Chopin nocturne that hushed the room."
+  },
+  {
+    "word": "elegy",
+    "definition": "A reflective poem, often mourning a loss.",
+    "example": "She wrote an elegy for her grandmother's garden."
+  },
+  {
+    "word": "epigram",
+    "definition": "A short, witty statement.",
+    "example": "His emails always ended with a sharp little epigram."
+  },
+  {
+    "word": "anecdote",
+    "definition": "A short, often amusing story about a real event.",
+    "example": "He had an anecdote ready for every occasion."
+  },
+  {
+    "word": "vignette",
+    "definition": "A brief, evocative description or scene.",
+    "example": "Each chapter was a vignette of village life."
+  },
+  {
+    "word": "tableau",
+    "definition": "A vivid, picture-like scene.",
+    "example": "The market formed a colorful tableau in the morning light."
+  },
+  {
+    "word": "panorama",
+    "definition": "A wide, unbroken view of a surrounding area.",
+    "example": "From the ridge we saw a panorama of green valleys."
+  },
+  {
+    "word": "vista",
+    "definition": "A pleasing, often distant view.",
+    "example": "The hilltop offered a vista of patchwork fields."
+  },
+  {
+    "word": "horizon",
+    "definition": "The line where the sky appears to meet the earth.",
+    "example": "Sails appeared on the horizon at first light."
+  },
+  {
+    "word": "expanse",
+    "definition": "A wide, continuous area of space.",
+    "example": "An expanse of wildflowers spread before us."
+  },
+  {
+    "word": "thicket",
+    "definition": "A dense growth of bushes or small trees.",
+    "example": "Rabbits darted into a thicket along the road."
+  },
+  {
+    "word": "grove",
+    "definition": "A small group of trees.",
+    "example": "A lemon grove perfumed the spring evenings."
+  },
+  {
+    "word": "copse",
+    "definition": "A small group of trees or shrubs.",
+    "example": "A copse of birches lined the slow river."
+  },
+  {
+    "word": "glade",
+    "definition": "An open, grassy area in a forest.",
+    "example": "We picnicked in a glade carpeted with bluebells."
+  },
+  {
+    "word": "meadow",
+    "definition": "A field of grass and wildflowers.",
+    "example": "The meadow buzzed with bees by midmorning."
+  },
+  {
+    "word": "moor",
+    "definition": "An open stretch of uncultivated land.",
+    "example": "Heather painted the moor purple in late summer."
+  },
+  {
+    "word": "heath",
+    "definition": "An area of open, shrubby land.",
+    "example": "Walking the heath cleared his thoughts each morning."
+  },
+  {
+    "word": "fen",
+    "definition": "A low, marshy area of land.",
+    "example": "Mist clung low over the quiet fen at dawn."
+  },
+  {
+    "word": "bog",
+    "definition": "Wet, spongy ground that is hard to walk on.",
+    "example": "Cranberries grew along the edges of the bog."
+  },
+  {
+    "word": "marsh",
+    "definition": "Soft, wet land often near water.",
+    "example": "Herons stalked the edges of the salt marsh."
+  },
+  {
+    "word": "estuary",
+    "definition": "Where a river meets the sea.",
+    "example": "Birds gathered at the estuary by the hundreds."
+  },
+  {
+    "word": "lagoon",
+    "definition": "A shallow body of water near a sea or lake.",
+    "example": "We swam in a calm lagoon ringed by pine trees."
+  },
+  {
+    "word": "cove",
+    "definition": "A small, sheltered bay.",
+    "example": "We anchored in a quiet cove for the night."
+  },
+  {
+    "word": "inlet",
+    "definition": "A narrow passage of water leading inland.",
+    "example": "Otters played near the rocky inlet."
+  },
+  {
+    "word": "harbor",
+    "definition": "A sheltered place for boats.",
+    "example": "Lights blinked across the harbor as fog rolled in."
+  },
+  {
+    "word": "bayou",
+    "definition": "A slow-moving, marshy waterway.",
+    "example": "Cypress trees leaned over the lazy bayou."
+  },
+  {
+    "word": "tributary",
+    "definition": "A smaller stream that flows into a larger one.",
+    "example": "The map showed a forgotten tributary near the cabin."
+  },
+  {
+    "word": "rivulet",
+    "definition": "A small stream or brook.",
+    "example": "A rivulet wound through the moss-covered rocks."
+  },
+  {
+    "word": "brook",
+    "definition": "A small, gentle stream.",
+    "example": "We rested by a brook that whispered through the woods."
+  },
+  {
+    "word": "creek",
+    "definition": "A small stream of water.",
+    "example": "Children splashed in the creek behind the schoolhouse."
+  },
+  {
+    "word": "torrent",
+    "definition": "A violent, rushing stream of water.",
+    "example": "Spring rain turned the path into a brown torrent."
+  },
+  {
+    "word": "cascade",
+    "definition": "A small waterfall flowing in stages.",
+    "example": "A cascade tumbled down the moss-soft rocks."
+  },
+  {
+    "word": "deluge",
+    "definition": "A heavy, overwhelming downpour or flood.",
+    "example": "A sudden deluge soaked our picnic in seconds."
+  },
+  {
+    "word": "drizzle",
+    "definition": "Light, fine rain.",
+    "example": "A gentle drizzle made the garden smell wonderful."
+  },
+  {
+    "word": "downpour",
+    "definition": "A heavy, sudden fall of rain.",
+    "example": "We sheltered under the awning during the downpour."
+  },
+  {
+    "word": "mist",
+    "definition": "A fine cloud of tiny water droplets.",
+    "example": "Morning mist softened the edges of the harbor."
+  },
+  {
+    "word": "haze",
+    "definition": "A thin, hazy atmosphere.",
+    "example": "A summer haze lingered over the rooftops."
+  },
+  {
+    "word": "fog",
+    "definition": "Thick mist that limits visibility.",
+    "example": "Fog settled into the valley like a quiet blanket."
+  },
+  {
+    "word": "frost",
+    "definition": "A thin layer of ice formed in cold weather.",
+    "example": "Frost glittered on the kale stems at dawn."
+  },
+  {
+    "word": "rime",
+    "definition": "Frosty ice formed by freezing fog.",
+    "example": "Rime coated every branch of the old oak."
+  },
+  {
+    "word": "hoarfrost",
+    "definition": "White ice crystals forming on cold surfaces.",
+    "example": "Hoarfrost made the world look like spun sugar."
+  },
+  {
+    "word": "flurry",
+    "definition": "A short, light fall of snow.",
+    "example": "A flurry came down as we walked home from dinner."
+  },
+  {
+    "word": "gust",
+    "definition": "A sudden, brief rush of wind.",
+    "example": "A gust scattered her notes across the lawn."
+  },
+  {
+    "word": "breeze",
+    "definition": "A light, gentle wind.",
+    "example": "An evening breeze cooled the porch."
+  },
+  {
+    "word": "zephyr",
+    "definition": "A soft, gentle breeze.",
+    "example": "A zephyr lifted the corners of her sundress."
+  },
+  {
+    "word": "gale",
+    "definition": "A very strong wind.",
+    "example": "A gale rattled the shutters all night."
+  },
+  {
+    "word": "tempest",
+    "definition": "A violent storm.",
+    "example": "The tempest tore branches from the old oak."
+  },
+  {
+    "word": "squall",
+    "definition": "A sudden, violent gust of wind, often with rain.",
+    "example": "A quick squall caught the small boats by surprise."
+  },
+  {
+    "word": "flotsam",
+    "definition": "Floating wreckage or debris in water.",
+    "example": "We collected flotsam along the tide line at sunrise."
+  },
+  {
+    "word": "jetsam",
+    "definition": "Items thrown overboard and washed ashore.",
+    "example": "The beach was strewn with jetsam after the storm."
+  },
+  {
+    "word": "driftwood",
+    "definition": "Wood washed ashore by water.",
+    "example": "She built a small shrine on the beach from driftwood."
+  },
+  {
+    "word": "tidepool",
+    "definition": "A pool of seawater left on the shore at low tide.",
+    "example": "We crouched at a tidepool watching tiny crabs scuttle."
+  },
+  {
+    "word": "shoal",
+    "definition": "A shallow area in a body of water.",
+    "example": "Birds gathered on the shoal at low tide."
+  },
+  {
+    "word": "reef",
+    "definition": "A ridge of rocks or coral near the surface.",
+    "example": "Fish darted in patterns above the bright reef."
+  },
+  {
+    "word": "atoll",
+    "definition": "A ring-shaped coral reef around a lagoon.",
+    "example": "Their plane circled a tiny green atoll."
+  },
+  {
+    "word": "isthmus",
+    "definition": "A narrow strip of land joining two larger areas.",
+    "example": "We drove the long isthmus at sunset."
+  },
+  {
+    "word": "headland",
+    "definition": "A piece of high land extending into the sea.",
+    "example": "We hiked to the headland to watch the whales pass."
+  },
+  {
+    "word": "promontory",
+    "definition": "A high point of land jutting out into water.",
+    "example": "The lighthouse stood on a windy promontory."
+  },
+  {
+    "word": "escarpment",
+    "definition": "A long, steep slope or cliff.",
+    "example": "An escarpment ran along the river for several miles."
+  },
+  {
+    "word": "ravine",
+    "definition": "A deep, narrow valley.",
+    "example": "A waterfall echoed somewhere down in the ravine."
+  },
+  {
+    "word": "gorge",
+    "definition": "A narrow valley between cliffs.",
+    "example": "We crossed an old footbridge above the gorge."
+  },
+  {
+    "word": "canyon",
+    "definition": "A deep valley with steep sides.",
+    "example": "Hawks circled above the red canyon walls."
+  },
+  {
+    "word": "plateau",
+    "definition": "A flat area of high land.",
+    "example": "Wildflowers covered the plateau in late spring."
+  },
+  {
+    "word": "knoll",
+    "definition": "A small, rounded hill.",
+    "example": "A single oak stood on the grassy knoll."
+  },
+  {
+    "word": "hummock",
+    "definition": "A small mound of earth or grass.",
+    "example": "The trail wound between hummocks of soft moss."
+  },
+  {
+    "word": "hillock",
+    "definition": "A small hill or mound.",
+    "example": "Rabbits sunned themselves on the hillock."
+  },
+  {
+    "word": "vale",
+    "definition": "A poetic word for a small valley.",
+    "example": "A quiet vale opened beyond the next ridge."
+  },
+  {
+    "word": "dell",
+    "definition": "A small wooded valley.",
+    "example": "Bluebells filled the dell every spring."
+  },
+  {
+    "word": "hollow",
+    "definition": "A small, sheltered low area.",
+    "example": "Deer rested in the hollow during the heat of the day."
+  },
+  {
+    "word": "thatch",
+    "definition": "Plant material used to cover roofs.",
+    "example": "The cottage had a thatch roof streaked with moss."
+  },
+  {
+    "word": "hearth",
+    "definition": "The floor area in front of a fireplace.",
+    "example": "The cat curled up on the warm hearth."
+  },
+  {
+    "word": "alcove",
+    "definition": "A small recessed space in a room.",
+    "example": "She read every evening in the alcove by the window."
+  },
+  {
+    "word": "nook",
+    "definition": "A small, cozy space.",
+    "example": "There was a reading nook tucked under the stairs."
+  },
+  {
+    "word": "cranny",
+    "definition": "A small, narrow space or crack.",
+    "example": "Birds nested in every cranny of the old wall."
+  },
+  {
+    "word": "vestibule",
+    "definition": "A small entrance hall.",
+    "example": "Boots and umbrellas filled the vestibule."
+  },
+  {
+    "word": "atrium",
+    "definition": "An open central area inside a building.",
+    "example": "Sunlight poured into the atrium at noon."
+  },
+  {
+    "word": "veranda",
+    "definition": "A roofed porch attached to a house.",
+    "example": "We had iced tea on the veranda all afternoon."
+  },
+  {
+    "word": "loggia",
+    "definition": "A roofed gallery open on one side.",
+    "example": "Roses climbed the columns of the old loggia."
+  },
+  {
+    "word": "portico",
+    "definition": "A roofed structure supported by columns.",
+    "example": "We waited under the portico during the rain."
+  },
+  {
+    "word": "balustrade",
+    "definition": "A railing supported by small posts.",
+    "example": "She leaned on the marble balustrade and listened."
+  },
+  {
+    "word": "parapet",
+    "definition": "A low protective wall along an edge.",
+    "example": "Children were warned to stay away from the parapet."
+  },
+  {
+    "word": "garret",
+    "definition": "A small attic room.",
+    "example": "He wrote his first novel in a chilly garret."
+  },
+  {
+    "word": "belfry",
+    "definition": "The part of a tower that holds bells.",
+    "example": "Bats sometimes appeared in the old church belfry."
+  },
+  {
+    "word": "cupola",
+    "definition": "A small dome on top of a building.",
+    "example": "The cupola caught the last gold of sunset."
+  },
+  {
+    "word": "rotunda",
+    "definition": "A round room or building with a dome.",
+    "example": "We met under the painted rotunda at noon."
+  },
+  {
+    "word": "colonnade",
+    "definition": "A row of columns supporting a roof.",
+    "example": "Marble columns formed a long, shaded colonnade."
+  },
+  {
+    "word": "esplanade",
+    "definition": "A long, open walkway, usually by water.",
+    "example": "We walked the esplanade after dinner each night."
+  },
+  {
+    "word": "promenade",
+    "definition": "A leisurely public walk along a path.",
+    "example": "The promenade buzzed with families and street performers."
+  },
+  {
+    "word": "courtyard",
+    "definition": "An open space surrounded by buildings.",
+    "example": "Lemons grew in pots all around the courtyard."
+  },
+  {
+    "word": "cobblestone",
+    "definition": "A small, rounded stone used to pave streets.",
+    "example": "Cobblestone alleys twisted through the old quarter."
+  },
+  {
+    "word": "lattice",
+    "definition": "A crisscrossed structure of strips.",
+    "example": "Roses climbed the lattice on the back wall."
+  },
+  {
+    "word": "trellis",
+    "definition": "A frame for supporting climbing plants.",
+    "example": "The trellis was heavy with grapevines by August."
+  },
+  {
+    "word": "arbor",
+    "definition": "A shaded garden seat under climbing plants.",
+    "example": "We took afternoon tea in the rose arbor."
+  },
+  {
+    "word": "gazebo",
+    "definition": "A small, open garden building.",
+    "example": "The wedding ceremony took place in the white gazebo."
+  },
+  {
+    "word": "pergola",
+    "definition": "An archway with a framework for climbing plants.",
+    "example": "Wisteria draped the pergola in pale purple."
+  },
+  {
+    "word": "cottage",
+    "definition": "A small, simple, cozy house.",
+    "example": "Her cottage smelled of bread and lavender."
+  },
+  {
+    "word": "chalet",
+    "definition": "A small wooden mountain house.",
+    "example": "We rented a chalet near the snowy ski lifts."
+  },
+  {
+    "word": "abode",
+    "definition": "A formal or poetic word for home.",
+    "example": "He invited us to visit his humble abode."
+  },
+  {
+    "word": "domicile",
+    "definition": "A formal word for one's place of residence.",
+    "example": "Her domicile was registered in the smaller town."
+  },
+  {
+    "word": "dwelling",
+    "definition": "A place where someone lives.",
+    "example": "The little dwelling stood at the edge of the woods."
+  },
+  {
+    "word": "homestead",
+    "definition": "A house with surrounding land used as a home.",
+    "example": "The old homestead had been in their family for generations."
+  },
+  {
+    "word": "kindle",
+    "definition": "Start a fire or stir up an emotion.",
+    "example": "Her kind words helped kindle his confidence."
+  },
+  {
+    "word": "ignite",
+    "definition": "Cause to start burning or become active.",
+    "example": "The discovery ignited her interest in astronomy."
+  },
+  {
+    "word": "smolder",
+    "definition": "Burn slowly without flame, or feel suppressed emotion.",
+    "example": "The campfire smoldered quietly through the night."
+  },
+  {
+    "word": "ember",
+    "definition": "A small piece of glowing coal or wood.",
+    "example": "We poked the embers and watched sparks rise."
+  },
+  {
+    "word": "soot",
+    "definition": "Black powder left after burning.",
+    "example": "Soot streaked the inside of the old fireplace."
+  },
+  {
+    "word": "ash",
+    "definition": "The powdery residue left after burning.",
+    "example": "Ash drifted across the garden after the bonfire."
+  },
+  {
+    "word": "cinder",
+    "definition": "A small piece of partly burned material.",
+    "example": "A single cinder still glowed in the grate."
+  },
+  {
+    "word": "billow",
+    "definition": "Rise or roll in large waves.",
+    "example": "Steam billowed from the old kettle."
+  },
+  {
+    "word": "swirl",
+    "definition": "Move in a twisting or spiraling motion.",
+    "example": "Leaves swirled around our boots on the path."
+  },
+  {
+    "word": "eddy",
+    "definition": "A small whirlpool or circular current.",
+    "example": "Trout rested in a quiet eddy near the bank."
+  },
+  {
+    "word": "ripple",
+    "definition": "A small wave on the surface of water.",
+    "example": "A pebble made ripples spread across the pond."
+  },
+  {
+    "word": "wave",
+    "definition": "A moving ridge on the surface of water.",
+    "example": "A small wave rocked the boat as we drifted home."
+  },
+  {
+    "word": "tide",
+    "definition": "The regular rise and fall of the sea.",
+    "example": "We waited for the tide to come back in."
+  },
+  {
+    "word": "current",
+    "definition": "A continuous flow of water in one direction.",
+    "example": "The river current pulled the canoe gently downstream."
+  },
+  {
+    "word": "undertow",
+    "definition": "A strong current pulling beneath the surface.",
+    "example": "The lifeguard warned swimmers about the undertow."
+  },
+  {
+    "word": "spray",
+    "definition": "Tiny droplets of water blown through the air.",
+    "example": "Spray from the falls cooled our faces."
+  },
+  {
+    "word": "froth",
+    "definition": "A mass of small bubbles on a liquid.",
+    "example": "Froth gathered along the edge of the breaking wave."
+  },
+  {
+    "word": "foam",
+    "definition": "A frothy mass of bubbles.",
+    "example": "Foam laced the rocks at the harbor's mouth."
+  },
+  {
+    "word": "lather",
+    "definition": "A frothy mass of soap and water.",
+    "example": "She rubbed a soft lather between her hands."
+  },
+  {
+    "word": "trickle",
+    "definition": "Flow slowly in a thin stream.",
+    "example": "Water trickled from the mossy spring."
+  },
+  {
+    "word": "drip",
+    "definition": "Fall in slow drops.",
+    "example": "Rain dripped from the eaves all morning."
+  },
+  {
+    "word": "drizzling",
+    "definition": "Lightly raining in fine drops.",
+    "example": "It was drizzling when we left for the market."
+  },
+  {
+    "word": "puddle",
+    "definition": "A small pool of liquid on the ground.",
+    "example": "Children stomped in every puddle on the way home."
+  },
+  {
+    "word": "pond",
+    "definition": "A small body of still water.",
+    "example": "Frogs sang at dusk near the garden pond."
+  },
+  {
+    "word": "lake",
+    "definition": "A large body of still water.",
+    "example": "The lake mirrored the mountains at dawn."
+  },
+  {
+    "word": "tarn",
+    "definition": "A small mountain lake.",
+    "example": "We hiked up to a still tarn ringed by pines."
+  },
+  {
+    "word": "spring",
+    "definition": "A place where water flows out of the earth.",
+    "example": "A cool spring bubbled up under the willows."
+  },
+  {
+    "word": "wellspring",
+    "definition": "An original source of something abundant.",
+    "example": "Her grandmother was a wellspring of stories."
+  },
+  {
+    "word": "fountain",
+    "definition": "A spray of water shaped by a structure.",
+    "example": "Children tossed coins into the small fountain."
+  },
+  {
+    "word": "geyser",
+    "definition": "A hot spring that shoots water into the air.",
+    "example": "We watched a geyser erupt against a pale sky."
+  },
+  {
+    "word": "iceberg",
+    "definition": "A massive piece of floating ice.",
+    "example": "An iceberg drifted slowly across the gray bay."
+  },
+  {
+    "word": "glacier",
+    "definition": "A vast, slow-moving mass of ice.",
+    "example": "Streams of meltwater flowed from the glacier."
+  },
+  {
+    "word": "avalanche",
+    "definition": "A sudden mass of snow rushing downhill.",
+    "example": "Distant avalanche sounds echoed across the valley."
+  },
+  {
+    "word": "drift",
+    "definition": "Be carried along slowly by a current.",
+    "example": "Petals drifted across the surface of the canal."
+  },
+  {
+    "word": "float",
+    "definition": "Rest gently on the surface of a liquid.",
+    "example": "Lily pads floated in the still pond."
+  },
+  {
+    "word": "buoyant",
+    "definition": "Able to float; cheerful and resilient.",
+    "example": "Her buoyant mood lifted everyone in the office."
+  },
+  {
+    "word": "anchor",
+    "definition": "A heavy device used to hold a boat in place.",
+    "example": "We dropped anchor in the quiet harbor."
+  },
+  {
+    "word": "vessel",
+    "definition": "A ship or boat.",
+    "example": "A small fishing vessel passed in the early light."
+  },
+  {
+    "word": "schooner",
+    "definition": "A type of sailing ship with two masts.",
+    "example": "A schooner sailed gracefully past the lighthouse."
+  },
+  {
+    "word": "dinghy",
+    "definition": "A small boat carried by a larger one.",
+    "example": "We rowed the dinghy ashore for breakfast."
+  },
+  {
+    "word": "skiff",
+    "definition": "A small, light boat.",
+    "example": "An old skiff was tied to the rotting pier."
+  },
+  {
+    "word": "kayak",
+    "definition": "A narrow paddled boat.",
+    "example": "We paddled our kayaks through the morning fog."
+  },
+  {
+    "word": "canoe",
+    "definition": "A long, narrow boat moved by paddles.",
+    "example": "A canoe glided silently across the still water."
+  },
+  {
+    "word": "raft",
+    "definition": "A flat structure used as a boat.",
+    "example": "We built a raft from driftwood and rope."
+  },
+  {
+    "word": "barge",
+    "definition": "A long, flat boat for carrying loads.",
+    "example": "A slow barge moved up the canal at noon."
+  },
+  {
+    "word": "buoy",
+    "definition": "A floating marker in water.",
+    "example": "A red buoy bobbed near the rocky point."
+  },
+  {
+    "word": "lighthouse",
+    "definition": "A tower with a light to guide ships.",
+    "example": "A lighthouse blinked through the heavy fog."
+  },
+  {
+    "word": "beacon",
+    "definition": "A signaling light or fire.",
+    "example": "His kindness was a beacon for everyone he met."
+  },
+  {
+    "word": "ablaze",
+    "definition": "Burning brightly or full of intense color.",
+    "example": "The maples were ablaze with autumn color."
+  },
+  {
+    "word": "aflame",
+    "definition": "Burning or glowing intensely.",
+    "example": "The horizon was aflame with sunset light."
+  },
+  {
+    "word": "aglow",
+    "definition": "Filled with a soft, warm light.",
+    "example": "The kitchen was aglow on Christmas Eve."
+  },
+  {
+    "word": "kindling",
+    "definition": "Small pieces of wood used to start a fire.",
+    "example": "He gathered kindling near the cabin door."
+  },
+  {
+    "word": "tinder",
+    "definition": "Dry material that catches fire easily.",
+    "example": "Strike a spark and it falls onto dry tinder."
+  },
+  {
+    "word": "lantern",
+    "definition": "A portable case enclosing a light.",
+    "example": "A lantern swung from the porch at twilight."
+  },
+  {
+    "word": "candelabra",
+    "definition": "A branched candle holder.",
+    "example": "A silver candelabra glowed on the long table."
+  },
+  {
+    "word": "chandelier",
+    "definition": "A decorative ceiling light with several arms.",
+    "example": "A crystal chandelier sparkled above the dancers."
+  },
+  {
+    "word": "sconce",
+    "definition": "A wall-mounted light fixture.",
+    "example": "Iron sconces cast a soft glow along the corridor."
+  },
+  {
+    "word": "torch",
+    "definition": "A burning stick or flashlight.",
+    "example": "She held the torch steady as we crossed the bridge."
+  },
+  {
+    "word": "wick",
+    "definition": "The string of a candle that draws fuel up.",
+    "example": "She trimmed the wick before lighting the candle."
+  },
+  {
+    "word": "taper",
+    "definition": "A long, slender candle.",
+    "example": "We lit tapers along the dinner table."
+  },
+  {
+    "word": "votive",
+    "definition": "A small candle, often offered for prayer.",
+    "example": "Rows of votive candles flickered in the chapel."
+  },
+  {
+    "word": "incense",
+    "definition": "A substance burned to release fragrant smoke.",
+    "example": "Incense drifted lazily through the open windows."
+  },
+  {
+    "word": "fragrance",
+    "definition": "A pleasant, sweet smell.",
+    "example": "The fragrance of jasmine filled the night air."
+  },
+  {
+    "word": "aroma",
+    "definition": "A distinctive, pleasant smell.",
+    "example": "The aroma of fresh bread greeted us at the door."
+  },
+  {
+    "word": "perfume",
+    "definition": "A pleasant scent worn on the body.",
+    "example": "Her perfume reminded him of summer holidays."
+  },
+  {
+    "word": "scent",
+    "definition": "A distinctive smell.",
+    "example": "The scent of cedar greeted us inside the lodge."
+  },
+  {
+    "word": "essence",
+    "definition": "The most important quality of something.",
+    "example": "Patience is the essence of good gardening."
+  },
+  {
+    "word": "elixir",
+    "definition": "A magical or medicinal liquid.",
+    "example": "Hot tea felt like an elixir on a cold day."
+  },
+  {
+    "word": "potion",
+    "definition": "A liquid with a special or magical effect.",
+    "example": "She sipped a potion of honey and ginger for her cough."
+  },
+  {
+    "word": "tincture",
+    "definition": "A medicine made by dissolving something in alcohol.",
+    "example": "She added a few drops of tincture to her tea."
+  },
+  {
+    "word": "balm",
+    "definition": "A soothing ointment.",
+    "example": "His kind voice was a balm after a difficult day."
+  },
+  {
+    "word": "salve",
+    "definition": "A healing ointment.",
+    "example": "The pharmacist made a salve for chapped hands."
+  },
+  {
+    "word": "remedy",
+    "definition": "A treatment for a problem or illness.",
+    "example": "Hot soup is her favorite remedy for a cold."
+  },
+  {
+    "word": "panacea",
+    "definition": "A supposed cure for all problems.",
+    "example": "He treated honesty as a panacea for relationships."
+  },
+  {
+    "word": "antidote",
+    "definition": "Something that counteracts a poison or problem.",
+    "example": "Fresh air is the best antidote for a long meeting."
+  },
+  {
+    "word": "tonic",
+    "definition": "Something that restores energy or wellbeing.",
+    "example": "A walk by the river is the perfect tonic."
+  },
+  {
+    "word": "vitality",
+    "definition": "Energy and liveliness.",
+    "example": "The garden was full of vitality after spring rain."
+  },
+  {
+    "word": "vigor",
+    "definition": "Physical strength and energy.",
+    "example": "She tackled the project with renewed vigor."
+  },
+  {
+    "word": "stamina",
+    "definition": "Lasting physical or mental energy.",
+    "example": "Long mountain hikes built up her stamina."
+  },
+  {
+    "word": "spry",
+    "definition": "Active and lively, especially for one's age.",
+    "example": "His spry grandfather still chopped his own wood."
+  },
+  {
+    "word": "nimble",
+    "definition": "Quick and light in movement or thought.",
+    "example": "Her nimble fingers wove the ribbon swiftly."
+  },
+  {
+    "word": "agile",
+    "definition": "Able to move quickly and easily.",
+    "example": "The agile cat leapt from shelf to shelf."
+  },
+  {
+    "word": "lithe",
+    "definition": "Slender, graceful, and flexible.",
+    "example": "Her lithe steps barely disturbed the dust."
+  },
+  {
+    "word": "supple",
+    "definition": "Soft and able to bend easily.",
+    "example": "Years of yoga kept her supple and strong."
+  },
+  {
+    "word": "pliable",
+    "definition": "Easily bent or shaped.",
+    "example": "Pliable willow branches make excellent baskets."
+  },
+  {
+    "word": "malleable",
+    "definition": "Able to be shaped without breaking.",
+    "example": "Soft clay is malleable in warm hands."
+  },
+  {
+    "word": "ductile",
+    "definition": "Able to be drawn out into a thin wire.",
+    "example": "Copper is ductile, which makes it useful for wiring."
+  },
+  {
+    "word": "tensile",
+    "definition": "Capable of being stretched without breaking.",
+    "example": "The rope had impressive tensile strength."
+  },
+  {
+    "word": "elastic",
+    "definition": "Able to return to its original shape.",
+    "example": "Elastic cords held the cargo neatly in place."
+  },
+  {
+    "word": "robust",
+    "definition": "Strong, sturdy, and healthy.",
+    "example": "The robust oak survived the worst storm in years."
+  },
+  {
+    "word": "sturdy",
+    "definition": "Strongly built and reliable.",
+    "example": "We sat on a sturdy bench overlooking the harbor."
+  },
+  {
+    "word": "stalwart",
+    "definition": "Loyal, reliable, and hardworking.",
+    "example": "He was a stalwart friend through every season."
+  },
+  {
+    "word": "stout",
+    "definition": "Strong, thick, and solidly built.",
+    "example": "We climbed a ladder with stout, well-oiled rungs."
+  },
+  {
+    "word": "hardy",
+    "definition": "Able to endure difficult conditions.",
+    "example": "Hardy plants thrive even in poor soil."
+  },
+  {
+    "word": "doughty",
+    "definition": "Brave and determined.",
+    "example": "The doughty crew rowed home through wind and rain."
+  },
+  {
+    "word": "valiant",
+    "definition": "Showing courage and determination.",
+    "example": "She made a valiant effort to finish the marathon."
+  },
+  {
+    "word": "intrepid",
+    "definition": "Fearless and adventurous.",
+    "example": "Intrepid explorers mapped the rugged coast."
+  },
+  {
+    "word": "audacious",
+    "definition": "Boldly daring.",
+    "example": "Her audacious plan surprised everyone in the room."
+  },
+  {
+    "word": "plucky",
+    "definition": "Showing brave determination despite difficulty.",
+    "example": "The plucky stray dog refused to give up."
+  },
+  {
+    "word": "feisty",
+    "definition": "Lively, spirited, and tough.",
+    "example": "Their feisty terrier ruled the back garden."
+  },
+  {
+    "word": "spirited",
+    "definition": "Full of energy and determination.",
+    "example": "It was a spirited debate from start to finish."
+  },
+  {
+    "word": "tenacious",
+    "definition": "Holding firmly to something; persistent.",
+    "example": "The tenacious vine climbed every available wall."
+  },
+  {
+    "word": "dogged",
+    "definition": "Persistent, even in the face of difficulty.",
+    "example": "His dogged practice finally paid off."
+  },
+  {
+    "word": "resolute",
+    "definition": "Firmly determined.",
+    "example": "She was resolute about leaving the city for good."
+  },
+  {
+    "word": "steadfast",
+    "definition": "Firm and unwavering.",
+    "example": "His steadfast support meant everything to her."
+  },
+  {
+    "word": "unwavering",
+    "definition": "Steady and constant.",
+    "example": "Her unwavering belief encouraged the whole team."
+  },
+  {
+    "word": "earnest",
+    "definition": "Showing serious, sincere effort.",
+    "example": "He gave an earnest apology and meant every word."
+  },
+  {
+    "word": "sincere",
+    "definition": "Free from pretense or deceit.",
+    "example": "Her sincere thanks brought tears to his eyes."
+  },
+  {
+    "word": "genuine",
+    "definition": "Truly what it appears to be.",
+    "example": "His smile was genuine and disarming."
+  },
+  {
+    "word": "authentic",
+    "definition": "True to its origin or its own character.",
+    "example": "The little restaurant served authentic Sicilian dishes."
+  },
+  {
+    "word": "veracity",
+    "definition": "The quality of being truthful.",
+    "example": "Her veracity was never in doubt."
+  },
+  {
+    "word": "fidelity",
+    "definition": "Faithfulness to something or someone.",
+    "example": "His fidelity to his old friends was unshakable."
+  },
+  {
+    "word": "loyalty",
+    "definition": "Faithful support of something or someone.",
+    "example": "Her loyalty to the team came before any reward."
+  },
+  {
+    "word": "allegiance",
+    "definition": "Loyalty or commitment to a person or cause.",
+    "example": "He felt his deepest allegiance was to honest work."
+  },
+  {
+    "word": "kinship",
+    "definition": "A feeling of close connection.",
+    "example": "She felt instant kinship with the other gardeners."
+  },
+  {
+    "word": "camaraderie",
+    "definition": "A friendly bond among people who share an experience.",
+    "example": "Long evenings on tour built real camaraderie."
+  },
+  {
+    "word": "fellowship",
+    "definition": "A friendly association based on shared interests.",
+    "example": "She joined the writing fellowship for company."
+  },
+  {
+    "word": "bond",
+    "definition": "A close link between people.",
+    "example": "Their bond grew stronger with every shared difficulty."
+  },
+  {
+    "word": "rapport",
+    "definition": "A close, harmonious relationship.",
+    "example": "They built easy rapport over morning coffee."
+  },
+  {
+    "word": "intimacy",
+    "definition": "Closeness or familiarity in a relationship.",
+    "example": "Long letters created an unusual kind of intimacy."
+  },
+  {
+    "word": "tenderness",
+    "definition": "Gentle warmth and care.",
+    "example": "He spoke to the puppy with quiet tenderness."
+  },
+  {
+    "word": "compassion",
+    "definition": "Sympathetic concern for others.",
+    "example": "Her compassion drew strangers to her like sunlight."
+  },
+  {
+    "word": "empathy",
+    "definition": "The ability to share another's feelings.",
+    "example": "Empathy made her a remarkable teacher."
+  },
+  {
+    "word": "kindness",
+    "definition": "The quality of being friendly and considerate.",
+    "example": "Small acts of kindness transformed his week."
+  },
+  {
+    "word": "gentleness",
+    "definition": "The quality of being gentle.",
+    "example": "He carried the kitten with great gentleness."
+  },
+  {
+    "word": "warmth",
+    "definition": "Friendly, affectionate feeling.",
+    "example": "Her warmth made the small office feel like home."
+  },
+  {
+    "word": "cordiality",
+    "definition": "Warm, friendly behavior.",
+    "example": "He was greeted with the cordiality of an old friend."
+  },
+  {
+    "word": "hospitality",
+    "definition": "Friendly reception of guests.",
+    "example": "Their hospitality made the long trip worthwhile."
+  },
+  {
+    "word": "graciousness",
+    "definition": "Politeness and warmth toward others.",
+    "example": "Her graciousness eased every awkward moment."
+  },
+  {
+    "word": "courtesy",
+    "definition": "Politeness shown in behavior.",
+    "example": "He always opened the door as a small courtesy."
+  },
+  {
+    "word": "civility",
+    "definition": "Formal politeness.",
+    "example": "The neighbors maintained quiet civility despite the dispute."
+  },
+  {
+    "word": "decorum",
+    "definition": "Behavior that follows good manners.",
+    "example": "Even the youngest guests showed careful decorum."
+  },
+  {
+    "word": "etiquette",
+    "definition": "The customary rules of polite behavior.",
+    "example": "Tea ceremony involves careful etiquette."
+  },
+  {
+    "word": "protocol",
+    "definition": "An accepted set of procedures or rules.",
+    "example": "There was a strict protocol for the diplomatic visit."
+  },
+  {
+    "word": "ritual",
+    "definition": "A set of actions performed regularly.",
+    "example": "Morning coffee was her favorite quiet ritual."
+  },
+  {
+    "word": "custom",
+    "definition": "A traditional way of doing something.",
+    "example": "It was their custom to sing at every birthday."
+  },
+  {
+    "word": "tradition",
+    "definition": "Practices handed down through generations.",
+    "example": "Sunday breakfast at the lake was a family tradition."
+  },
+  {
+    "word": "heritage",
+    "definition": "Things passed down from previous generations.",
+    "example": "The recipe was part of her culinary heritage."
+  },
+  {
+    "word": "legacy",
+    "definition": "Something received from the past.",
+    "example": "Her legacy was the trees she planted by the school."
+  },
+  {
+    "word": "lineage",
+    "definition": "A line of descent from an ancestor.",
+    "example": "His lineage included poets, farmers, and sailors."
+  },
+  {
+    "word": "ancestry",
+    "definition": "Family or ethnic origin.",
+    "example": "Her ancestry traced back to a coastal village."
+  },
+  {
+    "word": "kin",
+    "definition": "One's family and relatives.",
+    "example": "She was the youngest of all her kin."
+  },
+  {
+    "word": "matriarch",
+    "definition": "A respected female head of a family.",
+    "example": "She was the matriarch who held the family together."
+  },
+  {
+    "word": "patriarch",
+    "definition": "A respected male head of a family.",
+    "example": "The old patriarch told his stories every evening."
+  },
+  {
+    "word": "elder",
+    "definition": "An older person, often respected.",
+    "example": "The elder of the village shared his quiet wisdom."
+  },
+  {
+    "word": "sage",
+    "definition": "A wise person.",
+    "example": "The old gardener was a sage of the seasons."
+  },
+  {
+    "word": "mentor",
+    "definition": "An experienced person who guides another.",
+    "example": "Her first mentor remained a lifelong friend."
+  },
+  {
+    "word": "tutor",
+    "definition": "A private teacher.",
+    "example": "Her tutor introduced her to old French songs."
+  },
+  {
+    "word": "scholar",
+    "definition": "A person dedicated to academic study.",
+    "example": "The young scholar spent every weekend in the library."
+  },
+  {
+    "word": "pupil",
+    "definition": "A student under the care of a teacher.",
+    "example": "Each pupil received a small notebook on the first day."
+  },
+  {
+    "word": "apprentice",
+    "definition": "A person learning a trade.",
+    "example": "The apprentice studied under the old blacksmith for years."
+  },
+  {
+    "word": "novice",
+    "definition": "A person new to something.",
+    "example": "She was a novice cook but a confident one."
+  },
+  {
+    "word": "neophyte",
+    "definition": "A beginner or new convert.",
+    "example": "Even as a neophyte, he asked excellent questions."
+  },
+  {
+    "word": "tyro",
+    "definition": "An inexperienced beginner.",
+    "example": "He was no tyro on the chessboard."
+  },
+  {
+    "word": "amateur",
+    "definition": "A person who does something for love rather than profession.",
+    "example": "She was an amateur astronomer with a small telescope."
+  },
+  {
+    "word": "artisan",
+    "definition": "A skilled maker of handmade goods.",
+    "example": "Local artisans sold pottery at the weekend market."
+  },
+  {
+    "word": "craftsman",
+    "definition": "A worker skilled in a particular craft.",
+    "example": "Every chair was finished by a single craftsman."
+  },
+  {
+    "word": "artificer",
+    "definition": "A skilled maker or inventor.",
+    "example": "The clock had been built by a Venetian artificer."
+  },
+  {
+    "word": "luthier",
+    "definition": "A maker of stringed instruments.",
+    "example": "A young luthier carved violins in his quiet workshop."
+  },
+  {
+    "word": "cooper",
+    "definition": "A maker of barrels.",
+    "example": "An old cooper still worked in the hill town."
+  },
+  {
+    "word": "milliner",
+    "definition": "A maker or seller of women's hats.",
+    "example": "The milliner adjusted feathers with precise care."
+  },
+  {
+    "word": "haberdasher",
+    "definition": "A seller of small sewing goods or men's clothing.",
+    "example": "We stopped at the haberdasher for buttons."
+  },
+  {
+    "word": "cobbler",
+    "definition": "A person who mends shoes.",
+    "example": "The cobbler reshaped my old boots in an afternoon."
+  },
+  {
+    "word": "tinker",
+    "definition": "Someone who repairs household items, often traveling.",
+    "example": "An old tinker visited the village each summer."
+  },
+  {
+    "word": "wanderer",
+    "definition": "Someone who travels without a fixed destination.",
+    "example": "He had been a wanderer since leaving the city."
+  },
+  {
+    "word": "nomad",
+    "definition": "A person who moves from place to place.",
+    "example": "Modern nomads worked from cafes and trains."
+  },
+  {
+    "word": "voyager",
+    "definition": "A person who undertakes a long journey.",
+    "example": "She felt like a voyager every time she boarded a ship."
+  },
+  {
+    "word": "pilgrim",
+    "definition": "A traveler journeying to a sacred place.",
+    "example": "Pilgrims walked the old stone road for centuries."
+  },
+  {
+    "word": "expedition",
+    "definition": "A journey with a particular purpose.",
+    "example": "Their expedition into the highlands took weeks."
+  },
+  {
+    "word": "trek",
+    "definition": "A long, difficult journey on foot.",
+    "example": "Our trek through the jungle was unforgettable."
+  },
+  {
+    "word": "odyssey",
+    "definition": "A long, eventful journey.",
+    "example": "Her odyssey across the country lasted a full year."
+  },
+  {
+    "word": "sojourn",
+    "definition": "A temporary stay in a place.",
+    "example": "Her sojourn in Florence shaped her painting."
+  },
+  {
+    "word": "junket",
+    "definition": "A trip taken for pleasure.",
+    "example": "The wine junket included three small villages."
+  },
+  {
+    "word": "jaunt",
+    "definition": "A short, pleasant trip.",
+    "example": "We took a jaunt to the coast for the weekend."
+  },
+  {
+    "word": "excursion",
+    "definition": "A short journey for pleasure.",
+    "example": "The library hosted a weekend excursion to the gardens."
+  },
+  {
+    "word": "pilgrimage",
+    "definition": "A journey, often spiritual, to a special place.",
+    "example": "Her pilgrimage to her grandmother's village changed her."
+  },
+  {
+    "word": "quest",
+    "definition": "A long search for something important.",
+    "example": "His quest for the perfect pesto led him across Italy."
+  },
+  {
+    "word": "venture",
+    "definition": "A risky or adventurous undertaking.",
+    "example": "Their bookstore was a brave family venture."
+  },
+  {
+    "word": "endeavor",
+    "definition": "A serious, determined effort.",
+    "example": "The community garden was a shared endeavor."
+  },
+  {
+    "word": "mission",
+    "definition": "An important task or purpose.",
+    "example": "Her mission was to restore the old library."
+  },
+  {
+    "word": "vocation",
+    "definition": "A strong feeling that one is meant for a profession.",
+    "example": "Teaching turned out to be her true vocation."
+  },
+  {
+    "word": "calling",
+    "definition": "A strong inner pull toward a profession.",
+    "example": "Carpentry was a calling, not a backup plan."
+  },
+  {
+    "word": "avocation",
+    "definition": "A hobby done alongside one's main work.",
+    "example": "Bird-watching was his quiet weekend avocation."
+  },
+  {
+    "word": "pastime",
+    "definition": "An activity done for enjoyment.",
+    "example": "Reading was her favorite pastime in winter."
+  },
+  {
+    "word": "diversion",
+    "definition": "An activity that distracts or amuses.",
+    "example": "Crosswords were her favorite afternoon diversion."
+  },
+  {
+    "word": "leisure",
+    "definition": "Free time used for enjoyment.",
+    "example": "Sundays were strictly reserved for leisure."
+  },
+  {
+    "word": "repose",
+    "definition": "Calm and peaceful rest.",
+    "example": "She sought repose in the quiet of the garden."
+  },
+  {
+    "word": "siesta",
+    "definition": "A short afternoon nap.",
+    "example": "A short siesta saved the rest of his afternoon."
+  },
+  {
+    "word": "slumber",
+    "definition": "Sleep, especially deep or peaceful.",
+    "example": "The town settled into a deep evening slumber."
+  },
+  {
+    "word": "doze",
+    "definition": "Sleep lightly for a short time.",
+    "example": "He dozed in the hammock for an hour."
+  },
+  {
+    "word": "snooze",
+    "definition": "A brief, light sleep.",
+    "example": "She took a quick snooze before the meeting."
+  },
+  {
+    "word": "dream",
+    "definition": "A series of images during sleep.",
+    "example": "She remembered the dream long after morning."
+  },
+  {
+    "word": "daydream",
+    "definition": "A pleasant series of imaginings while awake.",
+    "example": "He fell into a daydream about a quiet seaside cottage."
+  },
+  {
+    "word": "reverence",
+    "definition": "Deep respect.",
+    "example": "She spoke about her teacher with quiet reverence."
+  },
+  {
+    "word": "awe",
+    "definition": "A feeling of wonder mixed with respect.",
+    "example": "We stood in awe of the old cathedral's stillness."
+  },
+  {
+    "word": "wonder",
+    "definition": "A feeling of amazement.",
+    "example": "Children watched the lanterns rise with wonder."
+  },
+  {
+    "word": "marvel",
+    "definition": "A wonderful or surprising thing.",
+    "example": "The bridge was a marvel of careful engineering."
+  },
+  {
+    "word": "miracle",
+    "definition": "A wonderful, surprising event.",
+    "example": "It felt like a miracle when the old radio played."
+  },
+  {
+    "word": "phenomenon",
+    "definition": "A remarkable observation or event.",
+    "example": "Bioluminescence is a phenomenon worth chasing."
+  },
+  {
+    "word": "spectacle",
+    "definition": "A remarkable visual display.",
+    "example": "The fireworks were quite a spectacle that year."
+  },
+  {
+    "word": "pageant",
+    "definition": "A grand, elaborate display.",
+    "example": "The town's harvest pageant filled the square with color."
+  },
+  {
+    "word": "procession",
+    "definition": "A line of people moving forward in order.",
+    "example": "A candlelit procession wound through the old streets."
+  },
+  {
+    "word": "parade",
+    "definition": "An organized public march.",
+    "example": "The morning parade brought the whole town outside."
+  },
+  {
+    "word": "festival",
+    "definition": "A day or period of celebration.",
+    "example": "The summer festival ended with music in the square."
+  },
+  {
+    "word": "carnival",
+    "definition": "A festival with rides, music, and games.",
+    "example": "The carnival lit up the field for two weeks."
+  },
+  {
+    "word": "gala",
+    "definition": "A festive social occasion.",
+    "example": "The library held a small fundraising gala."
+  },
+  {
+    "word": "soiree",
+    "definition": "An evening party.",
+    "example": "Their tiny soiree filled the apartment with music."
+  },
+  {
+    "word": "fête",
+    "definition": "A grand celebration or party.",
+    "example": "The village fête was the highlight of summer."
+  },
+  {
+    "word": "feast",
+    "definition": "An elaborate meal.",
+    "example": "The harvest feast lasted long into the night."
+  },
+  {
+    "word": "banquet",
+    "definition": "An elaborate, formal meal.",
+    "example": "A banquet was held to honor the visiting writer."
+  },
+  {
+    "word": "repast",
+    "definition": "A meal.",
+    "example": "We shared a quiet repast under the apple tree."
+  },
+  {
+    "word": "morsel",
+    "definition": "A small piece of food.",
+    "example": "She offered the cat a morsel from her plate."
+  },
+  {
+    "word": "tidbit",
+    "definition": "A small, interesting bit of food or news.",
+    "example": "He shared a tidbit from his travels."
+  },
+  {
+    "word": "crumb",
+    "definition": "A small piece of bread or cake.",
+    "example": "A trail of crumbs led the sparrows to the porch."
+  },
+  {
+    "word": "sliver",
+    "definition": "A small, thin piece.",
+    "example": "Only a sliver of moon hung over the trees."
+  },
+  {
+    "word": "smidgen",
+    "definition": "A very small amount.",
+    "example": "Just a smidgen more salt would do it."
+  },
+  {
+    "word": "dollop",
+    "definition": "A soft, shapeless mass.",
+    "example": "She added a dollop of cream to each bowl."
+  },
+  {
+    "word": "garnish",
+    "definition": "A small decoration on a dish.",
+    "example": "A sprig of mint made a perfect garnish."
+  },
+  {
+    "word": "savor",
+    "definition": "Enjoy something slowly and fully.",
+    "example": "We savored every bite of the slow-cooked stew."
+  },
+  {
+    "word": "relish",
+    "definition": "Great enjoyment.",
+    "example": "He told the old stories with obvious relish."
+  },
+  {
+    "word": "delight",
+    "definition": "Great pleasure.",
+    "example": "Her delight at the surprise was unmistakable."
+  },
+  {
+    "word": "elation",
+    "definition": "Great happiness or excitement.",
+    "example": "There was a quiet elation when the package finally arrived."
+  },
+  {
+    "word": "euphoria",
+    "definition": "An intense feeling of happiness.",
+    "example": "A wave of euphoria followed her first solo concert."
+  },
+  {
+    "word": "rapture",
+    "definition": "A feeling of intense joy.",
+    "example": "She listened to the violin in pure rapture."
+  },
+  {
+    "word": "bliss",
+    "definition": "Perfect happiness.",
+    "example": "Sunday mornings with coffee and crosswords were bliss."
+  },
+  {
+    "word": "ecstasy",
+    "definition": "Overwhelming happiness or excitement.",
+    "example": "He stepped onto the empty beach in quiet ecstasy."
+  },
+  {
+    "word": "jubilation",
+    "definition": "A feeling of great happiness.",
+    "example": "The square filled with jubilation when the team won."
+  },
+  {
+    "word": "exuberance",
+    "definition": "Energetic, enthusiastic happiness.",
+    "example": "Her exuberance lit up every gathering."
+  },
+  {
+    "word": "merriment",
+    "definition": "Cheerful enjoyment.",
+    "example": "The kitchen was a place of laughter and merriment."
+  },
+  {
+    "word": "mirth",
+    "definition": "Light cheerfulness or laughter.",
+    "example": "His easy mirth softened the room."
+  },
+  {
+    "word": "glee",
+    "definition": "Lively, cheerful joy.",
+    "example": "Children watched the puppets with open glee."
+  },
+  {
+    "word": "cheer",
+    "definition": "A feeling of brightness or encouragement.",
+    "example": "The fire brought cheer to the cold cabin."
+  },
+  {
+    "word": "good-humored",
+    "definition": "Friendly and cheerful in mood.",
+    "example": "He took the joke in a good-humored way."
+  },
+  {
+    "word": "lighthearted",
+    "definition": "Cheerful and free from worry.",
+    "example": "Their lighthearted banter filled the long drive."
+  },
+  {
+    "word": "playful",
+    "definition": "Lively and full of fun.",
+    "example": "She had a playful way of handling problems."
+  },
+  {
+    "word": "whimsical",
+    "definition": "Playfully unusual or fanciful.",
+    "example": "Her whimsical paintings featured tea-drinking owls."
+  },
+  {
+    "word": "fanciful",
+    "definition": "Imaginative or unrealistic in a charming way.",
+    "example": "The garden had fanciful sculptures of swans."
+  },
+  {
+    "word": "imaginative",
+    "definition": "Showing creativity and originality.",
+    "example": "Her imaginative bedtime stories delighted the children."
+  },
+  {
+    "word": "inventive",
+    "definition": "Skilled at creating new things.",
+    "example": "He was inventive with leftovers and old tools."
+  },
+  {
+    "word": "ingenious",
+    "definition": "Cleverly original.",
+    "example": "Her ingenious shelf used three lengths of rope."
+  },
+  {
+    "word": "resourceful",
+    "definition": "Able to deal with situations cleverly.",
+    "example": "He was resourceful enough to fix anything once."
+  },
+  {
+    "word": "shrewd",
+    "definition": "Sharp in judgment.",
+    "example": "Her shrewd questions saved the company time and money."
+  },
+  {
+    "word": "astute",
+    "definition": "Quick to see the right action.",
+    "example": "He was astute about the changing market."
+  },
+  {
+    "word": "perceptive",
+    "definition": "Quick to notice or understand.",
+    "example": "Her perceptive comments showed she had been listening."
+  },
+  {
+    "word": "discerning",
+    "definition": "Showing good judgment.",
+    "example": "She was a discerning reader of small-press novels."
+  },
+  {
+    "word": "judicious",
+    "definition": "Careful and wise in decision-making.",
+    "example": "His judicious editing made the chapter shine."
+  },
+  {
+    "word": "sagacious",
+    "definition": "Having or showing keen mental discernment.",
+    "example": "Her sagacious advice always seemed to work out."
+  },
+  {
+    "word": "prescient",
+    "definition": "Showing foresight about future events.",
+    "example": "His prescient note warned the team about the bug."
+  },
+  {
+    "word": "intuitive",
+    "definition": "Knowing or sensing without conscious reasoning.",
+    "example": "Her intuitive cooking style produced wonderful meals."
+  },
+  {
+    "word": "instinctive",
+    "definition": "Done without conscious thought.",
+    "example": "She had an instinctive way with frightened animals."
+  },
+  {
+    "word": "innate",
+    "definition": "Existing from birth.",
+    "example": "He had an innate sense of rhythm."
+  },
+  {
+    "word": "inborn",
+    "definition": "Naturally present from birth.",
+    "example": "Her inborn curiosity led her into many adventures."
+  },
+  {
+    "word": "inherent",
+    "definition": "Existing as a natural part of something.",
+    "example": "There is an inherent risk in any new venture."
+  },
+  {
+    "word": "intrinsic",
+    "definition": "Belonging naturally to something.",
+    "example": "Honesty was intrinsic to who he was."
+  },
+  {
+    "word": "fundamental",
+    "definition": "Forming a necessary base.",
+    "example": "Trust is fundamental to any partnership."
+  },
+  {
+    "word": "elemental",
+    "definition": "Basic, primal, or related to natural forces.",
+    "example": "The storm felt almost elemental in its power."
+  },
+  {
+    "word": "primal",
+    "definition": "Relating to the earliest stage; instinctive.",
+    "example": "There was a primal joy in stamping in puddles."
+  },
+  {
+    "word": "primeval",
+    "definition": "Belonging to the earliest ages of the world.",
+    "example": "The forest had a primeval stillness about it."
+  },
+  {
+    "word": "ancient",
+    "definition": "Belonging to the very distant past.",
+    "example": "Ancient stone walls bordered the orchard."
+  },
+  {
+    "word": "venerable",
+    "definition": "Greatly respected because of age or character.",
+    "example": "A venerable oak stood at the entrance to the village."
+  },
+  {
+    "word": "antiquated",
+    "definition": "Old-fashioned or out of date.",
+    "example": "The office still used an antiquated phone system."
+  },
+  {
+    "word": "vintage",
+    "definition": "From an earlier time and considered classic.",
+    "example": "She wore a vintage coat from the 1960s."
+  },
+  {
+    "word": "antique",
+    "definition": "An old object valued for age or beauty.",
+    "example": "We found a small antique mirror at the flea market."
+  },
+  {
+    "word": "heirloom",
+    "definition": "A valuable object passed down in a family.",
+    "example": "Her grandmother's brooch was a treasured heirloom."
+  },
+  {
+    "word": "relic",
+    "definition": "An object surviving from an earlier time.",
+    "example": "The old typewriter was a relic of his student years."
+  },
+  {
+    "word": "artifact",
+    "definition": "An object made by humans, often historical.",
+    "example": "Each artifact in the museum told a quiet story."
+  },
+  {
+    "word": "memento",
+    "definition": "An object kept as a reminder.",
+    "example": "She kept a small shell as a memento of that summer."
+  },
+  {
+    "word": "keepsake",
+    "definition": "A small item kept for sentimental reasons.",
+    "example": "He carried a keepsake from his first journey abroad."
+  },
+  {
+    "word": "souvenir",
+    "definition": "A reminder of a place or event.",
+    "example": "We brought back a clay whistle as a souvenir."
+  },
+  {
+    "word": "trinket",
+    "definition": "A small, decorative ornament or piece of jewelry.",
+    "example": "The little shop sold colorful trinkets to travelers."
+  },
+  {
+    "word": "bauble",
+    "definition": "A small showy ornament.",
+    "example": "The tree was decked with glittering baubles."
+  },
+  {
+    "word": "curio",
+    "definition": "An unusual or rare object that is interesting.",
+    "example": "Her shelves were full of small curios from her travels."
+  },
+  {
+    "word": "memoir",
+    "definition": "An account of personal experiences.",
+    "example": "She began writing a memoir about her childhood farm."
+  },
+  {
+    "word": "journal",
+    "definition": "A daily record of events and thoughts.",
+    "example": "He kept a small leather journal beside his bed."
+  },
+  {
+    "word": "diary",
+    "definition": "A personal daily record.",
+    "example": "Her diary captured the quiet rhythm of her days."
+  },
+  {
+    "word": "ledger",
+    "definition": "A book in which records or accounts are kept.",
+    "example": "The shopkeeper checked her ledger at the end of each week."
+  },
+  {
+    "word": "tome",
+    "definition": "A large, heavy book.",
+    "example": "She lifted a dusty tome from the highest shelf."
+  },
+  {
+    "word": "volume",
+    "definition": "A book, especially one in a series.",
+    "example": "The third volume was the most engrossing yet."
+  },
+  {
+    "word": "manuscript",
+    "definition": "A handwritten or typed document.",
+    "example": "She finished the manuscript by candlelight."
+  },
+  {
+    "word": "anthology",
+    "definition": "A collection of writings.",
+    "example": "The anthology featured poets from across three countries."
+  },
+  {
+    "word": "compendium",
+    "definition": "A concise summary or collection of information.",
+    "example": "He wrote a compendium of local birdcalls."
+  },
+  {
+    "word": "almanac",
+    "definition": "A yearly publication with calendar and useful information.",
+    "example": "The almanac listed the year's tides and harvest dates."
+  },
+  {
+    "word": "atlas",
+    "definition": "A book of maps.",
+    "example": "She traced the river with her finger across the atlas."
+  },
+  {
+    "word": "lexicon",
+    "definition": "A dictionary or vocabulary of a subject.",
+    "example": "Sailing has a lexicon all its own."
+  },
+  {
+    "word": "thesaurus",
+    "definition": "A book of synonyms and related words.",
+    "example": "She kept her thesaurus next to her notebook."
+  },
+  {
+    "word": "primer",
+    "definition": "An introductory book.",
+    "example": "The cookbook was a primer for nervous beginners."
+  },
+  {
+    "word": "treatise",
+    "definition": "A formal piece of writing on a subject.",
+    "example": "He wrote a long treatise on bread fermentation."
+  },
+  {
+    "word": "monograph",
+    "definition": "A scholarly piece on a single specific subject.",
+    "example": "Her monograph on tidal pools won quiet praise."
+  },
+  {
+    "word": "tract",
+    "definition": "A short pamphlet on a religious or political topic.",
+    "example": "The tract was passed quietly hand to hand."
+  },
+  {
+    "word": "pamphlet",
+    "definition": "A small booklet on a single subject.",
+    "example": "He picked up a pamphlet about local hiking trails."
+  },
+  {
+    "word": "leaflet",
+    "definition": "A small printed sheet of information.",
+    "example": "A leaflet about the festival was tucked into her bag."
+  },
+  {
+    "word": "broadside",
+    "definition": "A large sheet of paper printed on one side.",
+    "example": "Old broadsides papered the coffee shop's walls."
+  },
+  {
+    "word": "epistle",
+    "definition": "A letter, especially a long or formal one.",
+    "example": "Her epistle to her brother filled six pages."
+  },
+  {
+    "word": "missive",
+    "definition": "A letter, especially an official one.",
+    "example": "The missive bore a familiar signature."
+  },
+  {
+    "word": "dispatch",
+    "definition": "An official message or report.",
+    "example": "The dispatch arrived before sunrise."
+  },
+  {
+    "word": "correspondence",
+    "definition": "Letters between people.",
+    "example": "Their correspondence spanned three decades."
+  },
+  {
+    "word": "communique",
+    "definition": "An official announcement or statement.",
+    "example": "The mayor issued a brief communique that morning."
+  },
+  {
+    "word": "proclamation",
+    "definition": "An official public announcement.",
+    "example": "A proclamation was read in the town square."
+  },
+  {
+    "word": "decree",
+    "definition": "An official order.",
+    "example": "The new decree changed the market hours."
+  },
+  {
+    "word": "edict",
+    "definition": "An official command issued by an authority.",
+    "example": "The town responded slowly to the new edict."
+  },
+  {
+    "word": "manifesto",
+    "definition": "A public statement of intentions or beliefs.",
+    "example": "Their small manifesto called for slower mornings."
+  },
+  {
+    "word": "discourse",
+    "definition": "A formal discussion of a topic.",
+    "example": "She gave a thoughtful discourse on local history."
+  },
+  {
+    "word": "dialogue",
+    "definition": "A conversation between people.",
+    "example": "Their dialogue felt natural even in print."
+  },
+  {
+    "word": "monologue",
+    "definition": "A long speech by one person.",
+    "example": "His monologue about coffee was unexpectedly moving."
+  },
+  {
+    "word": "soliloquy",
+    "definition": "An act of speaking one's thoughts aloud, alone.",
+    "example": "She delivered a quiet soliloquy on the empty stage."
+  },
+  {
+    "word": "oration",
+    "definition": "A formal speech.",
+    "example": "His oration at the festival was the highlight of the week."
+  },
+  {
+    "word": "address",
+    "definition": "A formal speech to an audience.",
+    "example": "Her opening address set a warm tone."
+  },
+  {
+    "word": "homily",
+    "definition": "A short sermon or moralizing talk.",
+    "example": "Her homily about kindness moved the congregation."
+  },
+  {
+    "word": "sermon",
+    "definition": "A religious speech.",
+    "example": "The sermon was short, gentle, and full of light."
+  },
+  {
+    "word": "parable",
+    "definition": "A short story illustrating a lesson.",
+    "example": "He told a parable about patience and bread dough."
+  },
+  {
+    "word": "allegory",
+    "definition": "A story with a hidden symbolic meaning.",
+    "example": "The play was an allegory about modern friendship."
+  },
+  {
+    "word": "fable",
+    "definition": "A short story, often with animals, teaching a moral.",
+    "example": "Her favorite fable involved a clever crow."
+  },
+  {
+    "word": "myth",
+    "definition": "A traditional story explaining nature or beliefs.",
+    "example": "Each star in the cluster had its own myth."
+  },
+  {
+    "word": "legend",
+    "definition": "An old story, often based partly on truth.",
+    "example": "Local legend said a saint had blessed the spring."
+  },
+  {
+    "word": "lore",
+    "definition": "Traditional knowledge or stories.",
+    "example": "Mountain lore filled every shepherd's evening tale."
+  },
+  {
+    "word": "folklore",
+    "definition": "Traditional beliefs and stories of a people.",
+    "example": "Her notebook collected coastal folklore."
+  },
+  {
+    "word": "epic",
+    "definition": "A long heroic poem or story.",
+    "example": "The novel had the sweep of a small family epic."
+  },
+  {
+    "word": "saga",
+    "definition": "A long, dramatic story of events.",
+    "example": "The saga of the lost violin took years to unfold."
+  },
+  {
+    "word": "ballad",
+    "definition": "A storytelling poem or song.",
+    "example": "He played a ballad about a sailor on the dock."
+  },
+  {
+    "word": "sonnet",
+    "definition": "A fourteen-line poem with a fixed structure.",
+    "example": "She wrote a sonnet for her mother's birthday."
+  },
+  {
+    "word": "haiku",
+    "definition": "A short Japanese poem with three lines.",
+    "example": "Her favorite haiku was about morning fog."
+  },
+  {
+    "word": "ode",
+    "definition": "A poem honoring a subject.",
+    "example": "He wrote an ode to his battered bicycle."
+  },
+  {
+    "word": "limerick",
+    "definition": "A humorous five-line poem.",
+    "example": "The children giggled at every silly limerick."
+  },
+  {
+    "word": "verse",
+    "definition": "Writing arranged with rhythm or rhyme.",
+    "example": "He read a single verse before closing the book."
+  },
+  {
+    "word": "stanza",
+    "definition": "A grouped section of a poem.",
+    "example": "The first stanza echoed the sound of waves."
+  },
+  {
+    "word": "couplet",
+    "definition": "Two lines of verse, often rhyming.",
+    "example": "The poem ended with a quiet couplet."
+  },
+  {
+    "word": "refrain",
+    "definition": "A repeated line in a song or poem.",
+    "example": "The refrain stayed with her all afternoon."
+  },
+  {
+    "word": "chorus",
+    "definition": "A repeated section of a song.",
+    "example": "The chorus felt like a warm welcome."
+  },
+  {
+    "word": "melody",
+    "definition": "A pleasing arrangement of musical notes.",
+    "example": "A simple melody drifted from the piano."
+  },
+  {
+    "word": "harmony",
+    "definition": "Pleasing combination of musical notes.",
+    "example": "Their harmony made the small chapel feel large."
+  },
+  {
+    "word": "cadence",
+    "definition": "A rhythm or flow of sounds.",
+    "example": "His sentences had a careful cadence."
+  },
+  {
+    "word": "rhythm",
+    "definition": "A regular pattern of sound or movement.",
+    "example": "The morning had its own quiet rhythm."
+  },
+  {
+    "word": "tempo",
+    "definition": "The speed of music or activity.",
+    "example": "The tempo of the village shifted with the seasons."
+  },
+  {
+    "word": "lullaby",
+    "definition": "A soft song to soothe a child.",
+    "example": "She hummed a lullaby until the baby slept."
+  },
+  {
+    "word": "serenade",
+    "definition": "A piece of music sung outside someone's window.",
+    "example": "He surprised her with a quiet serenade."
+  },
+  {
+    "word": "hymn",
+    "definition": "A religious song of praise.",
+    "example": "The hymn rose softly from the small chapel."
+  },
+  {
+    "word": "anthem",
+    "definition": "An uplifting song with shared meaning.",
+    "example": "The song became an anthem for their slow summer."
+  },
+  {
+    "word": "carol",
+    "definition": "A festive song, especially for the holidays.",
+    "example": "Children sang carols door to door."
+  },
+  {
+    "word": "dirge",
+    "definition": "A mournful song or lament.",
+    "example": "A slow dirge played as the procession moved past."
+  },
+  {
+    "word": "lament",
+    "definition": "An expression of grief or sorrow.",
+    "example": "Her quiet lament filled the empty church."
+  },
+  {
+    "word": "requiem",
+    "definition": "A solemn musical composition for the dead.",
+    "example": "The requiem moved the audience to silence."
+  },
+  {
+    "word": "threnody",
+    "definition": "A song of lamentation for the dead.",
+    "example": "The poet's threnody was read at the small ceremony."
+  },
+  {
+    "word": "eulogy",
+    "definition": "A speech praising someone, often after death.",
+    "example": "His eulogy made the room laugh and cry."
+  },
+  {
+    "word": "tribute",
+    "definition": "Something given as a sign of respect.",
+    "example": "The garden was a tribute to her late father."
+  },
+  {
+    "word": "homage",
+    "definition": "Special honor or respect shown publicly.",
+    "example": "Her painting paid homage to the old masters."
+  },
+  {
+    "word": "accolade",
+    "definition": "An award or expression of praise.",
+    "example": "The little bakery received an unexpected accolade."
+  },
+  {
+    "word": "ovation",
+    "definition": "Enthusiastic, sustained applause.",
+    "example": "She received a long ovation after her solo."
+  },
+  {
+    "word": "applause",
+    "definition": "Approval shown by clapping.",
+    "example": "Polite applause filled the small auditorium."
+  },
+  {
+    "word": "cheers",
+    "definition": "Shouts of encouragement or congratulations.",
+    "example": "Cheers erupted as the cyclist crossed the line."
+  },
+  {
+    "word": "kudos",
+    "definition": "Praise for an achievement.",
+    "example": "Kudos to the team for finishing on time."
+  },
+  {
+    "word": "praise",
+    "definition": "Words expressing approval or admiration.",
+    "example": "Her quiet praise meant more than any award."
+  },
+  {
+    "word": "commendation",
+    "definition": "Formal praise or recognition.",
+    "example": "The volunteer received a commendation from the mayor."
+  },
+  {
+    "word": "approbation",
+    "definition": "Approval or praise.",
+    "example": "His work earned the quiet approbation of his peers."
+  },
+  {
+    "word": "endorsement",
+    "definition": "Public support of someone or something.",
+    "example": "Her endorsement helped the bookshop find new readers."
+  },
+  {
+    "word": "approval",
+    "definition": "Agreement that something is good.",
+    "example": "The plan won the approval of the whole committee."
+  },
+  {
+    "word": "consent",
+    "definition": "Permission for something to happen.",
+    "example": "Without his consent, the trip would never have started."
+  },
+  {
+    "word": "concur",
+    "definition": "Agree with something.",
+    "example": "Most members concurred with the new schedule."
+  },
+  {
+    "word": "consensus",
+    "definition": "General agreement.",
+    "example": "There was clear consensus around the new garden plan."
+  },
+  {
+    "word": "accord",
+    "definition": "Agreement between people or groups.",
+    "example": "After hours of talk, they reached a quiet accord."
+  },
+  {
+    "word": "concord",
+    "definition": "Agreement and friendly relations.",
+    "example": "Concord between the neighbors lasted for years."
+  },
+  {
+    "word": "amity",
+    "definition": "Friendly relations between people or nations.",
+    "example": "Years of trade had strengthened amity between the towns."
+  },
+  {
+    "word": "armistice",
+    "definition": "An agreement to stop fighting.",
+    "example": "The armistice brought a brief, fragile silence."
+  },
+  {
+    "word": "truce",
+    "definition": "A short agreement to stop fighting or arguing.",
+    "example": "The siblings called a truce over dinner."
+  },
+  {
+    "word": "pact",
+    "definition": "A formal agreement between people.",
+    "example": "They made a pact to write letters every month."
+  },
+  {
+    "word": "covenant",
+    "definition": "A formal, often sacred agreement.",
+    "example": "The covenant bound them together for life."
+  },
+  {
+    "word": "vow",
+    "definition": "A serious promise.",
+    "example": "He kept his vow to call her every Sunday."
+  },
+  {
+    "word": "oath",
+    "definition": "A solemn promise.",
+    "example": "The new ranger took her oath at sunrise."
+  },
+  {
+    "word": "pledge",
+    "definition": "A formal promise to do something.",
+    "example": "She made a pledge to plant a tree each year."
+  },
+  {
+    "word": "promise",
+    "definition": "An assurance to do something.",
+    "example": "He kept his promise to bring back postcards."
+  },
+  {
+    "word": "guarantee",
+    "definition": "A formal assurance.",
+    "example": "The carpenter offered a guarantee on his work."
+  },
+  {
+    "word": "warranty",
+    "definition": "A written guarantee about a product.",
+    "example": "The kettle came with a five-year warranty."
+  },
+  {
+    "word": "assurance",
+    "definition": "A confident promise.",
+    "example": "Her assurance steadied the nervous travelers."
+  },
+  {
+    "word": "reassurance",
+    "definition": "Comforting words removing doubt.",
+    "example": "His reassurance calmed her before the recital."
+  },
+  {
+    "word": "confidence",
+    "definition": "A feeling of trust in oneself or others.",
+    "example": "Her confidence grew with every small success."
+  },
+  {
+    "word": "conviction",
+    "definition": "A strongly held belief.",
+    "example": "She spoke with quiet conviction."
+  },
+  {
+    "word": "persuasion",
+    "definition": "The act of getting someone to believe something.",
+    "example": "His gentle persuasion changed her mind."
+  },
+  {
+    "word": "rhetoric",
+    "definition": "The art of effective speaking or writing.",
+    "example": "Her rhetoric mixed warmth with careful logic."
+  },
+  {
+    "word": "eloquence",
+    "definition": "Skillful and graceful expression.",
+    "example": "His eloquence drew listeners closer."
+  },
+  {
+    "word": "articulate",
+    "definition": "Able to express ideas clearly.",
+    "example": "She was articulate even in a second language."
+  },
+  {
+    "word": "lucid",
+    "definition": "Clear and easy to understand.",
+    "example": "His lucid explanation finally untangled the puzzle."
+  },
+  {
+    "word": "cogent",
+    "definition": "Clear, logical, and convincing.",
+    "example": "She made a cogent case for restoring the bridge."
+  },
+  {
+    "word": "coherent",
+    "definition": "Logical and consistent.",
+    "example": "Her notes formed a coherent picture of the trip."
+  },
+  {
+    "word": "concise",
+    "definition": "Brief and clear.",
+    "example": "His concise summary saved everyone time."
+  },
+  {
+    "word": "pithy",
+    "definition": "Brief and meaningful.",
+    "example": "Her pithy advice was hard to forget."
+  },
+  {
+    "word": "succinct",
+    "definition": "Briefly and clearly expressed.",
+    "example": "His succinct email answered every question."
+  },
+  {
+    "word": "terse",
+    "definition": "Sparing in words; sometimes blunt.",
+    "example": "His terse reply hinted at a long day."
+  },
+  {
+    "word": "laconic",
+    "definition": "Using few words.",
+    "example": "The laconic gardener said only what was needed."
+  },
+  {
+    "word": "verbose",
+    "definition": "Using more words than necessary.",
+    "example": "His verbose memos were notorious in the office."
+  },
+  {
+    "word": "loquacious",
+    "definition": "Tending to talk a great deal.",
+    "example": "Her loquacious neighbor was a fountain of stories."
+  },
+  {
+    "word": "garrulous",
+    "definition": "Excessively talkative, especially about trivial things.",
+    "example": "He grew garrulous after a single cup of strong tea."
+  },
+  {
+    "word": "voluble",
+    "definition": "Speaking fluently and at length.",
+    "example": "She was voluble about her favorite poets."
+  },
+  {
+    "word": "taciturn",
+    "definition": "Reserved or saying little.",
+    "example": "Her taciturn uncle preferred to listen."
+  },
+  {
+    "word": "reticent",
+    "definition": "Reluctant to share thoughts or feelings.",
+    "example": "She was reticent about her quiet successes."
+  },
+  {
+    "word": "reserved",
+    "definition": "Slow to reveal emotion or opinions.",
+    "example": "He had a reserved but kind manner."
+  },
+  {
+    "word": "demure",
+    "definition": "Quietly modest and reserved.",
+    "example": "Her demure smile hid a sharp wit."
+  },
+  {
+    "word": "modest",
+    "definition": "Not showing off; humble.",
+    "example": "He was modest about his many talents."
+  },
+  {
+    "word": "unassuming",
+    "definition": "Not boastful or arrogant.",
+    "example": "Her unassuming manner won people over instantly."
+  },
+  {
+    "word": "self-effacing",
+    "definition": "Avoiding attention to oneself.",
+    "example": "His self-effacing humor charmed the audience."
+  },
+  {
+    "word": "humble",
+    "definition": "Modest and unpretentious.",
+    "example": "Despite his fame, he remained humble."
+  },
+  {
+    "word": "meek",
+    "definition": "Quiet, gentle, and submissive.",
+    "example": "The meek puppy followed the children everywhere."
+  },
+  {
+    "word": "mild",
+    "definition": "Gentle and not severe.",
+    "example": "It was a mild evening with a soft breeze."
+  },
+  {
+    "word": "gentle",
+    "definition": "Soft, kind, and careful.",
+    "example": "Her gentle touch reassured the nervous bird."
+  },
+  {
+    "word": "tender",
+    "definition": "Showing kindness and affection.",
+    "example": "He gave a tender goodbye at the station."
+  },
+  {
+    "word": "kindly",
+    "definition": "In a kind, gentle way.",
+    "example": "She kindly offered to take the heavy box."
+  },
+  {
+    "word": "affectionate",
+    "definition": "Showing fondness and warmth.",
+    "example": "Their dog was unusually affectionate with new visitors."
+  },
+  {
+    "word": "loving",
+    "definition": "Showing love and care.",
+    "example": "She wrote a loving letter to her old teacher."
+  },
+  {
+    "word": "doting",
+    "definition": "Showing excessive love or care.",
+    "example": "Doting grandparents spoiled the children rotten."
+  },
+  {
+    "word": "ardour",
+    "definition": "Strong feeling or passion.",
+    "example": "The young poet wrote with surprising ardour."
+  },
+  {
+    "word": "passion",
+    "definition": "Strong, lasting feeling for something.",
+    "example": "Cooking became her quiet passion in retirement."
+  },
+  {
+    "word": "devotion",
+    "definition": "Loyal love or commitment.",
+    "example": "Her devotion to her students was widely admired."
+  },
+  {
+    "word": "reverent",
+    "definition": "Showing deep respect.",
+    "example": "He spoke in a reverent tone about old craftsmanship."
+  },
+  {
+    "word": "respectful",
+    "definition": "Showing thoughtful regard.",
+    "example": "She gave a respectful nod to the older musician."
+  },
+  {
+    "word": "deferential",
+    "definition": "Showing respect by yielding to others.",
+    "example": "He was deferential to his old mentor's advice."
+  },
+  {
+    "word": "obedient",
+    "definition": "Willing to follow rules or instructions.",
+    "example": "The obedient horse waited patiently to be led."
+  },
+  {
+    "word": "compliant",
+    "definition": "Willing to agree with rules or wishes.",
+    "example": "The puppy was compliant after just a few lessons."
+  },
+  {
+    "word": "amenable",
+    "definition": "Open to suggestion or influence.",
+    "example": "She was amenable to a change in plans."
+  },
+  {
+    "word": "receptive",
+    "definition": "Willing to consider new ideas.",
+    "example": "He was receptive to feedback from younger writers."
+  },
+  {
+    "word": "open-minded",
+    "definition": "Willing to consider different ideas.",
+    "example": "She remained open-minded even in heated discussions."
+  },
+  {
+    "word": "curious",
+    "definition": "Eager to learn or know.",
+    "example": "Her curious nature made every walk an adventure."
+  },
+  {
+    "word": "inquisitive",
+    "definition": "Eager to investigate or learn.",
+    "example": "The inquisitive child took apart every old radio."
+  },
+  {
+    "word": "studious",
+    "definition": "Spending much time studying.",
+    "example": "Her studious habits filled three bookshelves."
+  },
+  {
+    "word": "scholarly",
+    "definition": "Involving careful study or knowledge.",
+    "example": "She wrote a scholarly note for the local journal."
+  },
+  {
+    "word": "erudite",
+    "definition": "Having or showing great knowledge.",
+    "example": "The erudite professor charmed everyone with stories."
+  },
+  {
+    "word": "learned",
+    "definition": "Having much knowledge from study.",
+    "example": "The learned baker also wrote about old recipes."
+  },
+  {
+    "word": "well-read",
+    "definition": "Familiar with many books.",
+    "example": "She was well-read in both poetry and history."
+  },
+  {
+    "word": "enlightened",
+    "definition": "Having clear, well-informed thinking.",
+    "example": "Her enlightened approach changed the whole department."
+  },
+  {
+    "word": "wisdom",
+    "definition": "Deep understanding from experience and reflection.",
+    "example": "His wisdom guided three generations of students."
+  },
+  {
+    "word": "insight",
+    "definition": "A clear, deep understanding.",
+    "example": "Her sudden insight reshaped the whole project."
+  },
+  {
+    "word": "perception",
+    "definition": "Awareness through the senses or mind.",
+    "example": "His perception of the room was remarkably sharp."
+  },
+  {
+    "word": "understanding",
+    "definition": "The ability to grasp meaning.",
+    "example": "Her quiet understanding made her a trusted friend."
+  },
+  {
+    "word": "comprehension",
+    "definition": "The act of grasping meaning.",
+    "example": "His comprehension of the rules grew quickly."
+  },
+  {
+    "word": "knowledge",
+    "definition": "Awareness gained through experience or study.",
+    "example": "Her knowledge of native birds was extraordinary."
+  },
+  {
+    "word": "expertise",
+    "definition": "Deep skill in a particular area.",
+    "example": "His expertise in old maps was widely respected."
+  },
+  {
+    "word": "proficiency",
+    "definition": "Skill or competence in something.",
+    "example": "She gained proficiency on the violin in just a year."
+  },
+  {
+    "word": "mastery",
+    "definition": "Comprehensive command of a subject.",
+    "example": "Her mastery of Italian impressed the locals."
+  },
+  {
+    "word": "dexterity",
+    "definition": "Skill in using one's hands or mind.",
+    "example": "His dexterity with chopsticks delighted the children."
+  },
+  {
+    "word": "finesse",
+    "definition": "Skillful, subtle handling of a situation.",
+    "example": "She handled the awkward question with finesse."
+  },
+  {
+    "word": "aplomb",
+    "definition": "Self-confidence and composure.",
+    "example": "He delivered the speech with surprising aplomb."
+  },
+  {
+    "word": "polish",
+    "definition": "Refinement in manner or finish.",
+    "example": "Years of practice gave her work a quiet polish."
+  },
+  {
+    "word": "refinement",
+    "definition": "Subtle improvement or elegance.",
+    "example": "Her refinement showed in even small gestures."
+  },
+  {
+    "word": "elegance",
+    "definition": "Graceful, stylish quality.",
+    "example": "The little garden had a quiet elegance."
+  },
+  {
+    "word": "sophistication",
+    "definition": "Refined and worldly knowledge.",
+    "example": "His travels gave him a quiet sophistication."
+  },
+  {
+    "word": "charisma",
+    "definition": "Natural ability to attract and inspire others.",
+    "example": "His charisma made even small meetings memorable."
+  },
+  {
+    "word": "charm",
+    "definition": "Attractive, pleasing quality.",
+    "example": "The little inn had its own quiet charm."
+  },
+  {
+    "word": "allure",
+    "definition": "Powerful attraction.",
+    "example": "The empty beach had a strange autumn allure."
+  },
+  {
+    "word": "magnetism",
+    "definition": "A strong personal attraction.",
+    "example": "The new teacher had unusual magnetism."
+  },
+  {
+    "word": "appeal",
+    "definition": "An attractive quality.",
+    "example": "The book had a quiet appeal that grew with each chapter."
+  },
+  {
+    "word": "attraction",
+    "definition": "Something pleasing or interesting.",
+    "example": "The old clock tower was the village's main attraction."
+  },
+  {
+    "word": "draw",
+    "definition": "Something that pulls people's interest.",
+    "example": "The book sale was the main draw of the weekend."
+  },
+  {
+    "word": "magnetic",
+    "definition": "Strongly attractive.",
+    "example": "Her magnetic warmth drew strangers to her bench."
+  },
+  {
+    "word": "captivating",
+    "definition": "Capable of holding attention.",
+    "example": "The captivating story kept us up too late."
+  },
+  {
+    "word": "enchanting",
+    "definition": "Delightfully charming.",
+    "example": "Her enchanting voice softened the whole café."
+  },
+  {
+    "word": "alluring",
+    "definition": "Attractive and tempting.",
+    "example": "The alluring smell of bread filled the alley."
+  },
+  {
+    "word": "entrancing",
+    "definition": "Holding attention completely.",
+    "example": "The entrancing dance kept the audience silent."
+  },
+  {
+    "word": "spellbinding",
+    "definition": "Holding complete attention.",
+    "example": "Her spellbinding speech held the room frozen."
+  },
+  {
+    "word": "mesmerizing",
+    "definition": "Completely captivating.",
+    "example": "The mesmerizing dancer earned three encores."
+  },
+  {
+    "word": "riveting",
+    "definition": "Holding attention completely.",
+    "example": "The riveting documentary made dinner come late."
+  },
+  {
+    "word": "engrossing",
+    "definition": "Capturing full attention.",
+    "example": "The novel was so engrossing she missed her stop."
+  },
+  {
+    "word": "compelling",
+    "definition": "Powerfully interesting or persuasive.",
+    "example": "Her compelling story changed the room's mood."
+  },
+  {
+    "word": "fascinating",
+    "definition": "Extremely interesting.",
+    "example": "Her fascinating research uncovered forgotten poems."
+  },
+  {
+    "word": "intriguing",
+    "definition": "Interesting and mysterious.",
+    "example": "The intriguing letter raised more questions than answers."
+  },
+  {
+    "word": "absorbing",
+    "definition": "Capturing attention completely.",
+    "example": "An absorbing puzzle filled the rainy afternoon."
+  },
+  {
+    "word": "evocative",
+    "definition": "Bringing strong images or feelings to mind.",
+    "example": "His evocative essay made me homesick."
+  },
+  {
+    "word": "stirring",
+    "definition": "Causing strong feelings.",
+    "example": "Her stirring speech encouraged the volunteers."
+  },
+  {
+    "word": "rousing",
+    "definition": "Exciting or stirring.",
+    "example": "We sang a rousing song after dinner."
+  },
+  {
+    "word": "uplifting",
+    "definition": "Encouraging happy or hopeful feelings.",
+    "example": "Her uplifting letter arrived at the perfect moment."
+  },
+  {
+    "word": "heartening",
+    "definition": "Encouraging and reassuring.",
+    "example": "It was heartening to see so many friends gathered."
+  },
+  {
+    "word": "reassuring",
+    "definition": "Removing doubts and giving confidence.",
+    "example": "His reassuring tone calmed the crowd."
+  },
+  {
+    "word": "calming",
+    "definition": "Bringing peace or quiet.",
+    "example": "The calming garden was her favorite afternoon escape."
+  },
+  {
+    "word": "soothing",
+    "definition": "Gently easing pain or distress.",
+    "example": "Her soothing voice helped the puppy sleep."
+  },
+  {
+    "word": "comforting",
+    "definition": "Bringing relief or ease.",
+    "example": "A comforting bowl of soup waited at home."
+  },
+  {
+    "word": "consoling",
+    "definition": "Offering comfort during sadness.",
+    "example": "Her consoling letter was read many times."
+  },
+  {
+    "word": "heartfelt",
+    "definition": "Sincere and deeply felt.",
+    "example": "His heartfelt thanks meant more than any reward."
+  },
+  {
+    "word": "sincerely",
+    "definition": "In a heartfelt and honest way.",
+    "example": "She thanked him sincerely for the warm meal."
+  },
+  {
+    "word": "earnestness",
+    "definition": "Sincerity and seriousness.",
+    "example": "Her earnestness made the small speech memorable."
+  },
+  {
+    "word": "gravitas",
+    "definition": "A dignified, serious manner.",
+    "example": "He spoke with the gravitas of someone older."
+  },
+  {
+    "word": "dignity",
+    "definition": "The quality of being worthy of respect.",
+    "example": "She bore the difficult news with dignity."
+  },
+  {
+    "word": "majesty",
+    "definition": "Impressive grandeur.",
+    "example": "The mountain rose with quiet majesty."
+  },
+  {
+    "word": "grandeur",
+    "definition": "Impressive beauty or scale.",
+    "example": "The grandeur of the old library hushed every guest."
+  },
+  {
+    "word": "splendor",
+    "definition": "Magnificent, impressive beauty.",
+    "example": "Autumn arrived in full splendor along the river."
+  },
+  {
+    "word": "magnificence",
+    "definition": "Striking beauty or grandeur.",
+    "example": "The magnificence of the cathedral overwhelmed her."
+  },
+  {
+    "word": "opulence",
+    "definition": "Great wealth or luxury.",
+    "example": "The opulence of the old theater still impressed visitors."
+  },
+  {
+    "word": "luxury",
+    "definition": "Great comfort and elegance.",
+    "example": "A long bath felt like the smallest luxury."
+  },
+  {
+    "word": "comfort",
+    "definition": "Pleasant ease or warmth.",
+    "example": "Comfort was a thick sweater and slow tea."
+  },
+  {
+    "word": "coziness",
+    "definition": "A feeling of warmth and snug comfort.",
+    "example": "The blanket added real coziness to the corner."
+  },
+  {
+    "word": "snug",
+    "definition": "Cozy and warm.",
+    "example": "The cabin felt snug despite the howling wind."
+  },
+  {
+    "word": "warm-hearted",
+    "definition": "Kind and friendly in spirit.",
+    "example": "Her warm-hearted notes brightened our mornings."
+  },
+  {
+    "word": "homely",
+    "definition": "Simple, cozy, and comfortable.",
+    "example": "The homely soup tasted of long evenings."
+  },
+  {
+    "word": "rustic",
+    "definition": "Simple and country-like in style.",
+    "example": "The rustic table held mismatched bowls of fruit."
+  },
+  {
+    "word": "pastoral",
+    "definition": "Relating to peaceful country life.",
+    "example": "Her painting captured a quiet pastoral scene."
+  },
+  {
+    "word": "bucolic",
+    "definition": "Pleasantly rural.",
+    "example": "We spent the weekend in bucolic peace."
+  },
+  {
+    "word": "idyllic",
+    "definition": "Extremely peaceful and beautiful.",
+    "example": "The idyllic afternoon by the lake was unforgettable."
+  },
+  {
+    "word": "arcadian",
+    "definition": "Simple, peaceful, and rural in character.",
+    "example": "Their arcadian summer felt like a long held breath."
+  },
+  {
+    "word": "pristine",
+    "definition": "Untouched and perfectly clean.",
+    "example": "We woke to a pristine layer of snow."
+  },
+  {
+    "word": "immaculate",
+    "definition": "Spotlessly clean.",
+    "example": "The kitchen was immaculate by midnight."
+  },
+  {
+    "word": "spotless",
+    "definition": "Free from any mark or dirt.",
+    "example": "Her spotless workshop smelled of cedar shavings."
+  },
+  {
+    "word": "tidy",
+    "definition": "Neat and orderly.",
+    "example": "She kept her desk tidy with small wooden boxes."
+  },
+  {
+    "word": "orderly",
+    "definition": "Neat and well-arranged.",
+    "example": "Books were stacked in orderly rows along the wall."
+  },
+  {
+    "word": "meticulous",
+    "definition": "Showing great care for detail.",
+    "example": "His meticulous notes saved the project later."
+  },
+  {
+    "word": "fastidious",
+    "definition": "Very attentive to detail or cleanliness.",
+    "example": "He was fastidious about labeling each jar."
+  },
+  {
+    "word": "punctilious",
+    "definition": "Strictly attentive to details.",
+    "example": "She was punctilious in answering every email."
+  },
+  {
+    "word": "scrupulous",
+    "definition": "Careful and honest.",
+    "example": "Her scrupulous accounting earned everyone's trust."
+  },
+  {
+    "word": "thorough",
+    "definition": "Done with great care and completeness.",
+    "example": "Her thorough review caught every small mistake."
+  },
+  {
+    "word": "comprehensive",
+    "definition": "Including everything important.",
+    "example": "He prepared a comprehensive guide for new volunteers."
+  },
+  {
+    "word": "exhaustive",
+    "definition": "Including every possible detail.",
+    "example": "She made an exhaustive list of stops along the route."
+  },
+  {
+    "word": "encyclopedic",
+    "definition": "Comprehensive in knowledge.",
+    "example": "His encyclopedic memory of poetry surprised guests."
+  },
+  {
+    "word": "extensive",
+    "definition": "Covering a large area or topic.",
+    "example": "She had extensive notes from her summer abroad."
+  },
+  {
+    "word": "considerable",
+    "definition": "Notably large or significant.",
+    "example": "The garden had grown to a considerable size."
+  },
+  {
+    "word": "ample",
+    "definition": "More than enough.",
+    "example": "There was ample bread for second helpings."
+  },
+  {
+    "word": "abundant",
+    "definition": "Existing in large quantities.",
+    "example": "Wildflowers were abundant along the old road."
+  },
+  {
+    "word": "plentiful",
+    "definition": "Existing in great amount.",
+    "example": "Tomatoes were plentiful by the end of August."
+  },
+  {
+    "word": "copious",
+    "definition": "Large in quantity.",
+    "example": "The library held copious notes on local history."
+  },
+  {
+    "word": "bountiful",
+    "definition": "Generous and plentiful.",
+    "example": "Their bountiful garden fed half the neighborhood."
+  },
+  {
+    "word": "lavish",
+    "definition": "Generous to a great extent.",
+    "example": "He lavished attention on the small project."
+  },
+  {
+    "word": "profuse",
+    "definition": "In great amount; abundant.",
+    "example": "Profuse roses spilled over the garden wall."
+  },
+  {
+    "word": "manifold",
+    "definition": "Many and varied.",
+    "example": "Her manifold interests kept her endlessly busy."
+  },
+  {
+    "word": "myriad",
+    "definition": "A countless number.",
+    "example": "Myriad stars came out over the quiet valley."
+  },
+  {
+    "word": "countless",
+    "definition": "Too many to count.",
+    "example": "Countless letters survived in the wooden box."
+  },
+  {
+    "word": "innumerable",
+    "definition": "Too many to be counted.",
+    "example": "Innumerable shells lay scattered along the tide line."
+  },
+  {
+    "word": "scarce",
+    "definition": "Existing only in small amounts.",
+    "example": "Fresh peaches were scarce by late September."
+  },
+  {
+    "word": "sparse",
+    "definition": "Thinly distributed or scattered.",
+    "example": "The crowd was sparse but enthusiastic."
+  },
+  {
+    "word": "scant",
+    "definition": "Barely sufficient.",
+    "example": "There was scant evidence of recent visitors."
+  },
+  {
+    "word": "meager",
+    "definition": "Small in quantity or quality.",
+    "example": "His meager breakfast was just bread and tea."
+  },
+  {
+    "word": "frugal",
+    "definition": "Sparing or economical with money or food.",
+    "example": "Her frugal habits left room for thoughtful gifts."
+  },
+  {
+    "word": "thrifty",
+    "definition": "Careful with money.",
+    "example": "She was thrifty without ever being mean."
+  },
+  {
+    "word": "parsimonious",
+    "definition": "Excessively careful with money.",
+    "example": "His parsimonious habits left the kitchen oddly bare."
+  },
+  {
+    "word": "miserly",
+    "definition": "Greedy and unwilling to spend.",
+    "example": "The miserly old man kept every coin."
+  },
+  {
+    "word": "stingy",
+    "definition": "Unwilling to give or spend.",
+    "example": "He was stingy with praise but generous with bread."
+  },
+  {
+    "word": "lavishly",
+    "definition": "In a generous, abundant way.",
+    "example": "The host welcomed each guest lavishly."
+  },
+  {
+    "word": "generously",
+    "definition": "In a giving, open-handed way.",
+    "example": "She generously shared her grandmother's recipe."
+  },
+  {
+    "word": "magnanimity",
+    "definition": "The quality of being big-hearted.",
+    "example": "Her magnanimity at the meeting smoothed all hard feelings."
+  },
+  {
+    "word": "philanthropy",
+    "definition": "The desire to help others, often through giving.",
+    "example": "Her quiet philanthropy funded a small library."
+  },
+  {
+    "word": "charity",
+    "definition": "Help given to those in need.",
+    "example": "The bakery gave its day-old bread to local charity."
+  },
+  {
+    "word": "almsgiving",
+    "definition": "The giving of money or food to the poor.",
+    "example": "Almsgiving was a quiet ritual on Friday mornings."
+  },
+  {
+    "word": "benefactor",
+    "definition": "A person who gives money or help.",
+    "example": "An anonymous benefactor funded the new garden."
+  },
+  {
+    "word": "patron",
+    "definition": "Someone who supports an artist or cause.",
+    "example": "She found a patron for her botanical paintings."
+  },
+  {
+    "word": "advocate",
+    "definition": "A person who supports a cause.",
+    "example": "He became an advocate for the local river."
+  },
+  {
+    "word": "champion",
+    "definition": "Someone who defends a cause or person.",
+    "example": "She was a quiet champion of small bookshops."
+  },
+  {
+    "word": "ally",
+    "definition": "A person who supports another in a cause.",
+    "example": "He was a trusted ally during difficult discussions."
+  },
+  {
+    "word": "confidant",
+    "definition": "A person trusted with private matters.",
+    "example": "Her sister was her closest confidant."
+  },
+  {
+    "word": "comrade",
+    "definition": "A close companion who shares activities.",
+    "example": "His old comrade still wrote every winter."
+  },
+  {
+    "word": "companion",
+    "definition": "A person who spends time with another.",
+    "example": "Her quiet dog was her favorite walking companion."
+  },
+  {
+    "word": "consort",
+    "definition": "A spouse or companion, especially of royalty.",
+    "example": "The queen's consort attended every ceremony."
+  },
+  {
+    "word": "spouse",
+    "definition": "A husband or wife.",
+    "example": "Her spouse joined her at the small reception."
+  },
+  {
+    "word": "betrothed",
+    "definition": "A person engaged to be married.",
+    "example": "He spoke of his betrothed with shining eyes."
+  },
+  {
+    "word": "paramour",
+    "definition": "A lover, often secret.",
+    "example": "The novel hinted at a forgotten paramour."
+  },
+  {
+    "word": "beloved",
+    "definition": "Someone deeply loved.",
+    "example": "Her beloved old cat slept by the radiator."
+  },
+  {
+    "word": "darling",
+    "definition": "Someone dearly loved.",
+    "example": "He called every child a darling at the bakery."
+  },
+  {
+    "word": "sweetheart",
+    "definition": "A loved person.",
+    "example": "He still wrote letters to his college sweetheart."
+  },
+  {
+    "word": "sweetness",
+    "definition": "The quality of being kind and gentle.",
+    "example": "Her sweetness made strangers feel like friends."
+  },
+  {
+    "word": "endearing",
+    "definition": "Inspiring affection.",
+    "example": "His endearing habits won the children over."
+  },
+  {
+    "word": "adorable",
+    "definition": "Inspiring great love.",
+    "example": "The puppy was adorable in his oversized collar."
+  },
+  {
+    "word": "lovable",
+    "definition": "Easy to love.",
+    "example": "Her lovable awkwardness only added to her charm."
+  },
+  {
+    "word": "amorous",
+    "definition": "Showing or relating to love.",
+    "example": "An amorous letter slipped from the old book."
+  },
+  {
+    "word": "romantic",
+    "definition": "Relating to love or idealized situations.",
+    "example": "He had a romantic view of small village life."
+  },
+  {
+    "word": "tender-hearted",
+    "definition": "Easily moved to compassion.",
+    "example": "Her tender-hearted nature drew strays of every kind."
+  },
+  {
+    "word": "soft-spoken",
+    "definition": "Speaking in a quiet, gentle voice.",
+    "example": "The soft-spoken librarian knew every reader by name."
+  },
+  {
+    "word": "well-mannered",
+    "definition": "Polite and considerate.",
+    "example": "The well-mannered children helped clear the table."
+  },
+  {
+    "word": "considerate",
+    "definition": "Thoughtful of others' feelings.",
+    "example": "Her considerate notes made everyone feel seen."
+  },
+  {
+    "word": "thoughtful",
+    "definition": "Showing careful thought for others.",
+    "example": "He was thoughtful enough to bring soup."
+  },
+  {
+    "word": "attentive",
+    "definition": "Paying close attention.",
+    "example": "She was an attentive listener even at large parties."
+  },
+  {
+    "word": "mindful",
+    "definition": "Conscious and aware of something.",
+    "example": "He was mindful of every tiny sound in the woods."
+  },
+  {
+    "word": "aware",
+    "definition": "Knowing or noticing something.",
+    "example": "She was aware of a faint smell of rosemary."
+  },
+  {
+    "word": "observant",
+    "definition": "Quick to notice things.",
+    "example": "Her observant eye caught the small change in his mood."
+  },
+  {
+    "word": "alert",
+    "definition": "Quickly noticing and ready to act.",
+    "example": "The alert dog noticed the visitor first."
+  },
+  {
+    "word": "vigilant",
+    "definition": "Watchful, especially for danger.",
+    "example": "Vigilant volunteers kept the trails safe."
+  },
+  {
+    "word": "watchful",
+    "definition": "Carefully looking out for things.",
+    "example": "Her watchful gaze followed the toddler around the room."
+  },
+  {
+    "word": "wary",
+    "definition": "Cautious because of possible danger.",
+    "example": "The wary fox skirted the edge of the meadow."
+  },
+  {
+    "word": "circumspect",
+    "definition": "Careful and thoughtful before acting.",
+    "example": "She was circumspect about sharing her plans."
+  },
+  {
+    "word": "cautious",
+    "definition": "Careful to avoid danger or mistakes.",
+    "example": "He took a cautious sip of the steaming broth."
+  },
+  {
+    "word": "tentative",
+    "definition": "Done without confidence.",
+    "example": "She gave a tentative smile during the interview."
+  },
+  {
+    "word": "hesitant",
+    "definition": "Unwilling to act because of doubt.",
+    "example": "He was hesitant before the big decision."
+  },
+  {
+    "word": "reluctant",
+    "definition": "Unwilling to do something.",
+    "example": "She was reluctant to leave the warm kitchen."
+  },
+  {
+    "word": "loath",
+    "definition": "Strongly unwilling.",
+    "example": "He was loath to interrupt their long conversation."
+  },
+  {
+    "word": "averse",
+    "definition": "Strongly disliking.",
+    "example": "She was averse to crowded streetcars."
+  },
+  {
+    "word": "abhor",
+    "definition": "Strongly dislike.",
+    "example": "He continued to abhor early morning meetings."
+  },
+  {
+    "word": "loathe",
+    "definition": "Strongly dislike.",
+    "example": "She came to loathe the sound of squeaky shoes."
+  },
+  {
+    "word": "detest",
+    "definition": "Strongly dislike.",
+    "example": "He had grown to detest noisy fluorescent lights."
+  },
+  {
+    "word": "despise",
+    "definition": "Strongly dislike or hold in low regard.",
+    "example": "She came to despise rushed conversations."
+  },
+  {
+    "word": "disdain",
+    "definition": "Look down on something.",
+    "example": "He showed quiet disdain for shortcuts in his craft."
+  },
+  {
+    "word": "scorn",
+    "definition": "Strong contempt.",
+    "example": "Her scorn for cheap imitations was well known."
+  },
+  {
+    "word": "contempt",
+    "definition": "Feeling that something is worthless.",
+    "example": "She had nothing but contempt for cruelty."
+  },
+  {
+    "word": "disgust",
+    "definition": "Strong feeling of revulsion.",
+    "example": "His disgust at the mess was instantly clear."
+  },
+  {
+    "word": "revulsion",
+    "definition": "A strong sense of disgust.",
+    "example": "Revulsion crossed her face when she found the leak."
+  },
+  {
+    "word": "antipathy",
+    "definition": "Strong dislike.",
+    "example": "He had a quiet antipathy for noisy machines."
+  },
+  {
+    "word": "animosity",
+    "definition": "Strong hostility.",
+    "example": "Their old animosity had softened with the years."
+  },
+  {
+    "word": "rancor",
+    "definition": "Bitter, deep-seated ill will.",
+    "example": "The dispute ended without rancor on either side."
+  },
+  {
+    "word": "enmity",
+    "definition": "A feeling of active opposition.",
+    "example": "Years dissolved the enmity between the families."
+  },
+  {
+    "word": "feud",
+    "definition": "A long, bitter conflict.",
+    "example": "The neighborhood feud was finally healed by a shared crisis."
+  },
+  {
+    "word": "discord",
+    "definition": "Disagreement and tension.",
+    "example": "Discord spread through the office that week."
+  },
+  {
+    "word": "strife",
+    "definition": "Bitter conflict.",
+    "example": "Years of strife had hardened the old shopkeeper."
+  },
+  {
+    "word": "contention",
+    "definition": "Heated disagreement.",
+    "example": "The new policy was a point of contention."
+  },
+  {
+    "word": "altercation",
+    "definition": "A noisy argument.",
+    "example": "An altercation in the hallway brought the whole office out."
+  },
+  {
+    "word": "spat",
+    "definition": "A short, minor argument.",
+    "example": "Their tiny spat was forgotten by morning."
+  },
+  {
+    "word": "quarrel",
+    "definition": "An angry disagreement.",
+    "example": "Their quarrel ended with quiet apologies."
+  },
+  {
+    "word": "skirmish",
+    "definition": "A small fight or conflict.",
+    "example": "There was a brief skirmish over who paid the bill."
+  },
+  {
+    "word": "scuffle",
+    "definition": "A short, confused struggle.",
+    "example": "A small scuffle broke out among the seagulls."
+  },
+  {
+    "word": "tussle",
+    "definition": "A vigorous struggle.",
+    "example": "There was a friendly tussle for the last piece of pie."
+  },
+  {
+    "word": "wrangle",
+    "definition": "A long, complicated dispute.",
+    "example": "They wrangled politely over the recipe."
+  },
+  {
+    "word": "negotiate",
+    "definition": "Discuss to reach an agreement.",
+    "example": "They negotiated a kinder schedule for the children."
+  },
+  {
+    "word": "compromise",
+    "definition": "An agreement reached by adjustment.",
+    "example": "Their compromise pleased everyone in the end."
+  },
+  {
+    "word": "reconcile",
+    "definition": "Restore friendly relations.",
+    "example": "The siblings finally reconciled at the family wedding."
+  },
+  {
+    "word": "mend",
+    "definition": "Repair or improve.",
+    "example": "She mended the old quilt with gentle stitches."
+  },
+  {
+    "word": "repair",
+    "definition": "Fix something that is broken.",
+    "example": "He could repair almost any old typewriter."
+  },
+  {
+    "word": "restore",
+    "definition": "Bring back to a former state.",
+    "example": "She restored the old armchair to its original colors."
+  },
+  {
+    "word": "renovate",
+    "definition": "Repair and improve a building.",
+    "example": "They slowly renovated the old farmhouse."
+  },
+  {
+    "word": "refurbish",
+    "definition": "Renovate and improve.",
+    "example": "The library refurbished its reading room last spring."
+  },
+  {
+    "word": "rejuvenate",
+    "definition": "Make fresh and youthful again.",
+    "example": "A weekend in the mountains rejuvenated her spirit."
+  },
+  {
+    "word": "revive",
+    "definition": "Bring back to life or activity.",
+    "example": "Spring rain revived the dusty fields."
+  },
+  {
+    "word": "rekindle",
+    "definition": "Light or stir up again.",
+    "example": "Their letters rekindled an old friendship."
+  },
+  {
+    "word": "renew",
+    "definition": "Resume or extend something.",
+    "example": "She renewed her library card with quiet ceremony."
+  },
+  {
+    "word": "revitalize",
+    "definition": "Give new strength or energy.",
+    "example": "Fresh paint revitalized the whole café."
+  },
+  {
+    "word": "resurrect",
+    "definition": "Bring back from the past.",
+    "example": "They resurrected the village's old harvest festival."
+  },
+  {
+    "word": "regenerate",
+    "definition": "Form again, especially after damage.",
+    "example": "Forests can regenerate over many quiet decades."
+  },
+  {
+    "word": "rebound",
+    "definition": "Bounce back, especially after a setback.",
+    "example": "She rebounded from the rejection in days."
+  },
+  {
+    "word": "recover",
+    "definition": "Return to normal after illness or trouble.",
+    "example": "He recovered slowly but completely after the accident."
+  },
+  {
+    "word": "convalesce",
+    "definition": "Recover from an illness.",
+    "example": "She convalesced in a small seaside cottage."
+  },
+  {
+    "word": "heal",
+    "definition": "Become healthy or whole again.",
+    "example": "The garden helped her heal in quiet ways."
+  },
+  {
+    "word": "soothe",
+    "definition": "Gently calm or comfort.",
+    "example": "Soft music soothed the restless audience."
+  },
+  {
+    "word": "alleviate",
+    "definition": "Lessen pain or trouble.",
+    "example": "A cool cloth alleviated the dull headache."
+  },
+  {
+    "word": "mitigate",
+    "definition": "Make less severe.",
+    "example": "Careful planning mitigated most of the risk."
+  },
+  {
+    "word": "assuage",
+    "definition": "Reduce pain or worry.",
+    "example": "Her warm letter assuaged most of his fears."
+  },
+  {
+    "word": "appease",
+    "definition": "Calm by giving in.",
+    "example": "He brought treats to appease the grumpy cat."
+  },
+  {
+    "word": "placate",
+    "definition": "Make less angry.",
+    "example": "Her gentle apology placated the upset neighbor."
+  },
+  {
+    "word": "pacify",
+    "definition": "Calm or quiet down.",
+    "example": "A bowl of warm milk pacified the restless toddler."
+  },
+  {
+    "word": "tranquilize",
+    "definition": "Calm or quiet.",
+    "example": "The rhythmic rain tranquilized the whole house."
+  },
+  {
+    "word": "lull",
+    "definition": "Calm into rest or sleep.",
+    "example": "The hum of the train lulled her to sleep."
+  },
+  {
+    "word": "quiet",
+    "definition": "Make or become silent.",
+    "example": "She quieted the room with a single look."
+  },
+  {
+    "word": "hush",
+    "definition": "Make silent or still.",
+    "example": "A sudden hush fell over the garden."
+  },
+  {
+    "word": "still",
+    "definition": "Make calm and motionless.",
+    "example": "The wind stilled at sundown."
+  },
+  {
+    "word": "halt",
+    "definition": "Stop moving or working.",
+    "example": "The old clock halted at noon."
+  },
+  {
+    "word": "cease",
+    "definition": "Bring or come to an end.",
+    "example": "The rain ceased just before dawn."
+  },
+  {
+    "word": "discontinue",
+    "definition": "Stop doing or providing something.",
+    "example": "The shop discontinued its evening hours."
+  },
+  {
+    "word": "suspend",
+    "definition": "Stop temporarily.",
+    "example": "They suspended the meetings during the holidays."
+  },
+  {
+    "word": "pause",
+    "definition": "Temporarily stop.",
+    "example": "She paused before opening the old letter."
+  },
+  {
+    "word": "interlude",
+    "definition": "An intervening period of time.",
+    "example": "Their cottage was a quiet interlude between cities."
+  },
+  {
+    "word": "intermission",
+    "definition": "A short break during a performance.",
+    "example": "We met friends in the lobby during intermission."
+  },
+  {
+    "word": "interim",
+    "definition": "An intervening period.",
+    "example": "She helped during the interim before the new librarian arrived."
+  },
+  {
+    "word": "hiatus",
+    "definition": "A pause or break in continuity.",
+    "example": "Her band took a hiatus during the long winter."
+  },
+  {
+    "word": "lacuna",
+    "definition": "A gap or missing part.",
+    "example": "There was a lacuna in the old town records."
+  },
+  {
+    "word": "vacation",
+    "definition": "A period away from work.",
+    "example": "Their vacation lasted just three slow days."
+  },
+  {
+    "word": "holiday",
+    "definition": "A day off or period of celebration.",
+    "example": "It was a quiet holiday spent reading by the fire."
+  },
+  {
+    "word": "sabbath",
+    "definition": "A weekly day of rest.",
+    "example": "Their sabbath was filled with shared meals."
+  },
+  {
+    "word": "festive",
+    "definition": "Cheerful and celebratory.",
+    "example": "The kitchen had a festive air all weekend."
+  },
+  {
+    "word": "joyous",
+    "definition": "Full of happiness.",
+    "example": "The joyous reunion lasted into the night."
+  },
+  {
+    "word": "joyful",
+    "definition": "Filled with great happiness.",
+    "example": "Her joyful laugh carried across the bakery."
+  },
+  {
+    "word": "blissful",
+    "definition": "Extremely happy.",
+    "example": "It was a blissful afternoon by the river."
+  },
+  {
+    "word": "contented",
+    "definition": "Quietly happy and satisfied.",
+    "example": "He looked contented as he kneaded the dough."
+  },
+  {
+    "word": "satisfied",
+    "definition": "Pleased and at ease.",
+    "example": "She was satisfied with the simple supper."
+  },
+  {
+    "word": "fulfilled",
+    "definition": "Feeling complete and meaningful.",
+    "example": "She felt fulfilled by her quiet work."
+  },
+  {
+    "word": "gratified",
+    "definition": "Pleased or satisfied.",
+    "example": "He was gratified by the children's careful drawings."
+  },
+  {
+    "word": "grateful",
+    "definition": "Feeling thankful.",
+    "example": "She was grateful for the unexpected visit."
+  },
+  {
+    "word": "thankful",
+    "definition": "Feeling appreciation.",
+    "example": "He was thankful for the warm cup at dawn."
+  },
+  {
+    "word": "appreciative",
+    "definition": "Recognizing good qualities or kindness.",
+    "example": "She was appreciative of every small gesture."
+  },
+  {
+    "word": "indebted",
+    "definition": "Feeling owing in gratitude.",
+    "example": "He felt indebted to the family that had taken him in."
+  },
+  {
+    "word": "obliging",
+    "definition": "Eager to help.",
+    "example": "The obliging clerk found the old book for her."
+  },
+  {
+    "word": "accommodating",
+    "definition": "Willing to fit others' needs.",
+    "example": "The accommodating innkeeper saved them an early breakfast."
+  },
+  {
+    "word": "helpful",
+    "definition": "Giving useful assistance.",
+    "example": "Her helpful note made the morning easier."
+  },
+  {
+    "word": "supportive",
+    "definition": "Providing encouragement and help.",
+    "example": "Her supportive friends saw her through the hard year."
+  },
+  {
+    "word": "encouraging",
+    "definition": "Giving hope or confidence.",
+    "example": "His encouraging smile lifted her mood."
+  },
+  {
+    "word": "inspiring",
+    "definition": "Filling with the urge to do something great.",
+    "example": "Her inspiring speech moved many to volunteer."
+  },
+  {
+    "word": "motivating",
+    "definition": "Causing one to act.",
+    "example": "The deadline was strangely motivating."
+  },
+  {
+    "word": "galvanize",
+    "definition": "Stir into sudden activity.",
+    "example": "Her plea galvanized the small community."
+  },
+  {
+    "word": "rouse",
+    "definition": "Cause to stop sleeping or wake up.",
+    "example": "Sunlight roused her before the alarm."
+  },
+  {
+    "word": "wake",
+    "definition": "Stop sleeping; the trail of a moving boat.",
+    "example": "She watched the gulls follow the boat's wake."
+  },
+  {
+    "word": "awaken",
+    "definition": "Cause to wake up.",
+    "example": "The smell of coffee awakened the entire household."
+  },
+  {
+    "word": "stir",
+    "definition": "Move slightly or wake gently.",
+    "example": "The cat stirred and stretched in the sunlight."
+  },
+  {
+    "word": "arise",
+    "definition": "Get up or come into being.",
+    "example": "Old questions arise after every gentle conversation."
+  },
+  {
+    "word": "ascend",
+    "definition": "Go up.",
+    "example": "Smoke ascended from the chimney into still air."
+  },
+  {
+    "word": "soar",
+    "definition": "Fly high in the sky.",
+    "example": "Hawks soared above the wide valley."
+  },
+  {
+    "word": "glide",
+    "definition": "Move smoothly through air or water.",
+    "example": "Swans glided across the morning lake."
+  },
+  {
+    "word": "swoop",
+    "definition": "Move down through the air quickly.",
+    "example": "An owl swooped over the meadow at dusk."
+  },
+  {
+    "word": "plummet",
+    "definition": "Fall straight down quickly.",
+    "example": "The temperature plummeted overnight."
+  },
+  {
+    "word": "descend",
+    "definition": "Move downward.",
+    "example": "Mist descended into the small valley."
+  },
+  {
+    "word": "tumble",
+    "definition": "Fall in a clumsy way.",
+    "example": "Apples tumbled out of the basket."
+  },
+  {
+    "word": "topple",
+    "definition": "Fall over.",
+    "example": "A stack of books toppled when the cat leapt up."
+  },
+  {
+    "word": "collapse",
+    "definition": "Fall down suddenly.",
+    "example": "The old shed finally collapsed in the spring storm."
+  },
+  {
+    "word": "crumble",
+    "definition": "Break into small fragments.",
+    "example": "Old plaster crumbled at the smallest touch."
+  },
+  {
+    "word": "wither",
+    "definition": "Become dry and shrunken.",
+    "example": "The basil withered in the summer heat."
+  },
+  {
+    "word": "fade",
+    "definition": "Lose color or strength gradually.",
+    "example": "The blue cushion faded over many summers."
+  },
+  {
+    "word": "diminish",
+    "definition": "Become smaller or less.",
+    "example": "The morning fog diminished by ten o'clock."
+  },
+  {
+    "word": "dwindle",
+    "definition": "Become gradually smaller.",
+    "example": "Their savings dwindled but their happiness did not."
+  },
+  {
+    "word": "ebb",
+    "definition": "Recede or decline gradually.",
+    "example": "The tide ebbed and revealed the old pier posts."
+  },
+  {
+    "word": "wane",
+    "definition": "Decrease in size or strength.",
+    "example": "His enthusiasm waned by mid-afternoon."
+  },
+  {
+    "word": "subside",
+    "definition": "Become less intense.",
+    "example": "The rain subsided as evening came on."
+  },
+  {
+    "word": "abate",
+    "definition": "Become less intense.",
+    "example": "The wind finally abated by morning."
+  },
+  {
+    "word": "recede",
+    "definition": "Move back or grow smaller.",
+    "example": "The waters slowly receded from the field."
+  },
+  {
+    "word": "retreat",
+    "definition": "Move back or away.",
+    "example": "Mist retreated into the upper valleys."
+  },
+  {
+    "word": "withdraw",
+    "definition": "Take back or move away.",
+    "example": "She withdrew quietly from the noisy room."
+  },
+  {
+    "word": "hibernate",
+    "definition": "Spend winter in a deep sleep.",
+    "example": "The bears hibernate through the long mountain winter."
+  },
+  {
+    "word": "estivate",
+    "definition": "Spend a hot or dry season in a dormant state.",
+    "example": "Some snails estivate during the dry summer."
+  },
+  {
+    "word": "dormant",
+    "definition": "Inactive but capable of becoming active.",
+    "example": "The garlic lay dormant under the snow."
+  },
+  {
+    "word": "torpor",
+    "definition": "A state of physical or mental inactivity.",
+    "example": "The afternoon heat brought a slow torpor over the village."
+  },
+  {
+    "word": "lethargy",
+    "definition": "A lack of energy or enthusiasm.",
+    "example": "A summer lethargy settled across the office."
+  },
+  {
+    "word": "languor",
+    "definition": "A pleasant feeling of tiredness.",
+    "example": "A sweet languor settled over them after the long meal."
+  },
+  {
+    "word": "ennui",
+    "definition": "A feeling of weariness from lack of interest.",
+    "example": "Long winters brought a familiar ennui."
+  },
+  {
+    "word": "tedium",
+    "definition": "Boredom from monotony.",
+    "example": "She broke the tedium with small walks in the garden."
+  },
+  {
+    "word": "monotony",
+    "definition": "Sameness that becomes tiring.",
+    "example": "The monotony of the journey was eased by music."
+  },
+  {
+    "word": "novelty",
+    "definition": "Newness or freshness.",
+    "example": "The novelty of the toy lasted exactly one afternoon."
+  },
+  {
+    "word": "innovation",
+    "definition": "A new method or idea.",
+    "example": "Their small innovation saved the bakery hours each day."
+  },
+  {
+    "word": "ingenuity",
+    "definition": "Cleverness in solving problems.",
+    "example": "Her ingenuity turned a broken chair into a flower stand."
+  },
+  {
+    "word": "creativity",
+    "definition": "The ability to make something new.",
+    "example": "Creativity flowed easily on these long, slow afternoons."
+  },
+  {
+    "word": "originality",
+    "definition": "The quality of being new and different.",
+    "example": "Her quiet originality charmed every reader."
+  },
+  {
+    "word": "imagination",
+    "definition": "The ability to form mental images and ideas.",
+    "example": "The painting sparked her imagination for days."
+  },
+  {
+    "word": "fantasy",
+    "definition": "Imagination, especially when unrealistic.",
+    "example": "Her childhood fantasy of running a bookshop came true."
+  },
+  {
+    "word": "vision",
+    "definition": "An imagined or future picture of something.",
+    "example": "His vision for the garden took five years to bloom."
+  },
+  {
+    "word": "ambition",
+    "definition": "A strong desire to achieve something.",
+    "example": "Her ambition was a small farm of her own."
+  },
+  {
+    "word": "aspiration",
+    "definition": "A hope or ambition.",
+    "example": "His aspiration was simply to write one good poem."
+  },
+  {
+    "word": "yearning",
+    "definition": "Strong longing.",
+    "example": "A yearning for the sea returned each spring."
+  },
+  {
+    "word": "longing",
+    "definition": "Persistent desire for something.",
+    "example": "A quiet longing for home filled her letters."
+  },
+  {
+    "word": "craving",
+    "definition": "Strong desire.",
+    "example": "He had a sudden craving for warm bread."
+  },
+  {
+    "word": "desire",
+    "definition": "A strong wish for something.",
+    "example": "Her desire to learn never faded with age."
+  },
+  {
+    "word": "wish",
+    "definition": "A desire for something.",
+    "example": "Her secret wish was a quiet attic studio."
+  },
+  {
+    "word": "hope",
+    "definition": "An expectation of good things.",
+    "example": "Hope returned with the morning birds."
+  },
+  {
+    "word": "optimism",
+    "definition": "A hopeful, positive outlook.",
+    "example": "Her optimism survived the long winter."
+  },
+  {
+    "word": "pessimism",
+    "definition": "A tendency to expect the worst.",
+    "example": "His pessimism sometimes hid a deep care."
+  },
+  {
+    "word": "skepticism",
+    "definition": "Doubt about something's truth.",
+    "example": "She approached the new theory with healthy skepticism."
+  },
+  {
+    "word": "cynicism",
+    "definition": "A belief that people act selfishly.",
+    "example": "His cynicism softened around dogs and toddlers."
+  },
+  {
+    "word": "doubt",
+    "definition": "A feeling of uncertainty.",
+    "example": "Doubt crept in just before the curtain rose."
+  },
+  {
+    "word": "uncertainty",
+    "definition": "The state of not knowing.",
+    "example": "There was an uncertainty about the new road."
+  },
+  {
+    "word": "ambiguity",
+    "definition": "The quality of having multiple meanings.",
+    "example": "Her note's ambiguity made him reread it three times."
+  },
+  {
+    "word": "vagueness",
+    "definition": "The quality of being unclear.",
+    "example": "The vagueness of the directions doubled their walk."
+  },
+  {
+    "word": "obscurity",
+    "definition": "The state of being unclear or unknown.",
+    "example": "The poet emerged from years of obscurity."
+  },
+  {
+    "word": "anonymity",
+    "definition": "The state of being unnamed.",
+    "example": "She enjoyed the anonymity of the small library."
+  },
+  {
+    "word": "privacy",
+    "definition": "Freedom from public attention.",
+    "example": "She valued the privacy of her morning routine."
+  },
+  {
+    "word": "discretion",
+    "definition": "Careful judgment in keeping secrets.",
+    "example": "She handled the news with quiet discretion."
+  },
+  {
+    "word": "tact",
+    "definition": "Skill in handling delicate situations.",
+    "example": "Her tact saved many awkward moments."
+  },
+  {
+    "word": "diplomacy",
+    "definition": "The art of managing relations skillfully.",
+    "example": "His diplomacy ended a long family argument."
+  },
+  {
+    "word": "subtle",
+    "definition": "Delicate and not obvious.",
+    "example": "There was a subtle sweetness in the broth."
+  },
+  {
+    "word": "nuance",
+    "definition": "A subtle difference in meaning or feeling.",
+    "example": "The painting had a nuance only quiet rooms revealed."
+  },
+  {
+    "word": "delicate",
+    "definition": "Fine and easily damaged.",
+    "example": "She kept delicate teacups for special evenings."
+  },
+  {
+    "word": "fragile",
+    "definition": "Easily broken.",
+    "example": "The fragile box held her grandmother's letters."
+  },
+  {
+    "word": "brittle",
+    "definition": "Hard but easily broken.",
+    "example": "The brittle leaves crackled under their boots."
+  },
+  {
+    "word": "tenuous",
+    "definition": "Weak or slight.",
+    "example": "Their tenuous connection grew with shared meals."
+  },
+  {
+    "word": "feeble",
+    "definition": "Lacking strength.",
+    "example": "His feeble protest was lost in the laughter."
+  },
+  {
+    "word": "frail",
+    "definition": "Weak and easily broken or hurt.",
+    "example": "The frail old chair still held a child's weight."
+  },
+  {
+    "word": "wan",
+    "definition": "Pale and tired.",
+    "example": "Her wan smile told us she had not slept."
+  },
+  {
+    "word": "pallid",
+    "definition": "Pale, often from illness.",
+    "example": "His pallid face made her ask if he was well."
+  },
+  {
+    "word": "ashen",
+    "definition": "Very pale, like ash.",
+    "example": "He looked ashen after hearing the news."
+  },
+  {
+    "word": "ruddy",
+    "definition": "Having a healthy red color.",
+    "example": "His ruddy face glowed after the cold walk."
+  },
+  {
+    "word": "rosy",
+    "definition": "Pink or healthy in appearance.",
+    "example": "The children came in with rosy cheeks."
+  },
+  {
+    "word": "sallow",
+    "definition": "Yellowish or pale, often unhealthy.",
+    "example": "Her sallow look improved with rest."
+  },
+  {
+    "word": "tawny",
+    "definition": "Orange-brown in color.",
+    "example": "The tawny owl watched from the rafters."
+  },
+  {
+    "word": "dusky",
+    "definition": "Dim or shadowy.",
+    "example": "A dusky stillness filled the orchard."
+  },
+  {
+    "word": "gloaming",
+    "definition": "Twilight or dusk.",
+    "example": "We walked home in the soft gloaming."
+  },
+  {
+    "word": "twilight",
+    "definition": "The soft light after sunset or before sunrise.",
+    "example": "The garden was magical in the long twilight."
+  },
+  {
+    "word": "dusk",
+    "definition": "The dim part of evening.",
+    "example": "Bats appeared at dusk over the small pond."
+  },
+  {
+    "word": "dawn",
+    "definition": "The first light of day.",
+    "example": "Birds began calling at the very first dawn."
+  },
+  {
+    "word": "daybreak",
+    "definition": "The first appearance of daylight.",
+    "example": "The sailors set out at daybreak."
+  },
+  {
+    "word": "sunrise",
+    "definition": "The rising of the sun.",
+    "example": "We caught a slow sunrise over the orchards."
+  },
+  {
+    "word": "sunset",
+    "definition": "The setting of the sun.",
+    "example": "Sunset painted the harbor in deep orange."
+  },
+  {
+    "word": "midday",
+    "definition": "The middle of the day.",
+    "example": "Midday sun shone through the open windows."
+  },
+  {
+    "word": "midnight",
+    "definition": "The middle of the night.",
+    "example": "Midnight was quiet except for distant trains."
+  },
+  {
+    "word": "afternoon",
+    "definition": "The time after noon.",
+    "example": "The afternoon stretched out lazily on the porch."
+  },
+  {
+    "word": "evening",
+    "definition": "The end of the day.",
+    "example": "The evening grew cool and gentle."
+  },
+  {
+    "word": "morning",
+    "definition": "The early part of the day.",
+    "example": "The morning light filtered through curtains."
+  },
+  {
+    "word": "noontide",
+    "definition": "The middle of the day.",
+    "example": "Noontide caught us under the willows."
+  },
+  {
+    "word": "yesteryear",
+    "definition": "Past times, usually not long ago.",
+    "example": "Photos from yesteryear filled the old album."
+  },
+  {
+    "word": "bygone",
+    "definition": "Belonging to an earlier time.",
+    "example": "She told stories of bygone summers."
+  },
+  {
+    "word": "forthcoming",
+    "definition": "Going to happen soon.",
+    "example": "His forthcoming book was the talk of the café."
+  },
+  {
+    "word": "imminent",
+    "definition": "About to happen.",
+    "example": "Rain seemed imminent in the dark sky."
+  },
+  {
+    "word": "impending",
+    "definition": "About to happen, often serious.",
+    "example": "There was an impending hush before the storm."
+  },
+  {
+    "word": "looming",
+    "definition": "Appearing close and threatening.",
+    "example": "Mountains loomed on the horizon."
+  },
+  {
+    "word": "approaching",
+    "definition": "Coming nearer in time or space.",
+    "example": "We could hear the approaching train."
+  }
+]
