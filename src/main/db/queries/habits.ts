@@ -2,6 +2,7 @@ import { Habit, HabitLog } from '@shared/types'
 import { DrizzleDB } from '../database'
 import { habits, habitLogs, habitPauses } from '../schema'
 import { and, asc, eq, isNull, sql } from 'drizzle-orm'
+import { addDays, isInPause } from './helpers'
 
 export function getActiveHabits(db: DrizzleDB): Habit[] {
   return db
@@ -134,15 +135,3 @@ function atMostCreationDate(isoDate: string, creationTimestamp: string): boolean
   return isoDate >= creationTimestamp.substring(0, 10)
 }
 
-// helper — add (or subtract with negative) days to an ISO YYYY-MM-DD date
-function addDays(isoDate: string, days: number): string {
-  const d = new Date(isoDate + 'T00:00:00')
-  d.setDate(d.getDate() + days)
-  return d.toLocaleDateString('en-CA')
-}
-
-// helper — is `date` (YYYY-MM-DD) inside any pause range?
-// a pause covers [startDate, endDate]; endDate=null means open-ended (still paused)
-function isInPause(date: string, pauses: { startDate: string; endDate: string | null }[]): boolean {
-  return pauses.some((p) => p.startDate <= date && (p.endDate === null || date <= p.endDate))
-}
