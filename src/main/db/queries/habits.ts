@@ -29,7 +29,6 @@ export function createHabit(db: DrizzleDB, name: string, color: string): Habit |
 }
 
 export function archiveHabit(db: DrizzleDB, habitId: number): void {
-  // - update habits set isArchived = true, updatedAt = sql`(CURRENT_TIMESTAMP)` where id = habitId
   db.update(habits)
     .set({ isArchived: true, updatedAt: sql`(CURRENT_TIMESTAMP)` })
     .where(eq(habits.id, habitId))
@@ -37,7 +36,6 @@ export function archiveHabit(db: DrizzleDB, habitId: number): void {
 }
 
 export function unarchiveHabit(db: DrizzleDB, habitId: number): void {
-  // - update habits set isArchived = false, updatedAt = sql`(CURRENT_TIMESTAMP)` where id = habitId
   db.update(habits)
     .set({ isArchived: false, updatedAt: sql`(CURRENT_TIMESTAMP)` })
     .where(eq(habits.id, habitId))
