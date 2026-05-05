@@ -1,6 +1,6 @@
 import { EntryWidget } from '@shared/types'
 import { DrizzleDB } from '../database'
-import { entryWidgets } from '../schema'
+import { entryWidgets } from '../schemas/schema'
 import { asc, eq } from 'drizzle-orm'
 
 export function getWidgetsForEntry(db: DrizzleDB, entryId: number): EntryWidget[] {

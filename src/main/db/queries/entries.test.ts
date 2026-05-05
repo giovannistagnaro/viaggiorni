@@ -7,7 +7,13 @@ import {
   toggleBookmark,
   getAllBookmarkedEntries
 } from './entries'
-import { entries, entryWritings, entryWidgets, templateWritings, templateWidgets } from '../schema'
+import {
+  entries,
+  entryWritings,
+  entryWidgets,
+  templateWritings,
+  templateWidgets
+} from '../../schemas/schema'
 import type { DrizzleDB } from '../database'
 import { eq } from 'drizzle-orm'
 

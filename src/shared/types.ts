@@ -13,7 +13,7 @@ import type {
   templateWritings,
   templateWidgets,
   settings
-} from '../main/db/schema'
+} from '../main/db/schemas/schema'
 
 export type Entry = typeof entries.$inferSelect
 export type EntryWriting = typeof entryWritings.$inferSelect

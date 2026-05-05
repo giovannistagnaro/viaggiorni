@@ -1,6 +1,6 @@
 import { sql } from 'drizzle-orm'
 import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core'
-import { widgetTypes, writingTypes } from './dbConstants'
+import { widgetTypes, writingTypes } from '../dbConstants'
 
 // app user settings
 export const settings = sqliteTable('settings', {

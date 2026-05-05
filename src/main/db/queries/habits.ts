@@ -1,6 +1,6 @@
 import { Habit, HabitLog } from '@shared/types'
 import { DrizzleDB } from '../database'
-import { habits, habitLogs, habitPauses } from '../schema'
+import { habits, habitLogs, habitPauses } from '../schemas/schema'
 import { and, asc, eq, isNull, sql } from 'drizzle-orm'
 import { addDays, isInPause } from './helpers'
 
@@ -134,4 +134,3 @@ export function calculateStreak(
 function atMostCreationDate(isoDate: string, creationTimestamp: string): boolean {
   return isoDate >= creationTimestamp.substring(0, 10)
 }
-

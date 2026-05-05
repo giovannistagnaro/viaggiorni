@@ -1,6 +1,6 @@
 import { Todo } from '@shared/types'
 import { DrizzleDB } from '../database'
-import { todos } from '../schema'
+import { todos } from '../schemas/schema'
 import { eq, max, asc, gt, lt, and, lte, gte, sql } from 'drizzle-orm'
 
 export function createTodo(db: DrizzleDB, entryDate: string, label: string): Todo {

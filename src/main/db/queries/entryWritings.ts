@@ -1,6 +1,6 @@
 import { EntryWriting } from '@shared/types'
 import { DrizzleDB } from '../database'
-import { entryWritings } from '../schema'
+import { entryWritings } from '../schemas/schema'
 import { eq, asc, sql } from 'drizzle-orm'
 
 export function getWritingsForEntry(db: DrizzleDB, entryId: number): EntryWriting[] {

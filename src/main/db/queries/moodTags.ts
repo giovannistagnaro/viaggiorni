@@ -1,6 +1,6 @@
 import { MoodTag } from '@shared/types'
 import { DrizzleDB } from '../database'
-import { entryMoodTags, moodTags } from '../schema'
+import { entryMoodTags, moodTags } from '../schemas/schema'
 import { and, eq, getTableColumns, sql } from 'drizzle-orm'
 
 export function getAllMoodTags(db: DrizzleDB): MoodTag[] {
