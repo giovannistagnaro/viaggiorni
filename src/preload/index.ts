@@ -53,6 +53,25 @@ const api = {
       ipcRenderer.invoke('moodTags:removeMoodTagFromEntry', entryId, tagId),
     removeMoodTag: (tagId: number) => ipcRenderer.invoke('moodTags:removeMoodTag', tagId),
     createMoodTag: (label: string) => ipcRenderer.invoke('moodTags:createMoodTag', label)
+  },
+  habit: {
+    getActiveHabits: () => ipcRenderer.invoke('habit:getActiveHabits'),
+    createHabit: (name: string, color: string) =>
+      ipcRenderer.invoke('habit:createHabit', name, color),
+    archiveHabit: (habitId: number) => ipcRenderer.invoke('habit:archiveHabit', habitId),
+    unarchiveHabit: (habitId: number) => ipcRenderer.invoke('habit:unarchiveHabit', habitId),
+    updateHabit: (habitId: number, name: string, color: string) =>
+      ipcRenderer.invoke('habit:updateHabit', habitId, name, color),
+    getHabitLogForDate: (habitId: number, date: string) =>
+      ipcRenderer.invoke('habit:getHabitLogForDate', habitId, date),
+    toggleHabitCompleted: (habitId: number, date: string) =>
+      ipcRenderer.invoke('habit:toggleHabitCompleted', habitId, date),
+    pauseHabit: (habitId: number, startDate: string) =>
+      ipcRenderer.invoke('habit:pauseHabit', habitId, startDate),
+    resumeHabit: (habitId: number, endDate: string) =>
+      ipcRenderer.invoke('habit:resumeHabit', habitId, endDate),
+    calculateStreak: (habitId: number, today: string, tolerance: number) =>
+      ipcRenderer.invoke('habit:calculateStreak', habitId, today, tolerance)
   }
 }
 
