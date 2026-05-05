@@ -1,5 +1,5 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import { Entry, EntryWriting, EntryWidget, Todo, MoodTag } from '@shared/types'
+import { Entry, EntryWriting, EntryWidget, Todo, MoodTag, Habit, HabitLog } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
 
@@ -50,6 +50,19 @@ interface MoodTagsApi {
   createMoodTag: (label: string) => Promise<void>
 }
 
+interface HabitApi {
+  getActiveHabits: () => Promise<Habit[]>
+  createHabit: (name: string, color: string) => Promise<Habit | null>
+  archiveHabit: (habitId: number) => Promise<void>
+  unarchiveHabit: (habitId: number) => Promise<void>
+  updateHabit: (habitId: number, name: string, color: string) => Promise<void>
+  getHabitLogForDate: (habitId: number, date: string) => Promise<HabitLog | null>
+  toggleHabitCompleted: (habitId: number, date: string) => Promise<void>
+  pauseHabit: (habitId: number, startDate: string) => Promise<void>
+  resumeHabit: (habitId: number, endDate: string) => Promise<void>
+  calculateStreak: (habitId: number, today: string, tolerance: number) => Promise<number>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
@@ -58,6 +71,7 @@ interface Api {
   entryWidgets: EntryWidgetsApi
   todos: TodosApi
   moodTags: MoodTagsApi
+  habit: HabitApi
 }
 
 declare global {
