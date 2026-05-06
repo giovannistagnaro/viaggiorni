@@ -12,7 +12,11 @@ vi.mock('../../data/words.json', () => ({
   ]
 }))
 
-import { pickLocalWord } from './localFallbackService'
+vi.mock('../../data/prompts.json', () => ({
+  default: [{ prompt: 'First prompt.' }, { prompt: 'Second prompt.' }, { prompt: 'Third prompt.' }]
+}))
+
+import { pickLocalWord, pickLocalPrompt } from './localFallbackService'
 
 afterEach(() => {
   vi.restoreAllMocks()
@@ -39,7 +43,7 @@ describe('pickLocalWord', () => {
   })
 
   it('does not pick an excluded word', () => {
-    vi.spyOn(Math, 'random').mockReturnValue(0) // deterministic pick: index 0 of the filtered list
+    vi.spyOn(Math, 'random').mockReturnValue(0)
 
     const result = pickLocalWord(['ephemeral'])
 
@@ -55,7 +59,6 @@ describe('pickLocalWord', () => {
   })
 
   it('treats exclusions as case-insensitive against the corpus', () => {
-    // confirms the lowercase comparison happens on both sides
     const result = pickLocalWord(['Solace', 'Serendipity', 'Ephemeral'])
 
     expect(result).toBeNull()
@@ -68,19 +71,57 @@ describe('pickLocalWord', () => {
   })
 
   it('uses Math.random to pick from the available pool', () => {
-    // first item of the filtered list
     vi.spyOn(Math, 'random').mockReturnValue(0)
     expect(pickLocalWord([])?.word).toBe('ephemeral')
 
-    // last item: Math.random() near 1 → floor((n-1).999...) = n-1
     vi.spyOn(Math, 'random').mockReturnValue(0.999)
     expect(pickLocalWord([])?.word).toBe('solace')
   })
 
   it('picks from only the non-excluded subset', () => {
-    vi.spyOn(Math, 'random').mockReturnValue(0) // first of filtered
+    vi.spyOn(Math, 'random').mockReturnValue(0)
 
-    // exclude 'ephemeral' — pool becomes [serendipity, solace]
     expect(pickLocalWord(['ephemeral'])?.word).toBe('serendipity')
+  })
+})
+
+describe('pickLocalPrompt', () => {
+  it('returns an entry from the corpus when no prompts are excluded', () => {
+    const result = pickLocalPrompt([])
+
+    expect(result).not.toBeNull()
+    expect(['First prompt.', 'Second prompt.', 'Third prompt.']).toContain(result?.prompt)
+  })
+
+  it('returns an entry with the prompt field', () => {
+    const result = pickLocalPrompt([])
+
+    expect(result).toEqual(expect.objectContaining({ prompt: expect.any(String) }))
+  })
+
+  it('does not pick an excluded prompt', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0)
+
+    const result = pickLocalPrompt(['First prompt.'])
+
+    expect(result?.prompt).not.toBe('First prompt.')
+  })
+
+  it('treats exclusions as case-insensitive', () => {
+    const result = pickLocalPrompt(['FIRST PROMPT.', 'SECOND PROMPT.', 'THIRD PROMPT.'])
+
+    expect(result).toBeNull()
+  })
+
+  it('returns null when every prompt is excluded', () => {
+    const result = pickLocalPrompt(['First prompt.', 'Second prompt.', 'Third prompt.'])
+
+    expect(result).toBeNull()
+  })
+
+  it('picks from only the non-excluded subset', () => {
+    vi.spyOn(Math, 'random').mockReturnValue(0)
+
+    expect(pickLocalPrompt(['First prompt.'])?.prompt).toBe('Second prompt.')
   })
 })

@@ -2,7 +2,7 @@ import { ipcMain } from 'electron'
 import { generateWordOfDay, isOllamaAvailable } from '../ollamaService'
 import { getUsedWords, getWordForDate, saveWord } from '../db/queries/wordOfDay'
 import { getDB } from '../db'
-import { pickLocalWord } from '../localFallbackService'
+import { pickLocalPrompt } from '../localFallbackService'
 // import { WordOfDayItem } from '@shared/types'
 // import { settings } from '../db/schemas/schema'
 // import { getSettings } from '../db/queries/settings'
@@ -36,7 +36,7 @@ export function registerWordOfDayIpc(): void {
           }
         }
 
-        const local = pickLocalWord(excludeWords)
+        const local = pickLocalPrompt(excludeWords)
         if (!local) return null
         saveWord(db, date, local.word, local.definition, local.example, 'local')
         return getWordForDate(db, date)

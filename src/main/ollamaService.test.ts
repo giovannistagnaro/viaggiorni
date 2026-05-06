@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import ollama from 'ollama'
-import { isOllamaAvailable, generateWordOfDay } from './ollamaService'
+import { isOllamaAvailable, generateWordOfDay, generateWritingPrompt } from './ollamaService'
 
 vi.mock('ollama', () => ({
   default: { chat: vi.fn() }
@@ -140,5 +140,64 @@ describe('generateWordOfDay', () => {
     const promptContent = (args as { messages: Array<{ content: string }> }).messages[0].content
     expect(promptContent).toContain('serendipity')
     expect(promptContent).toContain('ephemeral')
+  })
+})
+
+describe('generateWritingPrompt', () => {
+  const validJson = JSON.stringify({
+    prompt: 'Describe a place you have been to that no longer exists.'
+  })
+
+  function mockChatContent(content: string): void {
+    mockedChat.mockResolvedValue({
+      message: { role: 'assistant', content }
+    } as never)
+  }
+
+  it('returns the parsed prompt entry when ollama returns valid JSON', async () => {
+    mockChatContent(validJson)
+
+    const result = await generateWritingPrompt('llama3', [])
+
+    expect(result).toEqual({
+      prompt: 'Describe a place you have been to that no longer exists.'
+    })
+  })
+
+  it('returns null when the response is missing the prompt field', async () => {
+    mockChatContent(JSON.stringify({}))
+
+    expect(await generateWritingPrompt('llama3', [])).toBeNull()
+  })
+
+  it('returns null when prompt is the wrong type', async () => {
+    mockChatContent(JSON.stringify({ prompt: 42 }))
+
+    expect(await generateWritingPrompt('llama3', [])).toBeNull()
+  })
+
+  it('returns null when prompt is empty', async () => {
+    mockChatContent(JSON.stringify({ prompt: '' }))
+
+    expect(await generateWritingPrompt('llama3', [])).toBeNull()
+  })
+
+  it('passes the given model to ollama.chat', async () => {
+    mockChatContent(validJson)
+
+    await generateWritingPrompt('mistral:latest', [])
+
+    expect(mockedChat).toHaveBeenCalledWith(expect.objectContaining({ model: 'mistral:latest' }))
+  })
+
+  it('includes excluded prompts in the prompt content', async () => {
+    mockChatContent(validJson)
+
+    await generateWritingPrompt('llama3', ['exclude one', 'exclude two'])
+
+    const args = mockedChat.mock.calls[0][0]
+    const promptContent = (args as { messages: Array<{ content: string }> }).messages[0].content
+    expect(promptContent).toContain('exclude one')
+    expect(promptContent).toContain('exclude two')
   })
 })
