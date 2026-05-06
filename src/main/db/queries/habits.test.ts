@@ -1,7 +1,7 @@
 import { DrizzleDB } from '../database'
 import { describe, expect, it, afterEach, beforeEach } from 'vitest'
 import { closeTestDb, createTestDb } from './testHelper'
-import { habits, habitLogs, habitPauses } from '../schema'
+import { habits, habitLogs, habitPauses } from '../schemas/schema'
 import { eq } from 'drizzle-orm'
 import {
   createHabit,

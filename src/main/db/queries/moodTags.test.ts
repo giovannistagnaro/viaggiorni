@@ -1,7 +1,7 @@
 import { DrizzleDB } from '../database'
 import { describe, expect, it, afterEach, beforeEach } from 'vitest'
 import { closeTestDb, createTestDb } from './testHelper'
-import { moodTags } from '../schema'
+import { moodTags } from '../schemas/schema'
 import {
   addMoodTagToEntry,
   createMoodTag,
@@ -118,9 +118,7 @@ describe('removeMoodTagFromEntry', () => {
 
     const remaining = getMoodTagsForEntry(db, entry.id)
     expect(remaining.length).toBe(2)
-    expect(remaining.map((t) => t.id).sort()).toEqual(
-      [allTags[0].id, allTags[2].id].sort()
-    )
+    expect(remaining.map((t) => t.id).sort()).toEqual([allTags[0].id, allTags[2].id].sort())
   })
 
   it('does not affect the same tag selected on a different entry', () => {

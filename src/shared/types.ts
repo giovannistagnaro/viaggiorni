@@ -13,7 +13,7 @@ import type {
   templateWritings,
   templateWidgets,
   settings
-} from '../main/db/schema'
+} from '../main/db/schemas/schema'
 
 export type Entry = typeof entries.$inferSelect
 export type EntryWriting = typeof entryWritings.$inferSelect
@@ -29,3 +29,5 @@ export type Template = typeof template.$inferSelect
 export type TemplateWriting = typeof templateWritings.$inferSelect
 export type TemplateWidget = typeof templateWidgets.$inferSelect
 export type Settings = typeof settings.$inferSelect
+
+export type WordOfDayItem = { word: string; definition: string; example: string }

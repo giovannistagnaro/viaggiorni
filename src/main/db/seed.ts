@@ -1,6 +1,6 @@
 import { sql } from 'drizzle-orm'
 import { DrizzleDB } from './database'
-import { settings, moodTags, template, templateWritings, templateWidgets } from './schema'
+import { settings, moodTags, template, templateWritings, templateWidgets } from './schemas/schema'
 import { DEFAULT_MOOD_TAGS, widgetTypes, writingTypes } from './dbConstants'
 
 const DEFAULT_TEMPLATE_WRITINGS: {

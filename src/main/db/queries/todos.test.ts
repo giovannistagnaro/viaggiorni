@@ -10,7 +10,7 @@ import {
   toggleTodoCompleted,
   updateTodoLabel
 } from './todos'
-import { todos } from '../schema'
+import { todos } from '../schemas/schema'
 import { eq } from 'drizzle-orm'
 
 let db: DrizzleDB

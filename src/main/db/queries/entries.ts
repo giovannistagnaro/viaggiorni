@@ -7,7 +7,7 @@ import {
   template,
   templateWritings,
   templateWidgets
-} from '../schema'
+} from '../schemas/schema'
 
 export function getEntryByDate(db: DrizzleDB, date: string): typeof entries.$inferSelect | null {
   const entriesByDate = db.select().from(entries).where(eq(entries.date, date)).limit(1).all()
