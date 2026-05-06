@@ -72,6 +72,9 @@ const api = {
       ipcRenderer.invoke('habit:resumeHabit', habitId, endDate),
     calculateStreak: (habitId: number, today: string, tolerance: number) =>
       ipcRenderer.invoke('habit:calculateStreak', habitId, today, tolerance)
+  },
+  wordOfDay: {
+    getOrCreateForDate: (date: string) => ipcRenderer.invoke('wordOfDay:getOrCreateForDate', date)
   }
 }
 

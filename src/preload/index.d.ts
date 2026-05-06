@@ -1,5 +1,14 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
-import { Entry, EntryWriting, EntryWidget, Todo, MoodTag, Habit, HabitLog } from '@shared/types'
+import {
+  Entry,
+  EntryWriting,
+  EntryWidget,
+  Todo,
+  MoodTag,
+  Habit,
+  HabitLog,
+  WordOfDay
+} from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
 
@@ -63,6 +72,10 @@ interface HabitApi {
   calculateStreak: (habitId: number, today: string, tolerance: number) => Promise<number>
 }
 
+interface WordOfDayApi {
+  getOrCreateForDate: (date: string) => Promise<WordOfDay | null>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
@@ -72,6 +85,7 @@ interface Api {
   todos: TodosApi
   moodTags: MoodTagsApi
   habit: HabitApi
+  wordOfDay: WordOfDayApi
 }
 
 declare global {

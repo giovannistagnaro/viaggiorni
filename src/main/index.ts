@@ -10,6 +10,7 @@ import { registerEntryWidgetsIpc } from './ipc/entryWidgets'
 import { registerTodosIpc } from './ipc/todos'
 import { registerMoodTagsIpc } from './ipc/moodTags'
 import { registerHabitIpc } from './ipc/habit'
+import { registerWordOfDayIpc } from './ipc/wordOfDay'
 
 function ipcRegistration(): void {
   registerDbIpc()
@@ -20,6 +21,7 @@ function ipcRegistration(): void {
   registerTodosIpc()
   registerMoodTagsIpc()
   registerHabitIpc()
+  registerWordOfDayIpc()
 }
 
 function createWindow(): void {
