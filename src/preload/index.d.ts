@@ -35,6 +35,8 @@ interface EntriesApi {
 interface EntryWritingsApi {
   getWritingsForEntry: (entryId: number) => Promise<EntryWriting[]>
   updateWritingContent: (writingId: number, newContent: string) => Promise<void>
+  updateWritingPrompt: (writingId: number, newPrompt: string) => Promise<void>
+  getOrCreatePromptForWriting: (writingId: number, entryDate: string) => Promise<string | null>
 }
 
 interface EntryWidgetsApi {

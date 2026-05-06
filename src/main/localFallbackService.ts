@@ -1,29 +1,37 @@
 import words from '../../data/words.json'
+import prompts from '../../data/prompts.json'
 import log from 'electron-log'
-import { WordOfDayItem } from '@shared/types'
 import { WordOfDaySchema } from './db/schemas/wordOfDay'
+import { WritingPromptSchema } from './db/schemas/writingPromptSchema'
+import { ZodType } from 'zod'
 
 // Validate once at module load. If the corpus is malformed, log it and fall
 // back to an empty list — pickLocalWord will return null for every call rather
 // than crashing the app.
-const parseResult = WordOfDaySchema.array().safeParse(words)
-if (!parseResult.success) {
-  log.error('words.json failed validation; local word fallback disabled', {
-    issues: parseResult.error.issues
-  })
-}
-const validatedWords: WordOfDayItem[] = parseResult.success ? parseResult.data : []
-
-export function pickLocalWord(excludeWords: string[]): WordOfDayItem | null {
-  const excluded = new Set(excludeWords.map((word) => word.toLowerCase()))
-
-  const availableWords = validatedWords.filter((item) => !excluded.has(item.word.toLowerCase()))
-
-  if (availableWords.length === 0) {
-    return null
+function createPicker<T>(
+  corpus: unknown,
+  schema: ZodType<T>,
+  getKey: (item: T) => string,
+  label: string
+): (excluded: string[]) => T | null {
+  const result = schema.array().safeParse(corpus)
+  if (!result.success) {
+    log.error(`${label} failed validation; fallback disabled`, { issues: result.error.issues })
   }
+  const validated = result.success ? result.data : []
 
-  const randomIndex = Math.floor(Math.random() * availableWords.length)
-
-  return availableWords[randomIndex]
+  return (excluded) => {
+    const excludedSet = new Set(excluded.map((s) => s.toLowerCase()))
+    const available = validated.filter((item) => !excludedSet.has(getKey(item).toLowerCase()))
+    if (available.length === 0) return null
+    return available[Math.floor(Math.random() * available.length)]
+  }
 }
+
+export const pickLocalWord = createPicker(words, WordOfDaySchema, (i) => i.word, 'words.json')
+export const pickLocalPrompt = createPicker(
+  prompts,
+  WritingPromptSchema,
+  (i) => i.prompt,
+  'prompts.json'
+)

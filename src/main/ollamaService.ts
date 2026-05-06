@@ -1,6 +1,8 @@
 import ollama, { ChatResponse } from 'ollama'
 import { WordOfDaySchema } from './db/schemas/wordOfDay'
-import { WordOfDayItem } from '@shared/types'
+import { WordOfDayItem, WritingPromptItem } from '@shared/types'
+import { WritingPromptSchema } from './db/schemas/writingPromptSchema'
+import { ZodType } from 'zod'
 
 const OLLAMA_WORD_OF_DAY_PROMPT = (bannedWords: string[]): string => `
 Generate a single "word of the day" for a personal journal app.
@@ -25,6 +27,26 @@ Do not pick any word from this list (case-insensitive): ${bannedWords.join(', ')
 
 Respond only with the JSON object — no surrounding prose, no markdown fences.
 `
+const OLLAMA_WRITING_PROMPT_PROMPT = (recentPrompts: string[]): string => `
+Generate a single writing prompt for a personal journal app.
+
+Aim for something interesting and thought-provoking — favor specificity, unusual angles, and questions that reach for something slightly uncomfortable or revealing. Concrete over abstract: prefer "Write about a meal you remember more vividly than the people you ate it with" over "Reflect on your relationship with food." Mix categories across calls — memory, observation, hypothetical, sensory, identity, relational, place, time, regret, surprise, contradiction, humor.
+
+Do not produce sappy, self-help, or gratitude-list-style prompts ("your inner light," "the love that surrounds you," yoga-studio whiteboard energy). Avoid generic prompts like "What are you grateful for today?" or "Describe your perfect day." Avoid explicitly therapeutic prompts, romance-specific prompts, and prompts that require specific life experiences (parenting, military, etc.). Nothing offensive.
+
+Respond with a JSON object with exactly one field:
+- prompt: string, 1–3 sentences, ending with a period, question mark, or exclamation point
+
+Example:
+{
+  "prompt": "Describe a place you have been to that no longer exists. What detail of it do you remember most clearly, and why that one?"
+}
+
+Do not produce a prompt substantively similar to any of these recent prompts (avoid both literal duplicates and rephrasings of the same idea):
+- ${recentPrompts.join('\n- ')}
+
+Respond only with the JSON object — no surrounding prose, no markdown fences.
+`
 
 export async function isOllamaAvailable(): Promise<boolean> {
   const controller = new AbortController()
@@ -42,15 +64,16 @@ export async function isOllamaAvailable(): Promise<boolean> {
   }
 }
 
-export async function generateWordOfDay(
+async function generateFromOllama<T>(
   model: string,
-  excludeWords: string[]
-): Promise<WordOfDayItem | null> {
+  prompt: string,
+  schema: ZodType<T>
+): Promise<T | null> {
   let response: ChatResponse
   try {
     response = await ollama.chat({
       model,
-      messages: [{ role: 'user', content: OLLAMA_WORD_OF_DAY_PROMPT(excludeWords) }],
+      messages: [{ role: 'user', content: prompt }],
       format: 'json'
     })
   } catch {
@@ -64,6 +87,18 @@ export async function generateWordOfDay(
     return null
   }
 
-  const result = WordOfDaySchema.safeParse(raw)
+  const result = schema.safeParse(raw)
   return result.success ? result.data : null
 }
+
+export const generateWordOfDay = (
+  model: string,
+  exclude: string[]
+): Promise<WordOfDayItem | null> =>
+  generateFromOllama(model, OLLAMA_WORD_OF_DAY_PROMPT(exclude), WordOfDaySchema)
+
+export const generateWritingPrompt = (
+  model: string,
+  exclude: string[]
+): Promise<WritingPromptItem | null> =>
+  generateFromOllama(model, OLLAMA_WRITING_PROMPT_PROMPT(exclude), WritingPromptSchema)
