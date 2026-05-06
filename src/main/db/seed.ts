@@ -30,7 +30,6 @@ export function seedDatabase(db: DrizzleDB): void {
   // seed default settings
   db.insert(settings)
     .values({
-      name: 'User',
       createdAt: sql`(CURRENT_TIMESTAMP)`
     })
     .run()

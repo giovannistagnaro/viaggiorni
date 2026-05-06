@@ -5,12 +5,9 @@ import { WordOfDaySchema } from './db/schemas/wordOfDay'
 import { WritingPromptSchema } from './db/schemas/writingPromptSchema'
 import { ZodType } from 'zod'
 
-// ======== Word of the Day fallback
-
 // Validate once at module load. If the corpus is malformed, log it and fall
 // back to an empty list — pickLocalWord will return null for every call rather
 // than crashing the app.
-// localFallbackService.ts
 function createPicker<T>(
   corpus: unknown,
   schema: ZodType<T>,

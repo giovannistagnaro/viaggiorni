@@ -25,7 +25,11 @@ const api = {
     getWritingsForEntry: (entryId: number) =>
       ipcRenderer.invoke('entryWritings:getWritingsForEntry', entryId),
     updateWritingContent: (writingId: number, newContent: string) =>
-      ipcRenderer.invoke('entryWritings:updateWritingContent', writingId, newContent)
+      ipcRenderer.invoke('entryWritings:updateWritingContent', writingId, newContent),
+    updateWritingPrompt: (writingId: number, newPrompt: string) =>
+      ipcRenderer.invoke('entryWritings:updateWritingPrompt', writingId, newPrompt),
+    getOrCreatePromptForWriting: (writingId: number, entryDate: string) =>
+      ipcRenderer.invoke('entryWritings:getOrCreatePromptForWriting', writingId, entryDate)
   },
   entryWidgets: {
     getWidgetsForEntry: (entryId: number) =>

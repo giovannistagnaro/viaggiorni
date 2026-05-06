@@ -5,7 +5,6 @@ import { widgetTypes, writingTypes } from '../dbConstants'
 // app user settings
 export const settings = sqliteTable('settings', {
   id: integer('id').primaryKey({ autoIncrement: true }),
-  name: text('name').notNull(),
   theme: text('theme').notNull().default('light'),
   streakTolerance: integer('streak_tolerance').notNull().default(0),
   ollamaModel: text('ollama_model'),
@@ -38,6 +37,7 @@ export const entryWritings = sqliteTable('entry_writings', {
   }).notNull(),
   label: text('label'),
   content: text('content'),
+  prompt: text('prompt'),
   position: integer('position').notNull(),
   isVisible: integer('is_visible', { mode: 'boolean' }).notNull().default(true),
   createdAt: text('created_at')

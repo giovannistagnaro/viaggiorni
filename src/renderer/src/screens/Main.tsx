@@ -113,6 +113,7 @@ function Main({ onLock }: Props): React.JSX.Element {
             <WritingEditor
               key={writing.id}
               writing={writing}
+              entryDate={entry.date}
               onSave={async (newContent) => {
                 try {
                   await window.api.entryWritings.updateWritingContent(writing.id, newContent)

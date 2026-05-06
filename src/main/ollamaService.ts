@@ -2,9 +2,6 @@ import ollama, { ChatResponse } from 'ollama'
 import { WordOfDaySchema } from './db/schemas/wordOfDay'
 import { WordOfDayItem, WritingPromptItem } from '@shared/types'
 import { WritingPromptSchema } from './db/schemas/writingPromptSchema'
-import log from 'electron-log'
-import words from '../../data/words.json'
-import prompts from '../../data/prompts.json'
 import { ZodType } from 'zod'
 
 const OLLAMA_WORD_OF_DAY_PROMPT = (bannedWords: string[]): string => `
@@ -105,31 +102,3 @@ export const generateWritingPrompt = (
   exclude: string[]
 ): Promise<WritingPromptItem | null> =>
   generateFromOllama(model, OLLAMA_WRITING_PROMPT_PROMPT(exclude), WritingPromptSchema)
-// localFallbackService.ts
-function createPicker<T>(
-  corpus: unknown,
-  schema: ZodType<T>,
-  getKey: (item: T) => string,
-  label: string
-): (excluded: string[]) => T | null {
-  const result = schema.array().safeParse(corpus)
-  if (!result.success) {
-    log.error(`${label} failed validation; fallback disabled`, { issues: result.error.issues })
-  }
-  const validated = result.success ? result.data : []
-
-  return (excluded) => {
-    const excludedSet = new Set(excluded.map((s) => s.toLowerCase()))
-    const available = validated.filter((item) => !excludedSet.has(getKey(item).toLowerCase()))
-    if (available.length === 0) return null
-    return available[Math.floor(Math.random() * available.length)]
-  }
-}
-
-export const pickLocalWord = createPicker(words, WordOfDaySchema, (i) => i.word, 'words.json')
-export const pickLocalPrompt = createPicker(
-  prompts,
-  WritingPromptSchema,
-  (i) => i.prompt,
-  'prompts.json'
-)
