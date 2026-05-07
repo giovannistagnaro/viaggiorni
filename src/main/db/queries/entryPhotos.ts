@@ -12,10 +12,15 @@ export function getPhotosForEntry(db: DrizzleDB, entryId: number): EntryPhoto[] 
     .all()
 }
 
+export function getPhotoById(db: DrizzleDB, photoId: number): EntryPhoto | null {
+  return db.select().from(entryPhotos).where(eq(entryPhotos.id, photoId)).get() ?? null
+}
+
 export function createPhoto(
   db: DrizzleDB,
   entryId: number,
   filePath: string,
+  mimeType: string,
   caption?: string
 ): EntryPhoto {
   const lastPosition = db
@@ -25,7 +30,11 @@ export function createPhoto(
     .get()
   const position = (lastPosition?.max ?? -1) + 1
 
-  return db.insert(entryPhotos).values({ entryId, filePath, caption, position }).returning().get()
+  return db
+    .insert(entryPhotos)
+    .values({ entryId, filePath, mimeType, caption, position })
+    .returning()
+    .get()
 }
 
 export function deletePhoto(db: DrizzleDB, photoId: number): string | null {
