@@ -82,7 +82,7 @@ interface WordOfDayApi {
 interface EntryPhotosApi {
   createPhoto: (entryId: number) => Promise<EntryPhoto | null>
   getPhotosForEntry: (entryId: number) => Promise<EntryPhoto[]>
-  getPhotoById: (photoId: number) => Promise<{ dataUrl: string; caption: string | null } | null>
+  getPhotoById: (photoId: number) => Promise<PhotoItem>
   deletePhoto: (photoId: number) => Promise<void>
   updatePhotoCaption: (photoId: number, newCaption: string) => Promise<void>
   changePhotoPosition: (photoId: number, newPosition: number) => Promise<void>
