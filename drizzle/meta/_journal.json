@@ -64,6 +64,13 @@
       "when": 1778127919862,
       "tag": "0008_serious_famine",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1778130555592,
+      "tag": "0009_outgoing_power_pack",
+      "breakpoints": true
     }
   ]
 }

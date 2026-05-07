@@ -187,6 +187,7 @@ export const entryPhotos = sqliteTable('entry_photos', {
     .notNull()
     .references(() => entries.id),
   filePath: text('file_path').notNull(),
+  mimeType: text('mime_type').notNull(),
   caption: text('caption'),
   position: integer('position').notNull(),
   createdAt: text('created_at')
