@@ -1,0 +1,1 @@
+ALTER TABLE `settings` ADD `encryption_key` blob;

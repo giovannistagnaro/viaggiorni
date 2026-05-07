@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm'
-import { sqliteTable, text, integer } from 'drizzle-orm/sqlite-core'
+import { sqliteTable, text, integer, blob } from 'drizzle-orm/sqlite-core'
 import { widgetTypes, writingTypes } from '../dbConstants'
 
 // app user settings
@@ -8,6 +8,7 @@ export const settings = sqliteTable('settings', {
   theme: text('theme').notNull().default('light'),
   streakTolerance: integer('streak_tolerance').notNull().default(0),
   ollamaModel: text('ollama_model'),
+  encryptionKey: blob('encryption_key', { mode: 'buffer' }),
   createdAt: text('created_at').notNull(),
   updatedAt: text('updated_at')
 })
@@ -190,7 +191,8 @@ export const entryPhotos = sqliteTable('entry_photos', {
   position: integer('position').notNull(),
   createdAt: text('created_at')
     .notNull()
-    .default(sql`(CURRENT_TIMESTAMP)`)
+    .default(sql`(CURRENT_TIMESTAMP)`),
+  updatedAt: text('updated_at')
 })
 
 // word of the day, one per date

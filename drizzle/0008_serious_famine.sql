@@ -1,0 +1,1 @@
+ALTER TABLE `entry_photos` ADD `updated_at` text;
