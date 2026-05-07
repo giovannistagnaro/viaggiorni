@@ -7,7 +7,8 @@ import {
   MoodTag,
   Habit,
   HabitLog,
-  WordOfDay
+  WordOfDay,
+  EntryPhoto
 } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
@@ -78,6 +79,15 @@ interface WordOfDayApi {
   getOrCreateForDate: (date: string) => Promise<WordOfDay | null>
 }
 
+interface EntryPhotosApi {
+  createPhoto: (entryId: number) => Promise<EntryPhoto | null>
+  getPhotosForEntry: (entryId: number) => Promise<EntryPhoto[]>
+  getPhotoById: (photoId: number) => Promise<PhotoItem>
+  deletePhoto: (photoId: number) => Promise<void>
+  updatePhotoCaption: (photoId: number, newCaption: string) => Promise<void>
+  changePhotoPosition: (photoId: number, newPosition: number) => Promise<void>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
@@ -88,6 +98,7 @@ interface Api {
   moodTags: MoodTagsApi
   habit: HabitApi
   wordOfDay: WordOfDayApi
+  entryPhotos: EntryPhotosApi
 }
 
 declare global {

@@ -1,0 +1,1 @@
+ALTER TABLE `entry_photos` ADD `mime_type` text NOT NULL;

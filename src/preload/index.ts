@@ -79,6 +79,17 @@ const api = {
   },
   wordOfDay: {
     getOrCreateForDate: (date: string) => ipcRenderer.invoke('wordOfDay:getOrCreateForDate', date)
+  },
+  entryPhotos: {
+    createPhoto: (entryId: number) => ipcRenderer.invoke('entryPhotos:createPhoto', entryId),
+    getPhotosForEntry: (entryId: number) =>
+      ipcRenderer.invoke('entryPhotos:getPhotosForEntry', entryId),
+    getPhotoById: (photoId: number) => ipcRenderer.invoke('entryPhotos:getPhotoById', photoId),
+    deletePhoto: (photoId: number) => ipcRenderer.invoke('entryPhotos:deletePhoto', photoId),
+    updatePhotoCaption: (photoId: number, newCaption: string) =>
+      ipcRenderer.invoke('entryPhotos:updatePhotoCaption', photoId, newCaption),
+    changePhotoPosition: (photoId: number, newPosition: number) =>
+      ipcRenderer.invoke('entryPhotos:changePhotoPosition', photoId, newPosition)
   }
 }
 
