@@ -3,6 +3,7 @@ import WidgetRenderer from '@renderer/components/WidgetRenderer'
 import { formatDateISO, formatTitleForDate } from '@renderer/utils/dateFormatters'
 import { Entry, EntryWriting, EntryWidget } from '@shared/types'
 import { useEffect, useState } from 'react'
+import BreadCrumb from '@renderer/components/Breadcrumb'
 
 interface Props {
   onLock: () => void
@@ -82,11 +83,17 @@ function Main({ onLock }: Props): React.JSX.Element {
     onLock()
   }
 
+  async function handleNav(screen: 'cover' | 'index'): Promise<void> {
+    // TODO: fill handleNav once the cover and index screens exist
+    console.warn(`Navigation to ${screen} not yet implemented`)
+  }
+
   if (loading) return <div>Loading...</div>
   if (!entry) return <div>Failed to load entry</div>
 
   return (
     <>
+      <BreadCrumb currentScreen="day" entryDate={entry.date} onNavigate={handleNav} />
       <button
         className="fixed top-4 right-4 rounded-lg bg-gray-600 text-white px-4 py-2"
         onClick={handleLock}

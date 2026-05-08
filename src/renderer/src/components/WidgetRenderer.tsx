@@ -4,6 +4,7 @@ import TodoListWidget from './widgets/TodoListWidget'
 import HabitTrackerWidget from './widgets/HabitTrackerWidget'
 import WordOfDayWidget from './widgets/WordOfDayWidget'
 import PhotoWidget from './widgets/PhotoWidget'
+import MoodTrackerWidget from './widgets/MoodTrackerWidget'
 
 interface Props {
   widget: EntryWidget
@@ -17,7 +18,7 @@ function WidgetRenderer({ widget, entryDate }: Props): React.JSX.Element | null 
     case 'todo_list':
       return <TodoListWidget entryDate={entryDate} />
     case 'mood_tracker':
-      return <PhotoWidget entryId={widget.entryId} />
+      return <MoodTrackerWidget entryId={widget.entryId} />
     case 'habit_tracker':
       return <HabitTrackerWidget entryDate={entryDate} />
     case 'word_of_day':
