@@ -8,7 +8,7 @@ interface Props {
 
 function BreadCrumb({ currentScreen, entryDate, onNavigate }: Props): React.JSX.Element {
   return (
-    <nav aria-label="Breadcrumb">
+    <nav aria-label="Breadcrumb" className="grid grid-flow-col justify-start gap-2">
       {currentScreen === 'cover' ? (
         <span>Cover</span>
       ) : (
