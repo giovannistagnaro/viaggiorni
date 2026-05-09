@@ -31,6 +31,7 @@ interface EntriesApi {
   updateTitle: (id: number, title: string) => Promise<void>
   toggleBookmark: (id: number) => Promise<void>
   getAllBookmarked: () => Promise<Entry[]>
+  getAllDates: () => Promise<string[]>
 }
 
 interface EntryWritingsApi {
