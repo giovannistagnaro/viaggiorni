@@ -1,12 +1,18 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import ollama from 'ollama'
-import { isOllamaAvailable, generateWordOfDay, generateWritingPrompt } from './ollamaService'
+import {
+  isOllamaAvailable,
+  generateWordOfDay,
+  generateWritingPrompt,
+  listOllamaModels
+} from './ollamaService'
 
 vi.mock('ollama', () => ({
-  default: { chat: vi.fn() }
+  default: { chat: vi.fn(), list: vi.fn() }
 }))
 
 const mockedChat = vi.mocked(ollama.chat)
+const mockedList = vi.mocked(ollama.list)
 
 beforeEach(() => {
   vi.stubGlobal('fetch', vi.fn())
@@ -199,5 +205,33 @@ describe('generateWritingPrompt', () => {
     const promptContent = (args as { messages: Array<{ content: string }> }).messages[0].content
     expect(promptContent).toContain('exclude one')
     expect(promptContent).toContain('exclude two')
+  })
+})
+
+describe('listOllamaModels', () => {
+  it('returns the list of model names when ollama.list resolves', async () => {
+    mockedList.mockResolvedValue({
+      models: [
+        { name: 'llama3:latest' },
+        { name: 'mistral:latest' },
+        { name: 'phi3:medium' }
+      ]
+    } as never)
+
+    const result = await listOllamaModels()
+
+    expect(result).toEqual(['llama3:latest', 'mistral:latest', 'phi3:medium'])
+  })
+
+  it('returns an empty array when no models are installed', async () => {
+    mockedList.mockResolvedValue({ models: [] } as never)
+
+    expect(await listOllamaModels()).toEqual([])
+  })
+
+  it('returns null when ollama.list throws (e.g. ollama not running)', async () => {
+    mockedList.mockRejectedValue(new Error('connection refused'))
+
+    expect(await listOllamaModels()).toBeNull()
   })
 })

@@ -98,7 +98,12 @@ const api = {
     updateTheme: (theme: Theme) => ipcRenderer.invoke('settings:updateTheme', theme),
     updateStreakTolerance: (tolerance: number) =>
       ipcRenderer.invoke('settings:updateStreakTolerance', tolerance),
-    updateOllamaModel: (model: string | null) => ipcRenderer.invoke('settings:updateOllamaModel', model)
+    updateOllamaModel: (model: string | null) =>
+      ipcRenderer.invoke('settings:updateOllamaModel', model)
+  },
+  ollama: {
+    listOllamaModels: () => ipcRenderer.invoke('ollama:listOllamaModels'),
+    isOllamaAvailable: () => ipcRenderer.invoke('ollama:isOllamaAvailable')
   }
 }
 

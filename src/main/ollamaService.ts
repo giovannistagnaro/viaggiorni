@@ -1,4 +1,4 @@
-import ollama, { ChatResponse } from 'ollama'
+import ollama, { ChatResponse, ListResponse } from 'ollama'
 import { WordOfDaySchema } from './db/schemas/wordOfDay'
 import { WordOfDayItem, WritingPromptItem } from '@shared/types'
 import { WritingPromptSchema } from './db/schemas/writingPromptSchema'
@@ -102,3 +102,16 @@ export const generateWritingPrompt = (
   exclude: string[]
 ): Promise<WritingPromptItem | null> =>
   generateFromOllama(model, OLLAMA_WRITING_PROMPT_PROMPT(exclude), WritingPromptSchema)
+
+export async function listOllamaModels(): Promise<string[] | null> {
+  let response: ListResponse
+
+  try {
+    response = await ollama.list()
+  } catch {
+    return null
+  }
+
+  const models = response.models.map((model) => model.name)
+  return models
+}

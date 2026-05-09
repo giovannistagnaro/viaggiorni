@@ -98,6 +98,11 @@ interface SettingsApi {
   updateOllamaModel: (model: string | null) => Promise<void>
 }
 
+interface OllamaApi {
+  listOllamaModels: () => Promise<string[] | null>
+  isOllamaAvailable: () => Promise<boolean>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
