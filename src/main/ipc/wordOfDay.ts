@@ -7,6 +7,7 @@ import { pickLocalWord } from '../localFallbackService'
 // import { getSettings } from '../db/queries/settings'
 import log from 'electron-log'
 import { WordOfDay } from '@shared/types'
+import { getSettings } from '../db/queries/settings'
 
 export function registerWordOfDayIpc(): void {
   ipcMain.handle(
@@ -21,10 +22,9 @@ export function registerWordOfDayIpc(): void {
 
         const excludeWords = getUsedWords(db, date)
 
-        // const settings = getSettings(db)
+        const settings = getSettings(db)
+        const ollamaModel: string | null = settings.ollamaModel
 
-        // TODO: read from settings once settings queries exist
-        const ollamaModel: string | null = null
         if (ollamaModel && (await isOllamaAvailable())) {
           for (let i = 0; i < 2; i++) {
             const result = await generateWordOfDay(ollamaModel, excludeWords)

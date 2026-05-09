@@ -10,6 +10,7 @@ import { getDB } from '../db'
 import log from 'electron-log'
 import { generateWritingPrompt, isOllamaAvailable } from '../ollamaService'
 import { pickLocalPrompt } from '../localFallbackService'
+import { getSettings } from '../db/queries/settings'
 
 export function registerEntryWritingsIpc(): void {
   ipcMain.handle('entryWritings:getWritingsForEntry', (_event, entryId: number) => {
@@ -52,8 +53,8 @@ export function registerEntryWritingsIpc(): void {
 
         const excludePrompts = getUsedWritingPrompts(db, entryDate)
 
-        // TODO: read from settings.ollamaModel once settings queries exist
-        const ollamaModel: string | null = null
+        const settings = getSettings(db)
+        const ollamaModel: string | null = settings.ollamaModel
 
         if (ollamaModel && (await isOllamaAvailable())) {
           for (let i = 0; i < 2; i++) {
