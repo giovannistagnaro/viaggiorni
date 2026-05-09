@@ -33,3 +33,8 @@ export type Settings = typeof settings.$inferSelect
 export type WordOfDayItem = { word: string; definition: string; example: string }
 export type WritingPromptItem = { prompt: string }
 export type PhotoItem = { dataUrl: string; caption: string | null } | null
+
+export type Theme = 'light' | 'dark'
+
+export type GenerationSource = 'local' | 'ollama'
+export type SafeReturnSettings = Omit<Settings, 'encryptionKey'>

@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { Theme } from '@shared/types'
 
 // Custom APIs for renderer
 const api = {
@@ -91,6 +92,18 @@ const api = {
       ipcRenderer.invoke('entryPhotos:updatePhotoCaption', photoId, newCaption),
     changePhotoPosition: (photoId: number, newPosition: number) =>
       ipcRenderer.invoke('entryPhotos:changePhotoPosition', photoId, newPosition)
+  },
+  settings: {
+    getSettings: () => ipcRenderer.invoke('settings:getSettings'),
+    updateTheme: (theme: Theme) => ipcRenderer.invoke('settings:updateTheme', theme),
+    updateStreakTolerance: (tolerance: number) =>
+      ipcRenderer.invoke('settings:updateStreakTolerance', tolerance),
+    updateOllamaModel: (model: string | null) =>
+      ipcRenderer.invoke('settings:updateOllamaModel', model)
+  },
+  ollama: {
+    listOllamaModels: () => ipcRenderer.invoke('ollama:listOllamaModels'),
+    isOllamaAvailable: () => ipcRenderer.invoke('ollama:isOllamaAvailable')
   }
 }
 

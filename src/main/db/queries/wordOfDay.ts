@@ -1,7 +1,7 @@
 import { eq, gte } from 'drizzle-orm'
 import { DrizzleDB } from '../database'
 import { wordOfDay } from '../schemas/schema'
-import { WordOfDay } from '@shared/types'
+import { GenerationSource, WordOfDay } from '@shared/types'
 import { addDays } from './helpers'
 
 export function getWordForDate(db: DrizzleDB, date: string): WordOfDay | null {
@@ -17,7 +17,7 @@ export function saveWord(
   word: string,
   definition: string,
   example: string,
-  source: 'local' | 'ollama'
+  source: GenerationSource
 ): void {
   db.insert(wordOfDay).values({ entryDate: date, word, definition, example, source }).run()
 }

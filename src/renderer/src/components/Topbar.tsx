@@ -1,20 +1,21 @@
-import { PostLoginScreen } from '@renderer/types'
-import BreadCrumb from './Breadcrumb'
-
 interface Props {
-  currentScreen: PostLoginScreen
-  entryDate?: string
-  onNavigate: (screen: 'cover' | 'index') => void
+  children: React.ReactNode
   onLock: () => void
+  onNavigateToSettings: () => void
 }
 
-function Topbar({ currentScreen, entryDate, onNavigate, onLock }: Props): React.JSX.Element {
+function Topbar({ children, onLock, onNavigateToSettings }: Props): React.JSX.Element {
   return (
     <header className="flex w-full justify-between px-1">
-      <BreadCrumb currentScreen={currentScreen} entryDate={entryDate} onNavigate={onNavigate} />
-      <button onClick={onLock} aria-label="Lock app">
-        Lock
-      </button>
+      {children}
+      <div className="flex gap-2">
+        <button onClick={onNavigateToSettings} aria-label="Settings">
+          Settings
+        </button>
+        <button onClick={onLock} aria-label="Lock app">
+          Lock
+        </button>
+      </div>
     </header>
   )
 }

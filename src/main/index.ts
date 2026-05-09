@@ -12,6 +12,8 @@ import { registerMoodTagsIpc } from './ipc/moodTags'
 import { registerHabitIpc } from './ipc/habit'
 import { registerWordOfDayIpc } from './ipc/wordOfDay'
 import { registerEntryPhotosIpc } from './ipc/entryPhotos'
+import { registerSettingsIpc } from './ipc/settings'
+import { registerOllamaIpc } from './ipc/ollama'
 
 function ipcRegistration(): void {
   registerDbIpc()
@@ -24,6 +26,8 @@ function ipcRegistration(): void {
   registerHabitIpc()
   registerWordOfDayIpc()
   registerEntryPhotosIpc()
+  registerSettingsIpc()
+  registerOllamaIpc()
 }
 
 function createWindow(): void {

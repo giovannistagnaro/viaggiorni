@@ -1,4 +1,4 @@
-import ollama, { ChatResponse } from 'ollama'
+import { Ollama, type ChatResponse, type ListResponse } from 'ollama'
 import { WordOfDaySchema } from './db/schemas/wordOfDay'
 import { WordOfDayItem, WritingPromptItem } from '@shared/types'
 import { WritingPromptSchema } from './db/schemas/writingPromptSchema'
@@ -47,6 +47,9 @@ Do not produce a prompt substantively similar to any of these recent prompts (av
 
 Respond only with the JSON object — no surrounding prose, no markdown fences.
 `
+const ollama = new Ollama({
+  host: 'http://127.0.0.1:11434'
+})
 
 export async function isOllamaAvailable(): Promise<boolean> {
   const controller = new AbortController()
@@ -102,3 +105,15 @@ export const generateWritingPrompt = (
   exclude: string[]
 ): Promise<WritingPromptItem | null> =>
   generateFromOllama(model, OLLAMA_WRITING_PROMPT_PROMPT(exclude), WritingPromptSchema)
+
+export async function listOllamaModels(): Promise<string[] | null> {
+  let response: ListResponse
+  try {
+    response = await ollama.list()
+  } catch {
+    return null
+  }
+
+  const models = response.models.map((model) => model.name)
+  return models
+}
