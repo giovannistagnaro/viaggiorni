@@ -1,5 +1,4 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
-import ollama from 'ollama'
 import {
   isOllamaAvailable,
   generateWordOfDay,
@@ -7,12 +6,17 @@ import {
   listOllamaModels
 } from './ollamaService'
 
-vi.mock('ollama', () => ({
-  default: { chat: vi.fn(), list: vi.fn() }
+const { mockedChat, mockedList } = vi.hoisted(() => ({
+  mockedChat: vi.fn(),
+  mockedList: vi.fn()
 }))
 
-const mockedChat = vi.mocked(ollama.chat)
-const mockedList = vi.mocked(ollama.list)
+vi.mock('ollama', () => ({
+  Ollama: class {
+    chat = mockedChat
+    list = mockedList
+  }
+}))
 
 beforeEach(() => {
   vi.stubGlobal('fetch', vi.fn())
