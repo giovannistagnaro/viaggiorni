@@ -1,5 +1,6 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
+import { Theme } from '@shared/types'
 
 // Custom APIs for renderer
 const api = {
@@ -94,10 +95,10 @@ const api = {
   },
   settings: {
     getSettings: () => ipcRenderer.invoke('settings:getSettings'),
-    updateTheme: (theme: string) => ipcRenderer.invoke('settings:updateTheme', theme),
-    updateStreakTolerance: (tolerance: string) =>
+    updateTheme: (theme: Theme) => ipcRenderer.invoke('settings:updateTheme', theme),
+    updateStreakTolerance: (tolerance: number) =>
       ipcRenderer.invoke('settings:updateStreakTolerance', tolerance),
-    updateOllamaModel: (model: string) => ipcRenderer.invoke('settings:updateOllamaModel', model)
+    updateOllamaModel: (model: string | null) => ipcRenderer.invoke('settings:updateOllamaModel', model)
   }
 }
 

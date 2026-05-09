@@ -9,7 +9,8 @@ import {
   HabitLog,
   WordOfDay,
   EntryPhoto,
-  SafeReturnSettings
+  SafeReturnSettings,
+  Theme
 } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
@@ -92,9 +93,9 @@ interface EntryPhotosApi {
 
 interface SettingsApi {
   getSettings: () => Promise<SafeReturnSettings>
-  updateTheme: (theme: string) => Promise<void>
-  updateStreakTolerance: (tolerance: string) => Promise<void>
-  updateOllamaModel: (model: string) => Promise<void>
+  updateTheme: (theme: Theme) => Promise<void>
+  updateStreakTolerance: (tolerance: number) => Promise<void>
+  updateOllamaModel: (model: string | null) => Promise<void>
 }
 
 interface Api {
