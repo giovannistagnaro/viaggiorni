@@ -5,20 +5,20 @@ import Cover from './Cover'
 
 describe('Cover', () => {
   it('renders the journal title', () => {
-    render(<Cover onNavigate={vi.fn()} />)
+    render(<Cover onNavigate={vi.fn()} onNavigateToToday={vi.fn()} />)
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Viaggiorni' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Viaggiorni' })).toBeInTheDocument()
   })
 
   it('renders the current year', () => {
-    render(<Cover onNavigate={vi.fn()} />)
+    render(<Cover onNavigate={vi.fn()} onNavigateToToday={vi.fn()} />)
 
     const currentYear = new Date().getFullYear().toString()
-    expect(screen.getByRole('heading', { level: 3, name: currentYear })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: currentYear })).toBeInTheDocument()
   })
 
   it('renders Open and Today buttons', () => {
-    render(<Cover onNavigate={vi.fn()} />)
+    render(<Cover onNavigate={vi.fn()} onNavigateToToday={vi.fn()} />)
 
     expect(screen.getByRole('button', { name: 'Open' })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Today' })).toBeInTheDocument()
@@ -26,19 +26,19 @@ describe('Cover', () => {
 
   it('navigates to the index screen when Open is clicked', async () => {
     const onNavigate = vi.fn()
-    render(<Cover onNavigate={onNavigate} />)
+    render(<Cover onNavigate={onNavigate} onNavigateToToday={vi.fn()} />)
 
     await userEvent.click(screen.getByRole('button', { name: 'Open' }))
 
     expect(onNavigate).toHaveBeenCalledWith('index')
   })
 
-  it('navigates to the day screen when Today is clicked', async () => {
-    const onNavigate = vi.fn()
-    render(<Cover onNavigate={onNavigate} />)
+  it('calls onNavigateToToday when Today is clicked', async () => {
+    const onNavigateToToday = vi.fn()
+    render(<Cover onNavigate={vi.fn()} onNavigateToToday={onNavigateToToday} />)
 
     await userEvent.click(screen.getByRole('button', { name: 'Today' }))
 
-    expect(onNavigate).toHaveBeenCalledWith('day')
+    expect(onNavigateToToday).toHaveBeenCalledTimes(1)
   })
 })

@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @theme inline {
   --color-background: var(--background);
@@ -75,4 +75,24 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.has-entry-indicator {
+  position: relative;
+}
+
+.has-entry-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: 12.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(8px, 0.6vw, 16px);
+  height: clamp(8px, 0.6vw, 16px);
+  border-radius: 50%;
+  background-color: var(--primary);
+}
+
+.has-bookmark-indicator::after {
+  background-color: hsl(200, 60%, 60%);
 }

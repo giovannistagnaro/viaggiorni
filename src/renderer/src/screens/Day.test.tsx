@@ -38,7 +38,7 @@ describe('Main', () => {
   it('loads and displays the existing entry for today', async () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-    render(<Day />)
+    render(<Day entryDate={mockEntry.date} />)
 
     expect(await screen.findByDisplayValue(mockEntry.title)).toBeInTheDocument()
     expect(window.api.entries.create).not.toHaveBeenCalled()
@@ -48,7 +48,7 @@ describe('Main', () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(null)
     vi.mocked(window.api.entries.create).mockResolvedValue(mockEntry)
 
-    render(<Day />)
+    render(<Day entryDate={mockEntry.date} />)
 
     await waitFor(() => {
       expect(window.api.entries.create).toHaveBeenCalled()
@@ -59,7 +59,7 @@ describe('Main', () => {
   it('calls updateTitle on blur when title changes', async () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-    render(<Day />)
+    render(<Day entryDate={mockEntry.date} />)
 
     const input = await screen.findByDisplayValue(mockEntry.title)
 
@@ -73,7 +73,7 @@ describe('Main', () => {
   it('does not call updateTitle when title is unchanged', async () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-    render(<Day />)
+    render(<Day entryDate={mockEntry.date} />)
 
     const input = await screen.findByDisplayValue(mockEntry.title)
 
@@ -81,5 +81,45 @@ describe('Main', () => {
     await userEvent.tab()
 
     expect(window.api.entries.updateTitle).not.toHaveBeenCalled()
+  })
+
+  describe('bookmark', () => {
+    it('renders "Bookmark" when the entry is not bookmarked', async () => {
+      vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
+
+      render(<Day entryDate={mockEntry.date} />)
+
+      expect(await screen.findByRole('button', { name: 'Bookmark' })).toBeInTheDocument()
+    })
+
+    it('renders "Un-bookmark" when the entry is already bookmarked', async () => {
+      vi.mocked(window.api.entries.getByDate).mockResolvedValue({
+        ...mockEntry,
+        isBookmarked: true
+      })
+
+      render(<Day entryDate={mockEntry.date} />)
+
+      expect(await screen.findByRole('button', { name: 'Un-bookmark' })).toBeInTheDocument()
+    })
+
+    it('calls toggleBookmark with the entry id when clicked', async () => {
+      vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
+
+      render(<Day entryDate={mockEntry.date} />)
+      await userEvent.click(await screen.findByRole('button', { name: 'Bookmark' }))
+
+      expect(window.api.entries.toggleBookmark).toHaveBeenCalledWith(mockEntry.id)
+    })
+
+    it('flips the button label after toggling', async () => {
+      vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
+      vi.mocked(window.api.entries.toggleBookmark).mockResolvedValue(undefined)
+
+      render(<Day entryDate={mockEntry.date} />)
+      await userEvent.click(await screen.findByRole('button', { name: 'Bookmark' }))
+
+      expect(await screen.findByRole('button', { name: 'Un-bookmark' })).toBeInTheDocument()
+    })
   })
 })

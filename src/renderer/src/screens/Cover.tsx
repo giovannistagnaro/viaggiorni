@@ -1,8 +1,9 @@
 interface Props {
   onNavigate: (screen: 'index' | 'day') => void
+  onNavigateToToday: () => void
 }
 
-function Cover({ onNavigate }: Props): React.JSX.Element {
+function Cover({ onNavigate, onNavigateToToday }: Props): React.JSX.Element {
   return (
     <div className="flex flex-col items-center gap-4">
       <h1>Viaggiorni</h1>
@@ -10,7 +11,7 @@ function Cover({ onNavigate }: Props): React.JSX.Element {
 
       <div className="flex gap-4">
         <button onClick={() => onNavigate('index')}>Open</button>
-        <button onClick={() => onNavigate('day')}>Today</button>
+        <button onClick={onNavigateToToday}>Today</button>
       </div>
     </div>
   )

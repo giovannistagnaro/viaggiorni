@@ -10,18 +10,32 @@ import Index from './screens/Index'
 
 function App(): React.JSX.Element {
   const [screen, setScreen] = useState<Screen>('loading')
-  const [entryDate] = useState<string>(formatDateISO(new Date()))
+  const [entryDate, setEntryDate] = useState<string>(formatDateISO(new Date()))
+  const [today, setToday] = useState<string>(formatDateISO(new Date()))
 
   useEffect(() => {
     async function detectStartScreen(): Promise<void> {
       const isFirst = await window.api.db.isFirstLaunch()
       setScreen(isFirst ? 'onboarding' : 'login')
+      setToday(formatDateISO(new Date()))
     }
     detectStartScreen()
   }, [])
 
+  useEffect(() => {
+    async function setTodayWrapper(): Promise<void> {
+      setToday(formatDateISO(new Date()))
+    }
+    setTodayWrapper()
+  }, [screen])
+
   function handleNavigate(screen: PostLoginScreen): void {
     setScreen(screen)
+  }
+
+  function handleNavigateToDay(date: string): void {
+    setEntryDate(date)
+    setScreen('day')
   }
 
   async function handleLock(): Promise<void> {
@@ -50,12 +64,15 @@ function App(): React.JSX.Element {
 
       {screen === 'cover' ? (
         <main className="flex-1 grid place-items-center">
-          <Cover onNavigate={(screen: 'index' | 'day') => setScreen(screen)} />
+          <Cover
+            onNavigate={(screen: 'index' | 'day') => setScreen(screen)}
+            onNavigateToToday={() => handleNavigateToDay(today)}
+          />
         </main>
       ) : screen === 'index' ? (
-        <Index />
+        <Index onNavigateToDay={handleNavigateToDay} />
       ) : (
-        <Day />
+        <Day entryDate={entryDate} />
       )}
     </div>
   )
