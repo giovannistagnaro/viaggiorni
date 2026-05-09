@@ -8,6 +8,7 @@ import Topbar from './components/Topbar'
 import Day from './screens/Day'
 import Index from './screens/Index'
 import Settings from './screens/Settings'
+import BreadCrumb from './components/Breadcrumb'
 
 function App(): React.JSX.Element {
   const [screen, setScreen] = useState<Screen>('loading')
@@ -61,14 +62,15 @@ function App(): React.JSX.Element {
   if (screen === 'login') return <Login onSuccess={() => setScreen('cover')} />
   return (
     <div className="flex flex-col min-h-screen">
-      <Topbar
-        currentScreen={screen}
-        entryDate={entryDate}
-        previousScreen={previousScreen}
-        onNavigate={handleNavigate}
-        onNavigateToDay={handleNavigateToDay}
-        onLock={handleLock}
-      />
+      <Topbar onLock={handleLock} onNavigateToSettings={() => handleNavigate('settings')}>
+        <BreadCrumb
+          currentScreen={screen}
+          entryDate={entryDate}
+          previousScreen={previousScreen}
+          onNavigate={handleNavigate}
+          onNavigateToDay={handleNavigateToDay}
+        />
+      </Topbar>
 
       {screen === 'cover' ? (
         <main className="flex-1 grid place-items-center">
