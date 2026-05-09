@@ -21,9 +21,7 @@ describe('Breadcrumb', () => {
     })
 
     it('does not render an entry date', () => {
-      render(
-        <Breadcrumb currentScreen="cover" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />
-      )
+      render(<Breadcrumb currentScreen="cover" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />)
 
       expect(screen.queryByText(ENTRY_DATE)).not.toBeInTheDocument()
     })
@@ -44,9 +42,7 @@ describe('Breadcrumb', () => {
     })
 
     it('does not render an entry date', () => {
-      render(
-        <Breadcrumb currentScreen="index" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />
-      )
+      render(<Breadcrumb currentScreen="index" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />)
 
       expect(screen.queryByText(ENTRY_DATE)).not.toBeInTheDocument()
     })
@@ -54,18 +50,14 @@ describe('Breadcrumb', () => {
 
   describe('on the day screen', () => {
     it('renders Cover and Index as clickable buttons', () => {
-      render(
-        <Breadcrumb currentScreen="day" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />
-      )
+      render(<Breadcrumb currentScreen="day" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />)
 
       expect(screen.getByRole('button', { name: 'Cover' })).toBeInTheDocument()
       expect(screen.getByRole('button', { name: 'Index' })).toBeInTheDocument()
     })
 
     it('renders the entry date as plain text, not a button', () => {
-      render(
-        <Breadcrumb currentScreen="day" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />
-      )
+      render(<Breadcrumb currentScreen="day" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />)
 
       expect(screen.queryByRole('button', { name: ENTRY_DATE })).not.toBeInTheDocument()
       expect(screen.getByText(ENTRY_DATE)).toBeInTheDocument()
@@ -112,11 +104,107 @@ describe('Breadcrumb', () => {
 
   describe('semantics', () => {
     it('wraps segments in a nav element with an accessible label', () => {
-      render(
-        <Breadcrumb currentScreen="day" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />
-      )
+      render(<Breadcrumb currentScreen="day" entryDate={ENTRY_DATE} onNavigate={vi.fn()} />)
 
       expect(screen.getByRole('navigation', { name: /Breadcrumb/i })).toBeInTheDocument()
+    })
+  })
+
+  describe('on the settings screen', () => {
+    describe('when the previous screen was cover', () => {
+      it('renders Cover as a clickable button', () => {
+        render(<Breadcrumb currentScreen="settings" previousScreen="cover" onNavigate={vi.fn()} />)
+
+        expect(screen.getByRole('button', { name: 'Cover' })).toBeInTheDocument()
+      })
+
+      it('does not render the Index segment', () => {
+        render(<Breadcrumb currentScreen="settings" previousScreen="cover" onNavigate={vi.fn()} />)
+
+        expect(screen.queryByText('Index')).not.toBeInTheDocument()
+      })
+
+      it('renders Settings as plain text, not a button', () => {
+        render(<Breadcrumb currentScreen="settings" previousScreen="cover" onNavigate={vi.fn()} />)
+
+        expect(screen.queryByRole('button', { name: 'Settings' })).not.toBeInTheDocument()
+        expect(screen.getByText('Settings')).toBeInTheDocument()
+      })
+    })
+
+    describe('when the previous screen was index', () => {
+      it('renders Cover and Index as clickable buttons', () => {
+        render(<Breadcrumb currentScreen="settings" previousScreen="index" onNavigate={vi.fn()} />)
+
+        expect(screen.getByRole('button', { name: 'Cover' })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: 'Index' })).toBeInTheDocument()
+      })
+
+      it('does not render an entry date even if entryDate is provided', () => {
+        render(
+          <Breadcrumb
+            currentScreen="settings"
+            previousScreen="index"
+            entryDate={ENTRY_DATE}
+            onNavigate={vi.fn()}
+          />
+        )
+
+        expect(screen.queryByText(ENTRY_DATE)).not.toBeInTheDocument()
+      })
+    })
+
+    describe('when the previous screen was day', () => {
+      it('renders Cover, Index, and the entry date as clickable buttons', () => {
+        render(
+          <Breadcrumb
+            currentScreen="settings"
+            previousScreen="day"
+            entryDate={ENTRY_DATE}
+            onNavigate={vi.fn()}
+            onNavigateToDay={vi.fn()}
+          />
+        )
+
+        expect(screen.getByRole('button', { name: 'Cover' })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: 'Index' })).toBeInTheDocument()
+        expect(screen.getByRole('button', { name: ENTRY_DATE })).toBeInTheDocument()
+      })
+
+      it('calls onNavigateToDay with the entry date when the date segment is clicked', async () => {
+        const onNavigateToDay = vi.fn()
+        render(
+          <Breadcrumb
+            currentScreen="settings"
+            previousScreen="day"
+            entryDate={ENTRY_DATE}
+            onNavigate={vi.fn()}
+            onNavigateToDay={onNavigateToDay}
+          />
+        )
+
+        await userEvent.click(screen.getByRole('button', { name: ENTRY_DATE }))
+
+        expect(onNavigateToDay).toHaveBeenCalledWith(ENTRY_DATE)
+      })
+    })
+
+    it('calls onNavigate with "cover" when Cover is clicked from settings', async () => {
+      const onNavigate = vi.fn()
+      render(<Breadcrumb currentScreen="settings" previousScreen="index" onNavigate={onNavigate} />)
+
+      await userEvent.click(screen.getByRole('button', { name: 'Cover' }))
+
+      expect(onNavigate).toHaveBeenCalledWith('cover')
+    })
+
+    it('calls onNavigate with "index" when Index is clicked from settings', async () => {
+      const onNavigate = vi.fn()
+      render(<Breadcrumb currentScreen="settings" previousScreen="index" onNavigate={onNavigate} />)
+
+      await userEvent.click(screen.getByRole('button', { name: 'Index' }))
+
+      expect(onNavigate).toHaveBeenCalledWith('index')
     })
   })
 })

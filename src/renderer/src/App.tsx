@@ -7,11 +7,14 @@ import { formatDateISO } from './utils/dateFormatters'
 import Topbar from './components/Topbar'
 import Day from './screens/Day'
 import Index from './screens/Index'
+import Settings from './screens/Settings'
 
 function App(): React.JSX.Element {
   const [screen, setScreen] = useState<Screen>('loading')
   const [entryDate, setEntryDate] = useState<string>(formatDateISO(new Date()))
   const [today, setToday] = useState<string>(formatDateISO(new Date()))
+  const [previousScreen, setPreviousScreen] =
+    useState<Exclude<PostLoginScreen, 'settings'>>('cover')
 
   useEffect(() => {
     async function detectStartScreen(): Promise<void> {
@@ -29,8 +32,11 @@ function App(): React.JSX.Element {
     setTodayWrapper()
   }, [screen])
 
-  function handleNavigate(screen: PostLoginScreen): void {
-    setScreen(screen)
+  function handleNavigate(target: PostLoginScreen): void {
+    if (target === 'settings' && screen !== 'settings') {
+      setPreviousScreen(screen as Exclude<PostLoginScreen, 'settings'>)
+    }
+    setScreen(target)
   }
 
   function handleNavigateToDay(date: string): void {
@@ -58,7 +64,9 @@ function App(): React.JSX.Element {
       <Topbar
         currentScreen={screen}
         entryDate={entryDate}
+        previousScreen={previousScreen}
         onNavigate={handleNavigate}
+        onNavigateToDay={handleNavigateToDay}
         onLock={handleLock}
       />
 
@@ -71,6 +79,8 @@ function App(): React.JSX.Element {
         </main>
       ) : screen === 'index' ? (
         <Index onNavigateToDay={handleNavigateToDay} />
+      ) : screen === 'settings' ? (
+        <Settings />
       ) : (
         <Day entryDate={entryDate} />
       )}

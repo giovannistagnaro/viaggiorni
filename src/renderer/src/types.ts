@@ -1,2 +1,2 @@
 export type Screen = 'loading' | 'onboarding' | 'login' | PostLoginScreen
-export type PostLoginScreen = 'cover' | 'index' | 'day'
+export type PostLoginScreen = 'cover' | 'index' | 'day' | 'settings'
