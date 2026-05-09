@@ -192,7 +192,7 @@
     "prompt": "Name a single ordinary day you would live again exactly as it was. What makes it worthy?"
   },
   {
-    "prompt": "Tell about a risk you didn't take that worked out anyway. Did the avoidance feel earned or lucky?"
+    "prompt": "Recall a risk you didn't take that worked out anyway. Did the avoidance feel earned or lucky?"
   },
   {
     "prompt": "Recall a text thread that ended on a strange note. Read it back in your head and write what you wished you'd sent."
@@ -1254,7 +1254,7 @@
     "prompt": "Recall a self-help idea that briefly worked and then didn't. Why did it stop?"
   },
   {
-    "prompt": "Pick a routine you protect like it's expensive. What would lose if it broke?"
+    "prompt": "Pick a routine you protect like it's expensive. What would you lose if it broke?"
   },
   {
     "prompt": "There's a small failure of discipline you forgive yourself for daily. Why this one?"
@@ -1282,9 +1282,6 @@
   },
   {
     "prompt": "Recall a near-miss you laugh about. Did the laughter come quickly?"
-  },
-  {
-    "prompt": "Pick the closest you've come to a story you tell. What's the gap between event and telling?"
   },
   {
     "prompt": "There's a fact about your own life you find hard to believe. State it plainly."
@@ -1587,7 +1584,7 @@
     "prompt": "Recall a misnaming someone has done to you for years. Why haven't you corrected them?"
   },
   {
-    "prompt": "Pick a piece of mail-merge mistake that delighted you. What did the machine think you were?"
+    "prompt": "Pick a moment when a machine got you wrong. What did it assume about you, and how was that wrong?"
   },
   {
     "prompt": "Describe the most fitting auto-corrected message you've ever sent. What did the algorithm catch?"
@@ -1899,7 +1896,7 @@
     "prompt": "Pick a door slam you remember. Whose door, and why?"
   },
   {
-    "prompt": "Describe an instance of someone driving you home you didn't want to be driven home. What were you negotiating?"
+    "prompt": "Describe an instance of someone driving you home when you didn't want them to. What were you negotiating?"
   },
   {
     "prompt": "There's a goodbye you didn't know was final. What were the last words?"
@@ -2067,7 +2064,7 @@
     "prompt": "There's a morning you woke up angry without remembering the dream. What did you do with the day?"
   },
   {
-    "prompt": "Recall a stretch of forgiveness that surprised you. Whose did you forgive yourself for?"
+    "prompt": "Recall a stretch of forgiveness that surprised you. Whose did it require?"
   },
   {
     "prompt": "Pick an act of restitution you made privately. Did anyone notice?"
@@ -2826,16 +2823,10 @@
     "prompt": "There's a piece of physical motion — walking, swimming, biking — that quiets a particular kind of thinking. Walk into the quieting."
   },
   {
-    "prompt": "Describe an instance of running that turned into a different state. Where did you arrive in your head?"
-  },
-  {
     "prompt": "Pick a stretch of walking where the destination stopped mattering. Why?"
   },
   {
     "prompt": "Recall the first time you understood your own body's limit. What stopped you?"
-  },
-  {
-    "prompt": "Describe an instance of the body knowing the answer before the mind. What was the answer?"
   },
   {
     "prompt": "There's a piece of food you eat slowly. Why this one?"

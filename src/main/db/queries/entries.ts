@@ -1,4 +1,4 @@
-import { eq, desc, sql } from 'drizzle-orm'
+import { eq, desc, sql, asc } from 'drizzle-orm'
 import type { DrizzleDB } from '../database'
 import {
   entries,
@@ -8,18 +8,15 @@ import {
   templateWritings,
   templateWidgets
 } from '../schemas/schema'
+import { Entry } from '@shared/types'
 
-export function getEntryByDate(db: DrizzleDB, date: string): typeof entries.$inferSelect | null {
+export function getEntryByDate(db: DrizzleDB, date: string): Entry | null {
   const entriesByDate = db.select().from(entries).where(eq(entries.date, date)).limit(1).all()
   if (entriesByDate.length < 1) return null
   else return entriesByDate[0]
 }
 
-export function createEntry(
-  db: DrizzleDB,
-  date: string,
-  title: string
-): typeof entries.$inferSelect {
+export function createEntry(db: DrizzleDB, date: string, title: string): Entry {
   return db.transaction((tx) => {
     const newEntry = tx.insert(entries).values({ title, date }).returning().get()
     const activeTemplate = tx.select().from(template).orderBy(desc(template.id)).limit(1).get()
@@ -92,7 +89,7 @@ export function toggleBookmark(db: DrizzleDB, id: number): void {
   })
 }
 
-export function getAllBookmarkedEntries(db: DrizzleDB): (typeof entries.$inferSelect)[] {
+export function getAllBookmarkedEntries(db: DrizzleDB): Entry[] {
   const allBookmarkedEntries = db
     .select()
     .from(entries)
@@ -100,4 +97,14 @@ export function getAllBookmarkedEntries(db: DrizzleDB): (typeof entries.$inferSe
     .orderBy(desc(entries.date))
     .all()
   return allBookmarkedEntries
+}
+
+export function getAllDates(db: DrizzleDB): string[] {
+  const dates = db
+    .selectDistinct({ date: entries.date })
+    .from(entries)
+    .orderBy(asc(entries.date))
+    .all()
+
+  return dates.map((dateObj) => dateObj.date)
 }

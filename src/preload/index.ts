@@ -19,7 +19,8 @@ const api = {
     updateTitle: (id: number, title: string) =>
       ipcRenderer.invoke('entries:updateTitle', id, title),
     toggleBookmark: (id: number) => ipcRenderer.invoke('entries:toggleBookmark', id),
-    getAllBookmarked: () => ipcRenderer.invoke('entries:getAllBookmarked')
+    getAllBookmarked: () => ipcRenderer.invoke('entries:getAllBookmarked'),
+    getAllDates: () => ipcRenderer.invoke('entries:getAllDates')
   },
   entryWritings: {
     getWritingsForEntry: (entryId: number) =>

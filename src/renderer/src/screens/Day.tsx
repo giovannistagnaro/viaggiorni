@@ -1,10 +1,13 @@
 import WritingEditor from '@renderer/components/WritingEditor'
 import WidgetRenderer from '@renderer/components/WidgetRenderer'
-import { formatDateISO, formatTitleForDate } from '@renderer/utils/dateFormatters'
+import { formatTitleForDate } from '@renderer/utils/dateFormatters'
 import { Entry, EntryWriting, EntryWidget } from '@shared/types'
 import { useEffect, useState } from 'react'
 
-function Day(): React.JSX.Element {
+interface Props {
+  entryDate: string
+}
+function Day({ entryDate }: Props): React.JSX.Element {
   const [entry, setEntry] = useState<Entry | null>(null)
   const [loading, setLoading] = useState(true)
   const [writings, setWritings] = useState<EntryWriting[]>([])
@@ -13,10 +16,9 @@ function Day(): React.JSX.Element {
   useEffect(() => {
     async function dateSetup(): Promise<void> {
       try {
-        const isoDate = formatDateISO(new Date())
-        let todayEntry = await window.api.entries.getByDate(isoDate)
+        let todayEntry = await window.api.entries.getByDate(entryDate)
         if (!todayEntry)
-          todayEntry = await window.api.entries.create(isoDate, formatTitleForDate(isoDate))
+          todayEntry = await window.api.entries.create(entryDate, formatTitleForDate(entryDate))
         setEntry(todayEntry)
       } catch (err) {
         // TODO: surface to user via error UI
@@ -26,7 +28,7 @@ function Day(): React.JSX.Element {
       }
     }
     dateSetup()
-  }, [])
+  }, [entryDate])
 
   useEffect(() => {
     async function entryWritingSetup(): Promise<void> {
@@ -66,6 +68,17 @@ function Day(): React.JSX.Element {
     }
   }
 
+  async function handleBookmark(): Promise<void> {
+    if (!entry) return
+    try {
+      await window.api.entries.toggleBookmark(entry.id)
+      setEntry({ ...entry, isBookmarked: !entry.isBookmarked })
+    } catch (err) {
+      // TODO: surface to user via error UI
+      console.error('Failed to bookmark entry', err)
+    }
+  }
+
   if (loading) return <div>Loading...</div>
   if (!entry) return <div>Failed to load entry</div>
 
@@ -78,6 +91,7 @@ function Day(): React.JSX.Element {
         placeholder={'Enter entry title...'}
       />
       <p>{entry.date}</p>
+      <button onClick={handleBookmark}>{entry.isBookmarked ? 'Un-bookmark' : 'Bookmark'}</button>
 
       <div className="grid grid-cols-2 grid-rows-1 gap-4">
         <div>

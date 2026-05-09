@@ -5,7 +5,8 @@ import {
   getEntryByDate,
   updateEntryTitle,
   toggleBookmark,
-  getAllBookmarkedEntries
+  getAllBookmarkedEntries,
+  getAllDates
 } from './entries'
 import {
   entries,
@@ -188,5 +189,38 @@ describe('getAllBookmarkedEntries', () => {
       '2026-05-02',
       '2026-05-01'
     ])
+  })
+})
+
+describe('getAllDates', () => {
+  it('returns empty array when no dates exist', () => {
+    const dates = getAllDates(db)
+    expect(dates).toHaveLength(0)
+  })
+
+  it('returns only dates for existing entries', () => {
+    const entry1 = createEntry(db, '2026-05-01', 'Entry 1')
+    const entry2 = createEntry(db, '2026-05-04', 'Entry 2')
+    const entry3 = createEntry(db, '2026-05-08', 'Entry 3')
+
+    const dates = getAllDates(db)
+    expect(dates).toEqual([entry1.date, entry2.date, entry3.date])
+  })
+
+  it('orders dates in ascending order', () => {
+    createEntry(db, '2026-05-01', 'Entry 1')
+    createEntry(db, '2026-05-03', 'Entry 2')
+    createEntry(db, '2026-05-02', 'Entry 3')
+
+    const dates = getAllDates(db)
+    expect(dates).toEqual(['2026-05-01', '2026-05-02', '2026-05-03'])
+  })
+
+  it('returns each date only once even when multiple entries share it', () => {
+    createEntry(db, '2026-05-01', 'Entry A')
+    createEntry(db, '2026-05-01', 'Entry B')
+
+    const dates = getAllDates(db)
+    expect(dates).toEqual(['2026-05-01'])
   })
 })

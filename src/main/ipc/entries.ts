@@ -5,7 +5,8 @@ import {
   createEntry,
   updateEntryTitle,
   toggleBookmark,
-  getAllBookmarkedEntries
+  getAllBookmarkedEntries,
+  getAllDates
 } from '../db/queries/entries'
 
 export function registerEntriesIpc(): void {
@@ -18,4 +19,5 @@ export function registerEntriesIpc(): void {
   )
   ipcMain.handle('entries:toggleBookmark', (_, id: number) => toggleBookmark(getDB(), id))
   ipcMain.handle('entries:getAllBookmarked', () => getAllBookmarkedEntries(getDB()))
+  ipcMain.handle('entries:getAllDates', () => getAllDates(getDB()))
 }
