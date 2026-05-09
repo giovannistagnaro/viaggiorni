@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import Main from './Main'
+import Day from './Day'
 
 const mockEntry = {
   id: 1,
@@ -38,7 +38,7 @@ describe('Main', () => {
   it('loads and displays the existing entry for today', async () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-    render(<Main onLock={vi.fn()} />)
+    render(<Day />)
 
     expect(await screen.findByDisplayValue(mockEntry.title)).toBeInTheDocument()
     expect(window.api.entries.create).not.toHaveBeenCalled()
@@ -48,7 +48,7 @@ describe('Main', () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(null)
     vi.mocked(window.api.entries.create).mockResolvedValue(mockEntry)
 
-    render(<Main onLock={vi.fn()} />)
+    render(<Day />)
 
     await waitFor(() => {
       expect(window.api.entries.create).toHaveBeenCalled()
@@ -59,7 +59,7 @@ describe('Main', () => {
   it('calls updateTitle on blur when title changes', async () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-    render(<Main onLock={vi.fn()} />)
+    render(<Day />)
 
     const input = await screen.findByDisplayValue(mockEntry.title)
 
@@ -73,7 +73,7 @@ describe('Main', () => {
   it('does not call updateTitle when title is unchanged', async () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-    render(<Main onLock={vi.fn()} />)
+    render(<Day />)
 
     const input = await screen.findByDisplayValue(mockEntry.title)
 
@@ -81,21 +81,5 @@ describe('Main', () => {
     await userEvent.tab()
 
     expect(window.api.entries.updateTitle).not.toHaveBeenCalled()
-  })
-
-  it('calls db.close and onLock when Lock button is clicked', async () => {
-    vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
-    const onLock = vi.fn()
-
-    render(<Main onLock={onLock} />)
-
-    await screen.findByDisplayValue(mockEntry.title)
-
-    await userEvent.click(screen.getByRole('button', { name: /lock/i }))
-
-    await waitFor(() => {
-      expect(window.api.db.close).toHaveBeenCalled()
-      expect(onLock).toHaveBeenCalled()
-    })
   })
 })
