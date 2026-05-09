@@ -115,6 +115,7 @@ interface Api {
   wordOfDay: WordOfDayApi
   entryPhotos: EntryPhotosApi
   settings: SettingsApi
+  ollama: OllamaApi
 }
 
 declare global {
