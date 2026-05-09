@@ -91,6 +91,13 @@ const api = {
       ipcRenderer.invoke('entryPhotos:updatePhotoCaption', photoId, newCaption),
     changePhotoPosition: (photoId: number, newPosition: number) =>
       ipcRenderer.invoke('entryPhotos:changePhotoPosition', photoId, newPosition)
+  },
+  settings: {
+    getSettings: () => ipcRenderer.invoke('settings:getSettings'),
+    updateTheme: (theme: string) => ipcRenderer.invoke('settings:updateTheme', theme),
+    updateStreakTolerance: (tolerance: string) =>
+      ipcRenderer.invoke('settings:updateStreakTolerance', tolerance),
+    updateOllamaModel: (model: string) => ipcRenderer.invoke('settings:updateOllamaModel', model)
   }
 }
 

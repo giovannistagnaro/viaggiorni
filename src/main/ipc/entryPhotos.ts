@@ -43,7 +43,7 @@ export function registerEntryPhotosIpc(): void {
     } catch (err) {
       log.error('Failed to add photo', { entryId, error: err })
       throw err
-      return 
+      return
     }
   })
 

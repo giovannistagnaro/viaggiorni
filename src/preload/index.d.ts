@@ -8,7 +8,8 @@ import {
   Habit,
   HabitLog,
   WordOfDay,
-  EntryPhoto
+  EntryPhoto,
+  SafeReturnSettings
 } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
@@ -89,6 +90,13 @@ interface EntryPhotosApi {
   changePhotoPosition: (photoId: number, newPosition: number) => Promise<void>
 }
 
+interface SettingsApi {
+  getSettings: () => Promise<SafeReturnSettings>
+  updateTheme: (theme: string) => Promise<void>
+  updateStreakTolerance: (tolerance: string) => Promise<void>
+  updateOllamaModel: (model: string) => Promise<void>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
@@ -100,6 +108,7 @@ interface Api {
   habit: HabitApi
   wordOfDay: WordOfDayApi
   entryPhotos: EntryPhotosApi
+  settings: SettingsApi
 }
 
 declare global {
