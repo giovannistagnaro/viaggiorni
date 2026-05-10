@@ -2,7 +2,7 @@ import { Habit, HabitLog } from '@shared/types'
 import { DrizzleDB } from '../database'
 import { habits, habitLogs, habitPauses } from '../schemas/schema'
 import { and, asc, eq, isNull, sql } from 'drizzle-orm'
-import { addDays, isInPause } from './helpers'
+import { addDays, isInPause } from '../../../shared/helpers'
 
 export function getActiveHabits(db: DrizzleDB): Habit[] {
   return db

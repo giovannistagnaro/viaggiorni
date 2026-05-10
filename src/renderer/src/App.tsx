@@ -11,12 +11,34 @@ import Settings from './screens/Settings'
 import BreadCrumb from './components/Breadcrumb'
 import Template from './screens/Template'
 import { SCREEN_CONFIG } from './screenConfig'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 function App(): React.JSX.Element {
   const [screen, setScreen] = useState<Screen>('loading')
   const [entryDate, setEntryDate] = useState<string>(formatDateISO(new Date()))
   const [today, setToday] = useState<string>(formatDateISO(new Date()))
   const [previousScreen, setPreviousScreen] = useState<NonOverlayScreen>('cover')
+
+  const isPostLogin = screen !== 'loading' && screen !== 'onboarding' && screen !== 'login'
+
+  useHotkeys('mod+l', () => handleLock(), { enabled: isPostLogin })
+  useHotkeys(
+    'mod+Comma',
+    () => (screen === 'settings' ? handleNavigate(previousScreen) : handleNavigate('settings')),
+    { enabled: isPostLogin }
+  )
+  useHotkeys(
+    'mod+Period',
+    () => (screen === 'template' ? handleNavigate(previousScreen) : handleNavigate('template')),
+    { enabled: isPostLogin }
+  )
+  useHotkeys(
+    'esc',
+    () => {
+      if (isPostLogin && SCREEN_CONFIG[screen].isOverlay) handleNavigate(previousScreen)
+    },
+    { enabled: isPostLogin }
+  )
 
   useEffect(() => {
     async function detectStartScreen(): Promise<void> {
@@ -92,7 +114,9 @@ function App(): React.JSX.Element {
       ) : screen === 'template' ? (
         <Template />
       ) : (
-        <Day entryDate={entryDate} />
+        <main className="flex-1 grid">
+          <Day entryDate={entryDate} onNavigateToDay={handleNavigateToDay} today={today} />
+        </main>
       )}
     </div>
   )

@@ -2,7 +2,7 @@ import { EntryWriting, WritingType } from '@shared/types'
 import { DrizzleDB } from '../database'
 import { entries, entryWritings } from '../schemas/schema'
 import { eq, asc, sql, gte, and, gt, lt, lte, max } from 'drizzle-orm'
-import { addDays } from './helpers'
+import { addDays } from '../../../shared/helpers'
 
 export function getWritingsForEntry(db: DrizzleDB, entryId: number): EntryWriting[] {
   return db
