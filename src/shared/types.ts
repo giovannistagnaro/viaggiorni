@@ -37,6 +37,11 @@ export type WidgetType = (typeof WIDGET_TYPES)[number]
 export type WordOfDayItem = { word: string; definition: string; example: string }
 export type WritingPromptItem = { prompt: string }
 export type PhotoItem = { dataUrl: string; caption: string | null } | null
+export type ActiveTemplate = {
+  id: number
+  widgets: TemplateWidget[]
+  writings: TemplateWriting[]
+}
 
 export type Theme = 'light' | 'dark'
 

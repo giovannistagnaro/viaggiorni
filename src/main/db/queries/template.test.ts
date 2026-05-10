@@ -53,6 +53,13 @@ describe('getActiveTemplate', () => {
     )
   })
 
+  it('returns the active template id', () => {
+    const { id } = getActiveTemplate(db)
+
+    expect(typeof id).toBe('number')
+    expect(id).toBeGreaterThan(0)
+  })
+
   it('throws when no template exists', () => {
     db.delete(templateWritings).run()
     db.delete(templateWidgets).run()

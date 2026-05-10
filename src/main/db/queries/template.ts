@@ -1,12 +1,15 @@
-import { TemplateWidget, TemplateWriting, WidgetType, WritingType } from '@shared/types'
+import {
+  ActiveTemplate,
+  TemplateWidget,
+  TemplateWriting,
+  WidgetType,
+  WritingType
+} from '@shared/types'
 import { DrizzleDB } from '../database'
 import { template, templateWidgets, templateWritings } from '../schemas/schema'
 import { and, desc, eq, gt, gte, lt, lte, max, sql } from 'drizzle-orm'
 
-export function getActiveTemplate(db: DrizzleDB): {
-  widgets: TemplateWidget[]
-  writings: TemplateWriting[]
-} {
+export function getActiveTemplate(db: DrizzleDB): ActiveTemplate {
   const activeTemplate = db.select().from(template).orderBy(desc(template.id)).limit(1).get()
   if (!activeTemplate) throw new Error('Template not found')
 
@@ -24,7 +27,7 @@ export function getActiveTemplate(db: DrizzleDB): {
     .orderBy(templateWritings.position)
     .all()
 
-  return { widgets, writings }
+  return { id: activeTemplate.id, widgets, writings }
 }
 
 export function addTemplateWriting(

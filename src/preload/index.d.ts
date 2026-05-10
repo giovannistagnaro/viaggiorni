@@ -1,5 +1,6 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
 import {
+  ActiveTemplate,
   Entry,
   EntryWriting,
   EntryWidget,
@@ -108,10 +109,7 @@ interface OllamaApi {
 }
 
 interface TemplateApi {
-  getActiveTemplate: () => Promise<{
-    widgets: TemplateWidget[]
-    writings: TemplateWriting[]
-  }>
+  getActiveTemplate: () => Promise<ActiveTemplate>
   addTemplateWriting: (
     templateId: number,
     type: WritingType,
