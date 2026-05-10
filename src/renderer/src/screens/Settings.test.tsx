@@ -16,6 +16,15 @@ vi.mock('@renderer/components/settings/HabitSettings', () => ({
 vi.mock('@renderer/components/settings/AISettings', () => ({
   default: () => <div data-testid="ai-section">AI content</div>
 }))
+vi.mock('@renderer/components/settings/BackupSettings', () => ({
+  default: ({ onLockRequired }: { onLockRequired: () => void }) => (
+    <div data-testid="backup-section">
+      <button data-testid="trigger-lock" onClick={onLockRequired}>
+        Trigger lock
+      </button>
+    </div>
+  )
+}))
 
 beforeEach(() => {
   window.api = {
@@ -36,27 +45,28 @@ beforeEach(() => {
 })
 
 describe('Settings', () => {
-  it('renders all four section labels in the sidebar', async () => {
-    render(<Settings />)
+  it('renders all section labels in the sidebar', async () => {
+    render(<Settings onLock={vi.fn()} />)
 
     // 'Profile' appears twice (sidebar + active-section header), so use getAllByText.
-    // The other three only appear in the sidebar (since Profile is the default active section).
+    // The others only appear in the sidebar (since Profile is the default active section).
     await waitFor(() => {
       expect(screen.getAllByText('Profile').length).toBeGreaterThan(0)
     })
     expect(screen.getByText('Appearance')).toBeInTheDocument()
     expect(screen.getByText('Habits')).toBeInTheDocument()
     expect(screen.getByText('AI')).toBeInTheDocument()
+    expect(screen.getByText('Backup')).toBeInTheDocument()
   })
 
   it('renders the Profile section by default', async () => {
-    render(<Settings />)
+    render(<Settings onLock={vi.fn()} />)
 
     expect(await screen.findByTestId('profile-section')).toBeInTheDocument()
   })
 
   it('switches to the Appearance section when clicked', async () => {
-    render(<Settings />)
+    render(<Settings onLock={vi.fn()} />)
 
     await screen.findByTestId('profile-section')
     await userEvent.click(screen.getByText('Appearance'))
@@ -66,12 +76,33 @@ describe('Settings', () => {
   })
 
   it('switches to the AI section when clicked', async () => {
-    render(<Settings />)
+    render(<Settings onLock={vi.fn()} />)
 
     await screen.findByTestId('profile-section')
     await userEvent.click(screen.getByText('AI'))
 
     expect(screen.getByTestId('ai-section')).toBeInTheDocument()
     expect(screen.queryByTestId('profile-section')).not.toBeInTheDocument()
+  })
+
+  it('switches to the Backup section when clicked', async () => {
+    render(<Settings onLock={vi.fn()} />)
+
+    await screen.findByTestId('profile-section')
+    await userEvent.click(screen.getByText('Backup'))
+
+    expect(screen.getByTestId('backup-section')).toBeInTheDocument()
+    expect(screen.queryByTestId('profile-section')).not.toBeInTheDocument()
+  })
+
+  it('threads onLock down to BackupSettings as onLockRequired', async () => {
+    const onLock = vi.fn()
+    render(<Settings onLock={onLock} />)
+
+    await screen.findByTestId('profile-section')
+    await userEvent.click(screen.getByText('Backup'))
+    await userEvent.click(await screen.findByTestId('trigger-lock'))
+
+    expect(onLock).toHaveBeenCalledTimes(1)
   })
 })
