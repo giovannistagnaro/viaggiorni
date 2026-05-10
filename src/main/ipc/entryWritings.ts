@@ -1,11 +1,15 @@
 import { ipcMain } from 'electron'
 import {
+  addEntryWriting,
+  changeEntryWritingPosition,
   getUsedWritingPrompts,
   getWritingById,
   getWritingsForEntry,
+  setEntryWritingVisibility,
   updateWritingContent,
   updateWritingPrompt
 } from '../db/queries/entryWritings'
+import { WritingType } from '@shared/types'
 import { getDB } from '../db'
 import log from 'electron-log'
 import { generateWritingPrompt, isOllamaAvailable } from '../ollamaService'
@@ -39,6 +43,36 @@ export function registerEntryWritingsIpc(): void {
         updateWritingPrompt(getDB(), writingId, newPrompt)
       } catch (err) {
         log.error('Failed to update writing prompt', { writingId, error: err })
+        throw err
+      }
+    }
+  )
+  ipcMain.handle('entryWritings:setVisibility', (_event, writingId: number, isVisible: boolean) => {
+    try {
+      setEntryWritingVisibility(getDB(), writingId, isVisible)
+    } catch (err) {
+      log.error('Failed to set entry writing visibility', { writingId, isVisible, error: err })
+      throw err
+    }
+  })
+  ipcMain.handle(
+    'entryWritings:changePosition',
+    (_event, writingId: number, newPosition: number) => {
+      try {
+        changeEntryWritingPosition(getDB(), writingId, newPosition)
+      } catch (err) {
+        log.error('Failed to change entry writing position', { writingId, newPosition, error: err })
+        throw err
+      }
+    }
+  )
+  ipcMain.handle(
+    'entryWritings:addEntryWriting',
+    (_event, entryId: number, type: WritingType, label: string | null) => {
+      try {
+        return addEntryWriting(getDB(), entryId, type, label)
+      } catch (err) {
+        log.error('Failed to add entry writing', { entryId, type, error: err })
         throw err
       }
     }

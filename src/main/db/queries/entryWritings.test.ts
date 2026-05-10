@@ -2,9 +2,12 @@ import { DrizzleDB } from '../database'
 import { closeTestDb, createTestDb } from './testHelper'
 import { describe, expect, it, afterEach, beforeEach } from 'vitest'
 import {
+  addEntryWriting,
+  changeEntryWritingPosition,
   getUsedWritingPrompts,
   getWritingById,
   getWritingsForEntry,
+  setEntryWritingVisibility,
   updateWritingContent,
   updateWritingPrompt
 } from './entryWritings'
@@ -180,5 +183,174 @@ describe('getUsedWritingPrompts', () => {
     const result = getUsedWritingPrompts(db, '2026-05-01')
     expect(result).toContain('First')
     expect(result).toContain('Second')
+  })
+})
+
+describe('setEntryWritingVisibility', () => {
+  it('sets isVisible to false', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writing = getWritingsForEntry(db, entry.id)[0]
+
+    setEntryWritingVisibility(db, writing.id, false)
+
+    expect(getWritingById(db, writing.id)?.isVisible).toBe(false)
+  })
+
+  it('sets isVisible back to true', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writing = getWritingsForEntry(db, entry.id)[0]
+    setEntryWritingVisibility(db, writing.id, false)
+
+    setEntryWritingVisibility(db, writing.id, true)
+
+    expect(getWritingById(db, writing.id)?.isVisible).toBe(true)
+  })
+
+  it('updates the updatedAt timestamp', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writing = getWritingsForEntry(db, entry.id)[0]
+
+    setEntryWritingVisibility(db, writing.id, false)
+
+    expect(getWritingById(db, writing.id)?.updatedAt).not.toBeNull()
+  })
+
+  it('throws when the writing does not exist', () => {
+    expect(() => setEntryWritingVisibility(db, 999, false)).toThrow(/Entry writing not found/i)
+  })
+})
+
+describe('changeEntryWritingPosition', () => {
+  it('moves a writing to a higher position', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writings = getWritingsForEntry(db, entry.id)
+    const target = writings[0]
+
+    changeEntryWritingPosition(db, target.id, writings.length - 1)
+
+    const after = getWritingsForEntry(db, entry.id)
+    expect(after.find((w) => w.id === target.id)?.position).toBe(writings.length - 1)
+  })
+
+  it('moves a writing to a lower position', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writings = getWritingsForEntry(db, entry.id)
+    const target = writings[writings.length - 1]
+
+    changeEntryWritingPosition(db, target.id, 0)
+
+    const after = getWritingsForEntry(db, entry.id)
+    expect(after.find((w) => w.id === target.id)?.position).toBe(0)
+  })
+
+  it('does nothing when newPosition equals the current position', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writings = getWritingsForEntry(db, entry.id)
+    const before = writings.map((w) => ({ id: w.id, position: w.position }))
+
+    changeEntryWritingPosition(db, writings[0].id, writings[0].position)
+
+    const after = getWritingsForEntry(db, entry.id).map((w) => ({ id: w.id, position: w.position }))
+    expect(after).toEqual(before)
+  })
+
+  it('clamps newPosition higher than max to the end', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writings = getWritingsForEntry(db, entry.id)
+
+    changeEntryWritingPosition(db, writings[0].id, 999)
+
+    const after = getWritingsForEntry(db, entry.id)
+    expect(after.find((w) => w.id === writings[0].id)?.position).toBe(writings.length - 1)
+  })
+
+  it('clamps negative newPosition to the start', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writings = getWritingsForEntry(db, entry.id)
+    const target = writings[writings.length - 1]
+
+    changeEntryWritingPosition(db, target.id, -5)
+
+    const after = getWritingsForEntry(db, entry.id)
+    expect(after.find((w) => w.id === target.id)?.position).toBe(0)
+  })
+
+  it('preserves contiguous positions across the entry after a move', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writings = getWritingsForEntry(db, entry.id)
+
+    changeEntryWritingPosition(db, writings[0].id, writings.length - 1)
+
+    const after = getWritingsForEntry(db, entry.id)
+    const positions = after.map((w) => w.position).sort((a, b) => a - b)
+    expect(positions).toEqual(Array.from({ length: writings.length }, (_, i) => i))
+  })
+
+  it('updates the updatedAt timestamp on the moved writing', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const writings = getWritingsForEntry(db, entry.id)
+
+    changeEntryWritingPosition(db, writings[0].id, writings.length - 1)
+
+    expect(getWritingById(db, writings[0].id)?.updatedAt).not.toBeNull()
+  })
+
+  it('throws when the writing does not exist', () => {
+    expect(() => changeEntryWritingPosition(db, 999, 0)).toThrow(/Entry writing not found/i)
+  })
+
+  it('does not affect writings in other entries', () => {
+    const e1 = createEntry(db, '2026-05-01', 'Entry 1')
+    const e2 = createEntry(db, '2026-05-02', 'Entry 2')
+    const e2Before = getWritingsForEntry(db, e2.id).map((w) => ({
+      id: w.id,
+      position: w.position
+    }))
+
+    const e1Writing = getWritingsForEntry(db, e1.id)[0]
+    changeEntryWritingPosition(db, e1Writing.id, 999)
+
+    const e2After = getWritingsForEntry(db, e2.id).map((w) => ({
+      id: w.id,
+      position: w.position
+    }))
+    expect(e2After).toEqual(e2Before)
+  })
+})
+
+describe('addEntryWriting', () => {
+  it('inserts a writing at the end of the entry', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const beforeCount = getWritingsForEntry(db, entry.id).length
+
+    addEntryWriting(db, entry.id, 'notable_moment', 'Notable Moment')
+
+    const after = getWritingsForEntry(db, entry.id)
+    expect(after.length).toBe(beforeCount + 1)
+    expect(after[after.length - 1].type).toBe('notable_moment')
+    expect(after[after.length - 1].position).toBe(beforeCount)
+  })
+
+  it('returns the inserted row with the provided label and isVisible true', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+
+    const inserted = addEntryWriting(db, entry.id, 'notable_moment', 'Notable Moment')
+
+    expect(inserted.entryId).toBe(entry.id)
+    expect(inserted.type).toBe('notable_moment')
+    expect(inserted.label).toBe('Notable Moment')
+    expect(inserted.isVisible).toBe(true)
+  })
+
+  it('accepts a null label', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+
+    const inserted = addEntryWriting(db, entry.id, 'notable_moment', null)
+
+    expect(inserted.label).toBeNull()
+  })
+
+  it('throws when the entryId does not exist', () => {
+    expect(() => addEntryWriting(db, 999, 'notable_moment', null)).toThrow(/Entry not found/i)
   })
 })

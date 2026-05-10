@@ -31,11 +31,23 @@ const api = {
     updateWritingPrompt: (writingId: number, newPrompt: string) =>
       ipcRenderer.invoke('entryWritings:updateWritingPrompt', writingId, newPrompt),
     getOrCreatePromptForWriting: (writingId: number, entryDate: string) =>
-      ipcRenderer.invoke('entryWritings:getOrCreatePromptForWriting', writingId, entryDate)
+      ipcRenderer.invoke('entryWritings:getOrCreatePromptForWriting', writingId, entryDate),
+    setVisibility: (writingId: number, isVisible: boolean) =>
+      ipcRenderer.invoke('entryWritings:setVisibility', writingId, isVisible),
+    changePosition: (writingId: number, newPosition: number) =>
+      ipcRenderer.invoke('entryWritings:changePosition', writingId, newPosition),
+    addEntryWriting: (entryId: number, type: string, label: string | null) =>
+      ipcRenderer.invoke('entryWritings:addEntryWriting', entryId, type, label)
   },
   entryWidgets: {
     getWidgetsForEntry: (entryId: number) =>
-      ipcRenderer.invoke('entryWidgets:getWidgetsForEntry', entryId)
+      ipcRenderer.invoke('entryWidgets:getWidgetsForEntry', entryId),
+    setVisibility: (widgetId: number, isVisible: boolean) =>
+      ipcRenderer.invoke('entryWidgets:setVisibility', widgetId, isVisible),
+    changePosition: (widgetId: number, newPosition: number) =>
+      ipcRenderer.invoke('entryWidgets:changePosition', widgetId, newPosition),
+    addEntryWidget: (entryId: number, type: string, colSpan?: number) =>
+      ipcRenderer.invoke('entryWidgets:addEntryWidget', entryId, type, colSpan)
   },
   todos: {
     createTodo: (entryDate: string, label: string) =>
