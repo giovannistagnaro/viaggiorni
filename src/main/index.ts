@@ -14,6 +14,7 @@ import { registerWordOfDayIpc } from './ipc/wordOfDay'
 import { registerEntryPhotosIpc } from './ipc/entryPhotos'
 import { registerSettingsIpc } from './ipc/settings'
 import { registerOllamaIpc } from './ipc/ollama'
+import { registerTemplateIpc } from './ipc/template'
 
 function ipcRegistration(): void {
   registerDbIpc()
@@ -28,6 +29,7 @@ function ipcRegistration(): void {
   registerEntryPhotosIpc()
   registerSettingsIpc()
   registerOllamaIpc()
+  registerTemplateIpc()
 }
 
 function createWindow(): void {

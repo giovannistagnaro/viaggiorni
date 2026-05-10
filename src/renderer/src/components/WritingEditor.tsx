@@ -1,4 +1,5 @@
 import { EntryWriting } from '@shared/types'
+import { WRITING_TYPE_LABELS } from '@shared/constants'
 import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useDebouncedCallback } from '@renderer/lib/useDebouncedCallback'
@@ -44,9 +45,11 @@ function WritingEditor({ writing, entryDate, onSave }: Props): React.JSX.Element
     }
   })
 
+  const headerLabel = writing.label ?? WRITING_TYPE_LABELS[writing.type]
+
   return (
     <div>
-      {writing.label && <h2>{writing.label}</h2>}
+      {headerLabel && <h2>{headerLabel}</h2>}
       {prompt && <h3>{prompt}</h3>}
       <EditorContent editor={editor} />
     </div>

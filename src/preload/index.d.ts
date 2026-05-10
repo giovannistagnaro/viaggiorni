@@ -1,5 +1,6 @@
 import { ElectronAPI } from '@electron-toolkit/preload'
 import {
+  ActiveTemplate,
   Entry,
   EntryWriting,
   EntryWidget,
@@ -10,7 +11,11 @@ import {
   WordOfDay,
   EntryPhoto,
   SafeReturnSettings,
-  Theme
+  Theme,
+  TemplateWriting,
+  TemplateWidget,
+  WidgetType,
+  WritingType
 } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
@@ -103,6 +108,30 @@ interface OllamaApi {
   isOllamaAvailable: () => Promise<boolean>
 }
 
+interface TemplateApi {
+  getActiveTemplate: () => Promise<ActiveTemplate>
+  addTemplateWriting: (
+    templateId: number,
+    type: WritingType,
+    label: string | null
+  ) => Promise<TemplateWriting>
+  removeTemplateWriting: (writingId: number) => Promise<void>
+  updateTemplateWriting: (
+    writingId: number,
+    label: string | null,
+    isVisible: boolean
+  ) => Promise<void>
+  changeTemplateWritingPosition: (writingId: number, newPosition: number) => Promise<void>
+  addTemplateWidget: (
+    templateId: number,
+    type: WidgetType,
+    colSpan?: number
+  ) => Promise<TemplateWidget>
+  removeTemplateWidget: (widgetId: number) => Promise<void>
+  updateTemplateWidget: (widgetId: number, colSpan: number, isVisible: boolean) => Promise<void>
+  changeTemplateWidgetPosition: (widgetId: number, newPosition: number) => Promise<void>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
@@ -116,6 +145,7 @@ interface Api {
   entryPhotos: EntryPhotosApi
   settings: SettingsApi
   ollama: OllamaApi
+  template: TemplateApi
 }
 
 declare global {

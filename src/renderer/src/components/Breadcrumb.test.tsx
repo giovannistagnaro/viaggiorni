@@ -162,7 +162,6 @@ describe('Breadcrumb', () => {
             previousScreen="day"
             entryDate={ENTRY_DATE}
             onNavigate={vi.fn()}
-            onNavigateToDay={vi.fn()}
           />
         )
 
@@ -171,21 +170,20 @@ describe('Breadcrumb', () => {
         expect(screen.getByRole('button', { name: ENTRY_DATE })).toBeInTheDocument()
       })
 
-      it('calls onNavigateToDay with the entry date when the date segment is clicked', async () => {
-        const onNavigateToDay = vi.fn()
+      it('calls onNavigate with "day" when the date segment is clicked', async () => {
+        const onNavigate = vi.fn()
         render(
           <Breadcrumb
             currentScreen="settings"
             previousScreen="day"
             entryDate={ENTRY_DATE}
-            onNavigate={vi.fn()}
-            onNavigateToDay={onNavigateToDay}
+            onNavigate={onNavigate}
           />
         )
 
         await userEvent.click(screen.getByRole('button', { name: ENTRY_DATE }))
 
-        expect(onNavigateToDay).toHaveBeenCalledWith(ENTRY_DATE)
+        expect(onNavigate).toHaveBeenCalledWith('day')
       })
     })
 
@@ -205,6 +203,36 @@ describe('Breadcrumb', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Index' }))
 
       expect(onNavigate).toHaveBeenCalledWith('index')
+    })
+  })
+
+  describe('on the template screen', () => {
+    it('renders the previous-screen chain followed by Template', () => {
+      render(<Breadcrumb currentScreen="template" previousScreen="cover" onNavigate={vi.fn()} />)
+
+      expect(screen.getByRole('button', { name: 'Cover' })).toBeInTheDocument()
+      expect(screen.getByText('Template')).toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Template' })).not.toBeInTheDocument()
+    })
+
+    it('falls back to Cover when no previousScreen is provided', () => {
+      render(<Breadcrumb currentScreen="template" onNavigate={vi.fn()} />)
+
+      expect(screen.getByRole('button', { name: 'Cover' })).toBeInTheDocument()
+      expect(screen.getByText('Template')).toBeInTheDocument()
+    })
+
+    it('renders the date segment when entered from day', () => {
+      render(
+        <Breadcrumb
+          currentScreen="template"
+          previousScreen="day"
+          entryDate={ENTRY_DATE}
+          onNavigate={vi.fn()}
+        />
+      )
+
+      expect(screen.getByRole('button', { name: ENTRY_DATE })).toBeInTheDocument()
     })
   })
 })

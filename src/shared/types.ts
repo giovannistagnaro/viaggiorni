@@ -14,6 +14,7 @@ import type {
   templateWidgets,
   settings
 } from '../main/db/schemas/schema'
+import { WIDGET_TYPES, WRITING_TYPES } from './constants'
 
 export type Entry = typeof entries.$inferSelect
 export type EntryWriting = typeof entryWritings.$inferSelect
@@ -30,9 +31,17 @@ export type TemplateWriting = typeof templateWritings.$inferSelect
 export type TemplateWidget = typeof templateWidgets.$inferSelect
 export type Settings = typeof settings.$inferSelect
 
+export type WritingType = (typeof WRITING_TYPES)[number]
+export type WidgetType = (typeof WIDGET_TYPES)[number]
+
 export type WordOfDayItem = { word: string; definition: string; example: string }
 export type WritingPromptItem = { prompt: string }
 export type PhotoItem = { dataUrl: string; caption: string | null } | null
+export type ActiveTemplate = {
+  id: number
+  widgets: TemplateWidget[]
+  writings: TemplateWriting[]
+}
 
 export type Theme = 'light' | 'dark'
 

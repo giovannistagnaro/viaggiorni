@@ -1,67 +1,48 @@
-import { PostLoginScreen } from '@renderer/types'
+import { NonOverlayScreen, PostLoginScreen } from '@renderer/types'
+import { SCREEN_CONFIG } from '@renderer/screenConfig'
 import React from 'react'
 
 interface Props {
   currentScreen: PostLoginScreen
   entryDate?: string
-  previousScreen?: Exclude<PostLoginScreen, 'settings'>
-  onNavigate: (screen: 'cover' | 'index') => void
-  onNavigateToDay?: (date: string) => void
+  previousScreen?: NonOverlayScreen
+  onNavigate: (screen: PostLoginScreen) => void
 }
 
-type Segment = { label: string; onClick?: () => void }
-
-function computeSegments(props: Props): Segment[] {
-  const { currentScreen, previousScreen, entryDate, onNavigate, onNavigateToDay } = props
-  const segments: Segment[] = []
-
-  segments.push({
-    label: 'Cover',
-    onClick: currentScreen === 'cover' ? undefined : () => onNavigate('cover')
-  })
-
-  const showIndex =
-    currentScreen === 'index' ||
-    currentScreen === 'day' ||
-    (currentScreen === 'settings' && (previousScreen === 'index' || previousScreen === 'day'))
-  if (showIndex) {
-    segments.push({
-      label: 'Index',
-      onClick: currentScreen === 'index' ? undefined : () => onNavigate('index')
-    })
+function buildChain(
+  screen: PostLoginScreen,
+  previousScreen: PostLoginScreen | undefined
+): PostLoginScreen[] {
+  const config = SCREEN_CONFIG[screen]
+  if (config.isOverlay) {
+    const base = previousScreen ? buildChain(previousScreen, undefined) : ['cover' as const]
+    return [...base, screen]
   }
-
-  const showDate =
-    entryDate &&
-    (currentScreen === 'day' || (currentScreen === 'settings' && previousScreen === 'day'))
-  if (showDate) {
-    segments.push({
-      label: entryDate,
-      onClick: currentScreen === 'settings' ? () => onNavigateToDay?.(entryDate) : undefined
-    })
-  }
-
-  if (currentScreen === 'settings') {
-    segments.push({ label: 'Settings' })
-  }
-
-  return segments
+  if (!config.parent) return [screen]
+  return [...buildChain(config.parent, undefined), screen]
 }
 
 function BreadCrumb(props: Props): React.JSX.Element {
-  const segments = computeSegments(props)
+  const { currentScreen, previousScreen, entryDate, onNavigate } = props
+  const chain = buildChain(currentScreen, previousScreen)
+
   return (
     <nav aria-label="Breadcrumb" className="grid grid-flow-col justify-start gap-2">
-      {segments.map((segment, i) => (
-        <React.Fragment key={i}>
-          {i > 0 && <span> {'>'} </span>}
-          {segment.onClick ? (
-            <button onClick={segment.onClick}>{segment.label}</button>
-          ) : (
-            <span>{segment.label}</span>
-          )}
-        </React.Fragment>
-      ))}
+      {chain.map((screen, idx) => {
+        const cfg = SCREEN_CONFIG[screen]
+        const label = typeof cfg.label === 'function' ? cfg.label({ entryDate }) : cfg.label
+        const isCurrent = screen === currentScreen
+        return (
+          <React.Fragment key={screen}>
+            {idx > 0 && <span> {'>'} </span>}
+            {isCurrent ? (
+              <span>{label}</span>
+            ) : (
+              <button onClick={() => onNavigate(screen)}>{label}</button>
+            )}
+          </React.Fragment>
+        )
+      })}
     </nav>
   )
 }

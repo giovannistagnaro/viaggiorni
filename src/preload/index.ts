@@ -104,6 +104,25 @@ const api = {
   ollama: {
     listOllamaModels: () => ipcRenderer.invoke('ollama:listOllamaModels'),
     isOllamaAvailable: () => ipcRenderer.invoke('ollama:isOllamaAvailable')
+  },
+  template: {
+    getActiveTemplate: () => ipcRenderer.invoke('template:getActiveTemplate'),
+    addTemplateWriting: (templateId: number, type: string, label: string | null) =>
+      ipcRenderer.invoke('template:addTemplateWriting', templateId, type, label),
+    removeTemplateWriting: (writingId: number) =>
+      ipcRenderer.invoke('template:removeTemplateWriting', writingId),
+    updateTemplateWriting: (writingId: number, label: string | null, isVisible: boolean) =>
+      ipcRenderer.invoke('template:updateTemplateWriting', writingId, label, isVisible),
+    changeTemplateWritingPosition: (writingId: number, newPosition: number) =>
+      ipcRenderer.invoke('template:changeTemplateWritingPosition', writingId, newPosition),
+    addTemplateWidget: (templateId: number, type: string, colSpan?: number) =>
+      ipcRenderer.invoke('template:addTemplateWidget', templateId, type, colSpan),
+    removeTemplateWidget: (widgetId: number) =>
+      ipcRenderer.invoke('template:removeTemplateWidget', widgetId),
+    updateTemplateWidget: (widgetId: number, colSpan: number, isVisible: boolean) =>
+      ipcRenderer.invoke('template:updateTemplateWidget', widgetId, colSpan, isVisible),
+    changeTemplateWidgetPosition: (widgetId: number, newPosition: number) =>
+      ipcRenderer.invoke('template:changeTemplateWidgetPosition', widgetId, newPosition)
   }
 }
 

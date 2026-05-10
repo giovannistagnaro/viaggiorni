@@ -77,11 +77,12 @@ describe('WritingEditor', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'Daily Summary' })).toBeInTheDocument()
   })
 
-  it('does not render a heading when label is null', () => {
+  it('falls back to the default label for the type when label is null', () => {
     const nullLabelWriting = { ...baseWriting, label: null }
     render(<WritingEditor writing={nullLabelWriting} entryDate={ENTRY_DATE} onSave={vi.fn()} />)
 
-    expect(screen.queryByRole('heading', { level: 2 })).not.toBeInTheDocument()
+    // Default label for 'daily_summary' is 'Daily Summary'
+    expect(screen.getByRole('heading', { level: 2, name: 'Daily Summary' })).toBeInTheDocument()
   })
 
   it('renders the editor', () => {
