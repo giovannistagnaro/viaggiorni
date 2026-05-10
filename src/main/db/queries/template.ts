@@ -189,7 +189,7 @@ export function addTemplateWidget(
   db: DrizzleDB,
   templateId: number,
   type: WidgetType,
-  colSpan: number = 2
+  colSpan: number = 4
 ): TemplateWidget {
   return db.transaction((tx) => {
     const exists = tx

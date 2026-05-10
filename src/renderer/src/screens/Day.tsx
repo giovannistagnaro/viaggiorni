@@ -166,6 +166,16 @@ function Day({ entryDate }: Props): React.JSX.Element {
     }
   }
 
+  async function handleWidgetColSpan(widgetId: number, colSpan: number): Promise<void> {
+    try {
+      await window.api.entryWidgets.updateColSpan(widgetId, colSpan)
+      await refreshStructure()
+    } catch (err) {
+      // TODO: surface to user via error UI
+      console.error('Failed to update widget colSpan', err)
+    }
+  }
+
   if (loading) return <div>Loading...</div>
   if (!entry) return <div>Failed to load entry</div>
 
@@ -195,10 +205,10 @@ function Day({ entryDate }: Props): React.JSX.Element {
       <button onClick={handleBookmark}>{entry.isBookmarked ? 'Un-bookmark' : 'Bookmark'}</button>
 
       <div className="grid grid-cols-2 grid-rows-1 gap-4">
-        <div>
+        <div className={editMode ? '' : 'grid grid-cols-4 gap-4'}>
           {visibleWidgets.map((widget) =>
             editMode ? (
-              <div key={widget.id} className="grid grid-cols-4 items-center gap-2">
+              <div key={widget.id} className="grid grid-cols-5 items-center gap-2">
                 <span>{widget.type}</span>
                 <button onClick={() => handleWidgetMove(widget.id, widget.position, -1)}>
                   [Up]
@@ -209,9 +219,18 @@ function Day({ entryDate }: Props): React.JSX.Element {
                 <button onClick={() => handleWidgetVisibility(widget.id, !widget.isVisible)}>
                   {widget.isVisible ? 'Hide' : 'Show'}
                 </button>
+                <select
+                  value={widget.colSpan}
+                  onChange={(e) => handleWidgetColSpan(widget.id, Number(e.target.value))}
+                >
+                  <option value={2}>Half</option>
+                  <option value={4}>Full</option>
+                </select>
               </div>
             ) : (
-              <WidgetRenderer key={widget.id} widget={widget} entryDate={entry.date} />
+              <div key={widget.id} style={{ gridColumn: `span ${widget.colSpan}` }}>
+                <WidgetRenderer widget={widget} entryDate={entry.date} />
+              </div>
             )
           )}
           {editMode && availableWidgetTypes.length > 0 && (

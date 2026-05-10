@@ -47,7 +47,9 @@ const api = {
     changePosition: (widgetId: number, newPosition: number) =>
       ipcRenderer.invoke('entryWidgets:changePosition', widgetId, newPosition),
     addEntryWidget: (entryId: number, type: string, colSpan?: number) =>
-      ipcRenderer.invoke('entryWidgets:addEntryWidget', entryId, type, colSpan)
+      ipcRenderer.invoke('entryWidgets:addEntryWidget', entryId, type, colSpan),
+    updateColSpan: (widgetId: number, colSpan: number) =>
+      ipcRenderer.invoke('entryWidgets:updateColSpan', widgetId, colSpan)
   },
   todos: {
     createTodo: (entryDate: string, label: string) =>
