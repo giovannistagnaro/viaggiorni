@@ -1,5 +1,6 @@
 import { MoodTag } from '@shared/types'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
   entryId: number
@@ -20,6 +21,7 @@ function MoodTrackerWidget({ entryId }: Props): React.JSX.Element {
       } catch (err) {
         // TODO: surface to user via error UI
         console.error('Failed to load mood tags', err)
+        toast.error('Failed to load mood tags')
       }
     }
     getMoodTags()
@@ -36,6 +38,7 @@ function MoodTrackerWidget({ entryId }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to toggle mood tag', err)
+      toast.error('Failed to toggle mood tag')
     }
   }
 
@@ -51,6 +54,7 @@ function MoodTrackerWidget({ entryId }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to add mood tag', err)
+      toast.error('Failed to add mood tag')
     }
   }
 

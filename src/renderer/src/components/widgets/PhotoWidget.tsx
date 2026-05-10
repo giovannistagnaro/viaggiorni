@@ -1,5 +1,6 @@
 import { EntryPhoto } from '@shared/types'
 import { useCallback, useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
   entryId: number
@@ -48,6 +49,7 @@ function PhotoWidget({ entryId }: Props): React.JSX.Element {
       } catch (err) {
         // TODO: surface to user via error UI
         console.error('Failed to load photo', err)
+        toast.error('Failed to load photo')
       } finally {
         if (!cancelled) setGettingImage(false)
       }
@@ -67,6 +69,7 @@ function PhotoWidget({ entryId }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to add photo', err)
+      toast.error('Failed to add photo')
     }
   }
 
@@ -79,6 +82,7 @@ function PhotoWidget({ entryId }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to delete photo', err)
+      toast.error('Failed to delete photo')
     }
   }
 

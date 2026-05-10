@@ -1,6 +1,7 @@
 import { formatDateISO } from '@renderer/utils/dateFormatters'
 import { Todo } from '@shared/types'
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
   entryDate: string
@@ -28,6 +29,7 @@ function TodoListWidget({ entryDate }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to fetch todos', err)
+      toast.error('Failed to fetch todos')
     }
   }, [activeDate])
 
@@ -45,6 +47,7 @@ function TodoListWidget({ entryDate }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to toggle todo', err)
+      toast.error('Failed to toggle todo')
     }
   }
 
@@ -60,6 +63,7 @@ function TodoListWidget({ entryDate }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to add todo', err)
+      toast.error('Failed to add todo')
     }
   }
 
@@ -70,6 +74,7 @@ function TodoListWidget({ entryDate }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to delete todo', err)
+      toast.error('Failed to delete todo')
     }
   }
 
@@ -83,6 +88,7 @@ function TodoListWidget({ entryDate }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to update todo label', err)
+      toast.error('Failed to update todo label')
     }
   }
 

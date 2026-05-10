@@ -2,6 +2,7 @@ import { Calendar } from '@renderer/components/ui/calendar'
 import { formatDateISO } from '@renderer/utils/dateFormatters'
 import { Entry } from '@shared/types'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
   onNavigateToDay: (date: string) => void
@@ -30,6 +31,7 @@ function Index({ onNavigateToDay }: Props): React.JSX.Element {
       } catch (err) {
         // TODO: surface to user via error UI
         console.error('Failed to fetch bookmarked entries', err)
+        toast.error('Failed to fetch bookmarked entries')
       }
     }
     getEntryData()

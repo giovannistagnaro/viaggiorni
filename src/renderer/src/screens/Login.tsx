@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { ENTER_YOUR_PASSWORD_PLACEHOLDER_TEXT } from './screenConstants'
+import { toast } from 'sonner'
 
 interface Props {
   onSuccess: () => void
@@ -19,6 +20,7 @@ function Login({ onSuccess }: Props): React.JSX.Element {
       } catch (err) {
         // TODO: surface to user via error UI
         console.error('Failed to fetch username', err)
+        toast.error('Failed to fetch username')
       }
     }
     getUsernameWrapper()

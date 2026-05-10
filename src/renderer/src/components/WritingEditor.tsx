@@ -4,6 +4,7 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useDebouncedCallback } from '@renderer/lib/useDebouncedCallback'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
   writing: Pick<EntryWriting, 'id' | 'type' | 'label' | 'content' | 'prompt'>
@@ -27,8 +28,8 @@ function WritingEditor({ writing, entryDate, onSave }: Props): React.JSX.Element
         )
         if (!cancelled) setPrompt(result)
       } catch (err) {
-        // TODO: surface to user via error UI
         console.error('Failed to fetch writing prompt', err)
+        toast.error('Failed to fetch writing prompt')
       }
     }
     fetchPrompt()
