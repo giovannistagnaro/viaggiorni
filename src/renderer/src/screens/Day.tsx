@@ -5,6 +5,7 @@ import { Entry, EntryWriting, EntryWidget, WidgetType, WritingType } from '@shar
 import { WIDGET_TYPES, WRITING_TYPES, WRITING_TYPE_LABELS } from '@shared/constants'
 import { useEffect, useState } from 'react'
 import { addDays } from '@shared/helpers'
+import { useHotkeys } from 'react-hotkeys-hook'
 
 interface Props {
   entryDate: string
@@ -18,6 +19,11 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
   const [widgets, setWidgets] = useState<EntryWidget[]>([])
   const [editMode, setEditMode] = useState<boolean>(false)
   const [rightNavAvailable, setRightNavAvailable] = useState<boolean>(false)
+
+  useHotkeys('mod+right', () => (rightNavAvailable ? onNavigateToDay(addDays(entryDate, 1)) : {}))
+  useHotkeys('mod+left', () => onNavigateToDay(addDays(entryDate, -1)))
+  useHotkeys('mod+b', () => handleBookmark())
+  useHotkeys('esc', () => (editMode ? setEditMode(false) : {}))
 
   useEffect(() => {
     async function dateSetup(): Promise<void> {

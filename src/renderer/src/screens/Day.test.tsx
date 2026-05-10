@@ -422,4 +422,69 @@ describe('Main', () => {
       expect(screen.queryByRole('button', { name: '>' })).not.toBeInTheDocument()
     })
   })
+
+  describe('keyboard shortcuts', () => {
+    beforeEach(() => {
+      vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
+    })
+
+    it('mod+left navigates to the previous day', async () => {
+      const onNavigateToDay = vi.fn()
+      render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today="2026-05-02" />)
+      await screen.findByDisplayValue(mockEntry.title)
+
+      await userEvent.keyboard('{Control>}{ArrowLeft}{/Control}')
+
+      expect(onNavigateToDay).toHaveBeenCalledWith('2026-04-30')
+    })
+
+    it('mod+right navigates to the next day when before today', async () => {
+      const onNavigateToDay = vi.fn()
+      render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today="2026-05-03" />)
+      await screen.findByDisplayValue(mockEntry.title)
+
+      await userEvent.keyboard('{Control>}{ArrowRight}{/Control}')
+
+      expect(onNavigateToDay).toHaveBeenCalledWith('2026-05-02')
+    })
+
+    it('mod+right is a no-op when entryDate equals today', async () => {
+      const onNavigateToDay = vi.fn()
+      render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today="2026-05-01" />)
+      await screen.findByDisplayValue(mockEntry.title)
+
+      await userEvent.keyboard('{Control>}{ArrowRight}{/Control}')
+
+      expect(onNavigateToDay).not.toHaveBeenCalled()
+    })
+
+    it('mod+b toggles the bookmark on the current entry', async () => {
+      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      await screen.findByDisplayValue(mockEntry.title)
+
+      await userEvent.keyboard('{Control>}b{/Control}')
+
+      expect(window.api.entries.toggleBookmark).toHaveBeenCalledWith(mockEntry.id)
+    })
+
+    it('esc exits edit mode when active', async () => {
+      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
+      expect(screen.getByRole('button', { name: 'Done' })).toBeInTheDocument()
+
+      await userEvent.keyboard('{Escape}')
+
+      expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument()
+    })
+
+    it('esc is a no-op when not in edit mode', async () => {
+      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      await screen.findByRole('button', { name: 'Edit' })
+
+      await userEvent.keyboard('{Escape}')
+
+      // Edit button still says "Edit" (we never entered edit mode, so esc shouldn't change anything)
+      expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument()
+    })
+  })
 })
