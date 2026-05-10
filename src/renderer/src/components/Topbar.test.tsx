@@ -6,7 +6,7 @@ import Topbar from './Topbar'
 describe('Topbar', () => {
   it('renders the children passed in', () => {
     render(
-      <Topbar onLock={vi.fn()} onNavigateToSettings={vi.fn()}>
+      <Topbar onLock={vi.fn()} onNavigateToSettings={vi.fn()} onNavigateToTemplate={vi.fn()}>
         <div>Slot content</div>
       </Topbar>
     )
@@ -16,7 +16,7 @@ describe('Topbar', () => {
 
   it('renders a Lock button', () => {
     render(
-      <Topbar onLock={vi.fn()} onNavigateToSettings={vi.fn()}>
+      <Topbar onLock={vi.fn()} onNavigateToSettings={vi.fn()} onNavigateToTemplate={vi.fn()}>
         <div />
       </Topbar>
     )
@@ -26,7 +26,7 @@ describe('Topbar', () => {
 
   it('renders a Settings button', () => {
     render(
-      <Topbar onLock={vi.fn()} onNavigateToSettings={vi.fn()}>
+      <Topbar onLock={vi.fn()} onNavigateToSettings={vi.fn()} onNavigateToTemplate={vi.fn()}>
         <div />
       </Topbar>
     )
@@ -37,7 +37,7 @@ describe('Topbar', () => {
   it('calls onLock when the Lock button is clicked', async () => {
     const onLock = vi.fn()
     render(
-      <Topbar onLock={onLock} onNavigateToSettings={vi.fn()}>
+      <Topbar onLock={onLock} onNavigateToSettings={vi.fn()} onNavigateToTemplate={vi.fn()}>
         <div />
       </Topbar>
     )
@@ -50,7 +50,11 @@ describe('Topbar', () => {
   it('calls onNavigateToSettings when the Settings button is clicked', async () => {
     const onNavigateToSettings = vi.fn()
     render(
-      <Topbar onLock={vi.fn()} onNavigateToSettings={onNavigateToSettings}>
+      <Topbar
+        onLock={vi.fn()}
+        onNavigateToSettings={onNavigateToSettings}
+        onNavigateToTemplate={vi.fn()}
+      >
         <div />
       </Topbar>
     )
@@ -58,5 +62,22 @@ describe('Topbar', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Settings' }))
 
     expect(onNavigateToSettings).toHaveBeenCalledTimes(1)
+  })
+
+  it('calls onNavigateToTemplate when the Template button is clicked', async () => {
+    const onNavigateToTemplate = vi.fn()
+    render(
+      <Topbar
+        onLock={vi.fn()}
+        onNavigateToSettings={vi.fn()}
+        onNavigateToTemplate={onNavigateToTemplate}
+      >
+        <div />
+      </Topbar>
+    )
+
+    await userEvent.click(screen.getByRole('button', { name: 'Template editor' }))
+
+    expect(onNavigateToTemplate).toHaveBeenCalledTimes(1)
   })
 })
