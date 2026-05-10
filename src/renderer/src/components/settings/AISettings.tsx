@@ -1,5 +1,6 @@
 import { SafeReturnSettings } from '@shared/types'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 function AISettings(): React.JSX.Element {
   const [settings, setSettings] = useState<SafeReturnSettings | null>(null)
@@ -25,6 +26,7 @@ function AISettings(): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to change Ollama model', err)
+      toast.error('Failed to change Ollama model')
     }
   }
 
@@ -35,6 +37,7 @@ function AISettings(): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to check Ollama availability', err)
+      toast.error('Failed to check Ollama availability')
     }
   }
 

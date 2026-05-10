@@ -1,5 +1,6 @@
 import { SafeReturnSettings, Theme } from '@shared/types'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 function AppearanceSettings(): React.JSX.Element {
   const [settings, setSettings] = useState<SafeReturnSettings | null>(null)
@@ -21,6 +22,7 @@ function AppearanceSettings(): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to change theme', err)
+      toast.error('Failed to change theme')
     }
   }
 

@@ -1,5 +1,6 @@
 import { WordOfDay } from '@shared/types'
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
   entryDate: string
@@ -16,6 +17,7 @@ function WordOfDayWidget({ entryDate }: Props): React.JSX.Element {
       } catch (err) {
         // TODO: surface to user via error UI
         console.error('Failed to load word of day', err)
+        toast.error('Failed to load word of day')
       } finally {
         setIsLoading(false)
       }

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { toast } from 'sonner'
 import {
   ERROR_MESSAGE_PASSWORD_MISMATCH,
   ERROR_MESSAGE_PASSWORD_TOO_LONG,
@@ -67,6 +68,7 @@ function Onboarding({ onComplete }: Props): React.JSX.Element {
       } catch (err) {
         // TODO: surface to user via error UI
         console.error('Failed to complete onboarding', err)
+        toast.error('Failed to complete onboarding')
         setError('Something went wrong. Please try again.')
       }
     }

@@ -12,6 +12,7 @@ import BreadCrumb from './components/Breadcrumb'
 import Template from './screens/Template'
 import { SCREEN_CONFIG } from './screenConfig'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { toast } from 'sonner'
 
 function App(): React.JSX.Element {
   const [screen, setScreen] = useState<Screen>('loading')
@@ -78,6 +79,7 @@ function App(): React.JSX.Element {
       await window.api.db.close()
     } catch (err) {
       console.error('Failed to close DB', err)
+      toast.error('Failed to close DB')
     }
     setScreen('login')
   }

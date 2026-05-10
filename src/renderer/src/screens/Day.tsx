@@ -6,6 +6,7 @@ import { WIDGET_TYPES, WRITING_TYPES, WRITING_TYPE_LABELS } from '@shared/consta
 import { useEffect, useState } from 'react'
 import { addDays } from '@shared/helpers'
 import { useHotkeys } from 'react-hotkeys-hook'
+import { toast } from 'sonner'
 
 interface Props {
   entryDate: string
@@ -34,8 +35,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
         setEntry(todayEntry)
         setRightNavAvailable(entryDate < today)
       } catch (err) {
-        // TODO: surface to user via error UI
         console.error("Failed to load or create today's entry", err)
+        toast.error("Failed to load or create today's entry")
       } finally {
         setLoading(false)
       }
@@ -50,8 +51,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
         const entryWritings = await window.api.entryWritings.getWritingsForEntry(entry.id)
         setWritings(entryWritings)
       } catch (err) {
-        // TODO: surface to user via error UI
         console.error('Failed to load entry writings', err)
+        toast.error('Failed to load entry writings')
       }
     }
     entryWritingSetup()
@@ -65,6 +66,7 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
         setWidgets(entryWidgets)
       } catch (err) {
         console.error('Failed to load widgets', err)
+        toast.error('Failed to load widgets')
       }
     }
     entryWidgetSetup()
@@ -76,8 +78,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       await window.api.entries.updateTitle(entry.id, newTitle)
       setEntry({ ...entry, title: newTitle })
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to update entry title', err)
+      toast.error('Failed to update entry title')
     }
   }
 
@@ -87,8 +89,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       await window.api.entries.toggleBookmark(entry.id)
       setEntry({ ...entry, isBookmarked: !entry.isBookmarked })
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to bookmark entry', err)
+      toast.error('Failed to bookmark entry')
     }
   }
 
@@ -102,8 +104,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       setWidgets(refreshedWidgets)
       setWritings(refreshedWritings)
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to refresh entry structure', err)
+      toast.error('Failed to refresh entry structure')
     }
   }
 
@@ -116,8 +118,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       await window.api.entryWidgets.changePosition(widgetId, position + direction)
       await refreshStructure()
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to change widget position', err)
+      toast.error('Failed to change widget position')
     }
   }
 
@@ -130,8 +132,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       await window.api.entryWritings.changePosition(writingId, position + direction)
       await refreshStructure()
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to change writing position', err)
+      toast.error('Failed to change writing position')
     }
   }
 
@@ -140,8 +142,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       await window.api.entryWidgets.setVisibility(widgetId, isVisible)
       await refreshStructure()
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to set widget visibility', err)
+      toast.error('Failed to set widget visibility')
     }
   }
 
@@ -150,8 +152,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       await window.api.entryWritings.setVisibility(writingId, isVisible)
       await refreshStructure()
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to set writing visibility', err)
+      toast.error('Failed to set writing visibility')
     }
   }
 
@@ -161,8 +163,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       await window.api.entryWidgets.addEntryWidget(entry.id, type)
       await refreshStructure()
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to add widget to entry', err)
+      toast.error('Failed to add widget to entry')
     }
   }
 
@@ -172,8 +174,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       await window.api.entryWritings.addEntryWriting(entry.id, type, WRITING_TYPE_LABELS[type])
       await refreshStructure()
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to add writing to entry', err)
+      toast.error('Failed to add writing to entry')
     }
   }
 
@@ -182,8 +184,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       await window.api.entryWidgets.updateColSpan(widgetId, colSpan)
       await refreshStructure()
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to update widget colSpan', err)
+      toast.error('Failed to update widget colSpan')
     }
   }
 
@@ -290,8 +292,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
                     try {
                       await window.api.entryWritings.updateWritingContent(writing.id, newContent)
                     } catch (err) {
-                      // TODO: surface to user via error UI
                       console.error('Failed to save writing content', err)
+                      toast.error('Failed to save writing content')
                     }
                   }}
                 />

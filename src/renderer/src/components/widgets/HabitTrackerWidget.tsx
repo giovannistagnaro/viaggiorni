@@ -1,5 +1,6 @@
 import { Habit } from '@shared/types'
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 interface Props {
   entryDate: string
@@ -20,6 +21,7 @@ function HabitTrackerWidget({ entryDate }: Props): React.JSX.Element {
       setHabits(activeHabits)
     } catch (err) {
       console.error('Failed to load habits', err)
+      toast.error('Failed to load habits')
       return
     }
 
@@ -35,6 +37,7 @@ function HabitTrackerWidget({ entryDate }: Props): React.JSX.Element {
       setHabitCompletion(new Map(entries))
     } catch (err) {
       console.error('Failed to load habit completion', err)
+      toast.error('Failed to load habit completion')
     }
   }, [entryDate])
 
@@ -59,6 +62,7 @@ function HabitTrackerWidget({ entryDate }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to create habit', err)
+      toast.error('Failed to create habit')
     }
   }
 
@@ -69,6 +73,7 @@ function HabitTrackerWidget({ entryDate }: Props): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to toggle habit completion', err)
+      toast.error('Failed to toggle habit completion')
     }
   }
 

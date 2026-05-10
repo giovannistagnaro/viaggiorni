@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { toast } from 'sonner'
 
 function ProfileSettings(): React.JSX.Element {
   const [username, setUsername] = useState<string | null>(null)
@@ -21,6 +22,7 @@ function ProfileSettings(): React.JSX.Element {
     } catch (err) {
       // TODO: surface to user via error UI
       console.error('Failed to change username', err)
+      toast.error('Failed to change username')
     }
   }
 
