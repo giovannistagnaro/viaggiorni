@@ -35,7 +35,9 @@ const api = {
     setVisibility: (writingId: number, isVisible: boolean) =>
       ipcRenderer.invoke('entryWritings:setVisibility', writingId, isVisible),
     changePosition: (writingId: number, newPosition: number) =>
-      ipcRenderer.invoke('entryWritings:changePosition', writingId, newPosition)
+      ipcRenderer.invoke('entryWritings:changePosition', writingId, newPosition),
+    addEntryWriting: (entryId: number, type: string, label: string | null) =>
+      ipcRenderer.invoke('entryWritings:addEntryWriting', entryId, type, label)
   },
   entryWidgets: {
     getWidgetsForEntry: (entryId: number) =>
@@ -43,7 +45,9 @@ const api = {
     setVisibility: (widgetId: number, isVisible: boolean) =>
       ipcRenderer.invoke('entryWidgets:setVisibility', widgetId, isVisible),
     changePosition: (widgetId: number, newPosition: number) =>
-      ipcRenderer.invoke('entryWidgets:changePosition', widgetId, newPosition)
+      ipcRenderer.invoke('entryWidgets:changePosition', widgetId, newPosition),
+    addEntryWidget: (entryId: number, type: string, colSpan?: number) =>
+      ipcRenderer.invoke('entryWidgets:addEntryWidget', entryId, type, colSpan)
   },
   todos: {
     createTodo: (entryDate: string, label: string) =>

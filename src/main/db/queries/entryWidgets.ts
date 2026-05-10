@@ -1,6 +1,6 @@
-import { EntryWidget } from '@shared/types'
+import { EntryWidget, WidgetType } from '@shared/types'
 import { DrizzleDB } from '../database'
-import { entryWidgets } from '../schemas/schema'
+import { entries, entryWidgets } from '../schemas/schema'
 import { and, asc, eq, gt, gte, lt, lte, max, sql } from 'drizzle-orm'
 
 export function getWidgetsForEntry(db: DrizzleDB, entryId: number): EntryWidget[] {
@@ -10,6 +10,32 @@ export function getWidgetsForEntry(db: DrizzleDB, entryId: number): EntryWidget[
     .where(eq(entryWidgets.entryId, entryId))
     .orderBy(asc(entryWidgets.position))
     .all()
+}
+
+export function addEntryWidget(
+  db: DrizzleDB,
+  entryId: number,
+  type: WidgetType,
+  colSpan: number = 2
+): EntryWidget {
+  return db.transaction((tx) => {
+    const exists = tx.select({ id: entries.id }).from(entries).where(eq(entries.id, entryId)).get()
+    if (!exists) throw new Error('Entry not found')
+
+    const maxRow = tx
+      .select({ max: sql<number>`COALESCE(MAX(${entryWidgets.position}), -1)` })
+      .from(entryWidgets)
+      .where(eq(entryWidgets.entryId, entryId))
+      .get()
+
+    const position = (maxRow?.max ?? -1) + 1
+
+    return tx
+      .insert(entryWidgets)
+      .values({ entryId, type, position, colSpan, isVisible: true })
+      .returning()
+      .get()
+  })
 }
 
 export function setEntryWidgetVisibility(

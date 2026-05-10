@@ -1,5 +1,6 @@
 import { ipcMain } from 'electron'
 import {
+  addEntryWriting,
   changeEntryWritingPosition,
   getUsedWritingPrompts,
   getWritingById,
@@ -8,6 +9,7 @@ import {
   updateWritingContent,
   updateWritingPrompt
 } from '../db/queries/entryWritings'
+import { WritingType } from '@shared/types'
 import { getDB } from '../db'
 import log from 'electron-log'
 import { generateWritingPrompt, isOllamaAvailable } from '../ollamaService'
@@ -60,6 +62,17 @@ export function registerEntryWritingsIpc(): void {
         changeEntryWritingPosition(getDB(), writingId, newPosition)
       } catch (err) {
         log.error('Failed to change entry writing position', { writingId, newPosition, error: err })
+        throw err
+      }
+    }
+  )
+  ipcMain.handle(
+    'entryWritings:addEntryWriting',
+    (_event, entryId: number, type: WritingType, label: string | null) => {
+      try {
+        return addEntryWriting(getDB(), entryId, type, label)
+      } catch (err) {
+        log.error('Failed to add entry writing', { entryId, type, error: err })
         throw err
       }
     }

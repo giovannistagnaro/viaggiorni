@@ -1,4 +1,4 @@
-import { EntryWriting } from '@shared/types'
+import { EntryWriting, WritingType } from '@shared/types'
 import { DrizzleDB } from '../database'
 import { entries, entryWritings } from '../schemas/schema'
 import { eq, asc, sql, gte, and, gt, lt, lte, max } from 'drizzle-orm'
@@ -11,6 +11,32 @@ export function getWritingsForEntry(db: DrizzleDB, entryId: number): EntryWritin
     .where(eq(entryWritings.entryId, entryId))
     .orderBy(asc(entryWritings.position))
     .all()
+}
+
+export function addEntryWriting(
+  db: DrizzleDB,
+  entryId: number,
+  type: WritingType,
+  label: string | null
+): EntryWriting {
+  return db.transaction((tx) => {
+    const exists = tx.select({ id: entries.id }).from(entries).where(eq(entries.id, entryId)).get()
+    if (!exists) throw new Error('Entry not found')
+
+    const maxRow = tx
+      .select({ max: sql<number>`COALESCE(MAX(${entryWritings.position}), -1)` })
+      .from(entryWritings)
+      .where(eq(entryWritings.entryId, entryId))
+      .get()
+
+    const position = (maxRow?.max ?? -1) + 1
+
+    return tx
+      .insert(entryWritings)
+      .values({ entryId, type, label, position, isVisible: true })
+      .returning()
+      .get()
+  })
 }
 
 export function updateWritingContent(db: DrizzleDB, writingId: number, content: string): void {

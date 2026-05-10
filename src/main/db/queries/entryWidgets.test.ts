@@ -3,6 +3,7 @@ import { closeTestDb, createTestDb } from './testHelper'
 import { describe, expect, it, afterEach, beforeEach } from 'vitest'
 import { createEntry } from './entries'
 import {
+  addEntryWidget,
   changeEntryWidgetPosition,
   getWidgetsForEntry,
   setEntryWidgetVisibility
@@ -155,5 +156,42 @@ describe('changeEntryWidgetPosition', () => {
 
     const e2After = getWidgetsForEntry(db, e2.id).map((w) => ({ id: w.id, position: w.position }))
     expect(e2After).toEqual(e2Before)
+  })
+})
+
+describe('addEntryWidget', () => {
+  it('inserts a widget at the end of the entry', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const beforeCount = getWidgetsForEntry(db, entry.id).length
+
+    addEntryWidget(db, entry.id, 'photo')
+
+    const after = getWidgetsForEntry(db, entry.id)
+    expect(after.length).toBe(beforeCount + 1)
+    expect(after[after.length - 1].type).toBe('photo')
+    expect(after[after.length - 1].position).toBe(beforeCount)
+  })
+
+  it('returns the inserted row with isVisible true and default colSpan of 2', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+
+    const inserted = addEntryWidget(db, entry.id, 'photo')
+
+    expect(inserted.entryId).toBe(entry.id)
+    expect(inserted.type).toBe('photo')
+    expect(inserted.isVisible).toBe(true)
+    expect(inserted.colSpan).toBe(2)
+  })
+
+  it('respects an explicit colSpan when provided', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+
+    const inserted = addEntryWidget(db, entry.id, 'photo', 4)
+
+    expect(inserted.colSpan).toBe(4)
+  })
+
+  it('throws when the entryId does not exist', () => {
+    expect(() => addEntryWidget(db, 999, 'photo')).toThrow(/Entry not found/i)
   })
 })

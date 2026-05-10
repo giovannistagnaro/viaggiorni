@@ -48,12 +48,18 @@ interface EntryWritingsApi {
   getOrCreatePromptForWriting: (writingId: number, entryDate: string) => Promise<string | null>
   setVisibility: (writingId: number, isVisible: boolean) => Promise<void>
   changePosition: (writingId: number, newPosition: number) => Promise<void>
+  addEntryWriting: (
+    entryId: number,
+    type: WritingType,
+    label: string | null
+  ) => Promise<EntryWriting>
 }
 
 interface EntryWidgetsApi {
   getWidgetsForEntry: (entryId: number) => Promise<EntryWidget[]>
   setVisibility: (widgetId: number, isVisible: boolean) => Promise<void>
   changePosition: (widgetId: number, newPosition: number) => Promise<void>
+  addEntryWidget: (entryId: number, type: WidgetType, colSpan?: number) => Promise<EntryWidget>
 }
 
 interface TodosApi {

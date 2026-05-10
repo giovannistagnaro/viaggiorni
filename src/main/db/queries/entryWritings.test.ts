@@ -2,6 +2,7 @@ import { DrizzleDB } from '../database'
 import { closeTestDb, createTestDb } from './testHelper'
 import { describe, expect, it, afterEach, beforeEach } from 'vitest'
 import {
+  addEntryWriting,
   changeEntryWritingPosition,
   getUsedWritingPrompts,
   getWritingById,
@@ -314,5 +315,42 @@ describe('changeEntryWritingPosition', () => {
       position: w.position
     }))
     expect(e2After).toEqual(e2Before)
+  })
+})
+
+describe('addEntryWriting', () => {
+  it('inserts a writing at the end of the entry', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const beforeCount = getWritingsForEntry(db, entry.id).length
+
+    addEntryWriting(db, entry.id, 'notable_moment', 'Notable Moment')
+
+    const after = getWritingsForEntry(db, entry.id)
+    expect(after.length).toBe(beforeCount + 1)
+    expect(after[after.length - 1].type).toBe('notable_moment')
+    expect(after[after.length - 1].position).toBe(beforeCount)
+  })
+
+  it('returns the inserted row with the provided label and isVisible true', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+
+    const inserted = addEntryWriting(db, entry.id, 'notable_moment', 'Notable Moment')
+
+    expect(inserted.entryId).toBe(entry.id)
+    expect(inserted.type).toBe('notable_moment')
+    expect(inserted.label).toBe('Notable Moment')
+    expect(inserted.isVisible).toBe(true)
+  })
+
+  it('accepts a null label', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+
+    const inserted = addEntryWriting(db, entry.id, 'notable_moment', null)
+
+    expect(inserted.label).toBeNull()
+  })
+
+  it('throws when the entryId does not exist', () => {
+    expect(() => addEntryWriting(db, 999, 'notable_moment', null)).toThrow(/Entry not found/i)
   })
 })
