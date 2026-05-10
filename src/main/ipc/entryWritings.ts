@@ -1,8 +1,10 @@
 import { ipcMain } from 'electron'
 import {
+  changeEntryWritingPosition,
   getUsedWritingPrompts,
   getWritingById,
   getWritingsForEntry,
+  setEntryWritingVisibility,
   updateWritingContent,
   updateWritingPrompt
 } from '../db/queries/entryWritings'
@@ -39,6 +41,25 @@ export function registerEntryWritingsIpc(): void {
         updateWritingPrompt(getDB(), writingId, newPrompt)
       } catch (err) {
         log.error('Failed to update writing prompt', { writingId, error: err })
+        throw err
+      }
+    }
+  )
+  ipcMain.handle('entryWritings:setVisibility', (_event, writingId: number, isVisible: boolean) => {
+    try {
+      setEntryWritingVisibility(getDB(), writingId, isVisible)
+    } catch (err) {
+      log.error('Failed to set entry writing visibility', { writingId, isVisible, error: err })
+      throw err
+    }
+  })
+  ipcMain.handle(
+    'entryWritings:changePosition',
+    (_event, writingId: number, newPosition: number) => {
+      try {
+        changeEntryWritingPosition(getDB(), writingId, newPosition)
+      } catch (err) {
+        log.error('Failed to change entry writing position', { writingId, newPosition, error: err })
         throw err
       }
     }

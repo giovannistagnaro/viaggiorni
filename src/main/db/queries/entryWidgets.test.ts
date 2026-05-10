@@ -2,7 +2,11 @@ import { DrizzleDB } from '../database'
 import { closeTestDb, createTestDb } from './testHelper'
 import { describe, expect, it, afterEach, beforeEach } from 'vitest'
 import { createEntry } from './entries'
-import { getWidgetsForEntry } from './entryWidgets'
+import {
+  changeEntryWidgetPosition,
+  getWidgetsForEntry,
+  setEntryWidgetVisibility
+} from './entryWidgets'
 
 let db: DrizzleDB
 
@@ -41,5 +45,115 @@ describe('getWidgetsForEntry', () => {
     expect(matchingWidgets.map((widget) => widget.position)).toEqual(
       matchingWidgets.map((widget) => widget.position).sort((a, b) => a - b)
     )
+  })
+})
+
+describe('setEntryWidgetVisibility', () => {
+  it('sets isVisible to false', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const widget = getWidgetsForEntry(db, entry.id)[0]
+
+    setEntryWidgetVisibility(db, widget.id, false)
+
+    const updated = getWidgetsForEntry(db, entry.id).find((w) => w.id === widget.id)
+    expect(updated?.isVisible).toBe(false)
+  })
+
+  it('sets isVisible back to true', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const widget = getWidgetsForEntry(db, entry.id)[0]
+    setEntryWidgetVisibility(db, widget.id, false)
+
+    setEntryWidgetVisibility(db, widget.id, true)
+
+    const updated = getWidgetsForEntry(db, entry.id).find((w) => w.id === widget.id)
+    expect(updated?.isVisible).toBe(true)
+  })
+
+  it('throws when the widget does not exist', () => {
+    expect(() => setEntryWidgetVisibility(db, 999, false)).toThrow(/Entry widget not found/i)
+  })
+})
+
+describe('changeEntryWidgetPosition', () => {
+  it('moves a widget to a higher position', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const widgets = getWidgetsForEntry(db, entry.id)
+    const target = widgets[0]
+
+    changeEntryWidgetPosition(db, target.id, widgets.length - 1)
+
+    const after = getWidgetsForEntry(db, entry.id)
+    expect(after.find((w) => w.id === target.id)?.position).toBe(widgets.length - 1)
+  })
+
+  it('moves a widget to a lower position', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const widgets = getWidgetsForEntry(db, entry.id)
+    const target = widgets[widgets.length - 1]
+
+    changeEntryWidgetPosition(db, target.id, 0)
+
+    const after = getWidgetsForEntry(db, entry.id)
+    expect(after.find((w) => w.id === target.id)?.position).toBe(0)
+  })
+
+  it('does nothing when newPosition equals the current position', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const widgets = getWidgetsForEntry(db, entry.id)
+    const before = widgets.map((w) => ({ id: w.id, position: w.position }))
+
+    changeEntryWidgetPosition(db, widgets[0].id, widgets[0].position)
+
+    const after = getWidgetsForEntry(db, entry.id).map((w) => ({ id: w.id, position: w.position }))
+    expect(after).toEqual(before)
+  })
+
+  it('clamps newPosition higher than max to the end', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const widgets = getWidgetsForEntry(db, entry.id)
+
+    changeEntryWidgetPosition(db, widgets[0].id, 999)
+
+    const after = getWidgetsForEntry(db, entry.id)
+    expect(after.find((w) => w.id === widgets[0].id)?.position).toBe(widgets.length - 1)
+  })
+
+  it('clamps negative newPosition to the start', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const widgets = getWidgetsForEntry(db, entry.id)
+    const target = widgets[widgets.length - 1]
+
+    changeEntryWidgetPosition(db, target.id, -5)
+
+    const after = getWidgetsForEntry(db, entry.id)
+    expect(after.find((w) => w.id === target.id)?.position).toBe(0)
+  })
+
+  it('preserves contiguous positions across the entry after a move', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const widgets = getWidgetsForEntry(db, entry.id)
+
+    changeEntryWidgetPosition(db, widgets[0].id, widgets.length - 1)
+
+    const after = getWidgetsForEntry(db, entry.id)
+    const positions = after.map((w) => w.position).sort((a, b) => a - b)
+    expect(positions).toEqual(Array.from({ length: widgets.length }, (_, i) => i))
+  })
+
+  it('throws when the widget does not exist', () => {
+    expect(() => changeEntryWidgetPosition(db, 999, 0)).toThrow(/Entry widget not found/i)
+  })
+
+  it('does not affect widgets in other entries', () => {
+    const e1 = createEntry(db, '2026-05-01', 'Entry 1')
+    const e2 = createEntry(db, '2026-05-02', 'Entry 2')
+    const e2Before = getWidgetsForEntry(db, e2.id).map((w) => ({ id: w.id, position: w.position }))
+
+    const e1Widget = getWidgetsForEntry(db, e1.id)[0]
+    changeEntryWidgetPosition(db, e1Widget.id, 999)
+
+    const e2After = getWidgetsForEntry(db, e2.id).map((w) => ({ id: w.id, position: w.position }))
+    expect(e2After).toEqual(e2Before)
   })
 })

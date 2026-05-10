@@ -1,5 +1,9 @@
 import { ipcMain } from 'electron'
-import { getWidgetsForEntry } from '../db/queries/entryWidgets'
+import {
+  changeEntryWidgetPosition,
+  getWidgetsForEntry,
+  setEntryWidgetVisibility
+} from '../db/queries/entryWidgets'
 import { getDB } from '../db'
 import log from 'electron-log'
 
@@ -12,4 +16,28 @@ export function registerEntryWidgetsIpc(): void {
       throw err
     }
   })
+
+  ipcMain.handle(
+    'entryWidgets:setVisibility',
+    (_, widgetId: number, isVisible: boolean) => {
+      try {
+        setEntryWidgetVisibility(getDB(), widgetId, isVisible)
+      } catch (err) {
+        log.error('Failed to set entry widget visibility', { widgetId, isVisible, error: err })
+        throw err
+      }
+    }
+  )
+
+  ipcMain.handle(
+    'entryWidgets:changePosition',
+    (_, widgetId: number, newPosition: number) => {
+      try {
+        changeEntryWidgetPosition(getDB(), widgetId, newPosition)
+      } catch (err) {
+        log.error('Failed to change entry widget position', { widgetId, newPosition, error: err })
+        throw err
+      }
+    }
+  )
 }
