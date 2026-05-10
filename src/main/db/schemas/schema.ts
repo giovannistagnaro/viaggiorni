@@ -1,6 +1,7 @@
 import { sql } from 'drizzle-orm'
 import { sqliteTable, text, integer, blob } from 'drizzle-orm/sqlite-core'
-import { widgetTypes, writingTypes } from '../dbConstants'
+import { WIDGET_TYPES } from '@shared/constants'
+import { WRITING_TYPES } from '@shared/constants'
 
 // app user settings
 export const settings = sqliteTable('settings', {
@@ -34,7 +35,7 @@ export const entryWritings = sqliteTable('entry_writings', {
     .notNull()
     .references(() => entries.id),
   type: text('type', {
-    enum: writingTypes
+    enum: WRITING_TYPES
   }).notNull(),
   label: text('label'),
   content: text('content'),
@@ -54,7 +55,7 @@ export const entryWidgets = sqliteTable('entry_widgets', {
     .notNull()
     .references(() => entries.id),
   type: text('type', {
-    enum: widgetTypes
+    enum: WIDGET_TYPES
   }).notNull(),
   position: integer('position').notNull(),
   colSpan: integer('col_span').notNull().default(2),
@@ -81,7 +82,7 @@ export const templateWritings = sqliteTable('template_writings', {
     .notNull()
     .references(() => template.id),
   type: text('type', {
-    enum: writingTypes
+    enum: WRITING_TYPES
   }).notNull(),
   label: text('label'),
   position: integer('position').notNull(),
@@ -98,7 +99,7 @@ export const templateWidgets = sqliteTable('template_widgets', {
     .notNull()
     .references(() => template.id),
   type: text('type', {
-    enum: widgetTypes
+    enum: WIDGET_TYPES
   }).notNull(),
   position: integer('position').notNull(),
   colSpan: integer('col_span').notNull().default(2),

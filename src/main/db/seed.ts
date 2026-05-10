@@ -1,10 +1,11 @@
 import { sql } from 'drizzle-orm'
 import { DrizzleDB } from './database'
 import { settings, moodTags, template, templateWritings, templateWidgets } from './schemas/schema'
-import { DEFAULT_MOOD_TAGS, widgetTypes, writingTypes } from './dbConstants'
+import { DEFAULT_MOOD_TAGS } from './dbConstants'
+import { WidgetType, WritingType } from '@shared/types'
 
 const DEFAULT_TEMPLATE_WRITINGS: {
-  type: (typeof writingTypes)[number]
+  type: WritingType
   label: string
   position: number
 }[] = [
@@ -14,7 +15,7 @@ const DEFAULT_TEMPLATE_WRITINGS: {
 ]
 
 const DEFAULT_TEMPLATE_WIDGETS: {
-  type: (typeof widgetTypes)[number]
+  type: WidgetType
   position: number
 }[] = [
   { type: 'mood_tracker', position: 0 },
