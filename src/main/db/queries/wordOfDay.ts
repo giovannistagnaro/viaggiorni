@@ -2,7 +2,7 @@ import { eq, gte } from 'drizzle-orm'
 import { DrizzleDB } from '../database'
 import { wordOfDay } from '../schemas/schema'
 import { GenerationSource, WordOfDay } from '@shared/types'
-import { addDays } from './helpers'
+import { addDays } from '../../../shared/helpers'
 
 export function getWordForDate(db: DrizzleDB, date: string): WordOfDay | null {
   const word = db.select().from(wordOfDay).where(eq(wordOfDay.entryDate, date)).get()

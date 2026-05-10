@@ -92,7 +92,9 @@ function App(): React.JSX.Element {
       ) : screen === 'template' ? (
         <Template />
       ) : (
-        <Day entryDate={entryDate} />
+        <main className="flex-1 grid">
+          <Day entryDate={entryDate} onNavigateToDay={handleNavigateToDay} today={today} />
+        </main>
       )}
     </div>
   )
