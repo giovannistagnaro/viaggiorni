@@ -2,20 +2,21 @@ import { useEffect, useState } from 'react'
 import Onboarding from './screens/Onboarding'
 import Login from './screens/Login'
 import Cover from './screens/Cover'
-import { PostLoginScreen, Screen } from '@renderer/types'
+import { NonOverlayScreen, PostLoginScreen, Screen } from '@renderer/types'
 import { formatDateISO } from './utils/dateFormatters'
 import Topbar from './components/Topbar'
 import Day from './screens/Day'
 import Index from './screens/Index'
 import Settings from './screens/Settings'
 import BreadCrumb from './components/Breadcrumb'
+import Template from './screens/Template'
+import { SCREEN_CONFIG } from './screenConfig'
 
 function App(): React.JSX.Element {
   const [screen, setScreen] = useState<Screen>('loading')
   const [entryDate, setEntryDate] = useState<string>(formatDateISO(new Date()))
   const [today, setToday] = useState<string>(formatDateISO(new Date()))
-  const [previousScreen, setPreviousScreen] =
-    useState<Exclude<PostLoginScreen, 'settings'>>('cover')
+  const [previousScreen, setPreviousScreen] = useState<NonOverlayScreen>('cover')
 
   useEffect(() => {
     async function detectStartScreen(): Promise<void> {
@@ -34,8 +35,10 @@ function App(): React.JSX.Element {
   }, [screen])
 
   function handleNavigate(target: PostLoginScreen): void {
-    if (target === 'settings' && screen !== 'settings') {
-      setPreviousScreen(screen as Exclude<PostLoginScreen, 'settings'>)
+    const targetIsOverlay = SCREEN_CONFIG[target].isOverlay
+    const currentIsOverlay = SCREEN_CONFIG[screen as PostLoginScreen]?.isOverlay
+    if (targetIsOverlay && !currentIsOverlay) {
+      setPreviousScreen(screen as NonOverlayScreen)
     }
     setScreen(target)
   }
@@ -62,13 +65,16 @@ function App(): React.JSX.Element {
   if (screen === 'login') return <Login onSuccess={() => setScreen('cover')} />
   return (
     <div className="flex flex-col min-h-screen">
-      <Topbar onLock={handleLock} onNavigateToSettings={() => handleNavigate('settings')}>
+      <Topbar
+        onLock={handleLock}
+        onNavigateToSettings={() => handleNavigate('settings')}
+        onNavigateToTemplate={() => handleNavigate('template')}
+      >
         <BreadCrumb
           currentScreen={screen}
           entryDate={entryDate}
           previousScreen={previousScreen}
           onNavigate={handleNavigate}
-          onNavigateToDay={handleNavigateToDay}
         />
       </Topbar>
 
@@ -83,6 +89,8 @@ function App(): React.JSX.Element {
         <Index onNavigateToDay={handleNavigateToDay} />
       ) : screen === 'settings' ? (
         <Settings />
+      ) : screen === 'template' ? (
+        <Template />
       ) : (
         <Day entryDate={entryDate} />
       )}
