@@ -137,6 +137,10 @@ const api = {
       ipcRenderer.invoke('template:updateTemplateWidget', widgetId, colSpan, isVisible),
     changeTemplateWidgetPosition: (widgetId: number, newPosition: number) =>
       ipcRenderer.invoke('template:changeTemplateWidgetPosition', widgetId, newPosition)
+  },
+  backup: {
+    exportBackup: () => ipcRenderer.invoke('backup:exportBackup'),
+    importBackup: () => ipcRenderer.invoke('backup:importBackup')
   }
 }
 

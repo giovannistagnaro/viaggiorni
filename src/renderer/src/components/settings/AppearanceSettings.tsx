@@ -20,7 +20,6 @@ function AppearanceSettings(): React.JSX.Element {
       await window.api.settings.updateTheme(newTheme)
       setSettings({ ...settings, theme: newTheme })
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to change theme', err)
       toast.error('Failed to change theme')
     }

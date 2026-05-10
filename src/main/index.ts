@@ -15,6 +15,7 @@ import { registerEntryPhotosIpc } from './ipc/entryPhotos'
 import { registerSettingsIpc } from './ipc/settings'
 import { registerOllamaIpc } from './ipc/ollama'
 import { registerTemplateIpc } from './ipc/template'
+import { registerBackupIpc } from './ipc/backup'
 
 function ipcRegistration(): void {
   registerDbIpc()
@@ -30,6 +31,7 @@ function ipcRegistration(): void {
   registerSettingsIpc()
   registerOllamaIpc()
   registerTemplateIpc()
+  registerBackupIpc()
 }
 
 function createWindow(): void {

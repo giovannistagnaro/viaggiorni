@@ -112,7 +112,7 @@ function App(): React.JSX.Element {
       ) : screen === 'index' ? (
         <Index onNavigateToDay={handleNavigateToDay} />
       ) : screen === 'settings' ? (
-        <Settings />
+        <Settings onLock={handleLock} />
       ) : screen === 'template' ? (
         <Template />
       ) : (

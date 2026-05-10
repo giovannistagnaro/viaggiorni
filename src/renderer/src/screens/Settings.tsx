@@ -1,13 +1,18 @@
 import AISettings from '@renderer/components/settings/AISettings'
 import AppearanceSettings from '@renderer/components/settings/AppearanceSettings'
+import BackupSettings from '@renderer/components/settings/BackupSettings'
 import HabitSettings from '@renderer/components/settings/HabitSettings'
 import ProfileSettings from '@renderer/components/settings/ProfileSettings'
 import { useState } from 'react'
 
-const SECTIONS = ['Profile', 'Appearance', 'Habits', 'AI']
+interface Props {
+  onLock: () => void
+}
+
+const SECTIONS = ['Profile', 'Appearance', 'Habits', 'AI', 'Backup']
 type Section = (typeof SECTIONS)[number]
 
-function Settings(): React.JSX.Element {
+function Settings({ onLock }: Props): React.JSX.Element {
   const [section, setSection] = useState<Section>('Profile')
 
   return (
@@ -26,6 +31,7 @@ function Settings(): React.JSX.Element {
           {section === 'Appearance' && <AppearanceSettings />}
           {section === 'Habits' && <HabitSettings />}
           {section === 'AI' && <AISettings />}
+          {section === 'Backup' && <BackupSettings onLockRequired={onLock} />}
         </div>
       </div>
     </div>
