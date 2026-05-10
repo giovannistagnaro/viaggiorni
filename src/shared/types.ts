@@ -47,3 +47,14 @@ export type Theme = 'light' | 'dark'
 
 export type GenerationSource = 'local' | 'ollama'
 export type SafeReturnSettings = Omit<Settings, 'encryptionKey'>
+
+export type ExportResult =
+  | { success: true; path: string }
+  | { success: false; reason: 'cancelled' | 'write_failed' }
+
+export type ImportResult =
+  | { success: true }
+  | {
+      success: false
+      reason: 'cancelled' | 'invalid_zip' | 'missing_required' | 'newer_schema' | 'extract_failed'
+    }

@@ -15,7 +15,9 @@ import {
   TemplateWriting,
   TemplateWidget,
   WidgetType,
-  WritingType
+  WritingType,
+  ExportResult,
+  ImportResult
 } from '@shared/types'
 
 type DbOpenResult = { success: true } | { success: false; error: string }
@@ -143,6 +145,11 @@ interface TemplateApi {
   changeTemplateWidgetPosition: (widgetId: number, newPosition: number) => Promise<void>
 }
 
+interface BackupApi {
+  exportBackup: () => Promise<ExportResult>
+  importBackup: () => Promise<ImportResult>
+}
+
 interface Api {
   db: DbApi
   user: UserApi
@@ -157,6 +164,7 @@ interface Api {
   settings: SettingsApi
   ollama: OllamaApi
   template: TemplateApi
+  backup: BackupApi
 }
 
 declare global {
