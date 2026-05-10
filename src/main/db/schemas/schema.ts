@@ -58,7 +58,7 @@ export const entryWidgets = sqliteTable('entry_widgets', {
     enum: WIDGET_TYPES
   }).notNull(),
   position: integer('position').notNull(),
-  colSpan: integer('col_span').notNull().default(2),
+  colSpan: integer('col_span').notNull().default(4),
   isVisible: integer('is_visible', { mode: 'boolean' }).notNull().default(true),
   createdAt: text('created_at')
     .notNull()
@@ -102,7 +102,7 @@ export const templateWidgets = sqliteTable('template_widgets', {
     enum: WIDGET_TYPES
   }).notNull(),
   position: integer('position').notNull(),
-  colSpan: integer('col_span').notNull().default(2),
+  colSpan: integer('col_span').notNull().default(4),
   isVisible: integer('is_visible', { mode: 'boolean' }).notNull().default(false),
   createdAt: text('created_at')
     .notNull()

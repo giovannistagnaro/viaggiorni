@@ -3,7 +3,8 @@ import {
   addEntryWidget,
   changeEntryWidgetPosition,
   getWidgetsForEntry,
-  setEntryWidgetVisibility
+  setEntryWidgetVisibility,
+  updateEntryWidgetColSpan
 } from '../db/queries/entryWidgets'
 import { getDB } from '../db'
 import log from 'electron-log'
@@ -48,4 +49,13 @@ export function registerEntryWidgetsIpc(): void {
       }
     }
   )
+
+  ipcMain.handle('entryWidgets:updateColSpan', (_, widgetId: number, colSpan: number) => {
+    try {
+      updateEntryWidgetColSpan(getDB(), widgetId, colSpan)
+    } catch (err) {
+      log.error('Failed to update entry widget colSpan', { widgetId, colSpan, error: err })
+      throw err
+    }
+  })
 }

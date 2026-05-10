@@ -60,6 +60,7 @@ interface EntryWidgetsApi {
   setVisibility: (widgetId: number, isVisible: boolean) => Promise<void>
   changePosition: (widgetId: number, newPosition: number) => Promise<void>
   addEntryWidget: (entryId: number, type: WidgetType, colSpan?: number) => Promise<EntryWidget>
+  updateColSpan: (widgetId: number, colSpan: number) => Promise<void>
 }
 
 interface TodosApi {

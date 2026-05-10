@@ -6,7 +6,8 @@ import {
   addEntryWidget,
   changeEntryWidgetPosition,
   getWidgetsForEntry,
-  setEntryWidgetVisibility
+  setEntryWidgetVisibility,
+  updateEntryWidgetColSpan
 } from './entryWidgets'
 
 let db: DrizzleDB
@@ -172,7 +173,7 @@ describe('addEntryWidget', () => {
     expect(after[after.length - 1].position).toBe(beforeCount)
   })
 
-  it('returns the inserted row with isVisible true and default colSpan of 2', () => {
+  it('returns the inserted row with isVisible true and default colSpan of 4', () => {
     const entry = createEntry(db, '2026-05-01', 'Entry 1')
 
     const inserted = addEntryWidget(db, entry.id, 'photo')
@@ -180,7 +181,7 @@ describe('addEntryWidget', () => {
     expect(inserted.entryId).toBe(entry.id)
     expect(inserted.type).toBe('photo')
     expect(inserted.isVisible).toBe(true)
-    expect(inserted.colSpan).toBe(2)
+    expect(inserted.colSpan).toBe(4)
   })
 
   it('respects an explicit colSpan when provided', () => {
@@ -193,5 +194,21 @@ describe('addEntryWidget', () => {
 
   it('throws when the entryId does not exist', () => {
     expect(() => addEntryWidget(db, 999, 'photo')).toThrow(/Entry not found/i)
+  })
+})
+
+describe('updateEntryWidgetColSpan', () => {
+  it('updates the colSpan to the new value', () => {
+    const entry = createEntry(db, '2026-05-01', 'Entry 1')
+    const widget = getWidgetsForEntry(db, entry.id)[0]
+
+    updateEntryWidgetColSpan(db, widget.id, 4)
+
+    const updated = getWidgetsForEntry(db, entry.id).find((w) => w.id === widget.id)
+    expect(updated?.colSpan).toBe(4)
+  })
+
+  it('throws when the widget does not exist', () => {
+    expect(() => updateEntryWidgetColSpan(db, 999, 3)).toThrow(/Entry widget not found/i)
   })
 })

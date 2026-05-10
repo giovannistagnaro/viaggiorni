@@ -255,11 +255,11 @@ describe('changeTemplateWritingPosition', () => {
 })
 
 describe('addTemplateWidget', () => {
-  it('returns the inserted row with default colSpan of 2', () => {
+  it('returns the inserted row with default colSpan of 4', () => {
     const inserted = addTemplateWidget(db, templateId, 'photo')
 
     expect(inserted.type).toBe('photo')
-    expect(inserted.colSpan).toBe(2)
+    expect(inserted.colSpan).toBe(4)
     expect(inserted.isVisible).toBe(true)
   })
 

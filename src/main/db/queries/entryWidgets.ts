@@ -16,7 +16,7 @@ export function addEntryWidget(
   db: DrizzleDB,
   entryId: number,
   type: WidgetType,
-  colSpan: number = 2
+  colSpan: number = 4
 ): EntryWidget {
   return db.transaction((tx) => {
     const exists = tx.select({ id: entries.id }).from(entries).where(eq(entries.id, entryId)).get()
@@ -46,6 +46,20 @@ export function setEntryWidgetVisibility(
   const result = db
     .update(entryWidgets)
     .set({ isVisible })
+    .where(eq(entryWidgets.id, widgetId))
+    .run()
+
+  if (result.changes === 0) throw new Error('Entry widget not found')
+}
+
+export function updateEntryWidgetColSpan(
+  db: DrizzleDB,
+  widgetId: number,
+  colSpan: number
+): void {
+  const result = db
+    .update(entryWidgets)
+    .set({ colSpan })
     .where(eq(entryWidgets.id, widgetId))
     .run()
 

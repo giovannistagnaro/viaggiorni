@@ -53,6 +53,15 @@ function Template(): React.JSX.Element {
     await refreshTemplate()
   }
 
+  async function handleWidgetColSpan(
+    widgetId: number,
+    colSpan: number,
+    isVisible: boolean
+  ): Promise<void> {
+    await window.api.template.updateTemplateWidget(widgetId, colSpan, isVisible)
+    await refreshTemplate()
+  }
+
   async function handleWritingAdd(type: WritingType): Promise<void> {
     await window.api.template.addTemplateWriting(activeTemplate.id, type, WRITING_TYPE_LABELS[type])
     await refreshTemplate()
@@ -71,7 +80,7 @@ function Template(): React.JSX.Element {
       <div className="grid grid-cols-1 place-items-start">
         <h1>Widgets</h1>
         {activeTemplate.widgets.map((activeWidget) => (
-          <div key={activeWidget.id} className="grid grid-cols-4">
+          <div key={activeWidget.id} className="grid grid-cols-5">
             <h1>{activeWidget.type}</h1>
             <button onClick={() => handleWidgetMove(activeWidget.id, activeWidget.position, -1)}>
               [Up]
@@ -80,6 +89,15 @@ function Template(): React.JSX.Element {
               [Down]
             </button>
             <button onClick={() => handleWidgetRemove(activeWidget.id)}>[-]</button>
+            <select
+              value={activeWidget.colSpan}
+              onChange={(e) =>
+                handleWidgetColSpan(activeWidget.id, Number(e.target.value), activeWidget.isVisible)
+              }
+            >
+              <option value={2}>Half</option>
+              <option value={4}>Full</option>
+            </select>
           </div>
         ))}
         {availableWidgetTypes.length > 0 && (

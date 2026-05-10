@@ -142,15 +142,13 @@ describe('Template', () => {
       render(<Template />)
       await screen.findByText('mood_tracker')
 
-      // Two selects on the page: first = widgets (mood_tracker + habit_tracker present)
-      const widgetSelect = screen.getAllByRole('combobox')[0]
+      const widgetSelect = screen.getByText('[+] Add widget').closest('select')!
       const optionTexts = Array.from(widgetSelect.querySelectorAll('option')).map((o) => o.value)
 
       // Placeholder option has empty value; real options should exclude the present types
       expect(optionTexts).toContain('')
       expect(optionTexts).not.toContain('mood_tracker')
       expect(optionTexts).not.toContain('habit_tracker')
-      // Remaining types still available
       const expectedAvailable = WIDGET_TYPES.filter(
         (t) => t !== 'mood_tracker' && t !== 'habit_tracker'
       )
@@ -161,7 +159,7 @@ describe('Template', () => {
       render(<Template />)
       await screen.findByText('mood_tracker')
 
-      const widgetSelect = screen.getAllByRole('combobox')[0]
+      const widgetSelect = screen.getByText('[+] Add widget').closest('select')!
       await userEvent.selectOptions(widgetSelect, 'todo_list')
 
       expect(window.api.template.addTemplateWidget).toHaveBeenCalledWith(TEMPLATE_ID, 'todo_list')
@@ -174,8 +172,7 @@ describe('Template', () => {
       render(<Template />)
       await screen.findByText('daily_summary')
 
-      // Second select = writings (daily_summary + gratitude present)
-      const writingSelect = screen.getAllByRole('combobox')[1]
+      const writingSelect = screen.getByText('[+] Add writing').closest('select')!
       await userEvent.selectOptions(writingSelect, 'notable_moment')
 
       expect(window.api.template.addTemplateWriting).toHaveBeenCalledWith(
@@ -195,9 +192,7 @@ describe('Template', () => {
       render(<Template />)
       await screen.findByText(WIDGET_TYPES[0])
 
-      // Only the writings select should be present (writings list is empty)
-      const selects = screen.getAllByRole('combobox')
-      expect(selects).toHaveLength(1)
+      expect(screen.queryByText('[+] Add widget')).not.toBeInTheDocument()
     })
 
     it('hides the writing add dropdown when all selectable writing types are present', async () => {
@@ -211,18 +206,39 @@ describe('Template', () => {
       render(<Template />)
       await screen.findByText(selectableTypes[0])
 
-      // Only the widgets select should be present (writings list is fully populated)
-      const selects = screen.getAllByRole('combobox')
-      expect(selects).toHaveLength(1)
+      expect(screen.queryByText('[+] Add writing')).not.toBeInTheDocument()
     })
 
     it('does not list "custom" in the writings dropdown', async () => {
       render(<Template />)
       await screen.findByText('daily_summary')
 
-      const writingSelect = screen.getAllByRole('combobox')[1]
+      const writingSelect = screen.getByText('[+] Add writing').closest('select')!
       const optionValues = Array.from(writingSelect.querySelectorAll('option')).map((o) => o.value)
       expect(optionValues).not.toContain('custom')
+    })
+  })
+
+  describe('widget colSpan picker', () => {
+    it('renders a colSpan select per widget initialized to widget.colSpan', async () => {
+      render(<Template />)
+      await screen.findByText('mood_tracker')
+
+      const moodRow = screen.getByText('mood_tracker').closest('div')!
+      const colSpanSelect = moodRow.querySelector('select') as HTMLSelectElement
+      expect(colSpanSelect).not.toBeNull()
+      expect(colSpanSelect.value).toBe('2')
+    })
+
+    it('calls updateTemplateWidget with the new colSpan and existing isVisible when changed', async () => {
+      render(<Template />)
+      await screen.findByText('mood_tracker')
+
+      const moodRow = screen.getByText('mood_tracker').closest('div')!
+      const colSpanSelect = moodRow.querySelector('select') as HTMLSelectElement
+      await userEvent.selectOptions(colSpanSelect, '4')
+
+      expect(window.api.template.updateTemplateWidget).toHaveBeenCalledWith(101, 4, true)
     })
   })
 })
