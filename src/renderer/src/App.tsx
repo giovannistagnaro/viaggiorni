@@ -10,6 +10,7 @@ import Index from './screens/Index'
 import Settings from './screens/Settings'
 import BreadCrumb from './components/Breadcrumb'
 import { SaveStatusProvider } from './components/SaveStatus'
+import WindowSizeBadge from './components/WindowSizeBadge'
 import Template from './screens/Template'
 import { SCREEN_CONFIG } from './screenConfig'
 import { useHotkeys } from 'react-hotkeys-hook'
@@ -90,6 +91,7 @@ function App(): React.JSX.Element {
   if (screen === 'login') return <Login onSuccess={() => setScreen('cover')} />
   return (
     <SaveStatusProvider>
+      <WindowSizeBadge />
       <div className="flex flex-col min-h-screen">
         <Topbar
           onLock={handleLock}

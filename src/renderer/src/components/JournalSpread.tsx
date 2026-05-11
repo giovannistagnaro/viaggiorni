@@ -65,7 +65,7 @@ export default function JournalSpread({
       <div className="relative" style={{ width: size.w || '100%', height: size.h || '100%' }}>
         {bookmarkTab && (
           <div
-            className="absolute z-30"
+            className="absolute z-30 overflow-hidden"
             style={{ top: 0, right: '8%', width: '3.2%', aspectRatio: '316 / 819' }}
           >
             {bookmarkTab}
