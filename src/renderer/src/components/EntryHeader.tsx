@@ -1,4 +1,5 @@
 import { pickByDate } from '@renderer/utils/pickByDate'
+import Stencil from './Stencil'
 
 const TORN_PAPERS = Object.values(
   import.meta.glob('@renderer/assets/torn_paper/cream/*.png', {
@@ -10,6 +11,14 @@ const TORN_PAPERS = Object.values(
 
 const WASHI_TAPES = Object.values(
   import.meta.glob('@renderer/assets/washi_tape/*.png', {
+    eager: true,
+    import: 'default',
+    query: '?url'
+  })
+) as string[]
+
+const SMALL_STENCILS = Object.values(
+  import.meta.glob('@renderer/assets/stencils/small/*.png', {
     eager: true,
     import: 'default',
     query: '?url'
@@ -33,6 +42,7 @@ export default function EntryHeader({
 }: Props): React.JSX.Element {
   const tornPaperUrl = pickByDate(entryDate, 'header-paper', TORN_PAPERS)
   const washiTapeUrl = pickByDate(entryDate, 'header-tape', WASHI_TAPES)
+  const stencilUrl = pickByDate(entryDate, 'header-stencil', SMALL_STENCILS)
 
   return (
     <div className="relative inline-block mt-4" style={{ transform: 'rotate(-0.6deg)' }}>
@@ -58,19 +68,29 @@ export default function EntryHeader({
           filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.18))'
         }}
       >
-        <div className="flex items-baseline gap-3">
+        <div className="flex items-center gap-3">
           <input
             key={entryDate}
             type="text"
             defaultValue={title}
             onBlur={(e) => onTitleBlur(e.target.value)}
             placeholder="Enter entry title…"
-            className="font-serif text-ink text-2xl font-semibold bg-transparent border-none outline-none focus:outline-1 focus:outline-ink/30 focus:outline-dashed focus:outline-offset-2 rounded px-0.5 w-full"
+            className="font-serif text-ink text-2xl font-semibold bg-transparent border-none outline-none focus:outline-1 focus:outline-ink/30 focus:outline-dashed focus:outline-offset-2 rounded px-0.5 flex-1 min-w-0"
             style={{ textShadow: '0 1px 0 rgba(0,0,0,0.04), 0 0 1px rgba(0,0,0,0.06)' }}
+          />
+          <Stencil
+            src={stencilUrl}
+            color="var(--color-sepia)"
+            className="flex-none"
+            style={{
+              width: '48px',
+              height: '48px',
+              transform: 'rotate(8deg)'
+            }}
           />
           <button
             onClick={onToggleEdit}
-            className="font-serif text-ink-soft text-xs hover:text-ink underline decoration-dotted underline-offset-2"
+            className="font-serif text-ink-soft text-xs hover:text-ink underline decoration-dotted underline-offset-2 flex-none"
           >
             {isEditMode ? 'Done' : 'Edit'}
           </button>

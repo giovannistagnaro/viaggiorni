@@ -5,6 +5,11 @@ interface Props {
   children: ReactNode
   className?: string
   style?: CSSProperties
+  /**
+   * Optional decoration rendered behind the scrolling content (z-index below).
+   * Stays fixed inside the area — doesn't scroll with content.
+   */
+  backgroundDecoration?: ReactNode
 }
 
 /**
@@ -12,7 +17,12 @@ interface Props {
  * that fade in only when there's content scrolled above/below the visible
  * area. Both hide when the user reaches the respective edge.
  */
-export default function ScrollableArea({ children, className, style }: Props): React.JSX.Element {
+export default function ScrollableArea({
+  children,
+  className,
+  style,
+  backgroundDecoration
+}: Props): React.JSX.Element {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [canScrollUp, setCanScrollUp] = useState(false)
   const [canScrollDown, setCanScrollDown] = useState(false)
@@ -42,7 +52,10 @@ export default function ScrollableArea({ children, className, style }: Props): R
 
   return (
     <div className={`relative ${className ?? ''}`} style={style}>
-      <div ref={scrollRef} className="absolute inset-0 overflow-auto no-scrollbar">
+      {backgroundDecoration && (
+        <div className="absolute inset-0 pointer-events-none z-0">{backgroundDecoration}</div>
+      )}
+      <div ref={scrollRef} className="absolute inset-0 z-10 overflow-auto no-scrollbar">
         {children}
       </div>
       <div

@@ -6,6 +6,8 @@ import ScrollableArea from './ScrollableArea'
 interface Props {
   left: React.ReactNode
   right: React.ReactNode
+  leftDecoration?: React.ReactNode
+  rightDecoration?: React.ReactNode
   leftEdge?: React.ReactNode
   rightEdge?: React.ReactNode
   bookmarkTab?: React.ReactNode
@@ -21,6 +23,8 @@ const RIGHT_PAGE = { left: '54%', top: '8%', width: '38%', height: '84%' } as co
 export default function JournalSpread({
   left,
   right,
+  leftDecoration,
+  rightDecoration,
   leftEdge,
   rightEdge,
   bookmarkTab
@@ -81,11 +85,19 @@ export default function JournalSpread({
           draggable={false}
         />
 
-        <ScrollableArea className="z-20" style={{ position: 'absolute', ...LEFT_PAGE }}>
+        <ScrollableArea
+          className="z-20"
+          style={{ position: 'absolute', ...LEFT_PAGE }}
+          backgroundDecoration={leftDecoration}
+        >
           {left}
         </ScrollableArea>
 
-        <ScrollableArea className="z-20" style={{ position: 'absolute', ...RIGHT_PAGE }}>
+        <ScrollableArea
+          className="z-20"
+          style={{ position: 'absolute', ...RIGHT_PAGE }}
+          backgroundDecoration={rightDecoration}
+        >
           {right}
         </ScrollableArea>
       </div>

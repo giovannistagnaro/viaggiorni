@@ -4,9 +4,38 @@ import JournalSpread from '@renderer/components/JournalSpread'
 import BookmarkTab from '@renderer/components/BookmarkTab'
 import EntryHeader from '@renderer/components/EntryHeader'
 import { useSaveStatus } from '@renderer/utils/saveStatus'
+import { pickByDate } from '@renderer/utils/pickByDate'
 import { formatTitleForDate } from '@renderer/utils/dateFormatters'
 import { Entry, EntryWriting, EntryWidget, WidgetType, WritingType } from '@shared/types'
 import { WIDGET_TYPES, WRITING_TYPES, WRITING_TYPE_LABELS } from '@shared/constants'
+
+const LARGE_STENCILS = Object.values(
+  import.meta.glob('@renderer/assets/stencils/large/*.png', {
+    eager: true,
+    import: 'default',
+    query: '?url'
+  })
+) as string[]
+
+// Prefer postage; passport as a fallback. Pulled into one list to keep the
+// hash distribution simple — postage is 4x more numerous so it dominates.
+const POSTAGE_STAMPS = Object.values(
+  import.meta.glob('@renderer/assets/stamps/postage_stamps/*.png', {
+    eager: true,
+    import: 'default',
+    query: '?url'
+  })
+) as string[]
+const PASSPORT_STAMPS = Object.values(
+  import.meta.glob('@renderer/assets/stamps/passport_stamps/*.png', {
+    eager: true,
+    import: 'default',
+    query: '?url'
+  })
+) as string[]
+// Stamp rotation pool — used by pickByDate to vary the angle per slot so the
+// page doesn't feel mechanically tiled.
+const STAMP_ROTATIONS = [-14, -10, -6, -3, 3, 6, 10, 14]
 import { useEffect, useState } from 'react'
 import { addDays } from '@shared/helpers'
 import { useHotkeys } from 'react-hotkeys-hook'
@@ -211,6 +240,33 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
     (t) => t !== 'custom' && !usedWritingTypes.has(t)
   )
 
+  // Decorations (deterministic per date)
+  const bottomStencilUrl = pickByDate(entry.date, 'right-page-stencil', LARGE_STENCILS)
+
+  // Build a flat list of widget-rows-with-gap-stamps so that any half-widget
+  // that doesn't get a sibling on its row gets a stamp filling the rest.
+  // Widget order is preserved (no auto-flow magic).
+  type GridItem =
+    | { kind: 'widget'; widget: EntryWidget }
+    | { kind: 'stamp'; colSpan: number; slot: number }
+  const gridItems: GridItem[] = []
+  let usedInRow = 0
+  let stampSlot = 0
+  for (const widget of visibleWidgets) {
+    if (usedInRow + widget.colSpan > 4) {
+      // Widget wraps. Fill the remainder of the previous row with a stamp.
+      gridItems.push({ kind: 'stamp', colSpan: 4 - usedInRow, slot: stampSlot++ })
+      usedInRow = widget.colSpan
+    } else {
+      usedInRow += widget.colSpan
+    }
+    gridItems.push({ kind: 'widget', widget })
+    if (usedInRow === 4) usedInRow = 0
+  }
+  if (usedInRow > 0 && usedInRow < 4) {
+    gridItems.push({ kind: 'stamp', colSpan: 4 - usedInRow, slot: stampSlot++ })
+  }
+
   const leftPage = (
     <div>
       <EntryHeader
@@ -222,31 +278,60 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       />
 
       <div className={editMode ? 'mt-6' : 'mt-6 grid grid-cols-4 gap-4'}>
-        {visibleWidgets.map((widget) =>
-          editMode ? (
-            <div key={widget.id} className="grid grid-cols-5 items-center gap-2">
-              <span>{widget.type}</span>
-              <button onClick={() => handleWidgetMove(widget.id, widget.position, -1)}>[Up]</button>
-              <button onClick={() => handleWidgetMove(widget.id, widget.position, 1)}>
-                [Down]
-              </button>
-              <button onClick={() => handleWidgetVisibility(widget.id, !widget.isVisible)}>
-                {widget.isVisible ? 'Hide' : 'Show'}
-              </button>
-              <select
-                value={widget.colSpan}
-                onChange={(e) => handleWidgetColSpan(widget.id, Number(e.target.value))}
-              >
-                <option value={2}>Half</option>
-                <option value={4}>Full</option>
-              </select>
-            </div>
-          ) : (
-            <div key={widget.id} style={{ gridColumn: `span ${widget.colSpan}` }}>
-              <WidgetRenderer widget={widget} entryDate={entry.date} />
-            </div>
-          )
-        )}
+        {editMode
+          ? visibleWidgets.map((widget) => (
+              <div key={widget.id} className="grid grid-cols-5 items-center gap-2">
+                <span>{widget.type}</span>
+                <button onClick={() => handleWidgetMove(widget.id, widget.position, -1)}>
+                  [Up]
+                </button>
+                <button onClick={() => handleWidgetMove(widget.id, widget.position, 1)}>
+                  [Down]
+                </button>
+                <button onClick={() => handleWidgetVisibility(widget.id, !widget.isVisible)}>
+                  {widget.isVisible ? 'Hide' : 'Show'}
+                </button>
+                <select
+                  value={widget.colSpan}
+                  onChange={(e) => handleWidgetColSpan(widget.id, Number(e.target.value))}
+                >
+                  <option value={2}>Half</option>
+                  <option value={4}>Full</option>
+                </select>
+              </div>
+            ))
+          : gridItems.map((item) =>
+              item.kind === 'widget' ? (
+                <div key={item.widget.id} style={{ gridColumn: `span ${item.widget.colSpan}` }}>
+                  <WidgetRenderer widget={item.widget} entryDate={entry.date} />
+                </div>
+              ) : (
+                <div
+                  key={`stamp-${item.slot}`}
+                  className="flex items-center justify-center"
+                  style={{ gridColumn: `span ${item.colSpan}` }}
+                >
+                  <img
+                    src={pickByDate(
+                      entry.date,
+                      `stamp-${item.slot}`,
+                      // Slot 0 = postage (preferred); subsequent slots alternate
+                      // so multiple stamps on a page diversify.
+                      item.slot % 2 === 0 ? POSTAGE_STAMPS : PASSPORT_STAMPS
+                    )}
+                    alt=""
+                    aria-hidden
+                    draggable={false}
+                    className="pointer-events-none select-none max-h-[180px] w-auto"
+                    style={{
+                      transform: `rotate(${pickByDate(entry.date, `stamp-rot-${item.slot}`, STAMP_ROTATIONS)}deg)`,
+                      opacity: 0.78,
+                      mixBlendMode: 'multiply'
+                    }}
+                  />
+                </div>
+              )
+            )}
         {editMode && availableWidgetTypes.length > 0 && (
           <select
             value=""
@@ -327,6 +412,16 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
     <JournalSpread
       left={leftPage}
       right={rightPage}
+      rightDecoration={
+        <img
+          src={bottomStencilUrl}
+          alt=""
+          aria-hidden
+          draggable={false}
+          className="absolute bottom-2 right-2 select-none pointer-events-none max-w-[55%] h-auto opacity-70"
+          style={{ transform: 'rotate(2deg)' }}
+        />
+      }
       bookmarkTab={
         <BookmarkTab
           label={monthLabel}

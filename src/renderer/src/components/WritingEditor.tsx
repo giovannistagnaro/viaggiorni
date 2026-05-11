@@ -4,6 +4,7 @@ import { useEditor, EditorContent } from '@tiptap/react'
 import StarterKit from '@tiptap/starter-kit'
 import { useDebouncedCallback } from '@renderer/lib/useDebouncedCallback'
 import { pickByDate } from '@renderer/utils/pickByDate'
+import Stencil from './Stencil'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
@@ -17,6 +18,14 @@ const BLUE_TORN_PAPERS = Object.values(
 
 const WASHI_TAPES = Object.values(
   import.meta.glob('@renderer/assets/washi_tape/*.png', {
+    eager: true,
+    import: 'default',
+    query: '?url'
+  })
+) as string[]
+
+const SMALL_STENCILS = Object.values(
+  import.meta.glob('@renderer/assets/stencils/small/*.png', {
     eager: true,
     import: 'default',
     query: '?url'
@@ -72,6 +81,7 @@ function WritingEditor({ writing, entryDate, onSave }: Props): React.JSX.Element
     const promptSeed = `${entryDate}-prompt-${writing.id}`
     const paperUrl = pickByDate(promptSeed, 'prompt-paper', BLUE_TORN_PAPERS)
     const washiUrl = pickByDate(promptSeed, 'prompt-tape', WASHI_TAPES)
+    const stencilUrl = pickByDate(promptSeed, 'prompt-stencil', SMALL_STENCILS)
 
     return (
       <div className="relative inline-block mb-6" style={{ transform: 'rotate(0.3deg)' }}>
@@ -96,11 +106,21 @@ function WritingEditor({ writing, entryDate, onSave }: Props): React.JSX.Element
             filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.18))'
           }}
         >
-          {prompt && (
-            <h3 className="font-serif text-ink text-sm font-semibold leading-snug">{prompt}</h3>
-          )}
-          <div className={`mt-2 ${EDITOR_CLASSES}`}>
-            <EditorContent editor={editor} />
+          <div className="flex items-start gap-3">
+            <Stencil
+              src={stencilUrl}
+              color="var(--color-ink)"
+              className="flex-none mt-0.5"
+              style={{ width: '48px', height: '48px' }}
+            />
+            <div className="flex-1 min-w-0">
+              {prompt && (
+                <h3 className="font-serif text-ink text-sm font-semibold leading-snug">{prompt}</h3>
+              )}
+              <div className={`mt-2 ${EDITOR_CLASSES}`}>
+                <EditorContent editor={editor} />
+              </div>
+            </div>
           </div>
         </div>
       </div>
