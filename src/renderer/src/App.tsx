@@ -54,8 +54,6 @@ function App(): React.JSX.Element {
     detectStartScreen()
   }, [])
 
-  // Apply the persisted theme as a class on <html>. Re-applies whenever the
-  // user reaches a post-login screen (covers theme changes made in Settings).
   useEffect(() => {
     if (!isPostLogin) return
     let cancelled = false
@@ -63,7 +61,9 @@ function App(): React.JSX.Element {
       try {
         const settings = await window.api.settings.getSettings()
         if (cancelled) return
-        document.documentElement.classList.toggle('dark', settings.theme === 'dark')
+        const isJournalScreen = screen === 'day' || screen === 'index'
+        const shouldBeDark = settings.theme === 'dark' && !isJournalScreen
+        document.documentElement.classList.toggle('dark', shouldBeDark)
       } catch (err) {
         console.error('Failed to apply theme', err)
       }

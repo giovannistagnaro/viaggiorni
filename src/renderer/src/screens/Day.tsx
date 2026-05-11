@@ -7,7 +7,13 @@ import { useSaveStatus } from '@renderer/utils/saveStatus'
 import { pickByDate } from '@renderer/utils/pickByDate'
 import { formatTitleForDate } from '@renderer/utils/dateFormatters'
 import { Entry, EntryWriting, EntryWidget, WidgetType, WritingType } from '@shared/types'
-import { WIDGET_TYPES, WRITING_TYPES, WRITING_TYPE_LABELS } from '@shared/constants'
+import {
+  WIDGET_TYPES,
+  WIDGET_TYPE_LABELS,
+  WRITING_TYPES,
+  WRITING_TYPE_LABELS
+} from '@shared/constants'
+import { Button } from '@renderer/components/ui/button'
 
 const LARGE_STENCILS = Object.values(
   import.meta.glob('@renderer/assets/stencils/large/*.png', {
@@ -38,7 +44,7 @@ import { useEffect, useState } from 'react'
 import { addDays } from '@shared/helpers'
 import { useHotkeys } from 'react-hotkeys-hook'
 import { toast } from 'sonner'
-import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight, Eye, EyeOff, Plus } from 'lucide-react'
 
 interface Props {
   entryDate: string
@@ -275,21 +281,50 @@ function Day({
 
       <div className={editMode ? 'mt-6' : 'mt-6 grid grid-cols-4 gap-4'}>
         {editMode
-          ? visibleWidgets.map((widget) => (
-              <div key={widget.id} className="grid grid-cols-5 items-center gap-2">
-                <span>{widget.type}</span>
-                <button onClick={() => handleWidgetMove(widget.id, widget.position, -1)}>
-                  [Up]
-                </button>
-                <button onClick={() => handleWidgetMove(widget.id, widget.position, 1)}>
-                  [Down]
-                </button>
-                <button onClick={() => handleWidgetVisibility(widget.id, !widget.isVisible)}>
-                  {widget.isVisible ? 'Hide' : 'Show'}
-                </button>
+          ? visibleWidgets.map((widget, idx) => (
+              <div
+                key={widget.id}
+                className={`flex items-center gap-2 py-2 font-serif text-sm ${
+                  idx === 0 ? '' : 'border-t border-ink/10'
+                } ${widget.isVisible ? '' : 'opacity-50'}`}
+              >
+                <span className="text-ink font-medium flex-1 min-w-0 truncate">
+                  {WIDGET_TYPE_LABELS[widget.type]}
+                </span>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={() => handleWidgetMove(widget.id, widget.position, -1)}
+                  disabled={widget.position === 0}
+                  aria-label={`Move ${widget.type} up`}
+                  className="text-ink-soft hover:text-ink hover:bg-ink/5"
+                >
+                  <ArrowUp />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={() => handleWidgetMove(widget.id, widget.position, 1)}
+                  disabled={widget.position === visibleWidgets.length - 1}
+                  aria-label={`Move ${widget.type} down`}
+                  className="text-ink-soft hover:text-ink hover:bg-ink/5"
+                >
+                  <ArrowDown />
+                </Button>
+                <Button
+                  variant="ghost"
+                  size="icon-sm"
+                  onClick={() => handleWidgetVisibility(widget.id, !widget.isVisible)}
+                  aria-label={widget.isVisible ? `Hide ${widget.type}` : `Show ${widget.type}`}
+                  className="text-ink-soft hover:text-ink hover:bg-ink/5"
+                >
+                  {widget.isVisible ? <Eye /> : <EyeOff />}
+                </Button>
                 <select
                   value={widget.colSpan}
                   onChange={(e) => handleWidgetColSpan(widget.id, Number(e.target.value))}
+                  aria-label={`${widget.type} width`}
+                  className="ml-1 px-2 py-1 rounded-md border border-ink/20 bg-paper text-ink text-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-ink/20"
                 >
                   <option value={2}>Half</option>
                   <option value={4}>Full</option>
@@ -329,41 +364,76 @@ function Day({
               )
             )}
         {editMode && availableWidgetTypes.length > 0 && (
-          <select
-            value=""
-            onChange={(e) => {
-              if (e.target.value) handleWidgetAdd(e.target.value as WidgetType)
-            }}
-          >
-            <option value="" disabled>
-              [+] Add widget
-            </option>
-            {availableWidgetTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
+          <div className="relative mt-3">
+            <Plus
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-soft pointer-events-none"
+              aria-hidden
+            />
+            <select
+              value=""
+              onChange={(e) => {
+                if (e.target.value) handleWidgetAdd(e.target.value as WidgetType)
+              }}
+              aria-label="Add widget"
+              className="w-full pl-9 pr-3 py-2 rounded-md border border-ink/20 bg-paper text-ink text-sm font-serif cursor-pointer focus:outline-none focus:ring-2 focus:ring-ink/20 appearance-none"
+            >
+              <option value="" disabled>
+                Add a widget…
               </option>
-            ))}
-          </select>
+              {availableWidgetTypes.map((type) => (
+                <option key={type} value={type}>
+                  {WIDGET_TYPE_LABELS[type]}
+                </option>
+              ))}
+            </select>
+          </div>
         )}
       </div>
     </div>
   )
 
   const rightPage = (
-    <div>
-      {visibleWritings.map((writing) =>
+    <div className={editMode ? 'pt-12' : ''}>
+      {visibleWritings.map((writing, idx) =>
         editMode ? (
-          <div key={writing.id} className="grid grid-cols-4 items-center gap-2">
-            <span>{writing.label ?? writing.type}</span>
-            <button onClick={() => handleWritingMove(writing.id, writing.position, -1)}>
-              [Up]
-            </button>
-            <button onClick={() => handleWritingMove(writing.id, writing.position, 1)}>
-              [Down]
-            </button>
-            <button onClick={() => handleWritingVisibility(writing.id, !writing.isVisible)}>
-              {writing.isVisible ? 'Hide' : 'Show'}
-            </button>
+          <div
+            key={writing.id}
+            className={`flex items-center gap-2 py-2 font-serif text-sm ${
+              idx === 0 ? '' : 'border-t border-ink/10'
+            } ${writing.isVisible ? '' : 'opacity-50'}`}
+          >
+            <span className="text-ink font-medium flex-1 min-w-0 truncate">
+              {writing.label ?? WRITING_TYPE_LABELS[writing.type]}
+            </span>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => handleWritingMove(writing.id, writing.position, -1)}
+              disabled={writing.position === 0}
+              aria-label={`Move ${writing.type} up`}
+              className="text-ink-soft hover:text-ink hover:bg-ink/5"
+            >
+              <ArrowUp />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => handleWritingMove(writing.id, writing.position, 1)}
+              disabled={writing.position === visibleWritings.length - 1}
+              aria-label={`Move ${writing.type} down`}
+              className="text-ink-soft hover:text-ink hover:bg-ink/5"
+            >
+              <ArrowDown />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              onClick={() => handleWritingVisibility(writing.id, !writing.isVisible)}
+              aria-label={writing.isVisible ? `Hide ${writing.type}` : `Show ${writing.type}`}
+              className="text-ink-soft hover:text-ink hover:bg-ink/5"
+            >
+              {writing.isVisible ? <Eye /> : <EyeOff />}
+            </Button>
           </div>
         ) : (
           <WritingEditor
@@ -383,21 +453,29 @@ function Day({
         )
       )}
       {editMode && availableWritingTypes.length > 0 && (
-        <select
-          value=""
-          onChange={(e) => {
-            if (e.target.value) handleWritingAdd(e.target.value as WritingType)
-          }}
-        >
-          <option value="" disabled>
-            [+] Add writing
-          </option>
-          {availableWritingTypes.map((type) => (
-            <option key={type} value={type}>
-              {type}
+        <div className="relative mt-3">
+          <Plus
+            className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-ink-soft pointer-events-none"
+            aria-hidden
+          />
+          <select
+            value=""
+            onChange={(e) => {
+              if (e.target.value) handleWritingAdd(e.target.value as WritingType)
+            }}
+            aria-label="Add writing"
+            className="w-full pl-9 pr-3 py-2 rounded-md border border-ink/20 bg-paper text-ink text-sm font-serif cursor-pointer focus:outline-none focus:ring-2 focus:ring-ink/20 appearance-none"
+          >
+            <option value="" disabled>
+              Add a writing…
             </option>
-          ))}
-        </select>
+            {availableWritingTypes.map((type) => (
+              <option key={type} value={type}>
+                {WRITING_TYPE_LABELS[type]}
+              </option>
+            ))}
+          </select>
+        </div>
       )}
     </div>
   )
