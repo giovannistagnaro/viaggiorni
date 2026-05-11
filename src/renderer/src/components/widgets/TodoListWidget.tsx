@@ -130,7 +130,7 @@ function TodoListWidget({ entryDate }: Props): React.JSX.Element {
       </div>
 
       {/* Todo list */}
-      <ul className="divide-y divide-ink/10">
+      <ul className="divide-y divide-ink/10 max-h-[180px] overflow-y-auto no-scrollbar">
         {todos.map((todo) => (
           <li key={todo.id} className="group flex items-center gap-2 py-1.5">
             <input

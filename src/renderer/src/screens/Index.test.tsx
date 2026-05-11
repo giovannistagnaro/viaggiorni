@@ -105,16 +105,12 @@ describe('Index', () => {
   })
 
   describe('bookmarks list', () => {
-    it('renders nothing in the list when no bookmarks exist', async () => {
+    it('renders an empty state when no bookmarks exist', async () => {
       vi.mocked(window.api.entries.getAllBookmarked).mockResolvedValue([])
 
       render(<Index onNavigateToDay={vi.fn()} />)
 
-      await waitFor(() => {
-        expect(window.api.entries.getAllBookmarked).toHaveBeenCalled()
-      })
-      // No level-2 headings = no bookmark items
-      expect(screen.queryByRole('heading', { level: 2 })).not.toBeInTheDocument()
+      expect(await screen.findByText(/No bookmarks yet/i)).toBeInTheDocument()
     })
 
     it('renders a button per bookmarked entry with date and title', async () => {
@@ -123,7 +119,8 @@ describe('Index', () => {
 
       render(<Index onNavigateToDay={vi.fn()} />)
 
-      expect(await screen.findByText('2026-04-15 - A trip')).toBeInTheDocument()
+      expect(await screen.findByText('Apr 15, 2026')).toBeInTheDocument()
+      expect(screen.getByText('A trip')).toBeInTheDocument()
     })
 
     it('navigates to the entry date when a bookmark is clicked', async () => {
