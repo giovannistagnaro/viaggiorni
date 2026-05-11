@@ -152,3 +152,10 @@
 .has-bookmark-indicator::after {
   background-color: hsl(200, 60%, 60%);
 }
+
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

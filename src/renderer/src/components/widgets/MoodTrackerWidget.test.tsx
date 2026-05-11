@@ -103,55 +103,13 @@ describe('MoodTrackerWidget', () => {
     })
   })
 
-  describe('add new tag', () => {
-    it('disables the + button when input is empty', () => {
+  describe('empty state', () => {
+    it('shows a "no moods" hint that directs the user to Settings', async () => {
+      vi.mocked(window.api.moodTags.getAllMoodTags).mockResolvedValue([])
+
       render(<MoodTrackerWidget entryId={ENTRY_ID} />)
 
-      expect(screen.getByRole('button', { name: 'Add new mood tag' })).toBeDisabled()
-    })
-
-    it('disables the + button when input is whitespace only', async () => {
-      render(<MoodTrackerWidget entryId={ENTRY_ID} />)
-
-      await userEvent.type(screen.getByRole('textbox'), '   ')
-
-      expect(screen.getByRole('button', { name: 'Add new mood tag' })).toBeDisabled()
-    })
-
-    it('calls createMoodTag with the trimmed label', async () => {
-      render(<MoodTrackerWidget entryId={ENTRY_ID} />)
-
-      await userEvent.type(screen.getByRole('textbox'), '  Excited  ')
-      await userEvent.click(screen.getByRole('button', { name: 'Add new mood tag' }))
-
-      expect(window.api.moodTags.createMoodTag).toHaveBeenCalledWith('Excited')
-    })
-
-    it('clears the input after a successful add', async () => {
-      render(<MoodTrackerWidget entryId={ENTRY_ID} />)
-
-      const input = screen.getByRole('textbox')
-      await userEvent.type(input, 'Excited')
-      await userEvent.click(screen.getByRole('button', { name: 'Add new mood tag' }))
-
-      await waitFor(() => {
-        expect(input).toHaveValue('')
-      })
-    })
-
-    it('refetches all mood tags after adding', async () => {
-      render(<MoodTrackerWidget entryId={ENTRY_ID} />)
-
-      await waitFor(() => {
-        expect(window.api.moodTags.getAllMoodTags).toHaveBeenCalledTimes(1)
-      })
-
-      await userEvent.type(screen.getByRole('textbox'), 'Excited')
-      await userEvent.click(screen.getByRole('button', { name: 'Add new mood tag' }))
-
-      await waitFor(() => {
-        expect(window.api.moodTags.getAllMoodTags).toHaveBeenCalledTimes(2)
-      })
+      expect(await screen.findByText(/No moods yet/i)).toBeInTheDocument()
     })
   })
 })

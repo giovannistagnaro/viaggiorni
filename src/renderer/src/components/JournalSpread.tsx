@@ -80,13 +80,11 @@ export default function JournalSpread({
           draggable={false}
         />
 
-        {/* Left page content */}
-        <div className="absolute overflow-auto z-20" style={LEFT_PAGE}>
+        <div className="absolute overflow-auto no-scrollbar z-20" style={LEFT_PAGE}>
           <div className="h-full">{left}</div>
         </div>
 
-        {/* Right page content */}
-        <div className="absolute overflow-auto z-20" style={RIGHT_PAGE}>
+        <div className="absolute overflow-auto no-scrollbar z-20" style={RIGHT_PAGE}>
           <div className="h-full">{right}</div>
         </div>
       </div>

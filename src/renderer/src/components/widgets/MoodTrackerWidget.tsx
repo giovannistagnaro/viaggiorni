@@ -9,7 +9,6 @@ interface Props {
 function MoodTrackerWidget({ entryId }: Props): React.JSX.Element {
   const [allMoodTags, setAllMoodTags] = useState<MoodTag[]>([])
   const [selectedMoodTags, setSelectedMoodTags] = useState<MoodTag[]>([])
-  const [newTag, setNewTag] = useState('')
 
   useEffect(() => {
     async function getMoodTags(): Promise<void> {
@@ -19,7 +18,6 @@ function MoodTrackerWidget({ entryId }: Props): React.JSX.Element {
         setAllMoodTags(all)
         setSelectedMoodTags(selected)
       } catch (err) {
-        // TODO: surface to user via error UI
         console.error('Failed to load mood tags', err)
         toast.error('Failed to load mood tags')
       }
@@ -36,55 +34,39 @@ function MoodTrackerWidget({ entryId }: Props): React.JSX.Element {
       }
       setSelectedMoodTags(await window.api.moodTags.getMoodTagsForEntry(entryId))
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to toggle mood tag', err)
       toast.error('Failed to toggle mood tag')
     }
   }
 
-  async function handleAdd(event: React.SyntheticEvent): Promise<void> {
-    event.preventDefault()
-    const trimmed = newTag.trim()
-    if (!trimmed) return
-
-    try {
-      await window.api.moodTags.createMoodTag(trimmed)
-      setNewTag('')
-      setAllMoodTags(await window.api.moodTags.getAllMoodTags())
-    } catch (err) {
-      // TODO: surface to user via error UI
-      console.error('Failed to add mood tag', err)
-      toast.error('Failed to add mood tag')
-    }
+  if (allMoodTags.length === 0) {
+    return (
+      <p className="font-serif text-ink-soft text-sm italic">
+        No moods yet — add some in Settings.
+      </p>
+    )
   }
 
   return (
-    <div>
-      <div>
-        {allMoodTags.map((moodTag) => {
-          const isSelected = selectedMoodTags.some((selected) => selected.id === moodTag.id)
-          return (
-            <button
-              key={moodTag.id}
-              type="button"
-              onClick={() => handleToggleSelect(moodTag.id)}
-              className={`px-2 py-1 mx-1 rounded ${
-                isSelected ? 'bg-blue-500 text-white' : 'bg-gray-200'
-              }`}
-            >
-              {moodTag.label}
-            </button>
-          )
-        })}
-      </div>
-      <div>
-        <form onSubmit={handleAdd}>
-          <input type="text" value={newTag} onChange={(e) => setNewTag(e.target.value)} />
-          <button type="submit" disabled={newTag.trim() === ''} aria-label="Add new mood tag">
-            +
+    <div className="flex flex-wrap gap-1.5">
+      {allMoodTags.map((moodTag) => {
+        const isSelected = selectedMoodTags.some((selected) => selected.id === moodTag.id)
+        return (
+          <button
+            key={moodTag.id}
+            type="button"
+            onClick={() => handleToggleSelect(moodTag.id)}
+            aria-pressed={isSelected}
+            className={`font-serif text-xs px-2.5 py-1 rounded-full border transition-colors ${
+              isSelected
+                ? 'bg-ink text-paper border-ink'
+                : 'bg-transparent text-ink-soft border-ink/25 hover:border-ink/50 hover:text-ink'
+            }`}
+          >
+            {moodTag.label}
           </button>
-        </form>
-      </div>
+        )
+      })}
     </div>
   )
 }
