@@ -38,6 +38,7 @@ import { useEffect, useState } from 'react'
 import { addDays } from '@shared/helpers'
 import { useHotkeys } from 'react-hotkeys-hook'
 import { toast } from 'sonner'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 
 interface Props {
   entryDate: string
@@ -427,20 +428,20 @@ function Day({
       leftEdge={
         <button
           onClick={() => onNavigateToDay(addDays(entryDate, -1))}
-          className="text-paper/70 hover:text-paper text-2xl font-serif"
+          className="grid place-items-center w-12 h-12 rounded-full bg-paper/10 border border-paper/30 text-paper/80 hover:text-paper hover:bg-paper/20 hover:border-paper/50 shadow-[0_4px_10px_rgba(0,0,0,0.4)] backdrop-blur-[1px] transition-colors"
           aria-label="Previous day"
         >
-          {'‹'}
+          <ChevronLeft className="w-6 h-6" strokeWidth={2.25} />
         </button>
       }
       rightEdge={
         rightNavAvailable ? (
           <button
             onClick={() => onNavigateToDay(addDays(entryDate, 1))}
-            className="text-paper/70 hover:text-paper text-2xl font-serif"
+            className="grid place-items-center w-12 h-12 rounded-full bg-paper/10 border border-paper/30 text-paper/80 hover:text-paper hover:bg-paper/20 hover:border-paper/50 shadow-[0_4px_10px_rgba(0,0,0,0.4)] backdrop-blur-[1px] transition-colors"
             aria-label="Next day"
           >
-            {'›'}
+            <ChevronRight className="w-6 h-6" strokeWidth={2.25} />
           </button>
         ) : null
       }
