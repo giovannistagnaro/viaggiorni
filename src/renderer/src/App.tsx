@@ -130,7 +130,7 @@ function App(): React.JSX.Element {
         </Topbar>
 
         {screen === 'cover' ? (
-          <main className="flex-1 grid place-items-center">
+          <main className="flex-1 grid">
             <Cover
               onNavigate={(screen: 'index' | 'day') => setScreen(screen)}
               onNavigateToToday={() => handleNavigateToDay(today)}
