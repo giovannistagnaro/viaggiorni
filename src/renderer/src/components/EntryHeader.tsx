@@ -29,16 +29,12 @@ interface Props {
   title: string
   entryDate: string
   onTitleBlur: (next: string) => void
-  isEditMode: boolean
-  onToggleEdit: () => void
 }
 
 export default function EntryHeader({
   title,
   entryDate,
-  onTitleBlur,
-  isEditMode,
-  onToggleEdit
+  onTitleBlur
 }: Props): React.JSX.Element {
   const tornPaperUrl = pickByDate(entryDate, 'header-paper', TORN_PAPERS)
   const washiTapeUrl = pickByDate(entryDate, 'header-tape', WASHI_TAPES)
@@ -88,12 +84,6 @@ export default function EntryHeader({
               transform: 'rotate(8deg)'
             }}
           />
-          <button
-            onClick={onToggleEdit}
-            className="font-serif text-ink-soft text-xs hover:text-ink underline decoration-dotted underline-offset-2 flex-none"
-          >
-            {isEditMode ? 'Done' : 'Edit'}
-          </button>
         </div>
       </div>
     </div>

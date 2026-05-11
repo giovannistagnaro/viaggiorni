@@ -39,7 +39,15 @@ interface Props {
 }
 
 const EDITOR_CLASSES =
-  'font-script text-ink text-lg leading-snug [&_.ProseMirror]:outline-none [&_.ProseMirror]:min-h-[2.5em] [&_.ProseMirror_p]:m-0'
+  'font-script text-ink text-lg [&_.ProseMirror]:outline-none [&_.ProseMirror]:min-h-[2.5em] [&_.ProseMirror_p]:m-0 [&_.ProseMirror_p]:leading-[1.7em]'
+
+const BASELINE_OFFSET = '1.45em'
+const RULED_STYLE = {
+  backgroundImage:
+    'repeating-linear-gradient(to bottom, hsla(33,33%,41%,0.30) 0, hsla(33,33%,41%,0.30) 1px, transparent 1px, transparent 1.7em)',
+  backgroundSize: `100% 1.7em`,
+  backgroundPosition: `0 ${BASELINE_OFFSET}`
+} as const
 
 function WritingEditor({ writing, entryDate, onSave }: Props): React.JSX.Element {
   const debouncedSave = useDebouncedCallback(onSave, 500)
@@ -117,7 +125,7 @@ function WritingEditor({ writing, entryDate, onSave }: Props): React.JSX.Element
               {prompt && (
                 <h3 className="font-serif text-ink text-sm font-semibold leading-snug">{prompt}</h3>
               )}
-              <div className={`mt-2 ${EDITOR_CLASSES}`}>
+              <div className={`mt-2 ${EDITOR_CLASSES}`} style={RULED_STYLE}>
                 <EditorContent editor={editor} />
               </div>
             </div>
@@ -138,7 +146,7 @@ function WritingEditor({ writing, entryDate, onSave }: Props): React.JSX.Element
           <div className="h-px bg-ink/15 mt-1 mb-2" />
         </>
       )}
-      <div className={EDITOR_CLASSES}>
+      <div className={EDITOR_CLASSES} style={RULED_STYLE}>
         <EditorContent editor={editor} />
       </div>
     </div>

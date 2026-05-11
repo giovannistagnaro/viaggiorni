@@ -33,8 +33,6 @@ const PASSPORT_STAMPS = Object.values(
     query: '?url'
   })
 ) as string[]
-// Stamp rotation pool — used by pickByDate to vary the angle per slot so the
-// page doesn't feel mechanically tiled.
 const STAMP_ROTATIONS = [-14, -10, -6, -3, 3, 6, 10, 14]
 import { useEffect, useState } from 'react'
 import { addDays } from '@shared/helpers'
@@ -45,14 +43,22 @@ interface Props {
   entryDate: string
   onNavigateToDay: (date: string) => void
   today: string
+  editMode: boolean
+  onSetEditMode: (next: boolean) => void
 }
-function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
+function Day({
+  entryDate,
+  onNavigateToDay,
+  today,
+  editMode,
+  onSetEditMode
+}: Props): React.JSX.Element {
   const [entry, setEntry] = useState<Entry | null>(null)
   const [loading, setLoading] = useState(true)
   const [writings, setWritings] = useState<EntryWriting[]>([])
   const [widgets, setWidgets] = useState<EntryWidget[]>([])
-  const [editMode, setEditMode] = useState<boolean>(false)
   const [rightNavAvailable, setRightNavAvailable] = useState<boolean>(false)
+  const setEditMode = onSetEditMode
   const { markSaved } = useSaveStatus()
 
   useHotkeys('mod+right', () => (rightNavAvailable ? onNavigateToDay(addDays(entryDate, 1)) : {}))
@@ -240,12 +246,8 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
     (t) => t !== 'custom' && !usedWritingTypes.has(t)
   )
 
-  // Decorations (deterministic per date)
   const bottomStencilUrl = pickByDate(entry.date, 'right-page-stencil', LARGE_STENCILS)
 
-  // Build a flat list of widget-rows-with-gap-stamps so that any half-widget
-  // that doesn't get a sibling on its row gets a stamp filling the rest.
-  // Widget order is preserved (no auto-flow magic).
   type GridItem =
     | { kind: 'widget'; widget: EntryWidget }
     | { kind: 'stamp'; colSpan: number; slot: number }
@@ -254,7 +256,6 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
   let stampSlot = 0
   for (const widget of visibleWidgets) {
     if (usedInRow + widget.colSpan > 4) {
-      // Widget wraps. Fill the remainder of the previous row with a stamp.
       gridItems.push({ kind: 'stamp', colSpan: 4 - usedInRow, slot: stampSlot++ })
       usedInRow = widget.colSpan
     } else {
@@ -269,13 +270,7 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
 
   const leftPage = (
     <div>
-      <EntryHeader
-        title={entry.title}
-        entryDate={entry.date}
-        onTitleBlur={handleTitleBlur}
-        isEditMode={editMode}
-        onToggleEdit={() => setEditMode(!editMode)}
-      />
+      <EntryHeader title={entry.title} entryDate={entry.date} onTitleBlur={handleTitleBlur} />
 
       <div className={editMode ? 'mt-6' : 'mt-6 grid grid-cols-4 gap-4'}>
         {editMode

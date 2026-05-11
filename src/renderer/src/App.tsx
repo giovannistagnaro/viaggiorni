@@ -20,6 +20,9 @@ function App(): React.JSX.Element {
   const [entryDate, setEntryDate] = useState<string>(formatDateISO(new Date()))
   const [today, setToday] = useState<string>(formatDateISO(new Date()))
   const [previousScreen, setPreviousScreen] = useState<NonOverlayScreen>('cover')
+  // Day screen's "edit layout" mode is lifted here so the Topbar can render
+  // the toggle button while Day owns the rendering behavior.
+  const [dayEditMode, setDayEditMode] = useState<boolean>(false)
 
   const isPostLogin = screen !== 'loading' && screen !== 'onboarding' && screen !== 'login'
 
@@ -95,6 +98,8 @@ function App(): React.JSX.Element {
           onLock={handleLock}
           onNavigateToSettings={() => handleNavigate('settings')}
           onNavigateToTemplate={() => handleNavigate('template')}
+          onToggleDayEdit={screen === 'day' ? () => setDayEditMode((v) => !v) : undefined}
+          isDayEditMode={dayEditMode}
         >
           <BreadCrumb
             currentScreen={screen}
@@ -119,7 +124,13 @@ function App(): React.JSX.Element {
           <Template />
         ) : (
           <main className="flex-1 grid">
-            <Day entryDate={entryDate} onNavigateToDay={handleNavigateToDay} today={today} />
+            <Day
+              entryDate={entryDate}
+              onNavigateToDay={handleNavigateToDay}
+              today={today}
+              editMode={dayEditMode}
+              onSetEditMode={setDayEditMode}
+            />
           </main>
         )}
       </div>

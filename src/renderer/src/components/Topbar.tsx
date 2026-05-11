@@ -1,4 +1,4 @@
-import { Check, FilePen, Lock, Settings } from 'lucide-react'
+import { Check, FilePen, Lock, Pencil, Settings } from 'lucide-react'
 import { formatSavedAgo, useNowTick, useSaveStatus } from '@renderer/utils/saveStatus'
 
 interface Props {
@@ -6,13 +6,18 @@ interface Props {
   onLock: () => void
   onNavigateToSettings: () => void
   onNavigateToTemplate: () => void
+  /** When provided, render an edit-layout toggle in the icon row. Used by Day. */
+  onToggleDayEdit?: () => void
+  isDayEditMode?: boolean
 }
 
 function Topbar({
   children,
   onLock,
   onNavigateToSettings,
-  onNavigateToTemplate
+  onNavigateToTemplate,
+  onToggleDayEdit,
+  isDayEditMode
 }: Props): React.JSX.Element {
   const { lastSavedAt } = useSaveStatus()
   const now = useNowTick(30_000)
@@ -39,6 +44,15 @@ function Topbar({
 
           {savedLabel && <div className="h-5 w-px bg-paper/15" />}
 
+          {onToggleDayEdit && (
+            <IconBtn
+              onClick={onToggleDayEdit}
+              title={isDayEditMode ? 'Done editing layout' : 'Edit page layout'}
+              active={isDayEditMode}
+            >
+              <Pencil className="w-4 h-4" />
+            </IconBtn>
+          )}
           <IconBtn onClick={onNavigateToTemplate} title="Template editor">
             <FilePen className="w-4 h-4" />
           </IconBtn>
@@ -58,17 +72,21 @@ interface IconBtnProps {
   onClick: () => void
   title: string
   disabled?: boolean
+  active?: boolean
   children: React.ReactNode
 }
 
-function IconBtn({ onClick, title, disabled, children }: IconBtnProps): React.JSX.Element {
+function IconBtn({ onClick, title, disabled, active, children }: IconBtnProps): React.JSX.Element {
   return (
     <button
       onClick={onClick}
       aria-label={title}
       title={title}
       disabled={disabled}
-      className="p-1.5 rounded text-paper/70 hover:text-paper hover:bg-paper/10 disabled:opacity-30 disabled:hover:bg-transparent disabled:cursor-not-allowed transition-colors"
+      aria-pressed={active}
+      className={`p-1.5 rounded transition-colors disabled:opacity-30 disabled:hover:bg-transparent disabled:cursor-not-allowed ${
+        active ? 'bg-paper/15 text-paper' : 'text-paper/70 hover:text-paper hover:bg-paper/10'
+      }`}
     >
       {children}
     </button>

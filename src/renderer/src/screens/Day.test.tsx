@@ -1,11 +1,38 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { useState } from 'react'
 import Day from './Day'
 import type { EntryWidget, EntryWriting } from '@shared/types'
 import { WIDGET_TYPES, WRITING_TYPES, WRITING_TYPE_LABELS } from '@shared/constants'
 
-// Stub the inner renderers to keep these tests focused on Day's structure logic
+function renderDay({
+  entryDate,
+  onNavigateToDay,
+  today
+}: {
+  entryDate: string
+  onNavigateToDay?: (date: string) => void
+  today: string
+}): ReturnType<typeof render> {
+  function Harness(): React.JSX.Element {
+    const [editMode, setEditMode] = useState(false)
+    return (
+      <>
+        <button onClick={() => setEditMode((v) => !v)}>{editMode ? 'Done' : 'Edit'}</button>
+        <Day
+          entryDate={entryDate}
+          onNavigateToDay={onNavigateToDay ?? vi.fn()}
+          today={today}
+          editMode={editMode}
+          onSetEditMode={setEditMode}
+        />
+      </>
+    )
+  }
+  return render(<Harness />)
+}
+
 vi.mock('@renderer/components/WidgetRenderer', () => ({
   default: ({ widget }: { widget: EntryWidget }) => (
     <div data-testid={`widget-rendered-${widget.id}`}>{widget.type}</div>
@@ -26,8 +53,6 @@ const mockEntry = {
   updatedAt: null
 }
 
-// Default "today" is one day after the mock entry's date so right-nav is available.
-// Tests that exercise the today boundary override this per-render.
 const TODAY = '2026-05-02'
 
 const widget = (overrides: Partial<EntryWidget> = {}): EntryWidget => ({
@@ -97,7 +122,7 @@ describe('Main', () => {
   it('loads and displays the existing entry for today', async () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-    render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+    renderDay({ entryDate: mockEntry.date, today: TODAY })
 
     expect(await screen.findByDisplayValue(mockEntry.title)).toBeInTheDocument()
     expect(window.api.entries.create).not.toHaveBeenCalled()
@@ -107,7 +132,7 @@ describe('Main', () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(null)
     vi.mocked(window.api.entries.create).mockResolvedValue(mockEntry)
 
-    render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+    renderDay({ entryDate: mockEntry.date, today: TODAY })
 
     await waitFor(() => {
       expect(window.api.entries.create).toHaveBeenCalled()
@@ -118,7 +143,7 @@ describe('Main', () => {
   it('calls updateTitle on blur when title changes', async () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-    render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+    renderDay({ entryDate: mockEntry.date, today: TODAY })
 
     const input = await screen.findByDisplayValue(mockEntry.title)
 
@@ -132,7 +157,7 @@ describe('Main', () => {
   it('does not call updateTitle when title is unchanged', async () => {
     vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-    render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+    renderDay({ entryDate: mockEntry.date, today: TODAY })
 
     const input = await screen.findByDisplayValue(mockEntry.title)
 
@@ -146,7 +171,7 @@ describe('Main', () => {
     it('renders an unbookmarked tab when the entry is not bookmarked', async () => {
       vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
 
       expect(
         await screen.findByRole('button', { name: 'Bookmark this page (May)' })
@@ -159,7 +184,7 @@ describe('Main', () => {
         isBookmarked: true
       })
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
 
       expect(
         await screen.findByRole('button', { name: 'Remove bookmark (May)' })
@@ -169,7 +194,7 @@ describe('Main', () => {
     it('calls toggleBookmark with the entry id when the tab is clicked', async () => {
       vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(
         await screen.findByRole('button', { name: 'Bookmark this page (May)' })
       )
@@ -181,7 +206,7 @@ describe('Main', () => {
       vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
       vi.mocked(window.api.entries.toggleBookmark).mockResolvedValue(undefined)
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(
         await screen.findByRole('button', { name: 'Bookmark this page (May)' })
       )
@@ -204,7 +229,7 @@ describe('Main', () => {
         writing({ id: 202, type: 'gratitude', label: 'Gratitude', isVisible: false })
       ])
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
 
       expect(await screen.findByTestId('widget-rendered-101')).toBeInTheDocument()
       expect(screen.queryByTestId('widget-rendered-102')).not.toBeInTheDocument()
@@ -218,7 +243,7 @@ describe('Main', () => {
         widget({ id: 101, colSpan: 4 })
       ])
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
 
       const rendered = await screen.findByTestId('widget-rendered-101')
       const wrapper = rendered.parentElement!
@@ -232,7 +257,7 @@ describe('Main', () => {
     })
 
     it('toggles the Edit button label between Edit and Done', async () => {
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
 
       const editBtn = await screen.findByRole('button', { name: 'Edit' })
       await userEvent.click(editBtn)
@@ -248,7 +273,7 @@ describe('Main', () => {
         widget({ id: 102, type: 'habit_tracker', isVisible: false })
       ])
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
       expect(screen.getByText('mood_tracker')).toBeInTheDocument()
@@ -260,7 +285,7 @@ describe('Main', () => {
         widget({ id: 101, type: 'mood_tracker', isVisible: true })
       ])
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
       await userEvent.click(screen.getByRole('button', { name: 'Hide' }))
 
@@ -273,7 +298,7 @@ describe('Main', () => {
         widget({ id: 102, type: 'habit_tracker', position: 1 })
       ])
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
       const habitRow = screen.getByText('habit_tracker').closest('div')!
@@ -289,7 +314,7 @@ describe('Main', () => {
         writing({ id: 202, type: 'gratitude', label: 'Gratitude', position: 1 })
       ])
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
       const summaryRow = screen.getByText('Daily Summary').closest('div')!
@@ -304,10 +329,9 @@ describe('Main', () => {
         widget({ id: 101, type: 'mood_tracker', colSpan: 2 })
       ])
 
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
-      // The widget row's only <select> is the colSpan picker (Half/Full)
       const moodRow = screen.getByText('mood_tracker').closest('div')!
       const colSpanSelect = moodRow.querySelector('select') as HTMLSelectElement
       await userEvent.selectOptions(colSpanSelect, '4')
@@ -322,7 +346,7 @@ describe('Main', () => {
           widget({ id: 102, type: 'habit_tracker' })
         ])
 
-        render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+        renderDay({ entryDate: mockEntry.date, today: TODAY })
         await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
         const widgetAdd = screen.getByText('[+] Add widget').closest('select')!
@@ -339,7 +363,7 @@ describe('Main', () => {
       it('calls addEntryWidget when a type is selected from the add dropdown', async () => {
         vi.mocked(window.api.entryWidgets.getWidgetsForEntry).mockResolvedValue([])
 
-        render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+        renderDay({ entryDate: mockEntry.date, today: TODAY })
         await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
         const widgetAdd = screen.getByText('[+] Add widget').closest('select')!
@@ -354,7 +378,7 @@ describe('Main', () => {
       it('calls addEntryWriting with the default label when a writing type is selected', async () => {
         vi.mocked(window.api.entryWritings.getWritingsForEntry).mockResolvedValue([])
 
-        render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+        renderDay({ entryDate: mockEntry.date, today: TODAY })
         await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
         const writingAdd = screen.getByText('[+] Add writing').closest('select')!
@@ -370,7 +394,7 @@ describe('Main', () => {
       it('does not list "custom" in the writings add dropdown', async () => {
         vi.mocked(window.api.entryWritings.getWritingsForEntry).mockResolvedValue([])
 
-        render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+        renderDay({ entryDate: mockEntry.date, today: TODAY })
         await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
         const writingAdd = screen.getByText('[+] Add writing').closest('select')!
@@ -392,7 +416,7 @@ describe('Main', () => {
     it('renders a left button that navigates to the previous day', async () => {
       const onNavigateToDay = vi.fn()
 
-      render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today={TODAY} />)
+      renderDay({ entryDate: '2026-05-01', onNavigateToDay, today: TODAY })
       await screen.findByDisplayValue(mockEntry.title)
 
       await userEvent.click(screen.getByRole('button', { name: 'Previous day' }))
@@ -401,7 +425,7 @@ describe('Main', () => {
     })
 
     it('renders a right button when entryDate is before today', async () => {
-      render(<Day entryDate="2026-05-01" onNavigateToDay={vi.fn()} today="2026-05-02" />)
+      renderDay({ entryDate: '2026-05-01', today: '2026-05-02' })
 
       expect(await screen.findByRole('button', { name: 'Next day' })).toBeInTheDocument()
     })
@@ -409,7 +433,7 @@ describe('Main', () => {
     it('clicking the right button navigates to the next day', async () => {
       const onNavigateToDay = vi.fn()
 
-      render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today="2026-05-03" />)
+      renderDay({ entryDate: '2026-05-01', onNavigateToDay, today: '2026-05-03' })
       await screen.findByDisplayValue(mockEntry.title)
 
       await userEvent.click(screen.getByRole('button', { name: 'Next day' }))
@@ -418,15 +442,14 @@ describe('Main', () => {
     })
 
     it('hides the right button when entryDate equals today', async () => {
-      render(<Day entryDate="2026-05-01" onNavigateToDay={vi.fn()} today="2026-05-01" />)
+      renderDay({ entryDate: '2026-05-01', today: '2026-05-01' })
       await screen.findByDisplayValue(mockEntry.title)
 
       expect(screen.queryByRole('button', { name: 'Next day' })).not.toBeInTheDocument()
     })
 
     it('hides the right button when entryDate is somehow after today', async () => {
-      // Defensive: this state shouldn't occur in practice, but verifying the boundary holds
-      render(<Day entryDate="2026-05-05" onNavigateToDay={vi.fn()} today="2026-05-01" />)
+      renderDay({ entryDate: '2026-05-05', today: '2026-05-01' })
       await screen.findByDisplayValue(mockEntry.title)
 
       expect(screen.queryByRole('button', { name: 'Next day' })).not.toBeInTheDocument()
@@ -440,7 +463,7 @@ describe('Main', () => {
 
     it('mod+left navigates to the previous day', async () => {
       const onNavigateToDay = vi.fn()
-      render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today="2026-05-02" />)
+      renderDay({ entryDate: '2026-05-01', onNavigateToDay, today: '2026-05-02' })
       await screen.findByDisplayValue(mockEntry.title)
 
       await userEvent.keyboard('{Control>}{ArrowLeft}{/Control}')
@@ -450,7 +473,7 @@ describe('Main', () => {
 
     it('mod+right navigates to the next day when before today', async () => {
       const onNavigateToDay = vi.fn()
-      render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today="2026-05-03" />)
+      renderDay({ entryDate: '2026-05-01', onNavigateToDay, today: '2026-05-03' })
       await screen.findByDisplayValue(mockEntry.title)
 
       await userEvent.keyboard('{Control>}{ArrowRight}{/Control}')
@@ -460,7 +483,7 @@ describe('Main', () => {
 
     it('mod+right is a no-op when entryDate equals today', async () => {
       const onNavigateToDay = vi.fn()
-      render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today="2026-05-01" />)
+      renderDay({ entryDate: '2026-05-01', onNavigateToDay, today: '2026-05-01' })
       await screen.findByDisplayValue(mockEntry.title)
 
       await userEvent.keyboard('{Control>}{ArrowRight}{/Control}')
@@ -469,7 +492,7 @@ describe('Main', () => {
     })
 
     it('mod+b toggles the bookmark on the current entry', async () => {
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await screen.findByDisplayValue(mockEntry.title)
 
       await userEvent.keyboard('{Control>}b{/Control}')
@@ -478,7 +501,7 @@ describe('Main', () => {
     })
 
     it('esc exits edit mode when active', async () => {
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
       expect(screen.getByRole('button', { name: 'Done' })).toBeInTheDocument()
 
@@ -488,12 +511,11 @@ describe('Main', () => {
     })
 
     it('esc is a no-op when not in edit mode', async () => {
-      render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
+      renderDay({ entryDate: mockEntry.date, today: TODAY })
       await screen.findByRole('button', { name: 'Edit' })
 
       await userEvent.keyboard('{Escape}')
 
-      // Edit button still says "Edit" (we never entered edit mode, so esc shouldn't change anything)
       expect(screen.getByRole('button', { name: 'Edit' })).toBeInTheDocument()
     })
   })
