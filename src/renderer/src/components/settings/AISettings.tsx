@@ -41,7 +41,7 @@ function AISettings(): React.JSX.Element {
   }
 
   if (!settings) {
-    return <p className="font-serif text-ink-soft text-sm italic">Loading…</p>
+    return <p className="font-serif text-muted-foreground text-sm italic">Loading…</p>
   }
 
   return (
@@ -53,7 +53,7 @@ function AISettings(): React.JSX.Element {
               aria-hidden
               className={`h-2 w-2 rounded-full ${ollamaAvailable ? 'bg-sage' : 'bg-rust'}`}
             />
-            <span className="text-ink">
+            <span className="text-foreground">
               {ollamaAvailable ? 'Available' : 'Not available'}
             </span>
           </div>

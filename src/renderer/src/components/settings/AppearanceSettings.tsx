@@ -18,6 +18,7 @@ function AppearanceSettings(): React.JSX.Element {
       if (!settings) return
       await window.api.settings.updateTheme(newTheme)
       setSettings({ ...settings, theme: newTheme })
+      document.documentElement.classList.toggle('dark', newTheme === 'dark')
     } catch (err) {
       console.error('Failed to change theme', err)
       toast.error('Failed to change theme')
@@ -25,7 +26,7 @@ function AppearanceSettings(): React.JSX.Element {
   }
 
   if (!settings) {
-    return <p className="font-serif text-ink-soft text-sm italic">Loading…</p>
+    return <p className="font-serif text-muted-foreground text-sm italic">Loading…</p>
   }
 
   return (

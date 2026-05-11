@@ -26,10 +26,10 @@ function Settings({ onLock }: Props): React.JSX.Element {
   const [section, setSection] = useState<Section>('Profile')
 
   return (
-    <main className="flex-1 flex bg-paper-aged/30 overflow-hidden">
+    <main className="flex-1 flex bg-background text-foreground overflow-hidden">
       <nav
         aria-label="Settings sections"
-        className="w-56 border-r border-ink/10 bg-paper py-6 px-3 flex flex-col gap-1 flex-none"
+        className="w-56 border-r border-border bg-card py-6 px-3 flex flex-col gap-1 flex-none"
       >
         {SECTIONS.map((sectionName) => (
           <button
@@ -38,8 +38,8 @@ function Settings({ onLock }: Props): React.JSX.Element {
             aria-current={section === sectionName ? 'page' : undefined}
             className={`w-full text-left px-3 py-2 rounded-md font-serif text-sm transition-colors ${
               section === sectionName
-                ? 'bg-ink text-paper font-medium'
-                : 'text-ink-soft hover:text-ink hover:bg-ink/5'
+                ? 'bg-foreground text-background font-medium'
+                : 'text-muted-foreground hover:text-foreground hover:bg-muted'
             }`}
           >
             {sectionName}
@@ -50,9 +50,9 @@ function Settings({ onLock }: Props): React.JSX.Element {
       <section className="flex-1 overflow-y-auto">
         <div className="max-w-2xl mx-auto px-10 py-10">
           <header className="mb-6">
-            <h1 className="font-serif text-ink text-2xl font-semibold">{section}</h1>
-            <p className="font-serif text-ink-soft text-sm mt-1">{DESCRIPTIONS[section]}</p>
-            <div className="h-px bg-ink/15 mt-4" />
+            <h1 className="font-serif text-foreground text-2xl font-semibold">{section}</h1>
+            <p className="font-serif text-muted-foreground text-sm mt-1">{DESCRIPTIONS[section]}</p>
+            <div className="h-px bg-border mt-4" />
           </header>
 
           {section === 'Profile' && <ProfileSettings />}

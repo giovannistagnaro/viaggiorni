@@ -71,7 +71,7 @@ function HabitSettings(): React.JSX.Element {
   }
 
   if (!settings) {
-    return <p className="font-serif text-ink-soft text-sm italic">Loading…</p>
+    return <p className="font-serif text-muted-foreground text-sm italic">Loading…</p>
   }
 
   return (
@@ -94,11 +94,11 @@ function HabitSettings(): React.JSX.Element {
 
       <Subsection title="Habits">
         {habits.length === 0 ? (
-          <p className="font-serif text-ink-soft text-sm italic mb-4">
+          <p className="font-serif text-muted-foreground text-sm italic mb-4">
             No habits yet — add one below.
           </p>
         ) : (
-          <ul className="divide-y divide-ink/10 mb-4">
+          <ul className="divide-y divide-border mb-4">
             {habits.map((habit) => (
               <li
                 key={habit.id}
@@ -109,14 +109,14 @@ function HabitSettings(): React.JSX.Element {
                   className="h-3 w-3 rounded-full flex-none ring-1 ring-black/10"
                   style={{ backgroundColor: habit.color }}
                 />
-                <span className="font-serif text-ink text-sm flex-1">{habit.name}</span>
+                <span className="font-serif text-foreground text-sm flex-1">{habit.name}</span>
                 <Button
                   type="button"
                   variant="ghost"
                   size="sm"
                   onClick={() => handleArchiveHabit(habit.id)}
                   aria-label={`Archive ${habit.name}`}
-                  className="text-ink-soft hover:text-ink hover:bg-ink/5"
+                  className="text-muted-foreground hover:text-foreground hover:bg-muted"
                 >
                   <Archive />
                   Archive
@@ -132,7 +132,7 @@ function HabitSettings(): React.JSX.Element {
             value={newColor}
             onChange={(e) => setNewColor(e.target.value)}
             aria-label="Habit color"
-            className="h-9 w-12 rounded-md border border-ink/20 cursor-pointer bg-paper flex-none p-1"
+            className="h-9 w-12 rounded-md border border-input cursor-pointer bg-background flex-none p-1"
           />
           <input
             type="text"

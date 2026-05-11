@@ -54,6 +54,26 @@ function App(): React.JSX.Element {
     detectStartScreen()
   }, [])
 
+  // Apply the persisted theme as a class on <html>. Re-applies whenever the
+  // user reaches a post-login screen (covers theme changes made in Settings).
+  useEffect(() => {
+    if (!isPostLogin) return
+    let cancelled = false
+    async function applyTheme(): Promise<void> {
+      try {
+        const settings = await window.api.settings.getSettings()
+        if (cancelled) return
+        document.documentElement.classList.toggle('dark', settings.theme === 'dark')
+      } catch (err) {
+        console.error('Failed to apply theme', err)
+      }
+    }
+    applyTheme()
+    return () => {
+      cancelled = true
+    }
+  }, [isPostLogin, screen])
+
   useEffect(() => {
     async function setTodayWrapper(): Promise<void> {
       setToday(formatDateISO(new Date()))

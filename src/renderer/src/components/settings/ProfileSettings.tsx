@@ -25,7 +25,7 @@ function ProfileSettings(): React.JSX.Element {
   }
 
   if (username === null) {
-    return <p className="font-serif text-ink-soft text-sm italic">Loading…</p>
+    return <p className="font-serif text-muted-foreground text-sm italic">Loading…</p>
   }
 
   return (

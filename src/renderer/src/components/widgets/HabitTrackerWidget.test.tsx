@@ -69,7 +69,20 @@ beforeEach(() => {
       toggleHabitCompleted: vi.fn().mockResolvedValue(undefined),
       pauseHabit: vi.fn(),
       resumeHabit: vi.fn(),
-      calculateStreak: vi.fn()
+      calculateStreak: vi.fn().mockResolvedValue(0)
+    },
+    settings: {
+      getSettings: vi.fn().mockResolvedValue({
+        id: 1,
+        theme: 'light',
+        streakTolerance: 0,
+        ollamaModel: null,
+        createdAt: '2026-05-01 00:00:00',
+        updatedAt: null
+      }),
+      updateTheme: vi.fn(),
+      updateStreakTolerance: vi.fn(),
+      updateOllamaModel: vi.fn()
     }
   } as never
 })
