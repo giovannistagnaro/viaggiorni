@@ -41,12 +41,12 @@ describe('AISettings', () => {
   })
 
   describe('when Ollama is unavailable', () => {
-    it('shows the unavailable message', async () => {
+    it('shows the unavailable status', async () => {
       vi.mocked(window.api.ollama.isOllamaAvailable).mockResolvedValue(false)
 
       render(<AISettings />)
 
-      expect(await screen.findByText(/Ollama is not available/i)).toBeInTheDocument()
+      expect(await screen.findByText(/Not available/i)).toBeInTheDocument()
     })
 
     it('does not render the model select', async () => {
@@ -54,7 +54,7 @@ describe('AISettings', () => {
 
       render(<AISettings />)
 
-      await screen.findByText(/Ollama is not available/i)
+      await screen.findByText(/Not available/i)
       expect(screen.queryByRole('combobox')).not.toBeInTheDocument()
     })
   })
@@ -68,10 +68,10 @@ describe('AISettings', () => {
       ])
     })
 
-    it('shows the available message', async () => {
+    it('shows the available status', async () => {
       render(<AISettings />)
 
-      expect(await screen.findByText(/Ollama is available/i)).toBeInTheDocument()
+      expect(await screen.findByText(/^Available$/i)).toBeInTheDocument()
     })
 
     it('renders the model select with the fetched options', async () => {

@@ -1,6 +1,9 @@
 import { SafeReturnSettings } from '@shared/types'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
+import { Button } from '@renderer/components/ui/button'
+import { RefreshCw } from 'lucide-react'
+import { Row, SETTINGS_SELECT } from './_shared'
 
 function AISettings(): React.JSX.Element {
   const [settings, setSettings] = useState<SafeReturnSettings | null>(null)
@@ -13,18 +16,15 @@ function AISettings(): React.JSX.Element {
       setOllamaAvailable(await window.api.ollama.isOllamaAvailable())
       setModels(await window.api.ollama.listOllamaModels())
     }
-
     getData()
   }, [])
 
   async function handleModelChange(newModel: string): Promise<void> {
     try {
       if (!settings || !newModel) return
-
       await window.api.settings.updateOllamaModel(newModel)
       setSettings({ ...settings, ollamaModel: newModel })
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to change Ollama model', err)
       toast.error('Failed to change Ollama model')
     }
@@ -35,22 +35,46 @@ function AISettings(): React.JSX.Element {
       setOllamaAvailable(await window.api.ollama.isOllamaAvailable())
       setModels(await window.api.ollama.listOllamaModels())
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to check Ollama availability', err)
       toast.error('Failed to check Ollama availability')
     }
   }
 
-  return !settings ? (
-    <div>Loading...</div>
-  ) : (
-    <div>
-      <p>Ollama {ollamaAvailable ? 'is' : 'is not'} available!</p>
+  if (!settings) {
+    return <p className="font-serif text-ink-soft text-sm italic">Loading…</p>
+  }
+
+  return (
+    <>
+      <Row label="Ollama" description="Local LLM runtime used for AI features.">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2 font-serif text-sm">
+            <span
+              aria-hidden
+              className={`h-2 w-2 rounded-full ${ollamaAvailable ? 'bg-sage' : 'bg-rust'}`}
+            />
+            <span className="text-ink">
+              {ollamaAvailable ? 'Available' : 'Not available'}
+            </span>
+          </div>
+          <Button variant="outline" size="sm" onClick={handleOllamaAvailabilityCheck}>
+            <RefreshCw />
+            Refresh
+          </Button>
+        </div>
+      </Row>
+
       {ollamaAvailable && models && (
-        <div>
+        <Row
+          label="Model"
+          description="Pick which installed model to use."
+          htmlFor="settings-ollama-model"
+        >
           <select
+            id="settings-ollama-model"
             value={settings.ollamaModel ?? ''}
             onChange={(e) => handleModelChange(e.target.value)}
+            className={SETTINGS_SELECT}
           >
             {settings.ollamaModel === null && (
               <option value="" disabled>
@@ -63,10 +87,9 @@ function AISettings(): React.JSX.Element {
               </option>
             ))}
           </select>
-        </div>
+        </Row>
       )}
-      <button onClick={handleOllamaAvailabilityCheck}>Refresh</button>
-    </div>
+    </>
   )
 }
 
