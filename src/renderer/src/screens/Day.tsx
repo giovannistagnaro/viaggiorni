@@ -2,6 +2,7 @@ import WritingEditor from '@renderer/components/WritingEditor'
 import WidgetRenderer from '@renderer/components/WidgetRenderer'
 import JournalSpread from '@renderer/components/JournalSpread'
 import BookmarkTab from '@renderer/components/BookmarkTab'
+import EntryHeader from '@renderer/components/EntryHeader'
 import { useSaveStatus } from '@renderer/utils/saveStatus'
 import { formatTitleForDate } from '@renderer/utils/dateFormatters'
 import { Entry, EntryWriting, EntryWidget, WidgetType, WritingType } from '@shared/types'
@@ -212,21 +213,15 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
 
   const leftPage = (
     <div>
-      <div>
-        <input
-          type="text"
-          defaultValue={entry.title}
-          onBlur={(e) => handleTitleBlur(e.target.value)}
-          placeholder={'Enter entry title...'}
-          className="font-serif text-ink"
-        />
-        <button onClick={() => setEditMode(!editMode)} className="text-ink-soft">
-          {editMode ? 'Done' : 'Edit'}
-        </button>
-      </div>
-      <p className="text-ink-soft">{entry.date}</p>
+      <EntryHeader
+        title={entry.title}
+        entryDate={entry.date}
+        onTitleBlur={handleTitleBlur}
+        isEditMode={editMode}
+        onToggleEdit={() => setEditMode(!editMode)}
+      />
 
-      <div className={editMode ? 'mt-4' : 'mt-4 grid grid-cols-4 gap-4'}>
+      <div className={editMode ? 'mt-6' : 'mt-6 grid grid-cols-4 gap-4'}>
         {visibleWidgets.map((widget) =>
           editMode ? (
             <div key={widget.id} className="grid grid-cols-5 items-center gap-2">
