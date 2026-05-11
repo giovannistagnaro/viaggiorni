@@ -61,7 +61,7 @@ function HabitTrackerWidget({ entryDate }: Props): React.JSX.Element {
   }
 
   return (
-    <ul className="divide-y divide-ink/10">
+    <ul className="divide-y divide-ink/10 max-h-[200px] overflow-y-auto no-scrollbar">
       {habits.map((habit) => (
         <li key={habit.id}>
           <label className="flex items-center gap-3 py-2 cursor-pointer rounded px-1 -mx-1 hover:bg-ink/[0.04]">
