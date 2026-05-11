@@ -1,10 +1,11 @@
 import { EntryWidget } from '@shared/types'
+import { WIDGET_TYPE_LABELS } from '@shared/constants'
 import TodoListWidget from './widgets/TodoListWidget'
-// import MoodTrackerWidget from './widgets/MoodTrackerWidget'
 import HabitTrackerWidget from './widgets/HabitTrackerWidget'
 import WordOfDayWidget from './widgets/WordOfDayWidget'
 import PhotoWidget from './widgets/PhotoWidget'
 import MoodTrackerWidget from './widgets/MoodTrackerWidget'
+import WidgetLabel from './WidgetLabel'
 
 interface Props {
   widget: EntryWidget
@@ -14,20 +15,33 @@ interface Props {
 function WidgetRenderer({ widget, entryDate }: Props): React.JSX.Element | null {
   if (!widget.isVisible) return null
 
+  let content: React.ReactNode = null
   switch (widget.type) {
     case 'todo_list':
-      return <TodoListWidget entryDate={entryDate} />
+      content = <TodoListWidget entryDate={entryDate} />
+      break
     case 'mood_tracker':
-      return <MoodTrackerWidget entryId={widget.entryId} />
+      content = <MoodTrackerWidget entryId={widget.entryId} />
+      break
     case 'habit_tracker':
-      return <HabitTrackerWidget entryDate={entryDate} />
+      content = <HabitTrackerWidget entryDate={entryDate} />
+      break
     case 'word_of_day':
-      return <WordOfDayWidget entryDate={entryDate} />
+      content = <WordOfDayWidget entryDate={entryDate} />
+      break
     case 'photo':
-      return <PhotoWidget entryId={widget.entryId} />
+      content = <PhotoWidget entryId={widget.entryId} />
+      break
     default:
       return null
   }
+
+  return (
+    <div className="mb-6">
+      <WidgetLabel>{WIDGET_TYPE_LABELS[widget.type]}</WidgetLabel>
+      {content}
+    </div>
+  )
 }
 
 export default WidgetRenderer

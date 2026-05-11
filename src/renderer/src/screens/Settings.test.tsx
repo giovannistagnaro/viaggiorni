@@ -13,6 +13,9 @@ vi.mock('@renderer/components/settings/AppearanceSettings', () => ({
 vi.mock('@renderer/components/settings/HabitSettings', () => ({
   default: () => <div data-testid="habits-section">Habits content</div>
 }))
+vi.mock('@renderer/components/settings/MoodSettings', () => ({
+  default: () => <div data-testid="moods-section">Moods content</div>
+}))
 vi.mock('@renderer/components/settings/AISettings', () => ({
   default: () => <div data-testid="ai-section">AI content</div>
 }))
@@ -55,6 +58,7 @@ describe('Settings', () => {
     })
     expect(screen.getByText('Appearance')).toBeInTheDocument()
     expect(screen.getByText('Habits')).toBeInTheDocument()
+    expect(screen.getByText('Moods')).toBeInTheDocument()
     expect(screen.getByText('AI')).toBeInTheDocument()
     expect(screen.getByText('Backup')).toBeInTheDocument()
   })

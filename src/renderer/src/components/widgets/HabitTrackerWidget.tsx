@@ -1,5 +1,5 @@
 import { Habit } from '@shared/types'
-import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 
 interface Props {
@@ -10,12 +10,8 @@ function HabitTrackerWidget({ entryDate }: Props): React.JSX.Element {
   const [habits, setHabits] = useState<Habit[]>([])
   const [habitCompletion, setHabitCompletion] = useState<Map<number, boolean>>(new Map())
 
-  const [newHabit, setNewHabit] = useState('')
-  const [newColor, setNewColor] = useState('#6586db')
-
   const setHabitCompletionMap = useCallback(async () => {
     let activeHabits: Habit[]
-
     try {
       activeHabits = await window.api.habit.getActiveHabits()
       setHabits(activeHabits)
@@ -29,11 +25,9 @@ function HabitTrackerWidget({ entryDate }: Props): React.JSX.Element {
       const entries = await Promise.all(
         activeHabits.map(async (habit) => {
           const log = await window.api.habit.getHabitLogForDate(habit.id, entryDate)
-
           return [habit.id, log?.completed === true] as [number, boolean]
         })
       )
-
       setHabitCompletion(new Map(entries))
     } catch (err) {
       console.error('Failed to load habit completion', err)
@@ -48,64 +42,46 @@ function HabitTrackerWidget({ entryDate }: Props): React.JSX.Element {
     setHabitCompletionMapWrapper()
   }, [setHabitCompletionMap])
 
-  async function handleAddHabit(event: SyntheticEvent): Promise<void> {
-    event.preventDefault()
-
-    const trimmed = newHabit.trim()
-    if (trimmed === '') return
-
-    try {
-      await window.api.habit.createHabit(trimmed, newColor)
-      setNewHabit('')
-      setNewColor('#6586db')
-      await setHabitCompletionMap()
-    } catch (err) {
-      // TODO: surface to user via error UI
-      console.error('Failed to create habit', err)
-      toast.error('Failed to create habit')
-    }
-  }
-
   async function handleToggleHabit(habitId: number, date: string): Promise<void> {
     try {
       setHabitCompletion((prev) => new Map(prev).set(habitId, !prev.get(habitId)))
       await window.api.habit.toggleHabitCompleted(habitId, date)
     } catch (err) {
-      // TODO: surface to user via error UI
       console.error('Failed to toggle habit completion', err)
       toast.error('Failed to toggle habit completion')
     }
   }
 
-  return (
-    <div>
-      <form>
-        {habits.map((habit) => {
-          return (
-            <label key={habit.id} className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                name="habit-list"
-                value={habit.name}
-                checked={habitCompletion.get(habit.id) ?? false}
-                onChange={() => handleToggleHabit(habit.id, entryDate)}
-              />
-              <span>{habit.name}</span>
-              <span
-                className="h-4 w-4 rounded-full border border-zinc-400"
-                style={{ backgroundColor: habit.color }}
-              />
-            </label>
-          )
-        })}
-      </form>
+  if (habits.length === 0) {
+    return (
+      <p className="font-serif text-ink-soft text-sm italic">
+        No habits yet — add some in Settings.
+      </p>
+    )
+  }
 
-      <form onSubmit={handleAddHabit}>
-        <input type="color" value={newColor} onChange={(e) => setNewColor(e.target.value)} />
-        <input type="text" value={newHabit} onChange={(e) => setNewHabit(e.target.value)} />
-        <button type="submit">+</button>
-      </form>
-    </div>
+  return (
+    <ul className="divide-y divide-ink/10">
+      {habits.map((habit) => (
+        <li key={habit.id}>
+          <label className="flex items-center gap-3 py-2 cursor-pointer rounded px-1 -mx-1 hover:bg-ink/[0.04]">
+            <span
+              className="h-3 w-3 rounded-full flex-none ring-1 ring-black/10"
+              style={{ backgroundColor: habit.color }}
+              aria-hidden
+            />
+            <span className="font-serif text-ink text-sm flex-1">{habit.name}</span>
+            <input
+              type="checkbox"
+              checked={habitCompletion.get(habit.id) ?? false}
+              onChange={() => handleToggleHabit(habit.id, entryDate)}
+              className="w-4 h-4 accent-ink cursor-pointer"
+              aria-label={habit.name}
+            />
+          </label>
+        </li>
+      ))}
+    </ul>
   )
 }
 

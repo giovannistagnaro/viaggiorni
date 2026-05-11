@@ -23,3 +23,11 @@ export const WRITING_TYPE_LABELS: Record<(typeof WRITING_TYPES)[number], string>
   writing_prompt: 'Writing Prompt',
   custom: 'Custom'
 }
+
+export const WIDGET_TYPE_LABELS: Record<(typeof WIDGET_TYPES)[number], string> = {
+  habit_tracker: 'Habits',
+  todo_list: 'To-do',
+  mood_tracker: 'Mood',
+  word_of_day: 'Word of the Day',
+  photo: 'Photo'
+}

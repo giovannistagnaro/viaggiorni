@@ -1,5 +1,6 @@
 import { NonOverlayScreen, PostLoginScreen } from '@renderer/types'
 import { SCREEN_CONFIG } from '@renderer/screenConfig'
+import { ChevronRight } from 'lucide-react'
 import React from 'react'
 
 interface Props {
@@ -27,18 +28,23 @@ function BreadCrumb(props: Props): React.JSX.Element {
   const chain = buildChain(currentScreen, previousScreen)
 
   return (
-    <nav aria-label="Breadcrumb" className="grid grid-flow-col justify-start gap-2">
+    <nav aria-label="Breadcrumb" className="flex items-center gap-2">
       {chain.map((screen, idx) => {
         const cfg = SCREEN_CONFIG[screen]
         const label = typeof cfg.label === 'function' ? cfg.label({ entryDate }) : cfg.label
         const isCurrent = screen === currentScreen
         return (
           <React.Fragment key={screen}>
-            {idx > 0 && <span> {'>'} </span>}
+            {idx > 0 && <ChevronRight className="w-3.5 h-3.5 text-paper/40" strokeWidth={2} />}
             {isCurrent ? (
-              <span>{label}</span>
+              <span className="text-paper">{label}</span>
             ) : (
-              <button onClick={() => onNavigate(screen)}>{label}</button>
+              <button
+                onClick={() => onNavigate(screen)}
+                className="text-paper/60 hover:text-paper transition-colors"
+              >
+                {label}
+              </button>
             )}
           </React.Fragment>
         )

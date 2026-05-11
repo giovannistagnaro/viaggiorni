@@ -2,6 +2,8 @@ import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Topbar from './Topbar'
+import { SaveStatusProvider } from './SaveStatus'
+import { useSaveStatus } from '@renderer/utils/saveStatus'
 
 describe('Topbar', () => {
   it('renders the children passed in', () => {
@@ -79,5 +81,53 @@ describe('Topbar', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Template editor' }))
 
     expect(onNavigateToTemplate).toHaveBeenCalledTimes(1)
+  })
+
+  describe('save status indicator', () => {
+    function MarkSavedTrigger(): React.JSX.Element {
+      const { markSaved } = useSaveStatus()
+      return (
+        <button data-testid="trigger" onClick={markSaved}>
+          mark saved
+        </button>
+      )
+    }
+
+    it('hides the indicator before any save has happened', () => {
+      render(
+        <SaveStatusProvider>
+          <Topbar onLock={vi.fn()} onNavigateToSettings={vi.fn()} onNavigateToTemplate={vi.fn()}>
+            <div />
+          </Topbar>
+        </SaveStatusProvider>
+      )
+
+      expect(screen.queryByText(/Saved/)).not.toBeInTheDocument()
+    })
+
+    it('hides the indicator when rendered without a SaveStatusProvider', () => {
+      render(
+        <Topbar onLock={vi.fn()} onNavigateToSettings={vi.fn()} onNavigateToTemplate={vi.fn()}>
+          <div />
+        </Topbar>
+      )
+
+      expect(screen.queryByText(/Saved/)).not.toBeInTheDocument()
+    })
+
+    it('shows the indicator after markSaved is called', async () => {
+      render(
+        <SaveStatusProvider>
+          <MarkSavedTrigger />
+          <Topbar onLock={vi.fn()} onNavigateToSettings={vi.fn()} onNavigateToTemplate={vi.fn()}>
+            <div />
+          </Topbar>
+        </SaveStatusProvider>
+      )
+
+      await userEvent.click(screen.getByTestId('trigger'))
+
+      expect(await screen.findByText(/Saved just now/)).toBeInTheDocument()
+    })
   })
 })

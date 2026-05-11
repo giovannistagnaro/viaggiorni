@@ -9,6 +9,7 @@ import Day from './screens/Day'
 import Index from './screens/Index'
 import Settings from './screens/Settings'
 import BreadCrumb from './components/Breadcrumb'
+import { SaveStatusProvider } from './components/SaveStatus'
 import Template from './screens/Template'
 import { SCREEN_CONFIG } from './screenConfig'
 import { useHotkeys } from 'react-hotkeys-hook'
@@ -19,6 +20,9 @@ function App(): React.JSX.Element {
   const [entryDate, setEntryDate] = useState<string>(formatDateISO(new Date()))
   const [today, setToday] = useState<string>(formatDateISO(new Date()))
   const [previousScreen, setPreviousScreen] = useState<NonOverlayScreen>('cover')
+  // Day screen's "edit layout" mode is lifted here so the Topbar can render
+  // the toggle button while Day owns the rendering behavior.
+  const [dayEditMode, setDayEditMode] = useState<boolean>(false)
 
   const isPostLogin = screen !== 'loading' && screen !== 'onboarding' && screen !== 'login'
 
@@ -88,39 +92,49 @@ function App(): React.JSX.Element {
   if (screen === 'onboarding') return <Onboarding onComplete={() => setScreen('cover')} />
   if (screen === 'login') return <Login onSuccess={() => setScreen('cover')} />
   return (
-    <div className="flex flex-col min-h-screen">
-      <Topbar
-        onLock={handleLock}
-        onNavigateToSettings={() => handleNavigate('settings')}
-        onNavigateToTemplate={() => handleNavigate('template')}
-      >
-        <BreadCrumb
-          currentScreen={screen}
-          entryDate={entryDate}
-          previousScreen={previousScreen}
-          onNavigate={handleNavigate}
-        />
-      </Topbar>
-
-      {screen === 'cover' ? (
-        <main className="flex-1 grid place-items-center">
-          <Cover
-            onNavigate={(screen: 'index' | 'day') => setScreen(screen)}
-            onNavigateToToday={() => handleNavigateToDay(today)}
+    <SaveStatusProvider>
+      <div className="flex flex-col min-h-screen">
+        <Topbar
+          onLock={handleLock}
+          onNavigateToSettings={() => handleNavigate('settings')}
+          onNavigateToTemplate={() => handleNavigate('template')}
+          onToggleDayEdit={screen === 'day' ? () => setDayEditMode((v) => !v) : undefined}
+          isDayEditMode={dayEditMode}
+        >
+          <BreadCrumb
+            currentScreen={screen}
+            entryDate={entryDate}
+            previousScreen={previousScreen}
+            onNavigate={handleNavigate}
           />
-        </main>
-      ) : screen === 'index' ? (
-        <Index onNavigateToDay={handleNavigateToDay} />
-      ) : screen === 'settings' ? (
-        <Settings onLock={handleLock} />
-      ) : screen === 'template' ? (
-        <Template />
-      ) : (
-        <main className="flex-1 grid">
-          <Day entryDate={entryDate} onNavigateToDay={handleNavigateToDay} today={today} />
-        </main>
-      )}
-    </div>
+        </Topbar>
+
+        {screen === 'cover' ? (
+          <main className="flex-1 grid place-items-center">
+            <Cover
+              onNavigate={(screen: 'index' | 'day') => setScreen(screen)}
+              onNavigateToToday={() => handleNavigateToDay(today)}
+            />
+          </main>
+        ) : screen === 'index' ? (
+          <Index onNavigateToDay={handleNavigateToDay} />
+        ) : screen === 'settings' ? (
+          <Settings onLock={handleLock} />
+        ) : screen === 'template' ? (
+          <Template />
+        ) : (
+          <main className="flex-1 grid">
+            <Day
+              entryDate={entryDate}
+              onNavigateToDay={handleNavigateToDay}
+              today={today}
+              editMode={dayEditMode}
+              onSetEditMode={setDayEditMode}
+            />
+          </main>
+        )}
+      </div>
+    </SaveStatusProvider>
   )
 }
 
