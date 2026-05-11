@@ -1,6 +1,7 @@
 import journalUrl from '@renderer/assets/textures/JOURNAL.png'
 import woodUrl from '@renderer/assets/textures/WOOD.png'
 import { useEffect, useRef, useState } from 'react'
+import ScrollableArea from './ScrollableArea'
 
 interface Props {
   left: React.ReactNode
@@ -80,13 +81,13 @@ export default function JournalSpread({
           draggable={false}
         />
 
-        <div className="absolute overflow-auto no-scrollbar z-20" style={LEFT_PAGE}>
-          <div className="h-full">{left}</div>
-        </div>
+        <ScrollableArea className="z-20" style={{ position: 'absolute', ...LEFT_PAGE }}>
+          {left}
+        </ScrollableArea>
 
-        <div className="absolute overflow-auto no-scrollbar z-20" style={RIGHT_PAGE}>
-          <div className="h-full">{right}</div>
-        </div>
+        <ScrollableArea className="z-20" style={{ position: 'absolute', ...RIGHT_PAGE }}>
+          {right}
+        </ScrollableArea>
       </div>
     </div>
   )

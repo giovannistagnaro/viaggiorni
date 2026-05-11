@@ -53,7 +53,6 @@ function WordOfDayWidget({ entryDate }: Props): React.JSX.Element {
 
   return (
     <div className="relative inline-block" style={{ transform: 'rotate(0.4deg)' }}>
-      {/* Washi tape strip near top */}
       <img
         src={washiUrl}
         alt=""
@@ -67,7 +66,6 @@ function WordOfDayWidget({ entryDate }: Props): React.JSX.Element {
         }}
       />
 
-      {/* Blue torn paper card body */}
       <div
         className="relative px-6 pt-7 pb-5 min-w-[260px]"
         style={{
