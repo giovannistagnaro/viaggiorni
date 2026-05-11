@@ -210,58 +210,13 @@ describe('HabitTrackerWidget', () => {
     })
   })
 
-  describe('add habit', () => {
-    it('does not call createHabit when the input is empty', async () => {
+  describe('empty state', () => {
+    it('shows a "no habits" hint that directs the user to Settings', async () => {
+      vi.mocked(window.api.habit.getActiveHabits).mockResolvedValue([])
+
       render(<HabitTrackerWidget entryDate={ENTRY_DATE} />)
 
-      await userEvent.click(screen.getByRole('button', { name: '+' }))
-
-      expect(window.api.habit.createHabit).not.toHaveBeenCalled()
-    })
-
-    it('does not call createHabit when the input is whitespace only', async () => {
-      render(<HabitTrackerWidget entryDate={ENTRY_DATE} />)
-
-      await userEvent.type(screen.getByRole('textbox'), '   ')
-      await userEvent.click(screen.getByRole('button', { name: '+' }))
-
-      expect(window.api.habit.createHabit).not.toHaveBeenCalled()
-    })
-
-    it('calls createHabit with the trimmed name and the selected color', async () => {
-      render(<HabitTrackerWidget entryDate={ENTRY_DATE} />)
-
-      await userEvent.type(screen.getByRole('textbox'), '  Running  ')
-      await userEvent.click(screen.getByRole('button', { name: '+' }))
-
-      expect(window.api.habit.createHabit).toHaveBeenCalledWith('Running', '#6586db')
-    })
-
-    it('clears the text input after a successful add', async () => {
-      render(<HabitTrackerWidget entryDate={ENTRY_DATE} />)
-
-      const input = screen.getByRole('textbox')
-      await userEvent.type(input, 'Running')
-      await userEvent.click(screen.getByRole('button', { name: '+' }))
-
-      await waitFor(() => {
-        expect(input).toHaveValue('')
-      })
-    })
-
-    it('refetches active habits after adding', async () => {
-      render(<HabitTrackerWidget entryDate={ENTRY_DATE} />)
-
-      await waitFor(() => {
-        expect(window.api.habit.getActiveHabits).toHaveBeenCalledTimes(1)
-      })
-
-      await userEvent.type(screen.getByRole('textbox'), 'Running')
-      await userEvent.click(screen.getByRole('button', { name: '+' }))
-
-      await waitFor(() => {
-        expect(window.api.habit.getActiveHabits).toHaveBeenCalledTimes(2)
-      })
+      expect(await screen.findByText(/No habits yet/i)).toBeInTheDocument()
     })
   })
 })
