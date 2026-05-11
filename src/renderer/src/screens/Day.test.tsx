@@ -385,7 +385,7 @@ describe('Main', () => {
       render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today={TODAY} />)
       await screen.findByDisplayValue(mockEntry.title)
 
-      await userEvent.click(screen.getByRole('button', { name: '<' }))
+      await userEvent.click(screen.getByRole('button', { name: 'Previous day' }))
 
       expect(onNavigateToDay).toHaveBeenCalledWith('2026-04-30')
     })
@@ -393,7 +393,7 @@ describe('Main', () => {
     it('renders a right button when entryDate is before today', async () => {
       render(<Day entryDate="2026-05-01" onNavigateToDay={vi.fn()} today="2026-05-02" />)
 
-      expect(await screen.findByRole('button', { name: '>' })).toBeInTheDocument()
+      expect(await screen.findByRole('button', { name: 'Next day' })).toBeInTheDocument()
     })
 
     it('clicking the right button navigates to the next day', async () => {
@@ -402,7 +402,7 @@ describe('Main', () => {
       render(<Day entryDate="2026-05-01" onNavigateToDay={onNavigateToDay} today="2026-05-03" />)
       await screen.findByDisplayValue(mockEntry.title)
 
-      await userEvent.click(screen.getByRole('button', { name: '>' }))
+      await userEvent.click(screen.getByRole('button', { name: 'Next day' }))
 
       expect(onNavigateToDay).toHaveBeenCalledWith('2026-05-02')
     })
@@ -411,7 +411,7 @@ describe('Main', () => {
       render(<Day entryDate="2026-05-01" onNavigateToDay={vi.fn()} today="2026-05-01" />)
       await screen.findByDisplayValue(mockEntry.title)
 
-      expect(screen.queryByRole('button', { name: '>' })).not.toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Next day' })).not.toBeInTheDocument()
     })
 
     it('hides the right button when entryDate is somehow after today', async () => {
@@ -419,7 +419,7 @@ describe('Main', () => {
       render(<Day entryDate="2026-05-05" onNavigateToDay={vi.fn()} today="2026-05-01" />)
       await screen.findByDisplayValue(mockEntry.title)
 
-      expect(screen.queryByRole('button', { name: '>' })).not.toBeInTheDocument()
+      expect(screen.queryByRole('button', { name: 'Next day' })).not.toBeInTheDocument()
     })
   })
 

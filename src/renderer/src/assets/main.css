@@ -1,5 +1,15 @@
 @import 'tailwindcss';
 
+/* Self-hosted journal fonts (offline-friendly for Electron) */
+@import '@fontsource/playfair-display/400.css';
+@import '@fontsource/playfair-display/500.css';
+@import '@fontsource/playfair-display/600.css';
+@import '@fontsource/playfair-display/700.css';
+@import '@fontsource/playfair-display/400-italic.css';
+@import '@fontsource/caveat/400.css';
+@import '@fontsource/caveat/500.css';
+@import '@fontsource/caveat/700.css';
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -23,6 +33,24 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+
+  /* Journal palette (drives bg-leather, text-ink, etc.) */
+  --color-leather: var(--leather);
+  --color-leather-light: var(--leather-light);
+  --color-paper: var(--paper);
+  --color-paper-aged: var(--paper-aged);
+  --color-paper-shadow: var(--paper-shadow);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-sepia: var(--sepia);
+  --color-sepia-soft: var(--sepia-soft);
+  --color-mustard: var(--mustard);
+  --color-sage: var(--sage);
+  --color-rust: var(--rust);
+
+  /* Typography (drives font-serif, font-script) */
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-script: 'Caveat', 'Bradley Hand', cursive;
 }
 
 :root {
@@ -45,6 +73,20 @@
   --input: hsl(35, 15%, 85%);
   --ring: hsl(25, 44%, 53%);
   --radius: 0.5rem;
+
+  /* Journal palette — sampled from Day-page mockup */
+  --leather: hsl(28, 25%, 18%); /* #3d2e22 — outer book cover */
+  --leather-light: hsl(28, 22%, 26%); /* warmer leather edges */
+  --paper: hsl(40, 55%, 88%); /* #f2e6cc — cream page body */
+  --paper-aged: hsl(38, 40%, 80%); /* darker cream for shadows/accents */
+  --paper-shadow: hsl(30, 30%, 45%); /* shadow under page edge */
+  --ink: hsl(218, 36%, 26%); /* #2a3b5a — navy headings/text */
+  --ink-soft: hsl(218, 24%, 38%); /* softer navy for secondary text */
+  --sepia: hsl(33, 33%, 41%); /* #8b6e45 — sepia accents/ornaments */
+  --sepia-soft: hsl(33, 28%, 55%); /* lighter sepia */
+  --mustard: hsl(36, 47%, 60%); /* #c8a56b — washi/highlight yellow */
+  --sage: hsl(80, 16%, 48%); /* sage green accent (stencils) */
+  --rust: hsl(15, 45%, 50%); /* rust/coral accent */
 }
 
 .dark {
@@ -66,6 +108,20 @@
   --border: hsl(20, 15%, 20%);
   --input: hsl(20, 15%, 20%);
   --ring: hsl(25, 44%, 53%);
+
+  /* Journal palette — night-mode variant: deeper leather, dimmer paper */
+  --leather: hsl(28, 25%, 8%);
+  --leather-light: hsl(28, 22%, 14%);
+  --paper: hsl(38, 18%, 18%); /* dim "night journal" page */
+  --paper-aged: hsl(38, 14%, 14%);
+  --paper-shadow: hsl(30, 30%, 5%);
+  --ink: hsl(40, 35%, 80%); /* light ink on dark paper */
+  --ink-soft: hsl(40, 20%, 65%);
+  --sepia: hsl(33, 35%, 55%);
+  --sepia-soft: hsl(33, 25%, 45%);
+  --mustard: hsl(36, 45%, 55%);
+  --sage: hsl(80, 18%, 50%);
+  --rust: hsl(15, 40%, 50%);
 }
 
 @layer base {

@@ -1,5 +1,7 @@
 import WritingEditor from '@renderer/components/WritingEditor'
 import WidgetRenderer from '@renderer/components/WidgetRenderer'
+import JournalSpread from '@renderer/components/JournalSpread'
+import { useSaveStatus } from '@renderer/utils/saveStatus'
 import { formatTitleForDate } from '@renderer/utils/dateFormatters'
 import { Entry, EntryWriting, EntryWidget, WidgetType, WritingType } from '@shared/types'
 import { WIDGET_TYPES, WRITING_TYPES, WRITING_TYPE_LABELS } from '@shared/constants'
@@ -20,6 +22,7 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
   const [widgets, setWidgets] = useState<EntryWidget[]>([])
   const [editMode, setEditMode] = useState<boolean>(false)
   const [rightNavAvailable, setRightNavAvailable] = useState<boolean>(false)
+  const { markSaved } = useSaveStatus()
 
   useHotkeys('mod+right', () => (rightNavAvailable ? onNavigateToDay(addDays(entryDate, 1)) : {}))
   useHotkeys('mod+left', () => onNavigateToDay(addDays(entryDate, -1)))
@@ -77,6 +80,7 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
     try {
       await window.api.entries.updateTitle(entry.id, newTitle)
       setEntry({ ...entry, title: newTitle })
+      markSaved()
     } catch (err) {
       console.error('Failed to update entry title', err)
       toast.error('Failed to update entry title')
@@ -88,6 +92,7 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
     try {
       await window.api.entries.toggleBookmark(entry.id)
       setEntry({ ...entry, isBookmarked: !entry.isBookmarked })
+      markSaved()
     } catch (err) {
       console.error('Failed to bookmark entry', err)
       toast.error('Failed to bookmark entry')
@@ -103,6 +108,7 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
       ])
       setWidgets(refreshedWidgets)
       setWritings(refreshedWritings)
+      markSaved()
     } catch (err) {
       console.error('Failed to refresh entry structure', err)
       toast.error('Failed to refresh entry structure')
@@ -203,128 +209,150 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
     (t) => t !== 'custom' && !usedWritingTypes.has(t)
   )
 
-  return (
-    <div className="grid grid-cols-[auto_1fr_auto] h-full">
-      <button onClick={() => onNavigateToDay(addDays(entryDate, -1))} className="self-center">
-        {'<'}
-      </button>
+  const leftPage = (
+    <div>
       <div>
-        <div>
-          <input
-            type="text"
-            defaultValue={entry.title}
-            onBlur={(e) => handleTitleBlur(e.target.value)}
-            placeholder={'Enter entry title...'}
-          />
-          <button onClick={() => setEditMode(!editMode)}>{editMode ? 'Done' : 'Edit'}</button>
-        </div>
-        <p>{entry.date}</p>
-        <button onClick={handleBookmark}>{entry.isBookmarked ? 'Un-bookmark' : 'Bookmark'}</button>
-
-        <div className="grid grid-cols-2 grid-rows-1 gap-4">
-          <div className={editMode ? '' : 'grid grid-cols-4 gap-4'}>
-            {visibleWidgets.map((widget) =>
-              editMode ? (
-                <div key={widget.id} className="grid grid-cols-5 items-center gap-2">
-                  <span>{widget.type}</span>
-                  <button onClick={() => handleWidgetMove(widget.id, widget.position, -1)}>
-                    [Up]
-                  </button>
-                  <button onClick={() => handleWidgetMove(widget.id, widget.position, 1)}>
-                    [Down]
-                  </button>
-                  <button onClick={() => handleWidgetVisibility(widget.id, !widget.isVisible)}>
-                    {widget.isVisible ? 'Hide' : 'Show'}
-                  </button>
-                  <select
-                    value={widget.colSpan}
-                    onChange={(e) => handleWidgetColSpan(widget.id, Number(e.target.value))}
-                  >
-                    <option value={2}>Half</option>
-                    <option value={4}>Full</option>
-                  </select>
-                </div>
-              ) : (
-                <div key={widget.id} style={{ gridColumn: `span ${widget.colSpan}` }}>
-                  <WidgetRenderer widget={widget} entryDate={entry.date} />
-                </div>
-              )
-            )}
-            {editMode && availableWidgetTypes.length > 0 && (
-              <select
-                value=""
-                onChange={(e) => {
-                  if (e.target.value) handleWidgetAdd(e.target.value as WidgetType)
-                }}
-              >
-                <option value="" disabled>
-                  [+] Add widget
-                </option>
-                {availableWidgetTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            )}
-          </div>
-          <div>
-            {visibleWritings.map((writing) =>
-              editMode ? (
-                <div key={writing.id} className="grid grid-cols-4 items-center gap-2">
-                  <span>{writing.label ?? writing.type}</span>
-                  <button onClick={() => handleWritingMove(writing.id, writing.position, -1)}>
-                    [Up]
-                  </button>
-                  <button onClick={() => handleWritingMove(writing.id, writing.position, 1)}>
-                    [Down]
-                  </button>
-                  <button onClick={() => handleWritingVisibility(writing.id, !writing.isVisible)}>
-                    {writing.isVisible ? 'Hide' : 'Show'}
-                  </button>
-                </div>
-              ) : (
-                <WritingEditor
-                  key={writing.id}
-                  writing={writing}
-                  entryDate={entry.date}
-                  onSave={async (newContent) => {
-                    try {
-                      await window.api.entryWritings.updateWritingContent(writing.id, newContent)
-                    } catch (err) {
-                      console.error('Failed to save writing content', err)
-                      toast.error('Failed to save writing content')
-                    }
-                  }}
-                />
-              )
-            )}
-            {editMode && availableWritingTypes.length > 0 && (
-              <select
-                value=""
-                onChange={(e) => {
-                  if (e.target.value) handleWritingAdd(e.target.value as WritingType)
-                }}
-              >
-                <option value="" disabled>
-                  [+] Add writing
-                </option>
-                {availableWritingTypes.map((type) => (
-                  <option key={type} value={type}>
-                    {type}
-                  </option>
-                ))}
-              </select>
-            )}
-          </div>
-        </div>
-      </div>
-      {rightNavAvailable && (
-        <button onClick={() => onNavigateToDay(addDays(entryDate, 1))} className="self-center">
-          {'>'}
+        <input
+          type="text"
+          defaultValue={entry.title}
+          onBlur={(e) => handleTitleBlur(e.target.value)}
+          placeholder={'Enter entry title...'}
+          className="font-serif text-ink"
+        />
+        <button onClick={() => setEditMode(!editMode)} className="text-ink-soft">
+          {editMode ? 'Done' : 'Edit'}
         </button>
+      </div>
+      <p className="text-ink-soft">{entry.date}</p>
+      <button onClick={handleBookmark} className="text-ink-soft">
+        {entry.isBookmarked ? 'Un-bookmark' : 'Bookmark'}
+      </button>
+
+      <div className={editMode ? 'mt-4' : 'mt-4 grid grid-cols-4 gap-4'}>
+        {visibleWidgets.map((widget) =>
+          editMode ? (
+            <div key={widget.id} className="grid grid-cols-5 items-center gap-2">
+              <span>{widget.type}</span>
+              <button onClick={() => handleWidgetMove(widget.id, widget.position, -1)}>[Up]</button>
+              <button onClick={() => handleWidgetMove(widget.id, widget.position, 1)}>
+                [Down]
+              </button>
+              <button onClick={() => handleWidgetVisibility(widget.id, !widget.isVisible)}>
+                {widget.isVisible ? 'Hide' : 'Show'}
+              </button>
+              <select
+                value={widget.colSpan}
+                onChange={(e) => handleWidgetColSpan(widget.id, Number(e.target.value))}
+              >
+                <option value={2}>Half</option>
+                <option value={4}>Full</option>
+              </select>
+            </div>
+          ) : (
+            <div key={widget.id} style={{ gridColumn: `span ${widget.colSpan}` }}>
+              <WidgetRenderer widget={widget} entryDate={entry.date} />
+            </div>
+          )
+        )}
+        {editMode && availableWidgetTypes.length > 0 && (
+          <select
+            value=""
+            onChange={(e) => {
+              if (e.target.value) handleWidgetAdd(e.target.value as WidgetType)
+            }}
+          >
+            <option value="" disabled>
+              [+] Add widget
+            </option>
+            {availableWidgetTypes.map((type) => (
+              <option key={type} value={type}>
+                {type}
+              </option>
+            ))}
+          </select>
+        )}
+      </div>
+    </div>
+  )
+
+  const rightPage = (
+    <div>
+      {visibleWritings.map((writing) =>
+        editMode ? (
+          <div key={writing.id} className="grid grid-cols-4 items-center gap-2">
+            <span>{writing.label ?? writing.type}</span>
+            <button onClick={() => handleWritingMove(writing.id, writing.position, -1)}>
+              [Up]
+            </button>
+            <button onClick={() => handleWritingMove(writing.id, writing.position, 1)}>
+              [Down]
+            </button>
+            <button onClick={() => handleWritingVisibility(writing.id, !writing.isVisible)}>
+              {writing.isVisible ? 'Hide' : 'Show'}
+            </button>
+          </div>
+        ) : (
+          <WritingEditor
+            key={writing.id}
+            writing={writing}
+            entryDate={entry.date}
+            onSave={async (newContent) => {
+              try {
+                await window.api.entryWritings.updateWritingContent(writing.id, newContent)
+                markSaved()
+              } catch (err) {
+                console.error('Failed to save writing content', err)
+                toast.error('Failed to save writing content')
+              }
+            }}
+          />
+        )
+      )}
+      {editMode && availableWritingTypes.length > 0 && (
+        <select
+          value=""
+          onChange={(e) => {
+            if (e.target.value) handleWritingAdd(e.target.value as WritingType)
+          }}
+        >
+          <option value="" disabled>
+            [+] Add writing
+          </option>
+          {availableWritingTypes.map((type) => (
+            <option key={type} value={type}>
+              {type}
+            </option>
+          ))}
+        </select>
       )}
     </div>
+  )
+
+  return (
+    <JournalSpread
+      left={leftPage}
+      right={rightPage}
+      leftEdge={
+        <button
+          onClick={() => onNavigateToDay(addDays(entryDate, -1))}
+          className="text-paper/70 hover:text-paper text-2xl font-serif"
+          aria-label="Previous day"
+        >
+          {'‹'}
+        </button>
+      }
+      rightEdge={
+        rightNavAvailable ? (
+          <button
+            onClick={() => onNavigateToDay(addDays(entryDate, 1))}
+            className="text-paper/70 hover:text-paper text-2xl font-serif"
+            aria-label="Next day"
+          >
+            {'›'}
+          </button>
+        ) : null
+      }
+    />
   )
 }
 
