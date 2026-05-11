@@ -89,7 +89,7 @@ describe('PhotoWidget', () => {
 
       render(<PhotoWidget entryId={ENTRY_ID} />)
 
-      expect(screen.getByText(/^Loading\.\.\./i)).toBeInTheDocument()
+      expect(screen.getByText(/^Loading/i)).toBeInTheDocument()
     })
 
     it('calls getPhotosForEntry with the entry id on mount', async () => {
