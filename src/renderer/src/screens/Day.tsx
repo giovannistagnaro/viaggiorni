@@ -1,6 +1,7 @@
 import WritingEditor from '@renderer/components/WritingEditor'
 import WidgetRenderer from '@renderer/components/WidgetRenderer'
 import JournalSpread from '@renderer/components/JournalSpread'
+import BookmarkTab from '@renderer/components/BookmarkTab'
 import { useSaveStatus } from '@renderer/utils/saveStatus'
 import { formatTitleForDate } from '@renderer/utils/dateFormatters'
 import { Entry, EntryWriting, EntryWidget, WidgetType, WritingType } from '@shared/types'
@@ -224,9 +225,6 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
         </button>
       </div>
       <p className="text-ink-soft">{entry.date}</p>
-      <button onClick={handleBookmark} className="text-ink-soft">
-        {entry.isBookmarked ? 'Un-bookmark' : 'Bookmark'}
-      </button>
 
       <div className={editMode ? 'mt-4' : 'mt-4 grid grid-cols-4 gap-4'}>
         {visibleWidgets.map((widget) =>
@@ -328,10 +326,19 @@ function Day({ entryDate, onNavigateToDay, today }: Props): React.JSX.Element {
     </div>
   )
 
+  const monthLabel = new Date(entryDate + 'T00:00:00').toLocaleString('en-US', { month: 'long' })
+
   return (
     <JournalSpread
       left={leftPage}
       right={rightPage}
+      bookmarkTab={
+        <BookmarkTab
+          label={monthLabel}
+          isBookmarked={entry.isBookmarked}
+          onClick={handleBookmark}
+        />
+      }
       leftEdge={
         <button
           onClick={() => onNavigateToDay(addDays(entryDate, -1))}

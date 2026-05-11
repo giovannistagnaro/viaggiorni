@@ -7,6 +7,7 @@ interface Props {
   right: React.ReactNode
   leftEdge?: React.ReactNode
   rightEdge?: React.ReactNode
+  bookmarkTab?: React.ReactNode
 }
 
 const JOURNAL_W = 1484
@@ -20,7 +21,8 @@ export default function JournalSpread({
   left,
   right,
   leftEdge,
-  rightEdge
+  rightEdge,
+  bookmarkTab
 }: Props): React.JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null)
   const [size, setSize] = useState<{ w: number; h: number }>({ w: 0, h: 0 })
@@ -60,9 +62,18 @@ export default function JournalSpread({
       )}
 
       <div className="relative" style={{ width: size.w || '100%', height: size.h || '100%' }}>
+        {bookmarkTab && (
+          <div
+            className="absolute z-30"
+            style={{ top: 0, right: '8%', width: '3.2%', aspectRatio: '316 / 819' }}
+          >
+            {bookmarkTab}
+          </div>
+        )}
+
         <img
           src={journalUrl}
-          className="absolute inset-0 w-full h-full block select-none pointer-events-none"
+          className="absolute inset-0 w-full h-full block select-none pointer-events-none z-10"
           style={{ filter: 'drop-shadow(0 24px 40px rgba(0,0,0,0.55))' }}
           alt=""
           aria-hidden
@@ -70,12 +81,12 @@ export default function JournalSpread({
         />
 
         {/* Left page content */}
-        <div className="absolute overflow-auto" style={LEFT_PAGE}>
+        <div className="absolute overflow-auto z-20" style={LEFT_PAGE}>
           <div className="h-full">{left}</div>
         </div>
 
         {/* Right page content */}
-        <div className="absolute overflow-auto" style={RIGHT_PAGE}>
+        <div className="absolute overflow-auto z-20" style={RIGHT_PAGE}>
           <div className="h-full">{right}</div>
         </div>
       </div>

@@ -143,15 +143,17 @@ describe('Main', () => {
   })
 
   describe('bookmark', () => {
-    it('renders "Bookmark" when the entry is not bookmarked', async () => {
+    it('renders an unbookmarked tab when the entry is not bookmarked', async () => {
       vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
       render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
 
-      expect(await screen.findByRole('button', { name: 'Bookmark' })).toBeInTheDocument()
+      expect(
+        await screen.findByRole('button', { name: 'Bookmark this page (May)' })
+      ).toBeInTheDocument()
     })
 
-    it('renders "Un-bookmark" when the entry is already bookmarked', async () => {
+    it('renders a bookmarked tab when the entry is already bookmarked', async () => {
       vi.mocked(window.api.entries.getByDate).mockResolvedValue({
         ...mockEntry,
         isBookmarked: true
@@ -159,26 +161,34 @@ describe('Main', () => {
 
       render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
 
-      expect(await screen.findByRole('button', { name: 'Un-bookmark' })).toBeInTheDocument()
+      expect(
+        await screen.findByRole('button', { name: 'Remove bookmark (May)' })
+      ).toBeInTheDocument()
     })
 
-    it('calls toggleBookmark with the entry id when clicked', async () => {
+    it('calls toggleBookmark with the entry id when the tab is clicked', async () => {
       vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
 
       render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
-      await userEvent.click(await screen.findByRole('button', { name: 'Bookmark' }))
+      await userEvent.click(
+        await screen.findByRole('button', { name: 'Bookmark this page (May)' })
+      )
 
       expect(window.api.entries.toggleBookmark).toHaveBeenCalledWith(mockEntry.id)
     })
 
-    it('flips the button label after toggling', async () => {
+    it('flips the tab label after toggling', async () => {
       vi.mocked(window.api.entries.getByDate).mockResolvedValue(mockEntry)
       vi.mocked(window.api.entries.toggleBookmark).mockResolvedValue(undefined)
 
       render(<Day entryDate={mockEntry.date} onNavigateToDay={vi.fn()} today={TODAY} />)
-      await userEvent.click(await screen.findByRole('button', { name: 'Bookmark' }))
+      await userEvent.click(
+        await screen.findByRole('button', { name: 'Bookmark this page (May)' })
+      )
 
-      expect(await screen.findByRole('button', { name: 'Un-bookmark' })).toBeInTheDocument()
+      expect(
+        await screen.findByRole('button', { name: 'Remove bookmark (May)' })
+      ).toBeInTheDocument()
     })
   })
 
