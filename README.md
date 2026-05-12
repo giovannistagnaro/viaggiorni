@@ -5,7 +5,7 @@
 **A private, encrypted desktop journal that feels like a real notebook.**
 Local-first. Privacy-centric. No accounts. No tracking.
 
-<img src="docs/assets/hero.gif" alt="Viaggiorni — opening the journal, browsing the index, writing an entry" width="800" />
+[<img src="docs/assets/hero.gif" alt="Viaggiorni — opening the journal, browsing the index, writing an entry" width="800" />](https://github.com/user-attachments/assets/3462ec9e-2e41-4fa0-b200-1a93f7732dd5)
 
 <br/>
 
