@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: viaggiorni
+appId: com.viaggiorni.app
+productName: Viaggiorni
 directories:
   buildResources: build
 files:
@@ -8,21 +8,28 @@ files:
   - '!electron.vite.config.{js,ts,mjs,cjs}'
   - '!{.eslintcache,eslint.config.mjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md}'
   - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
-  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json,tsconfig.web.tsbuildinfo}'
+  - '!{components.json,NPM_README.md,PROJECT_SPECIFICATIONS.md,vitest.config.ts,vitest.setup.ts,drizzle.config.ts}'
+  - '!raw_images/**'
+  - '!data/**'
+  - '!memory/**'
+  - '!.claude/**'
+  - '!.VSCodeCounter/**'
+  - '!squashfs-root/**'
 asarUnpack:
   - resources/**
+extraResources:
+  - from: ./drizzle
+    to: drizzle
 win:
   executableName: viaggiorni
-nsis:
-  artifactName: ${name}-${version}-setup.${ext}
-  shortcutName: ${productName}
-  uninstallDisplayName: ${productName}
-  createDesktopShortcut: always
+  target:
+    - msi
+msi:
+  artifactName: ${name}-${version}.${ext}
 mac:
   entitlementsInherit: build/entitlements.mac.plist
   extendInfo:
-    - NSCameraUsageDescription: Application requests access to the device's camera.
-    - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
     - NSDocumentsFolderUsageDescription: Application requests access to the user's Documents folder.
     - NSDownloadsFolderUsageDescription: Application requests access to the user's Downloads folder.
   notarize: false
@@ -33,11 +40,11 @@ linux:
     - AppImage
     - snap
     - deb
-  maintainer: electronjs.org
+  maintainer: Giovanni Stagnaro
   category: Utility
+  desktop:
+    entry:
+      StartupWMClass: viaggiorni
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
-publish:
-  provider: generic
-  url: https://example.com/auto-updates
