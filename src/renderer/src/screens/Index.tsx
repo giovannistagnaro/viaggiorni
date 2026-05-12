@@ -62,6 +62,16 @@ function Index({ onNavigateToDay }: Props): React.JSX.Element {
     }
   }, [])
 
+  async function handleUnbookmark(entryId: number): Promise<void> {
+    try {
+      await window.api.entries.toggleBookmark(entryId)
+      setBookmarkedEntries((prev) => prev.filter((e) => e.id !== entryId))
+    } catch (err) {
+      console.error('Failed to remove bookmark', err)
+      toast.error('Failed to remove bookmark')
+    }
+  }
+
   const leftPage = (
     <div className="flex flex-col items-center gap-4">
       <Calendar
@@ -107,17 +117,20 @@ function Index({ onNavigateToDay }: Props): React.JSX.Element {
       </h2>
       <div className="h-px bg-ink/15 mt-1 mb-3" />
       {bookmarkedEntries.length === 0 ? (
-        <p className="font-serif text-ink-soft text-sm italic">
+        <p className="font-serif text-ink-soft text-md italic">
           No bookmarks yet — bookmark days from the journal to find them here.
         </p>
       ) : (
         <ul className="divide-y divide-ink/10">
           {bookmarkedEntries.map((entry) => (
-            <li key={entry.id}>
+            <li
+              key={entry.id}
+              className="group flex items-center gap-1 -mx-1 px-1 rounded hover:bg-ink/[0.04]"
+            >
               <Button
                 variant="ghost"
                 onClick={() => onNavigateToDay(entry.date)}
-                className="group w-full justify-start text-left h-auto py-2 px-1 -mx-1 rounded hover:bg-ink/[0.04] gap-3 whitespace-normal"
+                className="flex-1 min-w-0 justify-start text-left h-auto py-2 gap-3 whitespace-normal hover:bg-transparent"
               >
                 <span className="font-serif text-[11px] uppercase tracking-wider text-ink-soft flex-none w-[6.5em]">
                   {formatShortDate(entry.date)}
@@ -126,6 +139,14 @@ function Index({ onNavigateToDay }: Props): React.JSX.Element {
                   {entry.title}
                 </span>
               </Button>
+              <button
+                type="button"
+                onClick={() => handleUnbookmark(entry.id)}
+                aria-label={`Remove bookmark: ${entry.title}`}
+                className="font-serif text-ink-soft text-base leading-none opacity-0 group-hover:opacity-100 hover:text-rust transition-opacity px-1"
+              >
+                ×
+              </button>
             </li>
           ))}
         </ul>

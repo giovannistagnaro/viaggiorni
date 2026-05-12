@@ -135,6 +135,70 @@ describe('Index', () => {
 
       expect(onNavigateToDay).toHaveBeenCalledWith('2026-04-15')
     })
+
+    it('renders a remove-bookmark button for each bookmark', async () => {
+      vi.mocked(window.api.entries.getAllBookmarked).mockResolvedValue([
+        baseEntry({ id: 7, title: 'A trip' }),
+        baseEntry({ id: 8, title: 'Another day' })
+      ])
+
+      render(<Index onNavigateToDay={vi.fn()} />)
+
+      expect(
+        await screen.findByRole('button', { name: 'Remove bookmark: A trip' })
+      ).toBeInTheDocument()
+      expect(
+        screen.getByRole('button', { name: 'Remove bookmark: Another day' })
+      ).toBeInTheDocument()
+    })
+
+    it('calls toggleBookmark with the entry id when remove-bookmark is clicked', async () => {
+      vi.mocked(window.api.entries.getAllBookmarked).mockResolvedValue([
+        baseEntry({ id: 7, title: 'A trip' })
+      ])
+
+      render(<Index onNavigateToDay={vi.fn()} />)
+
+      await userEvent.click(
+        await screen.findByRole('button', { name: 'Remove bookmark: A trip' })
+      )
+
+      expect(window.api.entries.toggleBookmark).toHaveBeenCalledWith(7)
+    })
+
+    it('optimistically removes the bookmark from the list after clicking remove', async () => {
+      vi.mocked(window.api.entries.getAllBookmarked).mockResolvedValue([
+        baseEntry({ id: 7, title: 'A trip' }),
+        baseEntry({ id: 8, title: 'Another day' })
+      ])
+      vi.mocked(window.api.entries.toggleBookmark).mockResolvedValue(undefined as never)
+
+      render(<Index onNavigateToDay={vi.fn()} />)
+
+      await userEvent.click(
+        await screen.findByRole('button', { name: 'Remove bookmark: A trip' })
+      )
+
+      await waitFor(() => {
+        expect(screen.queryByText('A trip')).not.toBeInTheDocument()
+      })
+      expect(screen.getByText('Another day')).toBeInTheDocument()
+    })
+
+    it('does not navigate when remove-bookmark is clicked', async () => {
+      vi.mocked(window.api.entries.getAllBookmarked).mockResolvedValue([
+        baseEntry({ id: 7, title: 'A trip' })
+      ])
+      const onNavigateToDay = vi.fn()
+
+      render(<Index onNavigateToDay={onNavigateToDay} />)
+
+      await userEvent.click(
+        await screen.findByRole('button', { name: 'Remove bookmark: A trip' })
+      )
+
+      expect(onNavigateToDay).not.toHaveBeenCalled()
+    })
   })
 
   describe('quick-jump buttons', () => {

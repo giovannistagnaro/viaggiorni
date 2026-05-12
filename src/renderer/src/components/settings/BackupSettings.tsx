@@ -39,12 +39,9 @@ function BackupSettings({ onLockRequired }: Props): React.JSX.Element {
 
   return (
     <>
-      <Row
-        label="Export"
-        description="Save an encrypted snapshot of your journal to a file."
-      >
+      <Row label="Export" description="Save an encrypted snapshot of your journal to a file.">
         <Button variant="outline" onClick={handleExport}>
-          <Download />
+          <Upload />
           Export a backup
         </Button>
       </Row>
@@ -53,7 +50,7 @@ function BackupSettings({ onLockRequired }: Props): React.JSX.Element {
         description="Restore from a backup file. The app will lock so you can sign back in."
       >
         <Button variant="outline" onClick={handleImport}>
-          <Upload />
+          <Download />
           Import a backup
         </Button>
       </Row>
