@@ -12,7 +12,7 @@ export default function BookmarkTab({ label, isBookmarked, onClick }: Props): Re
       onClick={onClick}
       aria-label={isBookmarked ? `Remove bookmark (${label})` : `Bookmark this page (${label})`}
       aria-pressed={isBookmarked}
-      className={`block w-full h-full cursor-pointer hover:brightness-110 active:brightness-95 transition-all duration-500 ease-in-out ${
+      className={`block w-full h-full cursor-pointer pointer-events-auto hover:brightness-110 active:brightness-95 transition-all duration-500 ease-in-out ${
         isBookmarked ? 'translate-y-0' : '-translate-y-[46%] hover:-translate-y-[13%]'
       }`}
     >

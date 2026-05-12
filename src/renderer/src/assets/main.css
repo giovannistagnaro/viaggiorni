@@ -109,19 +109,10 @@
   --input: hsl(20, 15%, 20%);
   --ring: hsl(25, 44%, 53%);
 
-  /* Journal palette — night-mode variant: deeper leather, dimmer paper */
-  --leather: hsl(28, 25%, 8%);
-  --leather-light: hsl(28, 22%, 14%);
-  --paper: hsl(38, 18%, 18%); /* dim "night journal" page */
-  --paper-aged: hsl(38, 14%, 14%);
-  --paper-shadow: hsl(30, 30%, 5%);
-  --ink: hsl(40, 35%, 80%); /* light ink on dark paper */
-  --ink-soft: hsl(40, 20%, 65%);
-  --sepia: hsl(33, 35%, 55%);
-  --sepia-soft: hsl(33, 25%, 45%);
-  --mustard: hsl(36, 45%, 55%);
-  --sage: hsl(80, 18%, 50%);
-  --rust: hsl(15, 40%, 50%);
+  /* Journal palette is intentionally NOT overridden in dark mode — the
+   * paper-and-ink look stays fixed, regardless of the user's theme choice.
+   * App-chrome screens (Settings, Cover, Login, Onboarding) use the semantic
+   * tokens above (background/foreground/card/...) and flip with .dark. */
 }
 
 @layer base {

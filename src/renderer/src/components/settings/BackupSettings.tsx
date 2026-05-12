@@ -1,4 +1,7 @@
 import { toast } from 'sonner'
+import { Button } from '@renderer/components/ui/button'
+import { Download, Upload } from 'lucide-react'
+import { Row } from './_shared'
 
 interface Props {
   onLockRequired: () => void
@@ -35,14 +38,23 @@ function BackupSettings({ onLockRequired }: Props): React.JSX.Element {
   }
 
   return (
-    <div>
-      <div>
-        <button onClick={handleImport}>Import a backup</button>
-      </div>
-      <div>
-        <button onClick={handleExport}>Export a backup</button>
-      </div>
-    </div>
+    <>
+      <Row label="Export" description="Save an encrypted snapshot of your journal to a file.">
+        <Button variant="outline" onClick={handleExport}>
+          <Upload />
+          Export a backup
+        </Button>
+      </Row>
+      <Row
+        label="Import"
+        description="Restore from a backup file. The app will lock so you can sign back in."
+      >
+        <Button variant="outline" onClick={handleImport}>
+          <Download />
+          Import a backup
+        </Button>
+      </Row>
+    </>
   )
 }
 

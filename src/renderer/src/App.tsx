@@ -55,6 +55,26 @@ function App(): React.JSX.Element {
   }, [])
 
   useEffect(() => {
+    if (!isPostLogin) return
+    let cancelled = false
+    async function applyTheme(): Promise<void> {
+      try {
+        const settings = await window.api.settings.getSettings()
+        if (cancelled) return
+        const isJournalScreen = screen === 'day' || screen === 'index'
+        const shouldBeDark = settings.theme === 'dark' && !isJournalScreen
+        document.documentElement.classList.toggle('dark', shouldBeDark)
+      } catch (err) {
+        console.error('Failed to apply theme', err)
+      }
+    }
+    applyTheme()
+    return () => {
+      cancelled = true
+    }
+  }, [isPostLogin, screen])
+
+  useEffect(() => {
     async function setTodayWrapper(): Promise<void> {
       setToday(formatDateISO(new Date()))
     }
@@ -110,7 +130,7 @@ function App(): React.JSX.Element {
         </Topbar>
 
         {screen === 'cover' ? (
-          <main className="flex-1 grid place-items-center">
+          <main className="flex-1 grid">
             <Cover
               onNavigate={(screen: 'index' | 'day') => setScreen(screen)}
               onNavigateToToday={() => handleNavigateToDay(today)}

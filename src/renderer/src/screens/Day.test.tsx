@@ -4,7 +4,12 @@ import userEvent from '@testing-library/user-event'
 import { useState } from 'react'
 import Day from './Day'
 import type { EntryWidget, EntryWriting } from '@shared/types'
-import { WIDGET_TYPES, WRITING_TYPES, WRITING_TYPE_LABELS } from '@shared/constants'
+import {
+  WIDGET_TYPES,
+  WIDGET_TYPE_LABELS,
+  WRITING_TYPES,
+  WRITING_TYPE_LABELS
+} from '@shared/constants'
 
 function renderDay({
   entryDate,
@@ -276,8 +281,8 @@ describe('Main', () => {
       renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
-      expect(screen.getByText('mood_tracker')).toBeInTheDocument()
-      expect(screen.getByText('habit_tracker')).toBeInTheDocument()
+      expect(screen.getByText(WIDGET_TYPE_LABELS.mood_tracker)).toBeInTheDocument()
+      expect(screen.getByText(WIDGET_TYPE_LABELS.habit_tracker)).toBeInTheDocument()
     })
 
     it('calls setVisibility when the Hide/Show button is clicked', async () => {
@@ -287,12 +292,12 @@ describe('Main', () => {
 
       renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
-      await userEvent.click(screen.getByRole('button', { name: 'Hide' }))
+      await userEvent.click(screen.getByRole('button', { name: 'Hide mood_tracker' }))
 
       expect(window.api.entryWidgets.setVisibility).toHaveBeenCalledWith(101, false)
     })
 
-    it('calls changePosition with position - 1 when [Up] is clicked on a widget', async () => {
+    it('calls changePosition with position - 1 when Up is clicked on a widget', async () => {
       vi.mocked(window.api.entryWidgets.getWidgetsForEntry).mockResolvedValue([
         widget({ id: 101, type: 'mood_tracker', position: 0 }),
         widget({ id: 102, type: 'habit_tracker', position: 1 })
@@ -301,14 +306,13 @@ describe('Main', () => {
       renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
-      const habitRow = screen.getByText('habit_tracker').closest('div')!
-      const upBtn = habitRow.querySelectorAll('button')[0]
+      const upBtn = screen.getByRole('button', { name: 'Move habit_tracker up' })
       await userEvent.click(upBtn)
 
       expect(window.api.entryWidgets.changePosition).toHaveBeenCalledWith(102, 0)
     })
 
-    it('calls changePosition with position + 1 when [Down] is clicked on a writing', async () => {
+    it('calls changePosition with position + 1 when Down is clicked on a writing', async () => {
       vi.mocked(window.api.entryWritings.getWritingsForEntry).mockResolvedValue([
         writing({ id: 201, type: 'daily_summary', label: 'Daily Summary', position: 0 }),
         writing({ id: 202, type: 'gratitude', label: 'Gratitude', position: 1 })
@@ -317,8 +321,7 @@ describe('Main', () => {
       renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
-      const summaryRow = screen.getByText('Daily Summary').closest('div')!
-      const downBtn = summaryRow.querySelectorAll('button')[1]
+      const downBtn = screen.getByRole('button', { name: 'Move daily_summary down' })
       await userEvent.click(downBtn)
 
       expect(window.api.entryWritings.changePosition).toHaveBeenCalledWith(201, 1)
@@ -332,8 +335,7 @@ describe('Main', () => {
       renderDay({ entryDate: mockEntry.date, today: TODAY })
       await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
-      const moodRow = screen.getByText('mood_tracker').closest('div')!
-      const colSpanSelect = moodRow.querySelector('select') as HTMLSelectElement
+      const colSpanSelect = screen.getByLabelText('mood_tracker width') as HTMLSelectElement
       await userEvent.selectOptions(colSpanSelect, '4')
 
       expect(window.api.entryWidgets.updateColSpan).toHaveBeenCalledWith(101, 4)
@@ -349,7 +351,7 @@ describe('Main', () => {
         renderDay({ entryDate: mockEntry.date, today: TODAY })
         await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
-        const widgetAdd = screen.getByText('[+] Add widget').closest('select')!
+        const widgetAdd = screen.getByLabelText('Add widget') as HTMLSelectElement
         const optionValues = Array.from(widgetAdd.querySelectorAll('option')).map((o) => o.value)
 
         expect(optionValues).toContain('')
@@ -366,7 +368,7 @@ describe('Main', () => {
         renderDay({ entryDate: mockEntry.date, today: TODAY })
         await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
-        const widgetAdd = screen.getByText('[+] Add widget').closest('select')!
+        const widgetAdd = screen.getByLabelText('Add widget') as HTMLSelectElement
         await userEvent.selectOptions(widgetAdd, 'mood_tracker')
 
         expect(window.api.entryWidgets.addEntryWidget).toHaveBeenCalledWith(
@@ -381,7 +383,7 @@ describe('Main', () => {
         renderDay({ entryDate: mockEntry.date, today: TODAY })
         await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
-        const writingAdd = screen.getByText('[+] Add writing').closest('select')!
+        const writingAdd = screen.getByLabelText('Add writing') as HTMLSelectElement
         await userEvent.selectOptions(writingAdd, 'notable_moment')
 
         expect(window.api.entryWritings.addEntryWriting).toHaveBeenCalledWith(
@@ -397,7 +399,7 @@ describe('Main', () => {
         renderDay({ entryDate: mockEntry.date, today: TODAY })
         await userEvent.click(await screen.findByRole('button', { name: 'Edit' }))
 
-        const writingAdd = screen.getByText('[+] Add writing').closest('select')!
+        const writingAdd = screen.getByLabelText('Add writing') as HTMLSelectElement
         const optionValues = Array.from(writingAdd.querySelectorAll('option')).map((o) => o.value)
 
         expect(optionValues).not.toContain('custom')

@@ -37,9 +37,9 @@ function ipcRegistration(): void {
 function createWindow(): void {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
-    width: 1200,
+    width: 1400,
     minWidth: 1200,
-    height: 810,
+    height: 850,
     minHeight: 810,
     show: false,
     autoHideMenuBar: true,

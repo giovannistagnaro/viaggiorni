@@ -1,6 +1,14 @@
 import { ActiveTemplate, WidgetType, WritingType } from '@shared/types'
-import { WIDGET_TYPES, WRITING_TYPES, WRITING_TYPE_LABELS } from '@shared/constants'
+import {
+  WIDGET_TYPES,
+  WIDGET_TYPE_LABELS,
+  WRITING_TYPES,
+  WRITING_TYPE_LABELS
+} from '@shared/constants'
+import { ArrowDown, ArrowUp, Plus, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { Button } from '@renderer/components/ui/button'
+import { SETTINGS_SELECT } from '@renderer/components/settings/_shared'
 
 function Template(): React.JSX.Element {
   const [activeTemplate, setActiveTemplate] = useState<ActiveTemplate>({
@@ -75,82 +83,193 @@ function Template(): React.JSX.Element {
     (t) => t !== 'custom' && !usedWritingTypes.has(t)
   )
 
+  const lastWidgetPosition = activeTemplate.widgets.length - 1
+  const lastWritingPosition = activeTemplate.writings.length - 1
+
   return (
-    <div className="grid grid-cols-2 px-1">
-      <div className="grid grid-cols-1 place-items-start">
-        <h1>Widgets</h1>
-        {activeTemplate.widgets.map((activeWidget) => (
-          <div key={activeWidget.id} className="grid grid-cols-5">
-            <h1>{activeWidget.type}</h1>
-            <button onClick={() => handleWidgetMove(activeWidget.id, activeWidget.position, -1)}>
-              [Up]
-            </button>
-            <button onClick={() => handleWidgetMove(activeWidget.id, activeWidget.position, 1)}>
-              [Down]
-            </button>
-            <button onClick={() => handleWidgetRemove(activeWidget.id)}>[-]</button>
-            <select
-              value={activeWidget.colSpan}
-              onChange={(e) =>
-                handleWidgetColSpan(activeWidget.id, Number(e.target.value), activeWidget.isVisible)
-              }
-            >
-              <option value={2}>Half</option>
-              <option value={4}>Full</option>
-            </select>
+    <main className="flex-1 flex bg-background text-foreground overflow-hidden">
+      <section className="flex-1 overflow-y-auto">
+        <div className="max-w-3xl mx-auto px-10 py-10">
+          <header className="mb-6">
+            <h1 className="font-serif text-foreground text-2xl font-semibold">Template</h1>
+            <p className="font-serif text-muted-foreground text-sm mt-1">
+              Choose which widgets and writings appear on every new day, and how they&apos;re laid
+              out.
+            </p>
+            <div className="h-px bg-border mt-4" />
+          </header>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div>
+              <h2 className="font-serif text-foreground text-sm uppercase tracking-[0.18em] font-semibold mb-2">
+                Widgets
+              </h2>
+              <div className="h-px bg-border mb-2" />
+              <div className="divide-y divide-border">
+                {activeTemplate.widgets.map((activeWidget) => (
+                  <div
+                    key={activeWidget.id}
+                    className="flex items-center gap-2 py-2 font-serif text-sm"
+                  >
+                    <span className="text-foreground font-medium flex-1 min-w-0 truncate">
+                      {WIDGET_TYPE_LABELS[activeWidget.type]}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => handleWidgetMove(activeWidget.id, activeWidget.position, -1)}
+                      disabled={activeWidget.position === 0}
+                      aria-label={`Move ${activeWidget.type} up`}
+                      title="Move up"
+                    >
+                      <ArrowUp />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => handleWidgetMove(activeWidget.id, activeWidget.position, 1)}
+                      disabled={activeWidget.position === lastWidgetPosition}
+                      aria-label={`Move ${activeWidget.type} down`}
+                      title="Move down"
+                    >
+                      <ArrowDown />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => handleWidgetRemove(activeWidget.id)}
+                      aria-label={`Remove ${activeWidget.type}`}
+                      title="Remove"
+                      className="text-muted-foreground hover:text-destructive"
+                    >
+                      <X />
+                    </Button>
+                    <select
+                      value={activeWidget.colSpan}
+                      onChange={(e) =>
+                        handleWidgetColSpan(
+                          activeWidget.id,
+                          Number(e.target.value),
+                          activeWidget.isVisible
+                        )
+                      }
+                      aria-label={`${activeWidget.type} width`}
+                      className="ml-1 px-2 py-1 rounded-md border border-input bg-background text-foreground text-xs cursor-pointer focus:outline-none focus:ring-2 focus:ring-ring/40"
+                    >
+                      <option value={2}>Half</option>
+                      <option value={4}>Full</option>
+                    </select>
+                  </div>
+                ))}
+              </div>
+
+              {availableWidgetTypes.length > 0 && (
+                <div className="relative mt-3">
+                  <Plus
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none"
+                    aria-hidden
+                  />
+                  <select
+                    value=""
+                    onChange={(e) => {
+                      if (e.target.value) handleWidgetAdd(e.target.value as WidgetType)
+                    }}
+                    aria-label="Add widget"
+                    className={`${SETTINGS_SELECT} pl-9 text-sm`}
+                  >
+                    <option value="" disabled>
+                      Add a widget…
+                    </option>
+                    {availableWidgetTypes.map((type) => (
+                      <option key={type} value={type}>
+                        {WIDGET_TYPE_LABELS[type]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
+
+            <div>
+              <h2 className="font-serif text-foreground text-sm uppercase tracking-[0.18em] font-semibold mb-2">
+                Writings
+              </h2>
+              <div className="h-px bg-border mb-2" />
+              <div className="divide-y divide-border">
+                {activeTemplate.writings.map((activeWriting) => (
+                  <div
+                    key={activeWriting.id}
+                    className="flex items-center gap-2 py-2 font-serif text-sm"
+                  >
+                    <span className="text-foreground font-medium flex-1 min-w-0 truncate">
+                      {WRITING_TYPE_LABELS[activeWriting.type]}
+                    </span>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() =>
+                        handleWritingMove(activeWriting.id, activeWriting.position, -1)
+                      }
+                      disabled={activeWriting.position === 0}
+                      aria-label={`Move ${activeWriting.type} up`}
+                      title="Move up"
+                    >
+                      <ArrowUp />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => handleWritingMove(activeWriting.id, activeWriting.position, 1)}
+                      disabled={activeWriting.position === lastWritingPosition}
+                      aria-label={`Move ${activeWriting.type} down`}
+                      title="Move down"
+                    >
+                      <ArrowDown />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      onClick={() => handleWritingRemove(activeWriting.id)}
+                      aria-label={`Remove ${activeWriting.type}`}
+                      title="Remove"
+                      className="text-muted-foreground hover:text-destructive"
+                    >
+                      <X />
+                    </Button>
+                  </div>
+                ))}
+              </div>
+
+              {availableWritingTypes.length > 0 && (
+                <div className="relative mt-3">
+                  <Plus
+                    className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none"
+                    aria-hidden
+                  />
+                  <select
+                    value=""
+                    onChange={(e) => {
+                      if (e.target.value) handleWritingAdd(e.target.value as WritingType)
+                    }}
+                    aria-label="Add writing"
+                    className={`${SETTINGS_SELECT} pl-9 text-sm`}
+                  >
+                    <option value="" disabled>
+                      Add a writing…
+                    </option>
+                    {availableWritingTypes.map((type) => (
+                      <option key={type} value={type}>
+                        {WRITING_TYPE_LABELS[type]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
           </div>
-        ))}
-        {availableWidgetTypes.length > 0 && (
-          <select
-            value=""
-            onChange={(e) => {
-              if (e.target.value) handleWidgetAdd(e.target.value as WidgetType)
-            }}
-          >
-            <option value="" disabled>
-              [+] Add widget
-            </option>
-            {availableWidgetTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
-      <div className="grid grid-cols-1 place-items-start">
-        <h1>Writings</h1>
-        {activeTemplate.writings.map((activeWriting) => (
-          <div key={activeWriting.id} className="grid grid-cols-4">
-            <h1>{activeWriting.type}</h1>
-            <button onClick={() => handleWritingMove(activeWriting.id, activeWriting.position, -1)}>
-              [Up]
-            </button>
-            <button onClick={() => handleWritingMove(activeWriting.id, activeWriting.position, 1)}>
-              [Down]
-            </button>
-            <button onClick={() => handleWritingRemove(activeWriting.id)}>[-]</button>
-          </div>
-        ))}
-        {availableWritingTypes.length > 0 && (
-          <select
-            value=""
-            onChange={(e) => {
-              if (e.target.value) handleWritingAdd(e.target.value as WritingType)
-            }}
-          >
-            <option value="" disabled>
-              [+] Add writing
-            </option>
-            {availableWritingTypes.map((type) => (
-              <option key={type} value={type}>
-                {type}
-              </option>
-            ))}
-          </select>
-        )}
-      </div>
-    </div>
+        </div>
+      </section>
+    </main>
   )
 }
 export default Template

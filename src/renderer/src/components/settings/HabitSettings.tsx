@@ -1,6 +1,9 @@
 import { Habit, SafeReturnSettings } from '@shared/types'
 import { SyntheticEvent, useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
+import { Button } from '@renderer/components/ui/button'
+import { Archive } from 'lucide-react'
+import { Row, SETTINGS_INPUT, Subsection } from './_shared'
 
 function HabitSettings(): React.JSX.Element {
   const [settings, setSettings] = useState<SafeReturnSettings | null>(null)
@@ -67,58 +70,69 @@ function HabitSettings(): React.JSX.Element {
     }
   }
 
-  if (!settings) return <div>Loading...</div>
+  if (!settings) {
+    return <p className="font-serif text-muted-foreground text-sm italic">Loading…</p>
+  }
 
   return (
-    <div>
-      <div>
-        <span>Streak Tolerance: </span>
+    <>
+      <Row
+        label="Streak tolerance"
+        description="Allowed missed days before a streak breaks."
+        htmlFor="settings-streak-tolerance"
+      >
         <input
+          id="settings-streak-tolerance"
           type="number"
           min="0"
           step="1"
           defaultValue={settings.streakTolerance}
           onBlur={(e) => handleStreakToleranceBlur(Number(e.target.value))}
+          className={`${SETTINGS_INPUT} w-24`}
         />
-      </div>
+      </Row>
 
-      <section aria-label="Habits">
-        <h3>Habits</h3>
+      <Subsection title="Habits">
         {habits.length === 0 ? (
-          <p>No habits yet.</p>
+          <p className="font-serif text-muted-foreground text-sm italic mb-4">
+            No habits yet — add one below.
+          </p>
         ) : (
-          <ul>
+          <ul className="divide-y divide-border mb-4">
             {habits.map((habit) => (
-              <li key={habit.id}>
+              <li
+                key={habit.id}
+                className="group flex items-center gap-3 py-2"
+              >
                 <span
                   aria-hidden
-                  style={{
-                    display: 'inline-block',
-                    width: '12px',
-                    height: '12px',
-                    borderRadius: '50%',
-                    backgroundColor: habit.color
-                  }}
+                  className="h-3 w-3 rounded-full flex-none ring-1 ring-black/10"
+                  style={{ backgroundColor: habit.color }}
                 />
-                <span>{habit.name}</span>
-                <button
+                <span className="font-serif text-foreground text-sm flex-1">{habit.name}</span>
+                <Button
                   type="button"
+                  variant="ghost"
+                  size="sm"
                   onClick={() => handleArchiveHabit(habit.id)}
                   aria-label={`Archive ${habit.name}`}
+                  className="text-muted-foreground hover:text-foreground hover:bg-muted"
                 >
+                  <Archive />
                   Archive
-                </button>
+                </Button>
               </li>
             ))}
           </ul>
         )}
 
-        <form onSubmit={handleAddHabit}>
+        <form onSubmit={handleAddHabit} className="flex items-center gap-2">
           <input
             type="color"
             value={newColor}
             onChange={(e) => setNewColor(e.target.value)}
             aria-label="Habit color"
+            className="h-9 w-12 rounded-md border border-input cursor-pointer bg-background flex-none p-1"
           />
           <input
             type="text"
@@ -126,11 +140,14 @@ function HabitSettings(): React.JSX.Element {
             onChange={(e) => setNewHabit(e.target.value)}
             placeholder="New habit..."
             aria-label="Habit name"
+            className={SETTINGS_INPUT}
           />
-          <button type="submit">Add habit</button>
+          <Button type="submit" disabled={newHabit.trim() === ''}>
+            Add habit
+          </Button>
         </form>
-      </section>
-    </div>
+      </Subsection>
+    </>
   )
 }
 
