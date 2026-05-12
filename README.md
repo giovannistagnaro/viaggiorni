@@ -47,13 +47,17 @@ The design north star was _cozy, trustworthy, and genuinely useful_. Not corpora
 One app-level password set on first launch. Used to derive a key (PBKDF2) that encrypts the entire SQLite database via SQLCipher. Photos are stored as separately AES-encrypted files on disk. The password is never stored. Lock the app any time with **Ctrl/Cmd+L**.
 
 ### A daily page you actually want to open
-<img src="docs/assets/day-view.png" alt="Journal Day View" width="800" />
+<p align="center">
+  <img src="docs/assets/day-view.png" alt="Journal Day View" width="800" />
+</p>
 
 Each day is a two-page spread. The left page holds your widgets; the right page holds your writings. Choose what shows up via the template editor.
 
 ### Widgets — track the things that matter to you
 
-<img src="docs/assets/template-editor.png" alt="Adding and arranging widgets in the template editor" width="800" />
+<p align="center">
+  <img src="docs/assets/template-editor.png" alt="Adding and arranging widgets in the template editor" width="800" />
+</p>
 
 - **Habit tracker** — checkboxes with colored dots and streak counters, with pause logic for vacations or sick days.
 - **To-do** — today/tomorrow toggle, add and reorder, ticked items move out of the way.
@@ -63,25 +67,33 @@ Each day is a two-page spread. The left page holds your widgets; the right page 
 
 ### Writings — guided and free-form
 
+<p align="center">
 <img src="docs/assets/writings.png" alt="Writing sections on the right page" width="700" />
+</p>
 
 Rich text via TipTap. Pick from built-in sections — _daily summary_, _gratitude_, _notable moment_, _writing prompt_. Mix and match in any order via the template.
 
 ### Local AI with Ollama (optional)
 
+<p align="center">
 <img src="docs/assets/ollama.png" alt="Ollama model picker in settings" width="700" />
+</p>
 
 If Ollama is running on `localhost:11434`, Viaggiorni detects it on launch and lets you pick any pulled model. AI is used for two opt-in features: generating a writing prompt for the day and generating a word of the day. If Ollama isn't there, both features fall back to a curated local list; the app never tries to reach an external server.
 
 ### Calendar index + bookmarks
 
-<img src="docs/assets/index.png" alt="Calendar index with entry dots and bookmarks list" width="800" />
+<p align="center">
+  <img src="docs/assets/index.png" alt="Calendar index with entry dots and bookmarks list" width="800" />
+</p>
 
 The index is a two-page spread: a month calendar with dot indicators on days you've written, and a bookmarks list of any entries you've dog-eared. Click a day, click a bookmark, jump to it.
 
 ### Custom visual assets — stamps, stencils, decorations
 
+<p align="center">
 <img src="docs/assets/decor.png" alt="Decorative stamps on a journal page" width="700" />
+</p>
 
 A library of stamps, stencils, and decorative elements that fill designated spots on each page, with the specific piece picked at random from the bundled set so no two pages look quite the same. Each one starts as generated artwork, then runs through a custom Python background-removal pipeline that cleanly isolates the element from its source. The whole library ships with the app, so decoration works fully offline.
 
