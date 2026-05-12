@@ -48,6 +48,7 @@ jobs:
         with:
           files: |
             dist/*.AppImage
+            dist/*.deb
             dist/*.msi
             dist/*.dmg
             dist/*.zip
