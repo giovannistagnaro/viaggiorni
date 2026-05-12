@@ -10,17 +10,19 @@ const DEFAULT_TEMPLATE_WRITINGS: {
   position: number
 }[] = [
   { type: 'daily_summary', label: 'Daily Summary', position: 0 },
-  { type: 'gratitude', label: 'Gratitude', position: 1 },
-  { type: 'writing_prompt', label: 'Writing Prompt', position: 2 }
+  { type: 'writing_prompt', label: 'Writing Prompt', position: 1 },
+  { type: 'notable_moment', label: 'Notable Moment', position: 2 }
 ]
 
 const DEFAULT_TEMPLATE_WIDGETS: {
   type: WidgetType
   position: number
+  colSpan: number
 }[] = [
-  { type: 'mood_tracker', position: 0 },
-  { type: 'habit_tracker', position: 1 },
-  { type: 'todo_list', position: 2 }
+  { type: 'todo_list', position: 0, colSpan: 2 },
+  { type: 'mood_tracker', position: 1, colSpan: 4 },
+  { type: 'habit_tracker', position: 2, colSpan: 4 },
+  { type: 'word_of_day', position: 3, colSpan: 2 }
 ]
 
 export function seedDatabase(db: DrizzleDB): void {
@@ -74,6 +76,7 @@ export function seedDatabase(db: DrizzleDB): void {
         templateId: insertedTemplate.id,
         type: widget.type,
         position: widget.position,
+        colSpan: widget.colSpan,
         isVisible: true,
         createdAt: sql`(CURRENT_TIMESTAMP)`
       }))

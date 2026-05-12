@@ -301,14 +301,15 @@ describe('removeTemplateWidget', () => {
   })
 
   it('shifts the positions of subsequent widgets down by 1', () => {
-    addTemplateWidget(db, templateId, 'photo') // appended at position 3
+    addTemplateWidget(db, templateId, 'photo')
     const before = getActiveTemplate(db).widgets
     const target = before.find((w) => w.position === 1)!
 
     removeTemplateWidget(db, target.id)
 
     const after = getActiveTemplate(db).widgets
-    expect(after.map((w) => w.position).sort((a, b) => a - b)).toEqual([0, 1, 2])
+    const expected = Array.from({ length: before.length - 1 }, (_, i) => i)
+    expect(after.map((w) => w.position).sort((a, b) => a - b)).toEqual(expected)
   })
 
   it('stamps updatedAt on the template', () => {
@@ -357,7 +358,7 @@ describe('changeTemplateWidgetPosition', () => {
     const widgets = getActiveTemplate(db).widgets
     const first = widgets[0]
 
-    changeTemplateWidgetPosition(db, first.id, 2)
+    changeTemplateWidgetPosition(db, first.id, widgets.length - 1)
 
     const after = getActiveTemplate(db).widgets
     expect(after[after.length - 1].id).toBe(first.id)

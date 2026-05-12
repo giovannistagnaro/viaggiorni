@@ -339,7 +339,7 @@ function Day({
               ) : (
                 <div
                   key={`stamp-${item.slot}`}
-                  className="flex items-center justify-center"
+                  className="relative -z-10 flex items-center justify-center"
                   style={{ gridColumn: `span ${item.colSpan}` }}
                 >
                   <img

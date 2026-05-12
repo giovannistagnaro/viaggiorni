@@ -60,7 +60,7 @@ export default function ScrollableArea({
       </div>
       <div
         aria-hidden
-        className={`absolute top-1 left-0 right-0 flex justify-center pointer-events-none transition-opacity duration-300 ${
+        className={`absolute top-1 left-0 right-0 z-20 flex justify-center pointer-events-none transition-opacity duration-300 ${
           canScrollUp ? 'opacity-60' : 'opacity-0'
         }`}
       >
@@ -68,7 +68,7 @@ export default function ScrollableArea({
       </div>
       <div
         aria-hidden
-        className={`absolute bottom-1 left-0 right-0 flex justify-center pointer-events-none transition-opacity duration-300 ${
+        className={`absolute bottom-1 left-0 right-0 z-20 flex justify-center pointer-events-none transition-opacity duration-300 ${
           canScrollDown ? 'opacity-60' : 'opacity-0'
         }`}
       >
