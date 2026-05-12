@@ -22,13 +22,14 @@ jobs:
 
       - run: npm ci
 
-      - run: npm rebuild better-sqlite3
-
       - run: npm run typecheck
 
       - run: npm run lint
-      
+
       - run: npm test
+
+      - name: Rebuild native modules for Electron
+        run: npx electron-builder install-app-deps
 
       - name: Build (Linux)
         if: matrix.os == 'ubuntu-latest'
