@@ -130,7 +130,7 @@ describe('Index', () => {
 
       render(<Index onNavigateToDay={onNavigateToDay} />)
 
-      const bookmarkButton = await screen.findByRole('button', { name: /A trip/ })
+      const bookmarkButton = await screen.findByRole('button', { name: /Apr 15, 2026.*A trip/ })
       await userEvent.click(bookmarkButton)
 
       expect(onNavigateToDay).toHaveBeenCalledWith('2026-04-15')

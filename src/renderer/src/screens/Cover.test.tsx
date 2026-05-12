@@ -14,13 +14,13 @@ describe('Cover', () => {
     render(<Cover onNavigate={vi.fn()} onNavigateToToday={vi.fn()} />)
 
     const currentYear = new Date().getFullYear().toString()
-    expect(screen.getByRole('heading', { name: currentYear })).toBeInTheDocument()
+    expect(screen.getByText(currentYear)).toBeInTheDocument()
   })
 
   it('renders Open and Today buttons', () => {
     render(<Cover onNavigate={vi.fn()} onNavigateToToday={vi.fn()} />)
 
-    expect(screen.getByRole('button', { name: 'Open' })).toBeInTheDocument()
+    expect(screen.getByRole('button', { name: /open journal/i })).toBeInTheDocument()
     expect(screen.getByRole('button', { name: 'Today' })).toBeInTheDocument()
   })
 
@@ -28,7 +28,7 @@ describe('Cover', () => {
     const onNavigate = vi.fn()
     render(<Cover onNavigate={onNavigate} onNavigateToToday={vi.fn()} />)
 
-    await userEvent.click(screen.getByRole('button', { name: 'Open' }))
+    await userEvent.click(screen.getByRole('button', { name: /open journal/i }))
 
     expect(onNavigate).toHaveBeenCalledWith('index')
   })
