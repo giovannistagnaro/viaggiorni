@@ -1,5 +1,6 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { existsSync, mkdirSync } from 'fs'
+import { join } from 'path'
 import { isFirstLaunch } from './index'
 
 vi.mock('./database', () => ({
@@ -87,7 +88,7 @@ describe('openDBWrapper', () => {
 
     openDBWrapper('pwd')
 
-    expect(mkdirSync).toHaveBeenCalledWith('/fake/userData/photos', { recursive: true })
+    expect(mkdirSync).toHaveBeenCalledWith(join('/fake/userData', 'photos'), { recursive: true })
   })
 
   it('does not create the photos directory if seeding fails', () => {
