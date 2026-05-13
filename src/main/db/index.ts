@@ -1,8 +1,8 @@
-import { existsSync } from 'fs'
+import { existsSync, mkdirSync } from 'fs'
 import { closeDatabase, DrizzleDB, openDatabase } from './database'
 import { seedDatabase } from './seed'
 import log from 'electron-log'
-import { SALT_FILE_NAME } from './dbConstants'
+import { PHOTOS_DIR_NAME, SALT_FILE_NAME } from './dbConstants'
 import { join } from 'path'
 import { app } from 'electron'
 
@@ -16,6 +16,10 @@ export function openDBWrapper(password: string): void {
   const opened = openDatabase(password)
   try {
     seedDatabase(opened)
+    // Ensure the photos directory exists. Fresh installs don't get this
+    // created automatically, so photo uploads fail until something else
+    // (like a backup import) creates it.
+    mkdirSync(join(app.getPath('userData'), PHOTOS_DIR_NAME), { recursive: true })
     db = opened
   } catch (err) {
     closeDatabase(opened)
