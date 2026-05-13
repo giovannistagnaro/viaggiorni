@@ -1,5 +1,5 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'
-import { existsSync } from 'fs'
+import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
+import { existsSync, mkdirSync } from 'fs'
 import { isFirstLaunch } from './index'
 
 vi.mock('./database', () => ({
@@ -16,7 +16,8 @@ vi.mock('electron', () => ({
 }))
 
 vi.mock('fs', () => ({
-  existsSync: vi.fn()
+  existsSync: vi.fn(),
+  mkdirSync: vi.fn()
 }))
 
 import { openDatabase, closeDatabase } from './database'
@@ -25,6 +26,11 @@ import { openDBWrapper, closeDBWrapper, getDB, isUnlocked } from './index'
 
 describe('openDBWrapper', () => {
   beforeEach(() => {
+    vi.resetAllMocks()
+    closeDBWrapper()
+  })
+
+  afterEach(() => {
     vi.resetAllMocks()
     closeDBWrapper()
   })
@@ -73,6 +79,26 @@ describe('openDBWrapper', () => {
     expect(seedDatabase).not.toHaveBeenCalled()
     expect(closeDatabase).not.toHaveBeenCalled()
     expect(isUnlocked()).toBe(false)
+  })
+
+  it('creates the photos directory after seeding', () => {
+    const fakeDb = { __sentinel: true } as never
+    vi.mocked(openDatabase).mockReturnValue(fakeDb)
+
+    openDBWrapper('pwd')
+
+    expect(mkdirSync).toHaveBeenCalledWith('/fake/userData/photos', { recursive: true })
+  })
+
+  it('does not create the photos directory if seeding fails', () => {
+    const fakeDb = { __sentinel: true } as never
+    vi.mocked(openDatabase).mockReturnValue(fakeDb)
+    vi.mocked(seedDatabase).mockImplementation(() => {
+      throw new Error('seed failed')
+    })
+
+    expect(() => openDBWrapper('pwd')).toThrow()
+    expect(mkdirSync).not.toHaveBeenCalled()
   })
 })
 
