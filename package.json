@@ -1,6 +1,6 @@
 {
   "name": "viaggiorni",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A private, encrypted desktop journal.",
   "main": "./out/main/index.js",
   "author": "Giovanni Stagnaro",
